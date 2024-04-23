@@ -7,7 +7,7 @@ on:
 
 jobs:  
   conf2mark:
-    runs-on: conf2md
+    runs-on: self-hosted
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     
