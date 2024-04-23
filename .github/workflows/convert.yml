@@ -19,7 +19,8 @@ jobs:
      
       - name: Build docs
         run: |
+          rm -rf export;
           mkdir export;
-          unzip test/Confluence-space-export-135450-6.html.zip -d export;
+          unzip test/Confluence-space-export-135450-6.html.zip -d export -x /;
           docker run -i -v $PWD:$PWD aerostitch/confluence-to-markdown npm run start $PWD/export/VHS9AG $PWD/docs
   
