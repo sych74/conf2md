@@ -19,5 +19,7 @@ jobs:
      
       - name: Build docs
         run: |
+          PWD=/tmp;
+          export $PWD;
           docker run -it -v $PWD:$PWD aerostitch/confluence-to-markdown npm run start $PWD/export $PWD/docs
   
