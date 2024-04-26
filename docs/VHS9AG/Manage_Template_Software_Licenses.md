@@ -1,1 +1,0 @@
-# Manage Template Software Licenses
