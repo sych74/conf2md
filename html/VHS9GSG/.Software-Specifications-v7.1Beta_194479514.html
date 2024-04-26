@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Beta Get Started Guide : .Software Specifications v7.1Beta</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Beta Get Started Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Beta-Get-Started-Guide_194478446.html">Beta Get Started Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Software-Specifications_194479515.html">Software Specifications</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Beta Get Started Guide : .Software Specifications v7.1Beta
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on Mar 04, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>The following table lists guest OS versions for compute resource, Control Panel, and backup servers.</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th scope="col" class="confluenceTh"><strong>Server </strong></th><th scope="col" class="confluenceTh"><strong>Supported Versions</strong></th></tr><tr><td class="confluenceTd">Compute Resource Server  </td><td class="confluenceTd">Virtuozzo Hybrid Server 9</td></tr><tr><td class="confluenceTd">Control Panel Server</td><td class="confluenceTd">AlmaLinux 9</td></tr><tr><td class="confluenceTd">Backup Server </td><td class="confluenceTd"><span style="color: rgb(23,43,77);">Virtuozzo Hybrid Server 9</span></td></tr></tbody></table></div><p><strong>Libvirt Versions</strong></p><p>The following table provides the libvirt versions compatible with your system, depending on the virtualization type and version.</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th colspan="2" scope="colgroup" class="confluenceTh"><strong>KVM</strong></th></tr><tr><td class="confluenceTd">CentOS 7.x (deprecated)</td><td class="confluenceTd">libvirt 3.9.0</td></tr></tbody></table></div><p><strong>Requirements</strong></p><p>There are the following requirements for Control Panel, compute resource, and backup servers:</p><ul><li>Install AlmaLinux 9 for Control Panel servers.</li><li>Install Virtuozzo Hybrid Server 9 for compute resources and backup servers.</li><li><p>The minimum running services are listed in the box:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">network    0:off    1:off    2:on    3:on    4:on    5:on   6:off 
+sshd       0:off    1:off    2:on    3:on    4:on    5:on   6:off</pre>
+</div></div></li><li>Configure the <em>network</em> with the ability to access <a href="http://rpm.repo.onapp.com/" class="external-link" rel="nofollow">rpm.repo.onapp.com</a> and <a href="http://templates.repo.onapp.com/" class="external-link" rel="nofollow">templates.repo.onapp.com</a>.</li><li>Configure the <em>open ssh server</em> with the ability for users to access and log in to the box.</li><li>The <strong>root</strong> user must be available on the box and configured as a <em>root account</em>/ <em>root user</em>/ <em>superuser</em> with access to all files, commands/tools, and services on the system. Installers should be run under the <strong>root</strong>.</li><li>Ensure the <em>curl</em>, <em>rpm</em>, <em>yum, </em>and <em>grub </em>packages are installed on the system. The <em>grub </em>is a mandatory boot loader only for compute resources.</li></ul><p><br/></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Apr 26, 2024 09:11</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

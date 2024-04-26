@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Beta Installation Guide : .Standard Kickstart Options v7.1Beta</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Beta-Installation-Guide_194478084.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Installing-Virtuozzo-Hybrid-Server_194478138.html">Installing Virtuozzo Hybrid Server</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="PXE-Installation_194478168.html">PXE Installation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Preparing-a-Kickstart-File_194478201.html">Preparing a Kickstart File</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Standard-Kickstart-Options_194478204.html">Standard Kickstart Options</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Beta Installation Guide : .Standard Kickstart Options v7.1Beta
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on Mar 04, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Your kickstart file may include any of the standard Linux options used in kickstart files for installing Linux operating systems. For the complete list of these options and their explanations, consult the respective Linux documentation (for example, the<span> </span><a style="text-decoration: none;" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/installation_guide/index" class="external-link" rel="nofollow">Red Hat Enterprise Linux Installation Guide</a>).</p><p>Listed below are the mandatory options and commands that you must include in each kickstart file:</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th style="text-align: left;" class="confluenceTh"><p>Option</p></th><th style="text-align: left;" class="confluenceTh"><p>Description</p></th></tr><tr><td class="confluenceTd"><p><code class="docutils literal notranslate"><span class="pre">auth</span></code></p></td><td class="confluenceTd"><p>Specifies authentication options for the Virtuozzo Hybrid Server physical server.</p></td></tr><tr><td class="confluenceTd"><p><code class="docutils literal notranslate"><span class="pre">bootloader</span></code></p></td><td class="confluenceTd"><p>Specifies the way of installing the bootloader.</p></td></tr><tr><td class="confluenceTd"><p><code class="docutils literal notranslate"><span class="pre">install</span></code></p></td><td class="confluenceTd"><p>Tells the system to install Virtuozzo Hybrid Server either from<span> </span><code class="docutils literal notranslate"><span class="pre">nfs</span></code><span> </span>or<span> </span><code class="docutils literal notranslate"><span class="pre">url</span></code><span> </span>(for FTP and HTTP installations, respectively). Specify this option to perform a clean installation of Virtuozzo Hybrid Server.</p></td></tr><tr><td class="confluenceTd"><p><code class="docutils literal notranslate"><span class="pre">cmdline</span></code></p></td><td class="confluenceTd"><p>Do not start the X Window System or show the installer GUI.</p></td></tr><tr><td class="confluenceTd"><p><code class="docutils literal notranslate"><span class="pre">keyboard</span></code></p></td><td class="confluenceTd"><p>Sets the system keyboard type.</p></td></tr><tr><td class="confluenceTd"><p><code class="docutils literal notranslate"><span class="pre">lang</span></code></p></td><td class="confluenceTd"><p>Sets the language to use during installation and the default language to use on the installed system.</p></td></tr><tr><td class="confluenceTd"><p><code class="docutils literal notranslate"><span class="pre">part</span></code></p></td><td class="confluenceTd"><p>Creates partitions on the server.</p></td></tr><tr><td class="confluenceTd"><p><code class="docutils literal notranslate"><span class="pre">rootpw</span></code></p></td><td class="confluenceTd"><p>Sets the root user’s password.</p></td></tr><tr><td class="confluenceTd"><p><code class="docutils literal notranslate"><span class="pre">timezone</span></code></p></td><td class="confluenceTd"><p>Sets the system time zone.</p></td></tr><tr><td class="confluenceTd"><p><code class="docutils literal notranslate"><span class="pre">clearpart</span></code></p></td><td class="confluenceTd"><p>Erases partitions on specified (or all) disk drives.</p></td></tr><tr><td class="confluenceTd"><code><span style="color: rgb(0,0,0);">autopart</span></code></td><td class="confluenceTd"><div class="content-wrapper"><p><span style="color: rgb(0,0,0);">Automatically creates partitions required to install Virtuozzo Hybrid Server and Virtuozzo Storage (if being installed).</span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">This option must follow<span> </span></span><code class="docutils literal notranslate"><span class="pre">clearpart</span></code><span style="color: rgb(0,0,0);">.</span></p></div></div></div></td></tr><tr><td class="confluenceTd"><code><span style="color: rgb(0,0,0);">zerombr</span></code></td><td class="confluenceTd"><div class="content-wrapper"><p><span style="color: rgb(0,0,0);">Initializes unused partitions on all disk drives reachable by the installer.<br/></span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">This option must follow<span> </span></span><code class="docutils literal notranslate"><span class="pre">clearpart</span></code><span style="color: rgb(0,0,0);">.</span></p></div></div><p><span style="color: rgb(0,0,0);"><br/></span></p></div></td></tr><tr><td class="confluenceTd"><p><code class="docutils literal notranslate"><span class="pre">ignoredisk</span></code></p></td><td class="confluenceTd"><p>Optional. Ignores the specified drives or all drives except the one specified. Used with one of the following arguments:</p><ul class="simple"><li><p><code class="docutils literal notranslate"><span class="pre">--drives=&lt;drive&gt;[,...]</span></code>, a comma-separated list of drives to ignore. If a server has drives other than those specified in this option, the installer will ask what to do with them.</p></li><li><p><code class="docutils literal notranslate"><span class="pre">--only-use=&lt;drive&gt;</span></code>, ignore every drive except the specified.</p></li></ul></td></tr></tbody></table></div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Apr 26, 2024 09:08</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

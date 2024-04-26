@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Beta Get Started Guide : .Virtuozzo Storage Cluster v7.1Beta</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Beta Get Started Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Beta-Get-Started-Guide_194478446.html">Beta Get Started Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Storage-Cluster_195789120.html">Virtuozzo Storage Cluster</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Beta Get Started Guide : .Virtuozzo Storage Cluster v7.1Beta
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on Apr 10, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>The Virtuozzo Storage cluster is a beta product. Using several standalone servers, one can create a Virtuozzo Storage cluster with additional commands. This product is planned to be completely implemented in the future Virtuozzo Hybrid Server 9 products.</p><p><span style="color: rgb(14,16,26);">In this version, only CLI setup and configuration of Virtuozzo Storage are available, which may be challenging if you have never used Virtuozzo Storage before. Contact </span><a href="mailto:vhs-nextgen-beta@virtuozzo.com" class="external-link" rel="nofollow"><span style="color: rgb(74,110,224);">vhs-nextgen-beta@virtuozzo.com</span></a><span style="color: rgb(14,16,26);"> if you need assistance. </span></p><p><br/></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>We highly recommend reading the Virtuozzo Storage documentation before following the outlined below instructions on how to install a Virtuozzo Storage cluster:</p><ul><li><p><a href="https://docs.virtuozzo.com/virtuozzo_hybrid_server_7_installation_guide/preparing-for-installation/planning-storage-cli.html" class="external-link" rel="nofollow">Planning Infrastructure for Virtuozzo Storage with CLI Management</a></p></li><li><p><a href="https://docs.virtuozzo.com/virtuozzo_storage_administrators_command_line_guide/index.html" class="external-link" rel="nofollow">Virtuozzo Storage Administrator’s Command Line Guide</a></p></li></ul></div></div><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(14,16,26);">Limitations and known issues of this version:</span></p><ol><li style="list-style-type: decimal;"><span style="color: rgb(14,16,26);">Virtuozzo Storage can only be set without <code>vstorage-ui-agent</code>. Thus, all the functionality coming from <code>vstorage-ui-agent</code> is not available.</span></li><li style="list-style-type: decimal;">This version does not support the <code>prepare_vstorage_drive</code> script.<span style="color: rgb(14,16,26);"><br/></span></li></ol></div></div><p><br/></p><h1 id="id-.VirtuozzoStorageClusterv7.1Beta-InstallingVirtuozzoStorageCluster">Installing Virtuozzo Storage Cluster</h1><hr/><ol><li><p>Install Virtuozzo Storage packages:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">yum groupinstall vstorage</pre>
+</div></div></li><li><p>Specify MDS server discovery. To specify the IP address of an MDS server manually, create a <code>bs.list</code> file in the <code>/etc/vstorage/clusters/Cluster_Name</code> directory (create this directory if it does not exist) on the server you are configuring for the cluster and indicate the IP address and port for connecting to the MDS server. Use the IP address intended for a Storage network. </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">echo &quot;10.200.200.11:2510&quot; &gt;&gt; /etc/vstorage/clusters/Cluster_Name/bs.list
+echo &quot;10.200.200.12:2510&quot; &gt;&gt; /etc/vstorage/clusters/Cluser_Name/bs.list</pre>
+</div></div></li><li><p>Prepare disks for chunk servers:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">uuid=$(uuidgen)
+mkfs.ext4 &quot;/dev/sdX&quot; -q -E lazy_itable_init=1 -O uninit_bg -m 0 -U &quot;$uuid&quot;  
+tune2fs -e remount-ro /dev/sdX</pre>
+</div></div></li><li style="list-style-type: decimal;"><p><span style="color: rgb(14,16,26);">Add a new partition to <code>/etc/fstab</code> by UUID and specify the <code>noatime</code>, <code>nofail</code>, and <code>lazytime</code> mount options. <br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">echo &quot;UUID=$uuid /vstorage/Cluster_Name-cs&lt;0N&gt; ext4 defaults,nofail,lazytime,noatime  0 0&quot; &gt;&gt; /etc/fstab</pre>
+</div></div><p><span style="color: rgb(14,16,26);"><br/></span></p></li><li><p>Create a mount point and remove redundant details:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">mkdir -p &quot;/vstorage/Cluster_Name-cs&lt;0N&gt;&quot; 
+mount -a
+rm -rf &quot;/vstorage/Cluster_Name-cs&lt;0N&gt;/lost+found&quot;</pre>
+</div></div></li><li><p>Create the first MDS server:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">vstorage -c Cluster_Name make-mds -I -a 10.200.200.11 -r /vstorage/Cluster_Name-mds -p</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(14,16,26);">The specified password is encrypted and saved to the <code><span style="color: rgb(23,43,77);">/etc/vstorage/clusters/Cluster_Name/auth_digest.key</span></code> file on the MDS server.</span></p></div></div></li><li><p>Start and enable the MDS management service <span style="color: rgb(14,16,26);">(<code>vstorage-mdsd</code>):<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">systemctl start vstorage-mdsd.target
+systemctl enable vstorage-mdsd.target</pre>
+</div></div><p><span style="color: rgb(14,16,26);"><br/></span></p></li><li style="list-style-type: decimal;"><p><span style="color: rgb(14,16,26);">Add the next node to the Virtuozzo Storage cluster. Complete steps 1-5, correspondingly.<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">vstorage -c Cluster_Name auth-node
+Please enter password for cluster:</pre>
+</div></div><p><span style="color: rgb(14,16,26);"><br/></span></p></li><li><p>Add the other MDS servers. Use the <code>-b</code> option and specify the IP addresses of the first MDS server (and all the other MDS servers if you have more than one in your cluster).</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">vstorage -c Cluster_Name make-mds -a 10.200.200.12 -r /vstorage/Cluster_Name-mds -b 10.200.200.11
+systemctl start vstorage-mdsd.target
+systemctl enable vstorage-mdsd.target</pre>
+</div></div></li><li><p>Create a chunk server. To specify a specific tier, use the <code>-t</code> key with possible arguments [<code>0-3</code>]. Omitting this key will add it to the tier <code>0</code>. There should be a custom mount point for each chunk server you want to create, each pointing to its exclusive hard disk.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">vstorage -c Cluster_Name -t 0 make-cs -r /vstorage/Cluster_Name-cs&lt;0N&gt;</pre>
+</div></div></li><li><p>Add all disks intended to be chunk servers on each node. Start and enable the corresponding service:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">systemctl start vstorage-csd.target
+systemctl enable vstorage-csd.target</pre>
+</div></div><p><span style="color: rgb(23,43,77);">The commands above will start and enable all the chunk servers you have created on this node.<br/><br/></span></p></li><li><p><span style="color: rgb(14,16,26);">Prepare to mount the cluster. (Optional, if you have BSs). Install the client package and authorize a BS to mount the cluster on the backup server:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">yum install vstorage-client
+vstorage -c Cluster_Name auth-node
+Please enter password for cluster:</pre>
+</div></div><p><span style="color: rgb(14,16,26);"><br/></span></p></li><li><p><span style="color: rgb(14,16,26);">Create a mount point and mount it:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">mkdir -p /vstorage/Cluster_Name
+vstorage-mount -c Cluster_Name /vstorage/Cluster_Name</pre>
+</div></div><p><span style="color: rgb(14,16,26);"><br/></span></p></li><li><p><span style="color: rgb(14,16,26);">Add the mount point to <code>/etc/fstab</code> to make it permanent:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">echo &quot;vstorage://Cluster_Name /vstorage/Cluster_Name fuse.vstorage rw,nosuid,nodev,_netdev 0 0&quot; &gt;&gt; /etc/fstab</pre>
+</div></div><p><span style="color: rgb(14,16,26);"><br/></span></p></li><li><p><span style="color: rgb(14,16,26);"><span style="color: rgb(14,16,26);">Configure the Virtuozzo Storage parameters. <span style="color: rgb(23,43,77);">Check the current Virtuozzo Storage cluster parameters:<br/></span></span></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">vstorage get-attr /vstorage/Cluster_Name</pre>
+</div></div><p><span style="color: rgb(23,43,77);">You may set the required configuration recursive to the whole cluster:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">vstorage -c Cluster_Name set-attr -R /vstorage/Cluster_Name replicas=&lt;1,2,3..15&gt; or encoding=&lt;1+0,3+2,5+2,7+2,17+3&gt; -p /failure-domain=&lt;disk|host&gt; tier=&lt;0,1,2,3&gt;</pre>
+</div></div><p><span style="color: rgb(23,43,77);"><br/>Enclosed directories extend the Virtuozzo Storage settings from the parent directory by default. However, they can be changed if required.<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">vstorage -c Cluster_Name set-attr -R /vstorage/Cluster_Name/directory ...</pre>
+</div></div><p><span style="color: rgb(23,43,77);"><br/></span></p><p><br/></p></li><li>To display information about the cluster, use the <code>vstorage -c Cluster_Name top</code> command.</li></ol>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Apr 26, 2024 09:11</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

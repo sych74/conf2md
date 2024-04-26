@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Beta Installation Guide : Configuring the DHCP Server</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Beta-Installation-Guide_194478084.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Installing-Virtuozzo-Hybrid-Server_194478138.html">Installing Virtuozzo Hybrid Server</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="PXE-Installation_194478168.html">PXE Installation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Preparing-for-PXE-Installation_194478171.html">Preparing for PXE Installation</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Beta Installation Guide : Configuring the DHCP Server
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on Mar 12, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>To configure the DHCP server, do the following:</p><ol class="arabic"><li><p>Make sure the DHCP server package is installed:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># yum install dhcp</pre>
+</div></div></li><li><p>Add the following lines to the file<span> </span><code class="docutils literal notranslate"><span class="pre">/etc/dhcp/dhcpd.conf</span></code><span> </span>(or<span> </span><code class="docutils literal notranslate"><span class="pre">/etc/dhcpd.conf</span></code>):</p><ul><li><p>For installation on BIOS-based client servers:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">next-server &lt;TFTP_server_IP_address&gt;;
+filename &quot;/pxelinux.0&quot;;</pre>
+</div></div></li><li><p>For installation on EFI-based client servers:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">next-server &lt;TFTP_server_IP_address&gt;;
+filename &quot;/grubx64.efi&quot;;</pre>
+</div></div></li></ul></li><li><p>Start the DHCP server if you installed it in step 1:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># systemctl start dhcpd.service</pre>
+</div></div><p><span style="letter-spacing: 0.0px;">Or restart the existing DHCP server:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># systemctl restart dhcpd.service</pre>
+</div></div><p><span style="letter-spacing: 0.0px;"><br/></span></p></li></ol>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Apr 26, 2024 09:08</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

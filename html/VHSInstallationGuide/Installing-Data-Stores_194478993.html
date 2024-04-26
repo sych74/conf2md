@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Beta Installation Guide : Installing Data Stores</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Beta-Installation-Guide_194478084.html">Beta Installation Guide</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Beta Installation Guide : Installing Data Stores
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on Mar 12, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>After successfully installing the Control Panel server and compute resources, follow the procedure to set up a QCOW2 data store:</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="InstallingDataStores-InstallingQCOW2DataStore">Installing QCOW2 Data Store</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(51,51,51);">To create a QCOW2 data store:</span></p><ol><li><span style="color: rgb(51,51,51);">Go to your Control Panel &gt; </span><strong>Admin</strong><span style="color: rgb(51,51,51);"> &gt; </span><strong>Settings</strong><span style="color: rgb(51,51,51);"> menu.</span></li><li><span style="color: rgb(51,51,51);">Click the <strong>Data Stores</strong> icon.</span></li><li><span style="color: rgb(51,51,51);">Click the <strong>Create Data Store</strong> button in the lower-right corner and fill in the following:</span><br/><br/><span style="color: rgb(51,51,51);"><strong>Step 1 of 2. Properties</strong></span><br/><br/><ul><li><span style="color: rgb(51,51,51);"><em>Label</em> - enter the data store label.</span></li><li><span style="color: rgb(51,51,51);"><em>Data store type</em> - select <strong>qcow2</strong>.</span></li><li><span style="color: rgb(51,51,51);"><em>Enabled</em> - move the slider to the right to turn on the data store. If disabled, new disks are forbidden to be created automatically on the data store. It prevents the data store from becoming too full and the automatic creation of root disks on particular data stores (high speed, etc.).</span></li><li><span style="color: rgb(51,51,51);">Click <strong>Next</strong>.<strong><br/><br/></strong></span></li></ul><span style="color: rgb(51,51,51);"><strong>Step 2 of 2. Resources</strong></span><br/><br/><ul><li><span style="color: rgb(51,51,51);"><em>QCOW2 path</em> - specify the path to the QCOW2 file. </span></li><li><span style="color: rgb(51,51,51);"><em>Disk Capacity</em> - set the disk capacity in GB.</span></li><li><span style="color: rgb(51,51,51);"><em>Local Compute Resource</em> - if required, bind the data store with a local compute resource to locate the data store and the compute resource on the same physical server. Thus, it decreases the connection time between the compute resource and the data store. If not bound with the local compute resource, such a data store will be available within the compute zone to which this data store is assigned.</span></li><li><p><span style="color: rgb(51,51,51);"><em>Data Store Zone</em> - in the drop-down list, select a data store zone to assign the data store to it. The drop-down list shows all data store zones set up in the cloud (to add or edit data store zones, see <a href="https://docs.onapp.com/vhs9ag/latest/storage-and-backups/data-store-zones-settings" rel="nofollow">Data Store Zones Settings</a>).</span></p></li></ul><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(51,51,51);">When adding a data store to a data store zone, the data store inherits the zone type. You can move such a data store exclusively to a data store zone of the same type. For more information, refer to <a href="https://docs.onapp.com/vhs9ag/latest/zone-types" rel="nofollow">Zone Types</a>.</span></p></div></div></li><li><p><span style="color: rgb(51,51,51);">Click the <strong>Create Data Store</strong> button.</span></p></li></ol></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Apr 26, 2024 09:08</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Beta Installation Guide : .Additional Kickstart Options v7.1Beta</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Beta-Installation-Guide_194478084.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Installing-Virtuozzo-Hybrid-Server_194478138.html">Installing Virtuozzo Hybrid Server</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="PXE-Installation_194478168.html">PXE Installation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Preparing-a-Kickstart-File_194478201.html">Preparing a Kickstart File</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Additional-Kickstart-Options_194478213.html">Additional Kickstart Options</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Beta Installation Guide : .Additional Kickstart Options v7.1Beta
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on Mar 04, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(0,0,0);">In addition to standard Linux kickstart options, Virtuozzo Hybrid Server provides a number of own options that you need to add to your kickstart file.</span></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.AdditionalKickstartOptionsv7.1Beta-GeneralOptions">General Options</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><strong>key (mandatory)</strong></p><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">key &lt;key&gt;</pre>
+</div></div><p><br/></p><p>Installs the Virtuozzo Hybrid Server product key on the server.</p><p><strong>%packages (mandatory)</strong></p><p>Specifies the package groups to install on the server:</p><ul class="simple"><li><p><code class="docutils literal notranslate"><span class="pre">@base</span></code>,<span> </span><code class="docutils literal notranslate"><span class="pre">@core</span></code>, mandatory, core Virtuozzo Hybrid Server packages.</p></li><li><p><code class="docutils literal notranslate"><span class="pre">@vz</span></code>, mandatory, Virtuozzo Hybrid Server OS virtualization packages.</p></li><li><p><code class="docutils literal notranslate"><span class="pre">@ps</span></code>, mandatory, Virtuozzo Hybrid Server hardware virtualization packages.</p></li><li><p><code class="docutils literal notranslate"><span class="pre">@qemu</span></code>, mandatory, QEMU-related packages.</p></li><li><p><code class="docutils literal notranslate"><span class="pre">@clustering</span></code>, optional, packages required for creating clusters from Virtuozzo Hybrid Server nodes.</p></li><li><p><code class="docutils literal notranslate"><span class="pre">@vstorage</span></code>, optional, packages required for setting up Virtuozzo Storage clusters.</p></li><li><p><code class="docutils literal notranslate"><span class="pre">@optional</span></code>, optional, additional packages not installed by default.</p></li></ul><p><strong>cep (optional)</strong></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">cep [--agree|--agree-node|--disagree]</pre>
+</div></div><p>Sets participation in the Customer Experience Program.</p><p><br/></p><div class="table-wrap"><table class="wrapped confluenceTable"><thead><tr><th style="text-align: left;" class="confluenceTh"><p>Option</p></th><th style="text-align: left;" class="confluenceTh"><p>Description</p></th></tr></thead><tbody><tr><td class="confluenceTd"><p><code class="docutils literal notranslate"><span class="pre">--agree</span></code></p></td><td class="confluenceTd"><div class="content-wrapper"><p>Join the program with physical server and virtual environments. In this case, Virtuozzo Hybrid Server will periodically collect information about the configuration of your physical server and virtual servers and use it to improve the product to better fit your needs.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>No private information like your name, e-mail address, phone number, or keyboard input will be collected.</p></div></div></div></td></tr><tr><td class="confluenceTd"><p><code class="docutils literal notranslate"><span class="pre">--agree-node</span></code></p></td><td class="confluenceTd"><div class="content-wrapper"><p>Join the program with physical server only. In this case, Virtuozzo Hybrid Server will periodically collect information only about the configuration of your physical server and use it to improve the product to better fit your needs.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>No private information like your name, e-mail address, phone number, or keyboard input will be collected.</p></div></div></div></td></tr><tr><td class="confluenceTd"><p><code class="docutils literal notranslate"><span class="pre">--disagree</span></code></p></td><td class="confluenceTd"><p>Do not join the program.</p></td></tr></tbody></table></div><p><br/></p><p><strong>up2date (optional)</strong></p><p>Does the following:</p><ol class="arabic simple"><li><p>Configure the repositories with updates for Virtuozzo Hybrid Server software and templates.</p></li><li><p>Check the repositories for available updates.</p></li><li><p>Download and install the updated packages, if any, on the server.</p></li></ol><p>Using this option, you can ensure that you have the latest Virtuozzo Hybrid Server software packages and templates right after the installation, without the need to manually check for updates.</p><p><strong>readykernel –disable-autoupdate (optional)</strong></p><p>Disables the automatic downloading and installation of the latest ReadyKernel patches for the current kernel. With automatic updating enabled by default, ReadyKernel will check for new patches daily at 12:00 server time. If a patch is available, ReadyKernel will download, install, and load it for the current kernel.</p><p><strong>prlnet (optional)</strong></p><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">prlnet --name &lt;name&gt; [--ip-scope-start &lt;start_IP_addr&gt; --ip-scope-end &lt;end_IP_addr&gt;]
+       [--ip &lt;adapter_IP_addr&gt;[/&lt;mask&gt;]] [--dhcp-ip &lt;DHCP_IP_addr&gt;]
+       [--dhcp-server &lt;on|off&gt;] [--dhcp6-server &lt;on|off&gt;]
+       [--ip6-scope-start &lt;start_IP_addr&gt; --ip6-scope-end &lt;end_IP_addr&gt;]
+       [--ip6 &lt;adapter_IP_addr&gt;[/&lt;mask&gt;]] [--dhcp-ip6 &lt;DHCP_IP_addr&gt;]</pre>
+</div></div><p><span style="letter-spacing: 0.0px;">Defines the range of IP addresses (IPv4 and IPv6) the DHCP server will be able to allocate to virtual servers in the defined host-only network; virtual adapter IP address (IPv4 and IPv6) and subnet mask; DHCP server IP address (IPv4 and IPv6); and enables or disables the virtual DHCP server (DHCPv4 or DHCPv6).</span></p><p>If you omit one or more parameters, the following default values will be used:</p><ul class="simple"><li><p><code class="docutils literal notranslate"><span class="pre">--ip-scope-start</span></code>: 10.37.130.1,</p></li><li><p><code class="docutils literal notranslate"><span class="pre">--ip-scope-end</span></code>: 10.37.130.254,</p></li><li><p><code class="docutils literal notranslate"><span class="pre">--ip</span></code>: 10.37.130.2/255.255.255.0,</p></li><li><p><code class="docutils literal notranslate"><span class="pre">--dhcp-ip</span></code>: 10.37.130.1,</p></li><li><p><code class="docutils literal notranslate"><span class="pre">--dhcp-server</span></code>: on,</p></li><li><p><code class="docutils literal notranslate"><span class="pre">--ip6-scope-start</span></code>: fdb2:2c26:f4e4::,</p></li><li><p><code class="docutils literal notranslate"><span class="pre">--ip-scope-end</span></code>: fdb2:2c26:f4e4::ffff,</p></li><li><p><code class="docutils literal notranslate"><span class="pre">--ip6</span></code>: fdb2:2c26:f4e4::1/ffff:ffff:ffff:ffff::,</p></li><li><p><code class="docutils literal notranslate"><span class="pre">--dhcp-ip6</span></code>: fdb2:2c26:f4e4::,</p></li><li><p><code class="docutils literal notranslate"><span class="pre">--dhcp6-server</span></code>: on.</p></li></ul><p><br/></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Apr 26, 2024 09:08</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

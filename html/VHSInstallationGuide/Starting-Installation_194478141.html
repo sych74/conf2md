@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Beta Installation Guide : Starting Installation</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Beta-Installation-Guide_194478084.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Installing-Virtuozzo-Hybrid-Server_194478138.html">Installing Virtuozzo Hybrid Server</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Beta Installation Guide : Starting Installation
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on Mar 12, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Virtuozzo Hybrid Server can be installed from:</p><ul><li><p>IPMI virtual drives</p></li><li><p>USB drives (see<span> </span><a href=".Preparing-for-Installation-from-USB-Storage-Drives-v7.1Beta_194478110.html"><span class="std std-ref">Preparing for Installation from USB Storage Drives</span></a>)</p></li><li><p>PXE servers (see<span> </span><a href=".PXE-Installation-v7.1Beta_194478167.html"><span class="xref std std-doc">Installation Using PXE</span></a><span> </span>for information on installing Virtuozzo Hybrid Server over the network)</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>In Virtuozzo Hybrid Server 9, time synchronization via NTP is enabled by default using the<span> </span><code class="docutils literal notranslate"><span class="pre">chronyd</span></code><span> </span>service. If you want to use<span> </span><code class="docutils literal notranslate"><span class="pre">ntpdate</span></code><span> </span>or<span> </span><code class="docutils literal notranslate"><span class="pre">ntpd</span></code>, stop and disable<span> </span><code class="docutils literal notranslate"><span class="pre">chronyd</span></code><span> </span>first.</p></div></div></li></ul><p>To start the installation, do the following:</p><ol class="arabic simple"><li><p>Configure the server to boot from the chosen media.</p></li><li><p>Boot the server and wait for the welcome screen.</p></li><li>Choose <strong style="text-align: left;">Install Virtuozzo Hybrid Server</strong>.</li></ol><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="StartingInstallation-EnablingForcedDetectionofSSDs">Enabling Forced Detection of SSDs</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Certain solid-state drives (SSDs) may not be autodetectable by the installer. It may result in issues when you create or join Virtuozzo Storage clusters. To avoid this problem, you can force the installer to identify the required drives as SSDs by doing the following:</p><ol class="arabic"><li><p>Choose the required installation option and press<span> </span><strong>E</strong><span> </span>to edit it.</p></li><li><p>Add<span> </span><code class="docutils literal notranslate"><span class="pre">ssd_hack=sd&lt;N&gt;[,...]</span></code><span> </span>at the end of the line starting with<span> </span><code class="docutils literal notranslate"><span class="pre">linux</span><span> </span><span class="pre">/images/pxeboot/vmlinuz</span></code>. For example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">linux /images/pxeboot/vmlinuz inst.stage2=hd:LABEL=&lt;VZ9_ISO_image&gt; quiet ip=dhcp \
+ssd_hack=sdb,sdc</pre>
+</div></div></li><li><p>Press<span> </span><strong>Ctrl-X</strong><span> </span>to load the selected installation option.</p></li></ol><p>The installer should identify the specified drives as SSDs.</p><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="StartingInstallation-ChangingtheSwapSizeCalculationMethod">Changing the Swap Size Calculation Method</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Virtuozzo Hybrid Server requires that a swap partition be created on the system disk during installation. The size of this partition depends on the RAM size. If automatic partitioning is used, the swap size is calculated as follows:</p><ul class="simple"><li><p>If the RAM size is 4-8 GB, the swap size <span style="color: rgb(14,16,26);">equals</span> the RAM size.</p></li><li><p>Otherwise, the swap size is half the RAM size.</p></li></ul><p>Such a method is beneficial for memory overcommit scenarios. If, however, overcommit is not required, you can use the old method of calculating the swap size:</p><ul class="simple"><li><p>If the RAM size is 4-8 GB, the swap size <span style="color: rgb(14,16,26);letter-spacing: 0.0px;">equals </span><span style="letter-spacing: 0.0px;">the RAM size.</span></p></li><li><p>If the RAM size is 8-64 GB, the swap size is half the RAM size.</p></li><li><p>Otherwise, the swap size is 32 GB.</p></li></ul><p>To have the installer use the old method while it partitions the disks automatically, boot to the welcome screen and do the following:</p><ol class="arabic"><li><p>Choose the required installation option and press<span> </span><strong>E</strong><span> </span>to edit it.</p></li><li><p>Add<span> </span><code class="docutils literal notranslate"><span class="pre">smallswap</span></code><span> </span>at the end of the line, starting with<span> </span><code class="docutils literal notranslate"><span class="pre">linux</span><span> </span><span class="pre">/images/pxeboot/vmlinuz</span></code>. For example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">linux /images/pxeboot/vmlinuz inst.stage2=hd:LABEL=&lt;VZ9_ISO_image&gt; quiet ip=dhcp smallswap</pre>
+</div></div></li><li><p>Press<span> </span><strong>CTRL-X</strong><span> </span>to start booting the chosen installation option.</p></li></ol><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="StartingInstallation-InstallingonUSBDrive">Installing on USB Drive</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Aside from regular disks, you can install Virtuozzo Hybrid Server on a 64 GB+ USB drive. In this case, however, you will still need to place the swap partition on a regular HDD/SSD drive. It is recommended to store logs on a syslog server.</p><p>To have a USB drive recognized as an installation destination, configure the installer as follows:</p><ol class="arabic"><li><p>Choose the required installation option and press<span> </span><strong>E</strong><span> </span>to edit it.</p></li><li><p>Add<span> </span><code class="docutils literal notranslate"><span class="pre">allow_usb_hdd</span></code><span> </span>at the end of the line starting with<span> </span><code class="docutils literal notranslate"><span class="pre">linux</span><span> </span><span class="pre">/images/pxeboot/vmlinuz</span></code>. For example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">linux /images/pxeboot/vmlinuz inst.stage2=hd:LABEL=&lt;VZ9_ISO_image&gt; quiet ip=dhcp \
+allow_usb_hdd</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>If you chose to install Virtuozzo Hybrid Server with GUI, add<span> </span><code class="docutils literal notranslate"><span class="pre">expert</span></code><span> </span>to this line.</p></div></div></li><li><p>Press<span> </span><strong>Ctrl-X</strong><span> </span>to load the selected installation option.</p></li><li><p>On the installer’s<span> </span><strong>INSTALLATION DESTINATION</strong><span> </span>screen, select the USB drive as system, select<span> </span><strong>I will configure partitioning</strong><span> at</span> the bottom, and click<span> </span><strong>Done</strong><span> </span>and then<span> </span><strong>OK</strong><span> </span>to proceed to the<span> </span><strong>MANUAL PARTITIONING</strong><span> </span>screen.</p></li><li><p>On the<span> </span><strong>MANUAL PARTITIONING</strong><span> </span>screen, select the swap partition in the list, click<span> </span><strong>Modify</strong><span> </span>on the right, and select an HDD or SSD drive to place the swap on.</p></li><li><p>Click<span> </span><strong>Done</strong>, then<span> </span><strong>Accept Changes</strong><span> </span>to return to the main installer screen and configure other options as usual.</p></li></ol><p><br/></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Apr 26, 2024 09:08</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

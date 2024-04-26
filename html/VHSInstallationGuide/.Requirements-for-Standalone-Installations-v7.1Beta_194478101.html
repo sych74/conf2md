@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Beta Installation Guide : .Requirements for Standalone Installations v7.1Beta</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Beta-Installation-Guide_194478084.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Preparing-for-Installation_194478088.html">Preparing for Installation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Requirements-for-Standalone-Installations_194478102.html">Requirements for Standalone Installations</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Beta Installation Guide : .Requirements for Standalone Installations v7.1Beta
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on Mar 04, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>The recommended hardware requirements for running Virtuozzo Hybrid Server 9 as a standalone installation are as follows:</p><ul><li><p>x86-64 platform with hardware virtualization support: Intel VT-x (with “unrestricted guest”) or AMD Virtualization (tested only on AMD EPYC).</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>To check if the Intel processor supports the “unrestricted guest” feature: 1) Download <code><span>vmxcap.py</span></code> from <a href="https://github.com/qemu/qemu/blob/master/scripts/kvm/vmxcap" class="external-link" rel="nofollow">https://github.com/qemu/qemu/blob/master/scripts/kvm/vmxcap</a>, 2) Run <code><span>python</span> <span>vmxcap.py</span> <span>|</span> <span>grep</span> <span>-i</span> <span>unrest</span></code>. The result must be <span><code>yes</code>.</span></p></div></div></li><li>CPUs: at least 4 cores, a 64-bit processor is required for running 64-bit guest operating systems.</li><li>RAM: 4 GB or more.</li><li><p>HDD: the minimal required disk size is the sum of the minimal <span><code>/vz</code> </span>and root partitions, as well as the swap size:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">min_hdd_size = min_vz_size + min_root_size + swap_size</pre>
+</div></div><p>Where <code><span>min_root_size</span></code> is 12 GiB, <code><span>min_vz_size</span></code> is 30 GiB, and <code><span>swap_size</span></code> depends on the RAM size. </p></li><li>SSD (optional): at least 30 GiB (at least 32 GiB with <code><span>/boot</span></code>).</li><li>Network: an Ethernet network adapter and a valid IP address.</li></ul><p>The actual number of virtual servers you can run on a physical server and their performance depend on resources they will consume.</p><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.RequirementsforStandaloneInstallationsv7.1Beta-SystemLimits">System Limits</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>The table below lists the current hardware limits for Virtuozzo Hybrid Server 9 servers.</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Hardware</th><th class="confluenceTh">Theoretical</th><th class="confluenceTh">Certified</th></tr><tr><td class="confluenceTd">RAM</td><td class="confluenceTd">64 TB</td><td class="confluenceTd">1 TB</td></tr><tr><td class="confluenceTd">HDD</td><td class="confluenceTd">1 EB</td><td class="confluenceTd">50 TB</td></tr></tbody></table></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Apr 26, 2024 09:08</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

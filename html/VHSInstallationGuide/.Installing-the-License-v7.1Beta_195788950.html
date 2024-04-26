@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Beta Installation Guide : .Installing the License v7.1Beta</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Beta-Installation-Guide_194478084.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Standalone-Virtuozzo-Hybrid-Server-Licensing_195788945.html">Standalone Virtuozzo Hybrid Server Licensing</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Installing-the-License_195788951.html">Installing the License</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Beta Installation Guide : .Installing the License v7.1Beta
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on Mar 04, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Virtuozzo Hybrid Server requires that a different license be installed on each server. You can activate a license during or after the installation. In the latter case, you can install a license from a product key, an activation code, or a license file.</p><p>If your Virtuozzo Hybrid Server node cannot access the Internet directly, you can activate a license via a proxy server.</p><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.InstallingtheLicensev7.1Beta-UsingaProxyServertoActivateLicenses">Using a Proxy Server to Activate Licenses</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>When a direct Internet connection is impossible, you can specify an HTTP proxy to access the Key Administration (KA) server through. To do that, add the HTTP proxy information to the <code>/etc/vz/vz.conf</code> file as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">HTTP_PROXY=&quot;http://&lt;host&gt;:&lt;port&gt;/&quot;
+HTTP_PROXY_USER=&quot;&lt;username&gt;&quot;
+HTTP_PROXY_PASSWORD=&quot;&lt;password&gt;&quot;</pre>
+</div></div><p>Note the following:</p><ul><li><p>You may need to create <code>/etc/vz/vz.conf</code>.</p></li><li><p>The proxy server must have port 5224 approved for SSL traffic.</p></li><li><p>The <code>vzlicutils </code>package is required for license auto-updating to work. If the package is not installed on your system for some reason, you can install it manually with <code>yum</code>. To enable license auto-updates after installing the package, launch the <code>vzlicmon</code> service with <code>systemctl start vzlicmon</code>. The service will show as <code>/usr/sbin/vzlicmonitor</code> in the running processes list.</p></li></ul><p>Once the access to the proxy server is configured, proceed to install the license.</p><p>Virtuozzo Hybrid Server licenses are updated automatically by default. A few days before the current license expires, the <code>vzlicmon</code> service (a part of the <code>vzlicutils</code> RPM package) attempts to contact the Virtuozzo KA server over the Internet and obtain a new license.</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.InstallingtheLicensev7.1Beta-InstallingtheLicensefromProductKeys,ActivationCodes,orLicenseFiles">Installing the License from Product Keys, Activation Codes, or License Files</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>To install a license from a product key or an activation code, run the <code><span>vzlicload</span> <span>-p</span></code> command or the <code><span>vzlicload</span> <span>-f</span></code> command to install from a license file. For example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vzlicload -p &lt;key_or_code&gt;
+
+# vzlicload -f &lt;license_file&gt;</pre>
+</div></div><p><span style="letter-spacing: 0.0px;">When you install a product key or activate a code, a license file is generated and installed on the server in the </span><code style="letter-spacing: 0.0px;">etc/vz/licenses/</code><span style="letter-spacing: 0.0px;"> directory. The difference between the product key and activation code is that the code needs to be activated online, so the server must be connected to the Internet. To activate the code, the installation tool accesses the Key Authentication (KA) licensing server and transmits the specified activation code to it. The KA server generates a license file, sends it back, and the license file is installed on the server automatically.</span></p><p><br/></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Apr 26, 2024 09:08</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

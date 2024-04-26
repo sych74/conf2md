@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Beta Installation Guide : Installing Control Panel Server</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Beta-Installation-Guide_194478084.html">Beta Installation Guide</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Beta Installation Guide : Installing Control Panel Server
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on Mar 12, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="confluence-information-macro has-no-icon confluence-information-macro-information"><p class="title">Before You Begin</p><div class="confluence-information-macro-body"><ul><li><span style="color: rgb(29,28,29);">Install Control Panel on a server running the AlmaLinux 9 OS.</span></li><li>Review the <a href="https://docs.onapp.com/vhs9gsg/latest" rel="nofollow">Virtuozzo Hybrid Server 9 Get Started Guide</a> <span>to ensure your environment is ready for installation.</span></li><li>Use the corresponding <a href="#InstallingControlPanelServer-installer">option</a> of the Control Panel installer if MySQL is already installed and configured.</li><li>The installer output is redirected to <code>/onapp-cp-install.log</code>.</li><li>All the installer critical errors are written to <code>/var/log/messages</code>.</li><li><span style="color: rgb(51,51,51);">To test the upgrade, you may first simulate the upgrade process on the test environment. For more details, refer to the </span><a style="text-decoration: none;" rel="nofollow" href="https://docs.onapp.com/misc/configuring-control-panel-environment-for-simulation-purposes-6-3-and-up">Configuring Control Panel Environment for Simulation Purposes</a> section. </li><li>Disable SELinux before the installation.</li></ul></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>To install the Control Panel server, run the following procedure:</p><ol><li><p>Update your server:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># yum update</pre>
+</div></div></li><li><p>Download the OnApp YUM repository file:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># rpm -Uvh http://rpm.repo.onapp.com/repo/onapp-repo-7.1.noarch.rpm</pre>
+</div></div></li><li><p>Install the OnApp Control Panel installer package:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># yum install onapp-cp-install</pre>
+</div></div></li><li><p><strong><span class="confluence-anchor-link" id="InstallingControlPanelServer-config"></span>(Optional) </strong>You can set custom configuration options for Control Panel. It is important to set custom values before the installer script runs.<br/><br/></p><div id="expander-996390546" class="expand-container"><div id="expander-control-996390546" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">The full list of custom configuration options for Control Panel.</span></div><div id="expander-content-996390546" class="expand-content"><p>Edit the <code>/onapp/onapp-cp.conf</code> file to set <span>custom values for </span><span>Control Panel: </span></p><p>#Template server URL</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">TEMPLATE_SERVER_URL=&#39;http://templates-manager.onapp.com&#39;</pre>
+</div></div><p># IPs (separated with a comma) list for the SNMP to trap. It is a list of Control Panel IP addresses on which the traps sent from the compute resources are processed.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">SNMP_TRAP_IPS=&quot;&quot;</pre>
+</div></div><p># OnApp Control Panel custom version</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">ONAPP_VERSION=&quot;&quot;</pre>
+</div></div><p># OnApp MySQL/MariaDB connection data (<code>database.yml</code>)</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">ONAPP_CONN_WAIT_TIMEOUT=15
+ONAPP_CONN_POOL=30
+ONAPP_CONN_RECONNECT=&#39;true&#39;
+ONAPP_CONN_ENCODING=&#39;utf8&#39;</pre>
+</div></div><p># MySQL/MariaDB server configuration data (in case of local server)</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">MYSQL_WAIT_TIMEOUT=604800
+MYSQL_MAX_CONNECTIONS=500
+MYSQL_LIMITNOFILE=8192</pre>
+</div></div><p># <a href="https://docs.onapp.com/display/MISC/Install+OnApp+Control+Panel+with+MariaDB+as+database+server">Use MariaDB instead of MySQL as OnApp database server</a> (Deprecated parameter. If you set any values for this parameter, they will not take effect)</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">WITH_MARIADB=0</pre>
+</div></div><p># Configure the database server relative amount of available RAM</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">TUNE_DB_SERVER=1</pre>
+</div></div><p># The number of C data structures that can be allocated before triggering the garbage collector. <span style="color: rgb(34,34,34);">It defaults to 8 million. </span>Only change this value if you understand what it does.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">RUBY_GC_MALLOC_LIMIT=16000000</pre>
+</div></div><p># <code>sysctl.conf net.core.somaxconn </code>value</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">NET_CORE_SOMAXCONN=2048</pre>
+</div></div><p># The root of the OnApp database dump directory (on the Control Panel box)</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">ONAPP_DB_DUMP_ROOT=&quot;&quot;</pre>
+</div></div><p># Remote server's (to store database dumps) IP, user, path, <code>openssh</code> connection options, and number of dumps to keep</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">DB_DUMP_SERVER=&quot;&quot;
+DB_DUMP_USER=&quot;root&quot;
+DB_DUMP_SERVER_ROOT=&quot;/onapp/backups&quot;
+DB_DUMP_SERVER_SSH_OPT=&quot;-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PasswordAuthentication=no&quot;
+KEEP_DUMPS=168
+DB_DUMP_CRON=&#39;40 * * * *&#39;</pre>
+</div></div><p># <a href="https://docs.onapp.com/display/MISC/OnApp+Services+Monitoring+Tool">Enable monit - tool for managing and monitoring Unix systems<br /></a></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">ENABLE_MONIT=1</pre>
+</div></div><p># <span style="color: rgb(34,34,34);">DEPRECATED: </span>If enabled (the <code>1</code> value is set) - install (if local box) and configure RabbitMQ Server (messaging system) for the vCloud support. (Deprecated parameter. If you set any values for this parameter, they will not take effect)</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">ENABLE_RABBITMQ=1</pre>
+</div></div><p># Rotate transactions' log files created more than TRANS_LOGS_ROTATE_TIME day(s) ago</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">TRANS_LOGS_ROTATE_TIME=30</pre>
+</div></div><p># Maximum allowed for uploading file size in bytes, from 0 (meaning unlimited) to 2147483647 (2 GB). The default is <code>0</code><span style="color: rgb(34,34,34);">.<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">MAX_UPLOAD_SIZE=0</pre>
+</div></div><p><span style="color: rgb(34,34,34);"># Timeout before ping the Redis server to check if it is started. The default is 10 sec.<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">REDIS_PING_TIMEOUT=10</pre>
+</div></div><p><span style="color: rgb(34,34,34);"># OnApp Control Panel SSL certificates (please do not change if you aren't familiar with SSL certificates)</span><br/><span style="color: rgb(34,34,34);"># * The data below to generate a self-signed PEM-encoded X.509 certificate<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">SSL_CERT_COUNTRY_NAME=&quot;UK&quot;
+SSL_CERT_ORGANIZATION_NAME=&#39;OnApp Limited&#39;
+SSL_CERT_ORGANIZATION_ALUNITNAME=&#39;OnApp Cloud&#39;
+SSL_CERT_COMMON_NAME=&quot;`hostname --fqdn 2&gt;/dev/null`&quot;</pre>
+</div></div><p><span style="color: rgb(34,34,34);">#   SSLCertificateFile, SSLCertificateKeyFile Apache directives' values</span><br/><span style="color: rgb(34,34,34);">#   ssl_certificate, ssl_certificate_key Nginx directives' values<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">SSLCERTIFICATEFILE=&quot;/etc/pki/tls/certs/ca.crt&quot;
+SSLCERTIFICATECSRFILE=&quot;/etc/pki/tls/private/ca.csr&quot;
+SSLCERTIFICATEKEYFILE=&quot;/etc/pki/tls/private/ca.key&quot;</pre>
+</div></div><p><span style="color: rgb(34,34,34);"># * PEM-encoded CA Certificate (if custom one exists)</span><br/><span style="color: rgb(34,34,34);">#   SSLCACertificateFile, SSLCertificateChainFile Apache directives' values</span><br/><span style="color: rgb(34,34,34);">#   ssl_client_certificate Nginx directives' values<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">SSLCACERTIFICATEFILE=&quot;&quot;
+SSLCERTIFICATECHAINFILE=&quot;&quot;</pre>
+</div></div><p><span style="color: rgb(34,34,34);">#   SSLCipherSuite, SSLProtocol Apache directives' values</span><br/><span style="color: rgb(34,34,34);">#   ssl_ciphers, ssl_protocols Nginx directives' values<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">SSLCIPHERSUITE=&quot;&quot;
+SSLPROTOCOL=&quot;&quot;</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vi /onapp/onapp-cp.conf</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>For a successful installation, accept the EULA.</p></div></div></div></div></li><li><p><span class="confluence-anchor-link" id="InstallingControlPanelServer-installer"></span>Run the Control Panel installer</p></li></ol><p><span>        For <span style="color: rgb(29,28,29);">AlmaLinux 9</span>:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># /onapp/onapp-cp-install/onapp-cp-install.sh -i SNMP_TRAP_IPS</pre>
+</div></div><div id="expander-396805835" class="expand-container"><div id="expander-control-396805835" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">The full list of installer options for Control Panel.</span></div><div id="expander-content-396805835" class="expand-content"><p><br/></p><pre class="code-java"># /onapp/onapp-cp-install/onapp-cp-install.sh -h
+Usage: /onapp/onapp-cp-install/onapp-cp-install.sh [-c CONFIG_FILE] [--mariadb | --mariadb-custom | --community | --percona | --percona-cluster] [-m MYSQL_HOST] [--mysql-port=MYSQL_PORT] [--mysql-sock[=MYSQL_SOCK] [-p MYSQL_PASSWD] [-d MYSQL_DB] [-u MYSQL_USER] [-U ADMIN_LOGIN] [-P ADMIN_PASSWD] [-F ADMIN_FIRSTNAME] [-L ADMIN_LASTNAME] [-E ADMIN_EMAIL] [-i SNMP_TRAP_IPS] [--redis-host=REDIS_HOST] [--redis-bind[=REDIS_BIND] [--redis-passwd[=REDIS_PASSWD] [--redis-port=REDIS_PORT] [--redis-sock[=REDIS_SOCK] [--rbthost RBT_HOST] [--vcdlogin VCD_LOGIN] [--vcdpasswd VCD_PASSWD] [--vcdvhost VCD_VHOST] [--rbtlogin RBT_LOGIN] [--rbtpasswd RBT_PASSWD] [-a] [-y] [-D] [-t] [--noservices] [--ha-install] [--rake=RAKE_TASKS] [--quick|--quick-update[=SERVICE] [--accept-eula] [-w] [-h]
+
+    Database server options:
+                           Default database SQL server is MySQL Server.
+
+                           Please use one of the following option to install LOCALLY:
+                           --mariadb         : MariaDB Server
+			   --mariadb-custom  : MariaDB Server (custom <span class="code-keyword" style="color: rgb(145,0,145);">for</span> <span style="color: rgb(29,28,29);">AlmaLinux 9</span> only)
+                           --community       : MySQL Community Server
+                           --percona         : Percona Server
+                           --percona-cluster : Percona Cluster
+
+                           -m MYSQL_HOST   : MySQL host. Default is <span class="code-quote" style="color: rgb(0,145,0);">'localhost'</span>
+                           --mysql-port=MYSQL_PORT    : TCP port where MySQL Server serves connections.
+                                                       Default values is 3306 <span class="code-keyword" style="color: rgb(145,0,145);">for</span> the local installation
+                           --mysql-sock[=MYSQL_SOCK] : Unix socket on which MySQL Server serves connections.
+                                                       Default values is /<span class="code-keyword" style="color: rgb(145,0,145);">var</span>/lib/mysql/mysql.sock. Used <span class="code-keyword" style="color: rgb(145,0,145);">if</span> local server only
+                                                       The socket is unset <span class="code-keyword" style="color: rgb(145,0,145);">if</span> the option<span class="code-quote" style="color: rgb(0,145,0);">'s argument isn'</span>t specified.
+                           -p MYSQL_PASSWD : MySQL password. Random is generated <span class="code-keyword" style="color: rgb(145,0,145);">if</span> is not set or specified.
+                           -d MYSQL_DB     : OnApp MySQL database name. Default is <span class="code-quote" style="color: rgb(0,145,0);">'onapp'</span>
+                           -u MYSQL_USER   : MySQL user. Default is <span class="code-quote" style="color: rgb(0,145,0);">'root'</span>
+
+
+    Redis Server options:
+
+                           --redis-host=REDIS_HOST : IP address/FQDN where Redis Server runs. It is used by Control Panel to connect to Redis Server.
+                                                     The Redis Server will be installed and configured on the current box <span class="code-keyword" style="color: rgb(145,0,145);">if</span> localhost/127.0.0.1 or box's <span class="code-keyword" style="color: rgb(145,0,145);">public</span> IP address (listed in SNMP_TRAP_IPS) is specified.
+                                                     Default value is 127.0.0.1.
+                                                     If local Redis, it will serve as well on the unix socket <span class="code-quote" style="color: rgb(0,145,0);">'PORT'</span> (<span class="code-keyword" style="color: rgb(145,0,145);">if</span> --redis-sock without argument isn't specified)
+                           --redis-bind[=REDIS_BIND] : The IP address <span class="code-keyword" style="color: rgb(145,0,145);">for</span> Redis Server to serve connections (to listen)
+                                                       The option isn't mandatory.
+
+                           --redis-port=REDIS_PORT : Redis Server listen port.
+                                                     Defaults are:
+                                                       0 - <span class="code-keyword" style="color: rgb(145,0,145);">if</span> local server
+                                                       6379 - <span class="code-keyword" style="color: rgb(145,0,145);">if</span> remote server
+                           --redis-passwd[=REDIS_PASSWD] : Redis Server password to authentificate.
+                                                           Random password is generated <span class="code-keyword" style="color: rgb(145,0,145);">if</span> the option<span class="code-quote" style="color: rgb(0,145,0);">'s argument isn'</span>t specified.
+                                                           By <span class="code-keyword" style="color: rgb(145,0,145);">default</span> no password is used <span class="code-keyword" style="color: rgb(145,0,145);">for</span> local Redis.
+                           --redis-sock[=REDIS_SOCK] : Path to the Redis Server's socket. Used <span class="code-keyword" style="color: rgb(145,0,145);">if</span> local server only.
+                                                     Default is /<span class="code-keyword" style="color: rgb(145,0,145);">var</span>/run/redis/redis.sock
+                                                     The socket is unset <span class="code-keyword" style="color: rgb(145,0,145);">if</span> the option<span class="code-quote" style="color: rgb(0,145,0);">'s argument isn'</span>t specified.
+
+
+    Options to manage OnApp Control Panel administrator account:
+                                                Please note, that these options are <span class="code-keyword" style="color: rgb(145,0,145);">for</span> NEW INSTALL only and not <span class="code-keyword" style="color: rgb(145,0,145);">for</span> upgrade
+
+                           -P ADMIN_PASSWD    : CP administrator password
+                           -F ADMIN_FIRSTNAME : CP administrator first name
+                           -L ADMIN_LASTNAME  : CP administrator last name
+                           -E ADMIN_EMAIL     : CP administrator e-mail
+
+
+     RabbitMQ Server and vCloud options:
+
+                           --rbthost   RBT_HOST   : IP address/FQDN where RabbitMQ Server runs.
+                                                    The RabbitMQ will be installed and configured on the current box <span class="code-keyword" style="color: rgb(145,0,145);">if</span> localhost/127.0.0.1 or box's <span class="code-keyword" style="color: rgb(145,0,145);">public</span> IP address (enlisted in SNMP_TRAP_IPS)
+                                                    Default values is 127.0.0.1.
+
+                              VCD_*      : Options are usefull <span class="code-keyword" style="color: rgb(145,0,145);">if</span> vCloud/RabbitMQ are already installed and configured.
+
+                           --vcdlogin  VCD_LOGIN  : RabbitMQ/vCloud user. Default value is <span class="code-quote" style="color: rgb(0,145,0);">'rbtvcd'</span>.
+                           --vcdpasswd VCD_PASSWD : RabbitMQ/vCloud user password. The random password is generated <span class="code-keyword" style="color: rgb(145,0,145);">if</span> isn't specified.
+                           --vcdvhost  VCD_VHOST  : RabbitMQ/vCloud vhost. Default value is <span class="code-quote" style="color: rgb(0,145,0);">'/'</span>
+
+                              RBT_*         : Options are used to configure RabbitMQ manager account. If local RabbitMQ server.
+
+                           --rbtlogin  RBT_LOGIN  : RabbitMQ manager login. The <span class="code-keyword" style="color: rgb(145,0,145);">default</span> value is <span class="code-quote" style="color: rgb(0,145,0);">'rbtmgr'</span>.
+                           --rbtpasswd RBT_PASSWD : RabbitMQ manager password. The random password is generated <span class="code-keyword" style="color: rgb(145,0,145);">if</span> isn't specified.
+
+
+     General options:
+
+                           --ha-install : Proceed with Control Panel and Hight Availability components installation
+			                  RHEL/<span style="color: rgb(29,28,29);">AlmaLinux 9</span> is supported only!
+
+                           --rake RAKE_TASKS : List of OnApp Control Panel rake tasks (separated with space) to run at the very end of install or upgrade
+
+                           -i SNMP_TRAP_IPS : IP addresses separated with comma <span class="code-keyword" style="color: rgb(145,0,145);">for</span> snmp to trap
+
+                           -y : Update OS packages (except of OnApp provided) on the box with <span class="code-quote" style="color: rgb(0,145,0);">'yum update'</span>.
+
+                           -a : Do not be interactive. <span class="code-object" style="color: rgb(0,0,145);">Process</span> with automatic installation.
+                                Please note, <span class="code-keyword" style="color: rgb(145,0,145);">this</span> will <span class="code-keyword" style="color: rgb(145,0,145);">continue</span> OnApp Control Panel install/upgrade even there is transaction currently running.
+
+                           -t : Add to the database and download Base Templates. For <span class="code-keyword" style="color: rgb(145,0,145);">new</span> installs only.
+
+                           --noservices : Do not start OnApp services: monit, onapp and httpd
+                                          Please note, crond and all OnApp's cron tasks remain running. They could be disabled by stopping crond service manually <span class="code-keyword" style="color: rgb(145,0,145);">for</span> your own risk.
+
+                           -D : Do not make database dump, and make sure it is disabled in the cron and not running at the moment
+
+                           -w : Do not disable iptables service.
+                                Is applicable on fresh installs only.
+
+                           --quick|--quick-update[=SERVICE] : Procceed with quick update procedure. 
+                                                 This will skip update and configure <span class="code-keyword" style="color: rgb(145,0,145);">for</span> services, like: system packages, MySQL database, Redis Server, RabbitMQ Server, Monit service
+                                                 Set the SERVICE parameter (space separated list of statements) to define services, which update is needed.
+                                                 Possible reserved statements are:
+                                                     rpms - <span class="code-keyword" style="color: rgb(145,0,145);">for</span> <span class="code-quote" style="color: rgb(0,145,0);">'system packages'</span> upgrade;
+                                                     mysql - <span class="code-keyword" style="color: rgb(145,0,145);">for</span> MySQL databse upgrade ond configuring;
+                                                     redis - <span class="code-keyword" style="color: rgb(145,0,145);">for</span> ERedis Server upgrade and configuring;
+                                                     rabbitmq - <span class="code-keyword" style="color: rgb(145,0,145);">for</span> RabbitMQ Server upgrade and configuring;
+                                                     monit - <span class="code-keyword" style="color: rgb(145,0,145);">for</span> Monit upgrade and configuring.
+
+			   --accept-eula : Automatically accept OnApp's End User License Agreement
+			                   (DEPRICATED)
+
+                           -c CONFIG_FILE   : Custom installer configuration file. Otherwise, preinstalled one is used.
+
+                           -h : print <span class="code-keyword" style="color: rgb(145,0,145);">this</span> info<br/><br/></pre><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col style="width: 201.0px;"/><col style="width: 1292.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><strong>Where:</strong></th><th class="confluenceTh"><br/></th></tr><tr><td class="confluenceTd"><strong> Database server options:</strong></td><td class="confluenceTd">The default database SQL server is a MySQL server. Please use one of the following options to install LOCALLY.</td></tr><tr><td class="confluenceTd"><code>--mariadb</code></td><td class="confluenceTd">MariaDB server.</td></tr><tr><td class="confluenceTd"><code>--community</code></td><td class="confluenceTd">MySQL community server.</td></tr><tr><td class="confluenceTd"><code>--percona</code></td><td class="confluenceTd">Percona server.</td></tr><tr><td class="confluenceTd"><code>--percona-cluster</code></td><td class="confluenceTd">Percona cluster.</td></tr><tr><td class="confluenceTd"><code>MYSQL_*</code></td><td class="confluenceTd">Options are useful if MySQL is already installed and configured.</td></tr><tr><td class="confluenceTd"><code>-m MYSQL_HOST</code></td><td class="confluenceTd">MySQL host. The default is <code>localhost</code>.</td></tr><tr><td class="confluenceTd"><code>--mysql-port=MYSQL_PORT</code></td><td class="confluenceTd">The TCP port where MySQL Server serves connections. The default value is <code>3306</code> for the local installation.</td></tr><tr><td class="confluenceTd"><code> --mysql-sock[=MYSQL_SOCK]</code></td><td class="confluenceTd">The Unix socket on which the MySQL server serves connections. The default value is <code>/var/lib/mysql/mysql.sock</code>. <br/>Used if the local server only. The socket is unset if the option's argument isn't specified.</td></tr><tr><td class="confluenceTd"><code>-p MYSQL_PASSWD</code></td><td class="confluenceTd">MySQL password. Random is generated if not set or specified.</td></tr><tr><td class="confluenceTd"><code>-d MYSQL_DB</code></td><td class="confluenceTd">OnApp MySQL database name. The default is <code>onapp</code>.</td></tr><tr><td class="confluenceTd"><code>-u MYSQL_USER</code></td><td class="confluenceTd">MySQL user. The default is <code>root</code>.</td></tr><tr><td colspan="2" class="confluenceTd"><strong>Redis server options:</strong></td></tr><tr><td class="confluenceTd"><code>REDIS_*</code></td><td class="confluenceTd">Options are useful if the Redis server is already installed and configured.</td></tr><tr><td class="confluenceTd"><code>--redis-host=REDIS_HOST </code><br/><br/><br/></td><td class="confluenceTd">The IP address/FQDN where the Redis server runs. It is used by Control Panel to connect to the Redis server. <br/>The Redis server will be installed and configured on the current box if <code>localhost/127.0.0.1</code> or the box's <br/>public IP address (listed in <code>SNMP_TRAP_IPS</code>) is specified. The default value is <code>127.0.0.1</code>. <br/>If the local Redis, it will serve as well on the Unix socket 'PORT' (if <code>--redis-sock</code> without argument isn't specified).</td></tr><tr><td class="confluenceTd"><code>--redis-bind[=REDIS_BIND]</code></td><td class="confluenceTd">The IP address for Redis server to serve connections (to listen). The option isn't mandatory.</td></tr><tr><td class="confluenceTd"><code>--redis-port=REDIS_PORT</code></td><td class="confluenceTd">Redis Server listen port.<br/>The defaults are as follows:<br/><code>0</code> - if a local server<br/><code>6379</code> - if a remote server</td></tr><tr><td class="confluenceTd"><code>--redis-passwd[=REDIS_PASSWD]</code></td><td class="confluenceTd">The Redis server password to authenticate.<br/>A random password is generated if the option's argument isn't specified.<br/>By default, no password is used for the local Redis.</td></tr><tr><td class="confluenceTd"><code>--redis-sock[=REDIS_SOCK]</code></td><td class="confluenceTd">The path to the Redis server's socket. Used if local server only. The default is <code>/var/run/redis/redis.sock</code>. <br/>The socket is unset if the option's argument isn't specified.</td></tr><tr><td colspan="2" class="confluenceTd"> <strong>Options to manage the OnApp Control Panel administrator account:</strong></td></tr><tr><td class="confluenceTd"><code>ADMIN_*</code></td><td class="confluenceTd">Options are used to configure OnApp Control Panel administrator data.<br/>Please note that these options are for NEW INSTALL only and not for upgrade.</td></tr><tr><td class="confluenceTd"><p><code>-P ADMIN_PASSWD</code></p></td><td class="confluenceTd">CP administrator password.</td></tr><tr><td class="confluenceTd"><code>-F ADMIN_FIRSTNAME</code></td><td class="confluenceTd">CP administrator first name.</td></tr><tr><td class="confluenceTd"><code>-L ADMIN_LASTNAME</code></td><td class="confluenceTd">CP administrator last name.</td></tr><tr><td class="confluenceTd"><code>-E ADMIN_EMAIL</code></td><td class="confluenceTd">CP administrator email.</td></tr><tr><td colspan="2" class="confluenceTd"><strong>RabbitMQ Server and vCloud options:</strong></td></tr><tr><td class="confluenceTd"><code>  --rbthost   RBT_HOST  </code></td><td class="confluenceTd">The IP address/FQDN where the RabbitMQ server runs. The RabbitMQ will be installed and configured on the current box <br/>if <code>localhost/127.0.0.1</code> or box's public IP address (enlisted in <code>SNMP_TRAP_IPS</code>). The default value is <code>127.0.0.1</code>.</td></tr><tr><td class="confluenceTd"><code>VCD_*</code></td><td class="confluenceTd">Options are useful if vCloud/RabbitMQ is already installed and configured.</td></tr><tr><td class="confluenceTd"><code>--vcdlogin  VCD_LOGIN</code></td><td class="confluenceTd">RabbitMQ/vCloud user. The default value is <code>rbtvcd</code>.</td></tr><tr><td class="confluenceTd"><code>--vcdpasswd VCD_PASSWD</code></td><td class="confluenceTd">RabbitMQ/vCloud user password. The random password is generated if not specified.</td></tr><tr><td class="confluenceTd"><code>--vcdvhost  VCD_VHOST</code></td><td class="confluenceTd">RabbitMQ/vCloud vhost. The default value is <code>/</code>.</td></tr><tr><td class="confluenceTd"><code>RBT_*  </code></td><td class="confluenceTd">Options are used to configure RabbitMQ manager account. If local RabbitMQ server.</td></tr><tr><td class="confluenceTd"><code>--rbtlogin  RBT_LOGIN </code></td><td class="confluenceTd">RabbitMQ manager login. The default value is <code>rbtmgr</code>.</td></tr><tr><td class="confluenceTd"><code>--rbtpasswd RBT_PASSWD</code></td><td class="confluenceTd">RabbitMQ manager password. The random password is generated if not specified.</td></tr><tr><td colspan="2" class="confluenceTd"><strong>General options:</strong></td></tr><tr><td class="confluenceTd"><code>--rake RAKE_TASKS</code></td><td class="confluenceTd">A list of OnApp Control Panel rake tasks (separated with space) to run at the very end of installation or upgrade.</td></tr><tr><td class="confluenceTd"><code>-i SNMP_TRAP_IPS</code></td><td class="confluenceTd">IP addresses are separated with a comma for SNMP to trap.</td></tr><tr><td class="confluenceTd"><code>-y</code></td><td class="confluenceTd">Update OS packages (except for OnApp provided) on the box with <code>yum update</code>.</td></tr><tr><td class="confluenceTd"><code>-a</code></td><td class="confluenceTd">Is not interactive. Process with automatic installation. Please note it will continue OnApp Control Panel installation/upgrade even if there is a transaction currently running.</td></tr><tr><td class="confluenceTd"><code>-t</code></td><td class="confluenceTd">Add to the database and download Base Templates. For new installations only. If this option is not used, only the following mandatory system templates will be added by default during fresh installation: OnApp CDN Appliance; Load Balancer Virtual Appliance; Application Server Appliance.</td></tr><tr><td class="confluenceTd"><code>--noservices</code></td><td class="confluenceTd"><p>Do not start OnApp services: <code>monit</code>, <code>onapp</code>, and <code>httpd</code>.<br/>Please note, <code>crond</code> and all OnApp's <code>cron</code> tasks remain running. They could be disabled by stopping the <code>crond</code> service manually for your own risk.</p></td></tr><tr><td class="confluenceTd"><code>-D</code></td><td class="confluenceTd">Do not make a database dump, and make sure it is disabled in the <code>cron</code> and not running at the moment.</td></tr><tr><td class="confluenceTd"><code><span style="color: rgb(34,34,34);">-w</span></code></td><td class="confluenceTd"><p>Do not disable the iptables service. It is applicable on fresh installs only.</p></td></tr><tr><td class="confluenceTd"><code>--quick|--quick-update[=SERVICE] </code></td><td class="confluenceTd">Proceed with the quick update procedure. This will skip an update and configuration for services, such as system packages, MySQL database, Redis Server, RabbitMQ Server, and Monit service. Set the <code>SERVICE</code> parameter (space-separated list of statements) to define services, which need to be updated. Possible reserved statements are:                   <br/><code>rpms</code> - for 'system packages' upgrade.<br/><code>mysql</code> - for MySQL database upgrade and configuration.<br/><code>redis</code> - for Redis server upgrade and configuration.<br/><code>rabbitmq</code> - for RabbitMQ server upgrade and configuration.<br/><code>monit</code> - for Monit upgrade and configuration.</td></tr><tr><td class="confluenceTd"><code>--accept-eula</code></td><td class="confluenceTd">Automatically accept the OnApp's End User License Agreement.</td></tr><tr><td class="confluenceTd"><code>-c CONFIG_FILE</code></td><td class="confluenceTd">Custom installer configuration file. Otherwise, a preinstalled one is used.</td></tr><tr><td class="confluenceTd"><code>-h</code></td><td class="confluenceTd">Print this info.</td></tr></tbody></table></div></div></div><p><span style="letter-spacing: 0.0px;">    6. Install an OnApp license to activate your Control Panel. Enter a valid license key via the OnApp UI. Your default OnApp credentials are </span><strong style="letter-spacing: 0.0px;">admin/changeme</strong><span style="letter-spacing: 0.0px;">. You can change a password via the Control Panel &gt; </span><strong style="letter-spacing: 0.0px;">Users</strong><span style="letter-spacing: 0.0px;"> menu.</span></p><div class="confluence-information-macro has-no-icon confluence-information-macro-information"><div class="confluence-information-macro-body"><p>After you enter a license key, it may take up to 15 minutes to activate the key.</p></div></div><p><span><br/>   7. Restart the OnApp service:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># service onapp restart</pre>
+</div></div><p><span style="letter-spacing: 0.0px;">    8. Generate SSH keys that OnApp requires for you to access various elements of the cloud. The script provided generates and transfers keys as necessary. The script needs to be run on your Control Panel server. It overwrites any keys that already exist, so if you have custom keys already installed, you need to add them again after running the script. You need to provide your login details to various servers during the script execution. Please follow the onscreen instructions.         </span></p><p><span>   9. If you install a new compute resource, connect to your Control Panel server via SSH, download, and run the script:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># wget http://downloads.repo.onapp.com/install-all-keys.sh
+# /bin/sh install-all-keys.sh</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Note that the script is applicable only if you configure your first compute resources in the cloud. If you already have some existing compute resources and install new ones, the script sets new SSH keys to all the compute resources, both new and existing.</p></div></div><p><br/>   10. If you add additional compute resources to an existing cloud, update the <code>authorized_keys</code> file by running the following script on the Control Panel server:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># ssh-copy-id -i /home/onapp/.ssh/id_rsa.pub root@HV_HOST_IP</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><strong>Perform the following step (14) if you do not plan to install a dedicated backup server.</strong></p></div></div><p><span>   11. Mount the locations for templates and backups. If you do not have a dedicated backup server, you must mount your template and backup repositories to compute resources. If your template and backup repositories are located on the Control Panel server, you can mount them as follows:<br/></span>        Add the repositories to <code>/etc/exports</code><span> on the Control Panel server and then restart the NFS service:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># /onapp/templates 192.168.10.0/24(rw,no_root_squash)
+# /onapp/backups 192.168.10.0/24(rw,no_root_squash)</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(51,51,51);">After the configuration is completed, Control Panel will be available in both http and https protocols. For security reasons, we recommend either closing port 80 or opening port 443. </span><span style="color: rgb(29,28,29);">This port is used for secure web browser communication. Data transferred across such connections are highly resistant to interception. Moreover, the identity of the remotely connected server can be verified with significant confidence. </span></p></div></div><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>If you use a time zone with 30-minute or 45-minute offsets, you need to modify the configuration file <code>/etc/crontab</code> and change the startup time (<code>rake vm:generate_hourly_stats</code>) from 0th minute to 30th or 45th minute, depending on a time zone.</p><p>In the script, replace<br/><code>0 * * * * onapp cd /onapp/interface; RAILS_ENV=production rake vm:generate_hourly_stats</code><br/>with<br/><code>30 * * * * onapp cd /onapp/interface; RAILS_ENV=production rake vm:generate_hourly_stats</code></p></div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Apr 26, 2024 09:08</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

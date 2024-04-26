@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Beta Installation Guide : .Configuring Server Ports v7.1Beta</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Beta-Installation-Guide_194478084.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Installing-Virtuozzo-Hybrid-Server_194478138.html">Installing Virtuozzo Hybrid Server</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Configuring-Server-Ports_194478155.html">Configuring Server Ports</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Beta Installation Guide : .Configuring Server Ports v7.1Beta
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on Mar 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Virtuozzo Hybrid Server enables Linux kernel firewall during installation. This section lists ports opened by default. The set of ports differs depending on your system configuration:</p><ul class="simple"><li><p>If the server does not participate in a Virtuozzo Storage cluster, see<span> </span><a href="#id-.ConfiguringServerPortsv7.1Beta-OpenedPortsOnStandaloneServers"><span class="std std-ref">Opened Ports on Standalone Servers</span></a><span> </span>for information on ports used by Virtuozzo Hybrid Server.</p></li><li><p>If the server is part of a Virtuozzo Storage cluster, in addition, see<span> </span><a href="#id-.ConfiguringServerPortsv7.1Beta-OpenedPortsOnServersInVirtuozzoStorageClusters"><span class="std std-ref">Opened Ports on Servers in Virtuozzo Storage Clusters</span></a><span> </span>for information on ports used by the cluster.</p></li></ul><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ConfiguringServerPortsv7.1Beta-OpenedPortsOnStandaloneServersOpenedPortsonStandaloneServers"><span class="confluence-anchor-link" id="id-.ConfiguringServerPortsv7.1Beta-OpenedPortsOnStandaloneServers"></span>Opened Ports on Standalone Servers</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(0,0,0);">The table below lists the ports for servers not participating in Virtuozzo Storage clusters.<span> </span></span><code class="docutils literal notranslate"><span class="pre">I</span></code><span style="color: rgb(0,0,0);"><span> </span>in the<span> </span></span><strong>Description</strong><span style="color: rgb(0,0,0);"><span> </span>column signals that the port should be open for incoming traffic, and<span> </span></span><code class="docutils literal notranslate"><span class="pre">O</span></code><span style="color: rgb(0,0,0);"><span> </span>means the same for outgoing traffic.</span></p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th style="text-align: left;" class="confluenceTh"><p>Port</p></th><th style="text-align: left;" class="confluenceTh"><p>Description</p></th></tr><tr><td class="confluenceTd"><p>22</p></td><td class="confluenceTd"><p>(IO) Used for secure logins via SSH.</p></td></tr><tr><td class="confluenceTd"><p>80</p></td><td class="confluenceTd"><p>(IO) Used for HTTP connections, for example, to download Virtuozzo Hybrid Server updates.</p></td></tr><tr><td class="confluenceTd"><p>443</p></td><td class="confluenceTd"><p>(O) Used to send problem reports to the support<em> </em>team.</p></td></tr><tr><td class="confluenceTd"><p>5224</p></td><td class="confluenceTd"><p>(O) Used to connect to the Key Administrator server to update Virtuozzo Hybrid Server lease licenses.</p></td></tr><tr><td class="confluenceTd"><p>64000</p></td><td class="confluenceTd"><p>(IO) Used to connect SDK with the dispatcher running on the remote server and for communication between the dispatchers on different servers.</p></td></tr><tr><td class="confluenceTd"><p>67</p></td><td class="confluenceTd"><p>Used to support host-only adapters in virtual servers. Virtuozzo Hybrid Server does not use port 67 for any external connections.</p></td></tr><tr><td class="confluenceTd"><p><code class="docutils literal notranslate"><span class="pre">&lt;RPC</span><span> </span><span class="pre">ports&gt;</span></code></p></td><td class="confluenceTd"><p>Used by various RPC services (for example, to support NFS shares). Port numbers may differ from system to system. To learn what RPC services are registered on your server and what ports they are using, run<span> </span><code class="docutils literal notranslate"><span class="pre">#</span><span> </span><span class="pre">rpcinfo</span><span> </span><span class="pre">-p</span><span> </span><span class="pre">localhost</span></code></p></td></tr><tr><td class="confluenceTd"><p>647, 847</p></td><td class="confluenceTd"><p>Reserved by the Linux<span> </span><code class="docutils literal notranslate"><span class="pre">portreserve</span></code><span> </span>program for the DHCP server, if you use one.</p></td></tr><tr><td class="confluenceTd"><p>5700-6900</p></td><td class="confluenceTd"><p>Range of ports used for VNC connections.</p></td></tr></tbody></table></div><p><br/></p><p><span style="color: rgb(0,0,0);">You may also need to open ports used to connect to remote yum repositories. Though most of the repositories can be accessed via HTTP, some may require access via HTTPS or FTP. You can check what repositories are currently configured for your system and what protocols are used to connect to them as follows:</span></p><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># yum repolist -v | egrep -e &#39;baseurl|mirrors&#39;
+Repo-mirrors : &lt;VZ9_mirrorlist_URL&gt;
+Repo-baseurl : &lt;VZ9_base_URL&gt;
+# curl &lt;VZ9_mirrorlist_URL&gt;</pre>
+</div></div><p><br/></p><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ConfiguringServerPortsv7.1Beta-OpenedPortsOnServersInVirtuozzoStorageClustersOpenedPortsonServersinVirtuozzoStorageClusters"><span class="confluence-anchor-link" id="id-.ConfiguringServerPortsv7.1Beta-OpenedPortsOnServersInVirtuozzoStorageClusters"></span>Opened Ports on Servers in Virtuozzo Storage Clusters</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(0,0,0);">A Virtuozzo Storage cluster requires ports listed below to be opened in addition to those on standalone servers. If you use the Virtuozzo Storage management panel to create clusters, all the necessary ports are opened automatically. Otherwise, open these ports manually on each node participating in the cluster.</span></p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th style="text-align: left;" class="confluenceTh"><p>Port</p></th><th style="text-align: left;" class="confluenceTh"><p>Description</p></th></tr><tr><td colspan="2" class="confluenceTd"><strong>MDS Servers</strong></td></tr><tr><td class="confluenceTd"><p>2510</p></td><td class="confluenceTd"><p>(IO) Used for communication between MDS servers.</p></td></tr><tr><td class="confluenceTd"><p>2511</p></td><td class="confluenceTd"><p>(IO) Used for communication with chunks servers and clients.</p></td></tr><tr><td colspan="2" class="confluenceTd"><strong>Chunk Servers</strong></td></tr><tr><td class="confluenceTd"><p>2511</p></td><td class="confluenceTd"><p>(O) Used for communication with MDS servers.</p></td></tr><tr><td class="confluenceTd"><p><code class="docutils literal notranslate"><span class="pre">&lt;random_port&gt;</span></code></p></td><td class="confluenceTd"><p>(I) Used for communication with clients. The chunk server management service automatically binds to any available port. You can also manually assign the service to a specific port.</p></td></tr><tr><td colspan="2" class="confluenceTd"><strong>Clients</strong></td></tr><tr><td class="confluenceTd"><p>2511</p></td><td class="confluenceTd"><p>(O) Used for communication with MDS servers.</p></td></tr><tr><td class="confluenceTd"><p><code class="docutils literal notranslate"><span class="pre">&lt;random_port&gt;</span></code></p></td><td class="confluenceTd"><p>(O) Used for communication with chunk servers. The client management service automatically binds to any available port. You can also manually assign the service to a specific port.</p></td></tr></tbody></table></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Apr 26, 2024 09:08</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Beta Get Started Guide : .Hardware Specifications v7.1Beta</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Beta Get Started Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Beta-Get-Started-Guide_194478446.html">Beta Get Started Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Hardware-Specifications_194479512.html">Hardware Specifications</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Beta Get Started Guide : .Hardware Specifications v7.1Beta
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on Mar 05, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>To run an OnApp installation, set up one Control Panel server, at least two compute resource servers and one backup server. These server instances are required to handle your environment as follows: </p><ul><li><strong>Control Panel Server <br/></strong><br/>The Control Panel server hosts the OnApp user interface and database and handles all cloud management processes. You do not need to set up a separate database server for your OnApp installation. OnApp provides full compatibility of Control Panel UI with Google Chrome and Firefox web browsers where JavaScript is enabled. <br/><br/></li><li><strong>Compute Resource Servers <br/><br/></strong>The<strong> </strong>compute resource servers provide CPU, RAM, and storage resources for applications and virtual servers that you or your users run in the cloud. A certain amount of CPU and RAM on each server is reserved for a compute resource (hypervisor) and the storage controller system. The remaining resources are available for allocation to virtual servers. You can set up at least two compute resource servers and scale out based on your needs. <br/><strong><br/></strong></li><li><strong>Backup Server </strong><br/><strong><br/></strong>The backup server stores virtual server backups and templates from which you can create virtual servers. It also handles disk-related transactions, such as provisioning virtual servers, taking backups, and resizing disks. The backup server may be optional for a staging environment. However, it is critical for an environment running production workloads. The backup server should include a backup storage volume that can be a local disk array or a mounted SAN/NAS storage. </li></ul><p>This document provides hardware suggestions and recommendations for the minimum size of servers you can use to set up each server in your environment. </p><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+
+<div class="aui-tabs horizontal-tabs">
+    <ul class="tabs-menu">
+                    <li class="menu-item active-tab">
+                <a href="#tabs-822c9fcf-9be9-4ec8-956d-d3cca52cf960-1"><strong>Control Panel Server</strong></a>
+            </li>
+                    <li class="menu-item">
+                <a href="#tabs-822c9fcf-9be9-4ec8-956d-d3cca52cf960-2"><strong>Compute Resources Server</strong></a>
+            </li>
+                    <li class="menu-item">
+                <a href="#tabs-822c9fcf-9be9-4ec8-956d-d3cca52cf960-3"><strong>Backup Server</strong></a>
+            </li>
+                    <li class="menu-item">
+                <a href="#tabs-822c9fcf-9be9-4ec8-956d-d3cca52cf960-4"><strong>Network Hardware</strong></a>
+            </li>
+                    <li class="menu-item">
+                <a href="#tabs-822c9fcf-9be9-4ec8-956d-d3cca52cf960-5"><strong>Local Storage</strong></a>
+            </li>
+            </ul>
+            <div class="tabs-pane active-pane" id="tabs-822c9fcf-9be9-4ec8-956d-d3cca52cf960-1">
+            <div class="sectionColumnWrapper"><div class="sectionMacro"><p><br/></p><p>To set up a Control Panel server, you can use hardware with the following specifications:</p><p><br/></p><div class="sectionMacroRow"><div class="columnMacro"><p><strong>Processor</strong></p><p>8 Cores CPUs<br/>lntel Xeon <span style="color: rgb(38,38,38);">e5-2640 v3</span> or similar</p></div><div class="columnMacro"><p><strong>Memory</strong></p><p>64+ GB DDR4 RAM</p></div><div class="columnMacro"><p><strong>Disks</strong></p><p>2 x 500 GB SSD</p></div><div class="columnMacro"><p><strong>RAID</strong></p><p>RAID 1</p></div><div class="columnMacro"><p><strong>Network Interfaces</strong></p><p>2 x 1 Gbps+</p></div></div></div></div>
+        </div>
+            <div class="tabs-pane" id="tabs-822c9fcf-9be9-4ec8-956d-d3cca52cf960-2">
+            <div class="sectionColumnWrapper"><div class="sectionMacro"><p><br/></p><p>To set up a compute resource server, you can use hardware with the following specifications:</p><p><br/></p><div class="sectionMacroRow"><div class="columnMacro"><p><strong>Processor</strong></p><p>8 Core CPUs<br/>Intel Xeon e5-2640 v3 or similar</p></div><div class="columnMacro"><p><strong>Memory</strong></p><p>64 GB DDR4 RAM</p></div><div class="columnMacro"><p><strong>Disks</strong></p><p>2-4 x 500 GB - 1 TB SATA/SAS/SSD (for VS storage)<br/>1 x 500+ GB NVMe (for caching)</p></div><div class="columnMacro"><p><strong>RAID</strong></p><p>PCIe Gen3<br/>PERC H730 1 GB Cache or similar<br/>Pass-through / JBOD Mode</p></div><div class="columnMacro"><p><strong>Network Interfaces</strong></p><p>2 x 1 Gbps+ and 2 х 10 Gbps+</p></div></div></div></div>
+        </div>
+            <div class="tabs-pane" id="tabs-822c9fcf-9be9-4ec8-956d-d3cca52cf960-3">
+            <div class="sectionColumnWrapper"><div class="sectionMacro"><p><br/></p><p>To set up a backup server, you can use hardware with the following specifications:</p><p><br/></p><div class="sectionMacroRow"><div class="columnMacro"><p><strong>Processor</strong></p><p>8 Core CPUs<br/>Intel Xeon e5-2620 v3 or similar</p></div><div class="columnMacro"><p><strong>Memory</strong></p><p>32+ GB DDR4 RAM</p></div><div class="columnMacro"><p><strong>Disks</strong></p><p>12 x 2 TB SAS</p></div><div class="columnMacro"><p><strong>RAID</strong></p><p>RAID 5/6/10</p></div><div class="columnMacro"><p><strong>Network Interfaces</strong></p><p>1 x 1 Gbps+ and 2 х 10 Gbps+</p></div></div></div></div>
+        </div>
+            <div class="tabs-pane" id="tabs-822c9fcf-9be9-4ec8-956d-d3cca52cf960-4">
+            <div class="sectionColumnWrapper"><div class="sectionMacro"><div class="sectionMacroRow"><div class="columnMacro"><p><span style="color: rgb(38,38,38);letter-spacing: 0.0px;">To set up a network, you can use hardware with the following specifications:</span></p><p><span style="color: rgb(38,38,38);">2 x High performance switches with 48 x 10 GbE and 4 x 40 GbE ports.</span></p></div></div></div></div>
+        </div>
+            <div class="tabs-pane" id="tabs-822c9fcf-9be9-4ec8-956d-d3cca52cf960-5">
+            <div class="sectionColumnWrapper"><div class="sectionMacro"><div class="sectionMacroRow"><div class="columnMacro"><p><br/></p><p>If you want to use local storage, the following requirements are recommended to implement:</p><ul><li>At least one dedicated partition on each compute resource.</li><li>A separate disk from the primary OS drive is recommended<em>.</em></li></ul></div></div></div></div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Apr 26, 2024 09:11</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

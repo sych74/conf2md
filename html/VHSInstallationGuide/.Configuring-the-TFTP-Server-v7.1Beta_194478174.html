@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Beta Installation Guide : .Configuring the TFTP Server v7.1Beta</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Beta-Installation-Guide_194478084.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Installing-Virtuozzo-Hybrid-Server_194478138.html">Installing Virtuozzo Hybrid Server</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="PXE-Installation_194478168.html">PXE Installation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Preparing-for-PXE-Installation_194478171.html">Preparing for PXE Installation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Configuring-the-TFTP-Server_194478175.html">Configuring the TFTP Server</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Beta Installation Guide : .Configuring the TFTP Server v7.1Beta
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on Mar 04, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">If you get the “Permission denied” error when trying to connect to the TFTP server from the client server, try running<span> </span></span><code class="docutils literal notranslate"><span class="pre">#</span><span> </span><span class="pre">restorecon</span><span> </span><span class="pre">-Rv</span><span> </span><span class="pre">/tftboot/</span></code><span style="color: rgb(0,0,0);"><span> </span>on the TFTP server.</span></p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ConfiguringtheTFTPServerv7.1Beta-ConfiguringTFTPServerforInstallationonBIOS-basedClientServers">Configuring TFTP Server for Installation on BIOS-based Client Servers</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>To configure the TFTP server for installation on BIOS-based client servers, do the following:</p><ol class="arabic"><li><p>Ensure the TFTP server, Xinetd, and SYSLINUX bootloader are installed:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># yum install tftp-server syslinux xinetd</pre>
+</div></div></li><li><p>Edit the<span> </span><code class="docutils literal notranslate"><span class="pre">/etc/xinetd.d/tftp</span></code><span> </span>file to have the following:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">service tftp
+{
+disable         = no
+socket_type     = dgram
+protocol        = udp
+wait            = yes
+user            = root
+server          = /usr/sbin/in.tftpd
+server_args     = -v -s /tftpboot
+per_source      = 11
+cps             = 100 2
+flags           = IPv4
+}</pre>
+</div></div></li><li><p>Copy the following files to the<span> </span><code class="docutils literal notranslate"><span class="pre">/tftpboot</span></code><span> </span>directory (if this directory does not exist, create it under the root (<code class="docutils literal notranslate"><span class="pre">/</span></code>) directory):</p><ul class="simple"><li><p><code class="docutils literal notranslate"><span class="pre">/images/pxeboot/vmlinuz</span></code><span> </span>and<span> </span><code class="docutils literal notranslate"><span class="pre">/images/pxeboot/initrd.img</span></code><span> </span>from the Virtuozzo Hybrid Server distribution,</p></li><li><p><code class="docutils literal notranslate"><span class="pre">menu.c32</span></code><span> </span>and<span> </span><code class="docutils literal notranslate"><span class="pre">pxelinux.0</span></code><span> </span>from the<span> </span><code class="docutils literal notranslate"><span class="pre">syslinux</span></code><span> </span>directory (usually<span> </span><code class="docutils literal notranslate"><span class="pre">/usr/share/syslinux</span></code><span> </span>or<span> </span><code class="docutils literal notranslate"><span class="pre">/usr/lib/syslinux</span></code>).</p></li></ul></li><li><p>In the<span> </span><code class="docutils literal notranslate"><span class="pre">/tftpboot</span></code><span> </span>directory, create the<span> </span><code class="docutils literal notranslate"><span class="pre">/pxelinux.cfg</span></code><span> </span>directory. In it, create the file<span> </span><code class="docutils literal notranslate"><span class="pre">default</span></code>.</p></li><li><p>Add the following lines to<span> </span><code class="docutils literal notranslate"><span class="pre">/tftpboot/pxelinux.cfg/default</span></code>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">default menu.c32
+prompt 0
+timeout 60
+ontimeout VZ
+menu title Virtuozzo Hybrid Server Boot Menu
+label 1
+     menu label Install Virtuozzo Hybrid Server 7 with GUI management
+     kernel vmlinuz
+     append initrd=initrd.img ui ip=dhcp inst.repo=http://&lt;HTTP_server_IP_address&gt;/vz
+label 2
+     menu label Install Virtuozzo Hybrid Server 7 with CLI management
+     kernel vmlinuz
+     append initrd=initrd.img ip=dhcp inst.repo=http://&lt;HTTP_server_IP_address&gt;/vz</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>For more details on the parameters you can specify in<span> </span><code class="docutils literal notranslate"><span class="pre">/tftpboot/pxelinux.cfg/default</span></code>, refer to the documentation for<span> </span><code class="docutils literal notranslate"><span class="pre">syslinux</span></code>.</p></div></div></li><li><p>Start the<span> </span><code class="docutils literal notranslate"><span class="pre">xinetd</span></code><span> </span>service:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># systemctl start xinetd.service</pre>
+</div></div><p>Or restart it if already running:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># systemctl restart xinetd.service</pre>
+</div></div></li><li><p>If necessary, allow incoming connections to the TFTP service in the firewall:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># firewall-cmd --add-service=tftp --permanent
+# systemctl restart firewalld.service</pre>
+</div></div></li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ConfiguringtheTFTPServerv7.1Beta-ConfiguringTFTPServerforInstallationonEFI-basedClientServers">Configuring TFTP Server for Installation on EFI-based Client Servers</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>To configure the TFTP server for installation on EFI-based client servers, do the following:</p><ol class="arabic"><li><p>Ensure the TFTP server and Xinetd are installed:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># yum install tftp-server xinetd</pre>
+</div></div></li><li><p>Edit the<span> </span><code class="docutils literal notranslate"><span class="pre">/etc/xinetd.d/tftp</span></code><span> </span>file to have the following:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">service tftp
+{
+disable         = no
+socket_type     = dgram
+protocol        = udp
+wait            = yes
+user            = root
+server          = /usr/sbin/in.tftpd
+server_args     = -v -s /tftpboot
+per_source      = 11
+cps             = 100 2
+flags           = IPv4
+}</pre>
+</div></div></li><li><p>Copy the following files from the Virtuozzo Hybrid Server distribution to the<span> </span><code class="docutils literal notranslate"><span class="pre">/tftpboot</span></code><span> </span>directory (if this directory does not exist, create it under the root (<code class="docutils literal notranslate"><span class="pre">/</span></code>) directory):</p><ul class="simple"><li><p><code class="docutils literal notranslate"><span class="pre">/images/pxeboot/vmlinuz</span></code>,</p></li><li><p><code class="docutils literal notranslate"><span class="pre">/images/pxeboot/initrd.img</span></code>,</p></li><li><p><code class="docutils literal notranslate"><span class="pre">/EFI/BOOT/grubx64.efi</span></code>.</p></li></ul></li><li><p>In the<span> </span><code class="docutils literal notranslate"><span class="pre">/tftpboot</span></code><span> </span>directory, create the<span> </span><code class="docutils literal notranslate"><span class="pre">grub.cfg</span></code><span> </span>file.</p></li><li><p>Add the following lines to<span> </span><code class="docutils literal notranslate"><span class="pre">/tftpboot/grub.cfg</span></code>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">set timeout=60
+    menuentry &#39;Virtuozzo Hybrid Server 7 with GUI management&#39; {
+    linuxefi vmlinuz ui ip=dhcp inst.repo=http://&lt;HTTP_server_IP_address&gt;/vz
+    initrdefi initrd.img
+}
+    menuentry &#39;Virtuozzo Hybrid Server 7 with CLI management&#39; {
+    linuxefi vmlinuz ip=dhcp inst.repo=http://&lt;HTTP_server_IP_address&gt;/vz
+    initrdefi initrd.img
+}</pre>
+</div></div></li><li><p>Start the<span> </span><code class="docutils literal notranslate"><span class="pre">xinetd</span></code><span> </span>service:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># systemctl start xinetd.service</pre>
+</div></div><p><span style="letter-spacing: 0.0px;">Or restart it if already running:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># systemctl restart xinetd.service</pre>
+</div></div></li><li><p>If necessary, allow incoming connections to the TFTP service in the firewall:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># firewall-cmd --add-service=tftp --permanent
+# systemctl restart firewalld.service</pre>
+</div></div><p><br/></p><pre><br/></pre></li></ol></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Apr 26, 2024 09:08</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

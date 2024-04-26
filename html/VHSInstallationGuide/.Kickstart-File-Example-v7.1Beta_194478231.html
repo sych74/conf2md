@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Beta Installation Guide : .Kickstart File Example v7.1Beta</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Beta-Installation-Guide_194478084.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Installing-Virtuozzo-Hybrid-Server_194478138.html">Installing Virtuozzo Hybrid Server</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="PXE-Installation_194478168.html">PXE Installation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Preparing-a-Kickstart-File_194478201.html">Preparing a Kickstart File</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Kickstart-File-Example_194478232.html">Kickstart File Example</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Beta Installation Guide : .Kickstart File Example v7.1Beta
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on Mar 04, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Below is an example of a kickstart file that you can use to install and configure Virtuozzo Hybrid Server in unattended mode. You can use this file as the basis for creating your own kickstart files.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul class="simple"><li><p>To ensure the disk where you install Virtuozzo Hybrid Server is partitioned correctly, you may need to erase existing partitions with<span> </span><code class="docutils literal notranslate"><span class="pre">clearpart</span></code>. This command is commented out by default to avoid accidental loss of data.</p></li><li><p>Keeping plain-text passwords in the kickstart file is a security risk if your network is not isolated. Consider encrypting your password according to<span> </span><code class="docutils literal notranslate"><span class="pre">auth</span></code><span> </span>parameters (for example, with SHA512 as in this example) and using<span> </span><code class="docutils literal notranslate"><span class="pre">rootpw</span><span> </span><span class="pre">--iscrypted</span><span> </span><span class="pre">&lt;passwd_hash&gt;</span></code>.</p></li></ul></div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Install Virtuozzo Hybrid Server.
+install
+# Skip loading X Window System and the installer GUI.
+# cmdline
+# Specify the location of the Virtuozzo Hybrid Server distribution files.
+url --url http://&lt;HTTP_server_IP_address&gt;/vz
+# Set the language for the installation and the default system language
+# to US English.
+lang en_US.UTF-8
+# Set the keyboard layout to US English.
+keyboard --vckeymap=us --xlayouts=&#39;us&#39;
+# Erase all partitions from the sda hard drive.
+# clearpart --drives=sda --all --initlabel --disklabel=gpt
+# Automatically creates required partitions. Requires clearpart.
+autopart
+# Agree to participate in the Customer Experience Program.
+cep --agree
+# Obtain network configuration via DHCP.
+network --bootproto dhcp
+# Download updated packages.
+# up2date
+# Set the root password for the server.
+rootpw &lt;passwd&gt;
+# Encrypt user passwords with the SHA-512 algorithm and enable shadow passwords.
+auth --enableshadow --passalgo=sha512
+# Set the system timezone.
+timezone --utc America/New_York --ntpservers=0.pool.ntp.org,1.pool.ntp.org
+# Set sda as the first drive in the BIOS boot order and write the boot record to
+# MBR.
+bootloader --location=mbr
+# Reboot the system after installation.
+reboot
+# Install a Virtuozzo Hybrid Server license.
+key &lt;key&gt;
+# Install Virtuozzo Hybrid Server packages.
+%packages
+@^cloudserver
+@base
+@core
+@ps
+@qemu
+@vstorage
+@vz
+kexec-tools
+%end</pre>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.KickstartFileExamplev7.1Beta-AdvancedPartitioningExample">Advanced Partitioning Example</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>For more control over partitioning, you can replace<span> </span><code class="docutils literal notranslate"><span class="pre">autopart</span></code><span> </span>with a set of<span> </span><code class="docutils literal notranslate"><span class="pre">part</span></code><span> </span>commands to adjust the size of required partitions. In this case, each partition will have the same size on every system you install Virtuozzo Hybrid Server. For example, if you use the lines below, the swap will be 4 GiB, and<span> </span><code class="docutils literal notranslate"><span class="pre">/vz</span></code><span> </span>will be 40 GiB on every system (whereas if you use<span> </span><code class="docutils literal notranslate"><span class="pre">autopart</span></code><span>, the </span>swap size will depend on RAM size, and<span> </span><code class="docutils literal notranslate"><span class="pre">/vz</span></code><span> </span>will occupy all available space).</p><p>For example, for installation on BIOS-based systems:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">part /boot --fstype=ext4 --size=1024
+part / --fstype=ext4 --size=20096
+part /vz --fstype=ext4 --size=40768 --grow
+part swap --size=4096</pre>
+</div></div><p><span style="letter-spacing: 0.0px;">For installation on EFI-based systems, also specify</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">part /boot/efi --fstype=efi --size=200</pre>
+</div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Apr 26, 2024 09:08</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

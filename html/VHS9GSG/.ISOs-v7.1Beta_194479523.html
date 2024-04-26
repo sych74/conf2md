@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Beta Get Started Guide : .ISOs v7.1Beta</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Beta Get Started Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Beta-Get-Started-Guide_194478446.html">Beta Get Started Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="ISOs_194479524.html">ISOs</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Beta Get Started Guide : .ISOs v7.1Beta
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on Mar 04, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>You can enable users to build and boot virtual servers from ISO images. To enable the usage of ISO, mount the location where ISO images are stored on a Control Panel server to compute resource servers. </p><h5 id="id-.ISOsv7.1Beta-MountISOLocations"><strong><span>Mount ISO Locations</span></strong></h5><p><span>When a virtual server is booted from an ISO image, the ISO image is taken from a compute resource server. To mount and share the location where ISO images are stored on a Control Panel server with the compute resource servers, edit the <code>onapp.yml</code> file as follows:  </span></p><ul><li><code>iso_path_on_cp</code> - specifies the location where ISO images are stored on the Control Panel server. By default, the location is <code>/data</code>. You can change it to any other suitable location. Ensure that this location is shared with the specified<code> iso_path_on_hv</code> location.</li><li><code>iso_path_on_hv</code> - specifies the location where ISO images are located on the compute resource servers. By default, the location is <code>/data</code>.  You can change it to any other suitable location with the <code>onappowner</code> and read/write access. Ensure that this location is mounted to the specified<code> iso_path_on_cp </code>location.</li></ul><p><br/></p><p><span>You can store ISO images on a dedicated server at any location with an arbitrary name. In this case, it is necessary to mount the ISO images location on this server to the <code>iso_path_on_cp</code> directory on Control Panel and all <code>iso_path_on_hv </code>locations on compute resources. It can be a backup server to avoid the usage of the Control Panel resources.</span></p><h5 id="id-.ISOsv7.1Beta-EnablePermissionsinControlPanelUI"><span>Enable Permissions in Control Panel UI</span></h5><p><span>Make sure to enable the following permissions for your Admin and other roles in the Control Panel user interface:</span></p><ul><li><em>Any action on ISOs</em> - the user can take any action on ISOs.</li><li><em>Create a new ISO</em> - the user can create a new ISO.</li><li><em>Destroy any ISO</em> - the user can delete any ISO (own, user, and public).</li><li><em>Destroy own ISO</em> - the user can delete only their ISO.</li><li><em>Destroy user ISO</em> - the user can delete ISOs created by any user, but not public ISOs.</li><li><em>Make any ISO public</em> - the user can make any ISO available to all users.</li><li><em>Make own ISO public</em> - the user can make public only their ISOs.</li><li><em>Make user ISO public</em> - the user can make public ISOs created by any user.</li><li><em>Create and manage own ISOs</em> - the user can create, edit, delete, and view their ISOs.</li><li><em>Manage all ISOs</em> - the user can manage their/user/public ISOs.</li><li><em>Create and manage user ISOs</em> - the user can view/create/edit/delete ISOs created by any user.</li><li><em>See all ISOs</em> - the user can view all ISOs in the cloud.</li><li><em>See own ISOs</em> - the user can only view the ISOs created by themselves.</li><li><em>See all public ISOs</em> - the user can view all public ISOs.</li><li><em>See user ISOs</em> - the user can view the ISOs created by any user in the cloud.</li><li><em>Update any ISO</em> - the user can edit any ISO in the cloud.</li><li><em>Update own ISO</em> - the user can edit only their ISO.</li><li><em>Update user ISO</em> - the user can edit ISOs created by any user in the cloud.</li></ul><p><br/></p>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Apr 26, 2024 09:11</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

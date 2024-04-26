@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Beta Installation Guide : .Making Kickstart File Accessible Over Network v7.1Beta</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Beta-Installation-Guide_194478084.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Installing-Virtuozzo-Hybrid-Server_194478138.html">Installing Virtuozzo Hybrid Server</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="PXE-Installation_194478168.html">PXE Installation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Preparing-a-Kickstart-File_194478201.html">Preparing a Kickstart File</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Making-Kickstart-File-Accessible-Over-Network_194478239.html">Making Kickstart File Accessible Over Network</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Beta Installation Guide : .Making Kickstart File Accessible Over Network v7.1Beta
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on Mar 04, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>To use the prepared kickstart file, make it accessible over the network as follows:</p><ol class="arabic"><li><p>Copy the kickstart file to the same directory on the HTTP server where the Virtuozzo Hybrid Server installation files are stored (for example,<span> </span><code class="docutils literal notranslate"><span class="pre">/var/www/html/vz</span></code>).</p></li><li><p>Add the option<span> </span><code class="docutils literal notranslate"><span class="pre">ks=&lt;HTTP_server_address&gt;/&lt;path_to_kickstart_file&gt;</span></code><span> </span>to the corresponding files on the TFTP server.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The kickstart file contains the location of the Virtuozzo Hybrid Server distribution files and overrides the previously added option<span> </span><code class="docutils literal notranslate"><span class="pre">inst.repo=http://&lt;HTTP_server_IP_address&gt;/vz</span></code><span> </span>so you can remove it.</p></div></div><p><br/></p><ul><li><p>For installation on BIOS-based systems, modify<span> </span><code class="docutils literal notranslate"><span class="pre">/tftpboot/pxelinux.cfg/default</span></code>. For example, for the HTTP server at 198.123.123.198 and the kickstart file in<span> </span><code class="docutils literal notranslate"><span class="pre">/var/www/html/vz/ks.cfg</span></code>, the<span> </span><code class="docutils literal notranslate"><span class="pre">default</span></code><span> </span>file may look like the following:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">default menu.c32
+prompt 0
+timeout 60
+ontimeout VZ
+menu title Virtuozzo Hybrid Server Boot Menu
+label VZ
+     menu label Install Virtuozzo Hybrid Server 7
+     kernel vmlinuz
+     append initrd=initrd.img ip=dhcp ks=http://198.123.123.198/vz/ks.cfg</pre>
+</div></div></li><li><p>For installation on EFI-based systems, modify<span> </span><code class="docutils literal notranslate"><span class="pre">/tftpboot/grub.cfg</span></code>. For example, for the HTTP server at 198.123.123.198 and the kickstart file in<span> </span><code class="docutils literal notranslate"><span class="pre">/var/www/html/vz/ks.cfg</span></code>, the<span> </span><code class="docutils literal notranslate"><span class="pre">grub.cfg</span></code><span> </span>file may look like the following:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">set timeout=60
+    menuentry &#39;Virtuozzo Hybrid Server 7&#39; {
+    linuxefi vmlinuz ip=dhcp ks=http://198.123.123.198/vz/ks.cfg
+    initrdefi initrd.img
+}</pre>
+</div></div></li></ul></li></ol>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Apr 26, 2024 09:08</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

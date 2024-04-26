@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Beta Installation Guide : Preparing for Installation from USB Storage Drives</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Beta-Installation-Guide_194478084.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Preparing-for-Installation_194478088.html">Preparing for Installation</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Beta Installation Guide : Preparing for Installation from USB Storage Drives
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on Mar 12, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Installing Virtuozzo Hybrid Server from a USB storage drive requires a 2 GB or higher-capacity USB drive and the Virtuozzo Hybrid Server 9 distribution ISO image.</p><p>Make a bootable USB drive by transferring the distribution image to it.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Be careful to specify the correct drive to transfer the image to.</p></div></div><p><br/></p><p>On Linux, you can use <code><span>dd</span></code>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># dd if=&lt;VZ9_ISO_image&gt; of=/dev/sdb</pre>
+</div></div><pre><br/></pre><p>On Windows, you can use <a href="https://rufus.ie/" class="external-link" rel="nofollow">Rufus</a>:<br/><br/></p><ol><li>In the <strong>Drive Properties</strong> section, select your flash drive from the <strong>Device</strong> drop-down menu and click <strong>SELECT</strong>. Then, select the distribution image from your local machine.</li><li><p>Click <strong>START</strong>.<br/><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" draggable="false" width="450" src="attachments/194478111/195790859.png" data-image-src="attachments/194478111/195790859.png" data-unresolved-comment-count="0" data-linked-resource-id="195790859" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="rufus1.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="194478111" data-linked-resource-container-version="2" alt=""></span></p></li><li><p>In the dialog, select <strong>Write in DD Image mode</strong> and click <strong>OK</strong>.<br/><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" draggable="false" width="450" src="attachments/194478111/195790858.png" data-image-src="attachments/194478111/195790858.png" data-unresolved-comment-count="0" data-linked-resource-id="195790858" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="rufus2.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="194478111" data-linked-resource-container-version="2" alt=""></span></p></li></ol>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/194478111/195790858.png">rufus2.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/194478111/195790859.png">rufus1.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Apr 26, 2024 09:08</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

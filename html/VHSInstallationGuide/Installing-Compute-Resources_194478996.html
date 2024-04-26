@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Beta Installation Guide : Installing Compute Resources</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Beta Installation Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Beta-Installation-Guide_194478084.html">Beta Installation Guide</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Beta Installation Guide : Installing Compute Resources
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on Mar 12, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>After successfully installing the Control Panel server, follow the procedures to set up static compute resources.</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="InstallingComputeResources-staticInstallingStaticComputeResources"><span class="confluence-anchor-link" id="InstallingComputeResources-static"></span>Installing Static Compute Resources</h2><hr/><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="confluence-information-macro has-no-icon confluence-information-macro-note"><p class="title">Before You Proceed</p><div class="confluence-information-macro-body"><ul><li>Install base Virtuozzo Hybrid Server packages on the local drive before compute resource installation, depending on which virtualization method you choose:<ul><li>KVM compute resources: Virtuozzo Hybrid Server 9</li></ul></li><li>Disable CPU power-saving features in BIOS before you proceed to the compute resource installation.</li><li>If you are not using a dedicated backup server in your cloud setup, configure the NFS server with the following options to preserve the file owner and group settings during template unpacking on NFS storage:   <br/><ul><li><code>no_root_squash</code></li><li><code>no_all_squash</code></li></ul></li></ul></div></div><p><strong>To install a compute resource:</strong></p><ol><li><p>Update your server:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># yum update</pre>
+</div></div></li><li><p>Download the OnApp repository:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># rpm -Uvh http://rpm.repo.onapp.com/repo/onapp-repo-7.1.noarch.rpm</pre>
+</div></div></li><li><p>Install the OnApp compute resource installer package:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># yum install onapp-hv-install </pre>
+</div></div></li><li><p><span style="color: rgb(51,51,51);">Edit custom configuration for a compute resource. Custom values must be set before the installer script runs.</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vi /onapp/onapp-hv.conf</pre>
+</div></div><div id="expander-1069177641" class="expand-container"><div id="expander-control-1069177641" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">The full list of custom values for a compute resource.</span></div><div id="expander-content-1069177641" class="expand-content"><ul><li><p><span style="color: rgb(34,34,34);letter-spacing: 0.0px;">Enable </span>Monit,<span style="color: rgb(34,34,34);letter-spacing: 0.0px;"> the tool for managing and monitoring Unix systems:<br/><br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">ENABLE_MONIT=1</pre>
+</div></div><p><span style="color: rgb(34,34,34);letter-spacing: 0.0px;"><br/></span></p></li></ul><ul><li><p>Default server to sync time on the compute resource:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">NTP_TIME_SERVER=&#39;pool.ntp.org&#39;</pre>
+</div></div></li><li><p>Xen HV (Domain-0) related configuration:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">XEN_DOM0_MEM_MIN=409600
+XEN_DOM0_MEM_DEVISOR=48
+XEN_DOM0_MAX_VCPUS=&quot;&quot;
+XEN_DOM0_VCPUS_PIN_ENABLE=0
+XEN_DOM0_SCHEDULER_WEIGHT=65535
+XEN_DOM0_SCHEDULER_CAP=200
+# 4.2.x and higher versions only
+XEN_DOM0_SCHEDULER_RATELIMIT_US=100
+XEN_DOM0_SCHEDULER_TIMESLICE_MS=5</pre>
+</div></div></li><li><p>The number of loopback devices created:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">LOOPBACKS=128</pre>
+</div></div></li><li><p>The maximum size of the connection tracking table.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body">The value can't be greater than 65536 if the total memory of Xen Domain-0 or KVM is less than 1 Gb.<br/>The value can be doubled (or even more, depending on the memory amount).</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">NET_IPV4_NETFILTER_IP_CONTRACK_MAX=&quot;&quot;</pre>
+</div></div></li><li><p>The divisor to calculate the hash table. The recommended value is 8.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">hashsize = nf_conntrack_max / 8
+CONTRACK_TO_HASHSIZE=8</pre>
+</div></div></li><li><p>Outdated Xen compute resource's (Domain-0) configuration parameters:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">XEN_DOM0_MEM_OVERHEAD_MIN=262144
+P_TO_VCPUS=4</pre>
+</div></div></li></ul></div></div></li><li><p><span class="confluence-anchor-link" id="InstallingComputeResources-installer"></span><span style="color: rgb(29,28,29);">Run the OnApp compute resource installer script</span>: </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># /onapp/onapp-hv-install/onapp-hv-kvm-install.sh </pre>
+</div></div><div id="expander-957564171" class="expand-container"><div id="expander-control-957564171" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">The full list of KVM installer options</span></div><div id="expander-content-957564171" class="expand-content"><p><strong>Usage: </strong></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># /onapp/onapp-hv-install/onapp-hv-kvm-install.sh [-c CONFIG_FILE] [-a] [-y] [-t] [-s] [-x] [-v HV_VERSION] [-p API_VERSION] [-h]</pre>
+</div></div><p><strong>Where:</strong></p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><td class="confluenceTd"><p><code>-c CONFIG_FILE</code></p></td><td class="confluenceTd">Custom installer configuration file. Otherwise, the pre-installed one is used.</td></tr><tr><td class="confluenceTd"><p><code>-a</code></p></td><td class="confluenceTd">Do NOT be interactive. Process with automatic installation.</td></tr><tr><td class="confluenceTd"><p><code>-v HV_VERSION</code></p></td><td class="confluenceTd">Custom compute resource tool version.</td></tr><tr><td class="confluenceTd"><p><code>-p API_VERSION</code></p></td><td class="confluenceTd">Custom StorageAPI version.</td></tr><tr><td class="confluenceTd"><p><code>-t</code></p></td><td class="confluenceTd"><p>Initiate Recovery templates and ISO(s), which are used to provision FreeBSD guests, download. The download is initiated if the <code>-a</code> option is used.</p></td></tr><tr><td class="confluenceTd"><p><code>-y</code></p></td><td class="confluenceTd">Update OS packages (except those provided by OnApp for a compute resource) with <code>yum update</code>. U<span style="color: rgb(34,34,34);">seful for an update (not for fresh installation).</span></td></tr><tr><td colspan="1" class="confluenceTd"><p><code>-s</code></p></td><td colspan="1" class="confluenceTd">Skip packages management: install, remove, upgrade. U<span style="color: rgb(34,34,34);">seful for an update (not for fresh installation).</span></td></tr><tr><td colspan="1" class="confluenceTd"><p><code><span style="color: rgb(34,34,34);">- x</span></code></p></td><td colspan="1" class="confluenceTd"><p>Skip <code>kvm</code>, <code>kernel</code>, and <code>libvirt</code> (compute resource-related RPM) package management. Useful for an update (not for fresh installation).</p></td></tr><tr><td colspan="1" class="confluenceTd"><p><code>- d</code></p></td><td colspan="1" class="confluenceTd">Install OnApp Storage-related packages. Applicable to Virtuozzo Hybrid Server 9 only.</td></tr><tr><td colspan="1" class="confluenceTd"><p><code>-h</code></p></td><td colspan="1" class="confluenceTd">Print this info.</td></tr></tbody></table></div></div></div><p><br/><br/></p></li><li><p>Configure the compute resource for your cloud. This step is also required for the SNMP statistics receiver configuration:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># /onapp/onapp-hv-install/onapp-hv-config.sh -h &lt;CP_HOST_IP&gt; -p &lt;HV_HOST_IP&gt; -b &lt;HV_BSNET_IP&gt;</pre>
+</div></div><div id="expander-653187859" class="expand-container"><div id="expander-control-653187859" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">The full list of compute resource (both Xen and KVM) configuration options.</span></div><div id="expander-content-653187859" class="expand-content"><p><strong>Usage: </strong></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># /onapp/onapp-hv-install/onapp-hv-config.sh [-h CP_HOST_IP] [-p HV_HOST_IP] [-b HV_BSNET_IP] [-f FTS_IP] [-l LVM_HOST_ID] [-a|-i [USER:PASSWD]] [-s] -?</pre>
+</div></div><p><strong>Where:<br/></strong></p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><td class="confluenceTd"><p><code>-h CP_HOST_IP</code></p></td><td class="confluenceTd"><p>The FQDN or IP addresses (separated by a comma) of the management server, which should receive all status reports and are authoritative for this compute resource. Used by <code>snmpd</code> and <code>snmptrapd</code>.</p></td></tr><tr><td class="confluenceTd"><p><code>-p HV_HOST_IP</code></p></td><td class="confluenceTd"><p>The FQDN or IP address of the server (compute resource) which will serve all stats-related and other requests sent by the <code>CP_HOST_IP</code>. Used by <code>snmpd</code>, <code>snmptrapd</code>, and StorageAPI.</p></td></tr><tr><td class="confluenceTd"><p><code>-b HV_BSNET_IP</code></p></td><td class="confluenceTd"><p>The compute resource's IP address from backup servers' network. Used to bind the SCSI target daemon.</p></td></tr><tr><td class="confluenceTd"><p><code>-f FTS_IP</code></p></td><td class="confluenceTd"><div class="content-wrapper"><p> The File Transfer Server FQDN or IP address used for daily <code>cron</code> update recovery ISO by <code>recovery.sh</code></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>If unsure, set the Control Panel server's management IP as <code>CP_HOST_IP</code> and <code>FILE_TRANSFER_SERVER_IP</code>.</p></div></div></div></td></tr><tr><td colspan="1" class="confluenceTd"><p><code> -l LVM_HOST_ID</code></p></td><td colspan="1" class="confluenceTd"><p>The <code>lvmlockd sanlock host_id</code>. The ID should be unique for each compute resource in the cloud. Its value for static compute resources are between 257 and 2000.</p></td></tr><tr><td class="confluenceTd"><p><code>-a</code></p></td><td class="confluenceTd"><p> Install AoE.</p></td></tr><tr><td class="confluenceTd"><p><code>-s</code></p></td><td class="confluenceTd"><p> Install SSHFS.</p></td></tr><tr><td class="confluenceTd"><p><code>-?</code></p></td><td class="confluenceTd"><p> Print this help info.</p></td></tr></tbody></table></div></div></div></li><li><p>If requested by the installer, reboot the compute resource to complete the installation:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># shutdown -r now</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Perform the steps from 9 to 11 if you haven't installed SSH keys for the compute resource yet. You may proceed to step 10 if you want to install all compute resources or install a particular compute resource at step 11.</p></div></div></li><li>Generate SSH keys that OnApp requires for you to access various elements. The script provided will generate and transfer keys as necessary. The script needs to be run on your Control Panel server. It will overwrite any keys that already exist, so if you have custom keys already installed, add them again after running the script. The script will ask you for your login details to various servers during the execution. Please follow the onscreen instructions.</li><li><p>If you install a new cloud instance, connect to your Control Panel server via SSH, download, and run the script:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># wget http://downloads.repo.onapp.com/install-all-keys.sh
+# /bin/sh install-all-keys.sh</pre>
+</div></div></li><li><p>If you add additional compute resources to an existing cloud, update the <code>authorized_keys</code> file by running the following script on the Control Panel server:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># ssh-copy-id -i /home/onapp/.ssh/id_rsa.pub root@HV_HOST_IP</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Perform the following step 12 if you do not plan to install a dedicated backup server.</p></div></div></li><li>If you do not have a dedicated backup server, you must mount your template and backup repositories to compute resources. <span style="color: rgb(38,38,38);">If your template and backup repositories are located on the Control Panel server, you can mount them as follows:</span><p>Ensure that locations are added to <code>/etc/exports</code> on the Control Panel server and then reboot.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># /onapp/templates 192.168.10.0/24(rw,no_root_squash)
+# /onapp/backups 192.168.10.0/24(rw,no_root_squash)</pre>
+</div></div><p>Add locations to <code>/etc/rc.local</code> on the compute resource and run them manually on the command line (in this example, we are mounting from <code>192.168.10.101</code>).</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># mkdir -p /onapp/backups &amp;&amp; mount -t nfs 192.168.10.101:/onapp/backups /onapp/backups
+# mkdir -p /onapp/templates &amp;&amp; mount -t nfs 192.168.10.101:/onapp/templates /onapp/templates</pre>
+</div></div></li><li>Mount ISO locations:<br/><p>To build virtual servers from ISO images, it is required to mount and share the location where the ISOs are stored at the Control Panel server with all the compute resources. When virtual servers are booted from ISOs, the ISO image is taken from the compute resource server. The location is preconfigured in the <code>onapp.yml</code> config file:</p><ul><li><code>iso_path_on_cp</code> - specifies the location where ISOs are stored on the Control Panel server. By default, the location is <code>/data</code>. You can change it to any other suitable location. Make sure that this location is shared with the specified iso_path_on_hv location.</li><li><code>iso_path_on_hv</code> - specifies the location where ISOs are located on the compute resource servers. By default, the location is <code>/data</code>.  You can change it to any other suitable location with the <code>onappowner</code> user and read/write access. Make sure that this location is mounted to the specified <code>iso_path_on_cp </code>location<code>.</code></li></ul><p>ISOs can be hosted on a dedicated server at any desired location with an arbitrary name if you want. In this case, it is necessary to mount the ISOs location on this server to the Control Panel <code>iso_path_on_cp</code> directory and all the compute resources <code>iso_path_on_hv</code> locations. This can be a backup server to avoid the excess usage of the Control Panel resources.<br/><br/></p></li><li>Add the compute resource to your cloud using your Control Panel: <strong>Admin </strong>&gt; <strong>Settings </strong>&gt;<strong> Compute resources </strong>&gt;<strong> Add New Compute Resource</strong>.<br/>Ensure that the compute resource is visible in your Control Panel.</li></ol><p><br/></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Apr 26, 2024 09:08</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>
