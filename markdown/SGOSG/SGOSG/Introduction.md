@@ -1,0 +1,9 @@
+# Introduction
+
+Virtuozzo is committed to providing high-quality, cost-effective solutions to our customers. Rapidly changing technologies influence the level, timing, and character of demand for particular product versions and components. All of these drive the need to introduce new products and services and to stop testing and supporting specific guest operating systems.
+
+This guide intends to provide a list of supported Linux and Windows guest OSs and specify the availability of their templates. A template is a fully preconfigured operating system's environment containing an operating system's root directory. You can create a virtual server based on a particular template. The templates fall into system and user or custom. The system templates **** are provided by Virtuozzo, and you can download them from an online library. The custom or user templates are the templates you create by backing up an existing virtual server and converting this backup to a template. For more details about the templates, refer to [Templates](https://docs.onapp.com/vhs9ag/latest/templates). 
+
+The following chapters of this guide provide information on the guest OSs tested and supported in virtual servers and a list of legacy (end-of-life) guest OSs.
+
+

@@ -1,0 +1,35 @@
+# Making Kickstart File Accessible Over Network
+
+To use the prepared kickstart file, make it accessible over the network as follows:
+
+1.  Copy the kickstart file to the same directory on the HTTP server where the Virtuozzo Hybrid Server installation files are stored (for example, `/var/www/html/vz`).
+
+2.  Add the option `ks=/` to the corresponding files on the TFTP server.
+
+    The kickstart file contains the location of the Virtuozzo Hybrid Server distribution files and overrides the previously added option `inst.repo=http:///vz` so you can remove it.
+
+    -   For installation on BIOS-based systems, modify `/tftpboot/pxelinux.cfg/default`. For example, for the HTTP server at 198.123.123.198 and the kickstart file in `/var/www/html/vz/ks.cfg`, the `default` file may look like the following:
+
+        ``` java
+        default menu.c32
+        prompt 0
+        timeout 60
+        ontimeout VZ
+        menu title Virtuozzo Hybrid Server Boot Menu
+        label VZ
+             menu label Install Virtuozzo Hybrid Server 7
+             kernel vmlinuz
+             append initrd=initrd.img ip=dhcp ks=http://198.123.123.198/vz/ks.cfg
+        ```
+
+    -   For installation on EFI-based systems, modify `/tftpboot/grub.cfg`. For example, for the HTTP server at 198.123.123.198 and the kickstart file in `/var/www/html/vz/ks.cfg`, the `grub.cfg` file may look like the following:
+
+        ``` java
+        set timeout=60
+            menuentry 'Virtuozzo Hybrid Server 7' {
+            linuxefi vmlinuz ip=dhcp ks=http://198.123.123.198/vz/ks.cfg
+            initrdefi initrd.img
+        }
+        ```
+
+
