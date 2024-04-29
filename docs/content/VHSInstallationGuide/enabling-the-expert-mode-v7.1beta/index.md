@@ -1,0 +1,34 @@
+---
+draft: false
+title: "Enabling the Expert Mode v7.1Beta"
+aliases: "/enabling-the-expert-mode-v7.1beta/"
+seoindex: "index, follow"
+seotitle: "Enabling the Expert Mode v7.1Beta"
+seokeywords: ""
+seodesc: ""
+menu:
+    docs:
+        title: "Enabling the Expert Mode v7.1Beta"
+        url: "/enabling-the-expert-mode-v7.1beta/"
+        weight: 10
+        parent: "get-started"
+        identifier: "enabling-the-expert-mode-v7.1beta.md"
+---
+# Enabling the Expert Mode v7.1Beta
+
+The expert mode allows choosing packages to install and manually partition disks. The latter capability is needed to install Virtuozzo Hybrid Server on a USB drive. It is recommended to use only the expert mode in this particular case.
+
+To enable the expert mode:
+
+1.  Choose the required installation option and press **E** to edit it.
+
+2.  Add `expert` at the end of the line, starting with `linux /images/pxeboot/vmlinuz`. For example:
+
+    ``` java
+    linux /images/pxeboot/vmlinuz inst.stage2=hd:LABEL=<VZ9_ISO_image> quiet ip=dhcp \
+    expert
+    ```
+
+3.  Press **Ctrl-X** to load the selected installation option.
+
+

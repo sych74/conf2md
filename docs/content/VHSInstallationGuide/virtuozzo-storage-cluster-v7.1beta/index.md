@@ -1,0 +1,158 @@
+---
+draft: false
+title: "Virtuozzo Storage Cluster v7.1Beta"
+aliases: "/virtuozzo-storage-cluster-v7.1beta/"
+seoindex: "index, follow"
+seotitle: "Virtuozzo Storage Cluster v7.1Beta"
+seokeywords: ""
+seodesc: ""
+menu:
+    docs:
+        title: "Virtuozzo Storage Cluster v7.1Beta"
+        url: "/virtuozzo-storage-cluster-v7.1beta/"
+        weight: 10
+        parent: "get-started"
+        identifier: "virtuozzo-storage-cluster-v7.1beta.md"
+---
+# Virtuozzo Storage Cluster v7.1Beta
+
+The Virtuozzo Storage cluster is a beta product. Using several standalone servers, one can create a Virtuozzo Storage cluster with additional commands. This product is planned to be completely implemented in the future Virtuozzo Hybrid Server 9 products.
+
+In this version, only CLI setup and configuration of Virtuozzo Storage are available, which may be challenging if you have never used Virtuozzo Storage before. Contact <vhs-nextgen-beta@virtuozzo.com> if you need assistance. 
+
+We highly recommend reading the Virtuozzo Storage documentation before following the outlined below instructions on how to install a Virtuozzo Storage cluster:
+
+-   [Planning Infrastructure for Virtuozzo Storage with CLI Management](https://docs.virtuozzo.com/virtuozzo_hybrid_server_7_installation_guide/preparing-for-installation/planning-storage-cli.html)
+
+-   [Virtuozzo Storage Administrator’s Command Line Guide](index)
+
+Limitations and known issues of this version:
+
+1.  Virtuozzo Storage can only be set without vstorage-ui-agent. Thus, all the functionality coming from vstorage-ui-agent is not available.
+2.  This version does not support the `prepare_vstorage_drive` script.
+
+# Installing Virtuozzo Storage Cluster
+
+------------------------------------------------------------------------
+
+1.  Install Virtuozzo Storage packages:
+
+    ``` java
+    yum groupinstall vstorage
+    ```
+
+2.  Specify MDS server discovery. To specify the IP address of an MDS server manually, create a `bs.list` file in the `/etc/vstorage/clusters/Cluster_Name` directory (create this directory if it does not exist) on the server you are configuring for the cluster and indicate the IP address and port for connecting to the MDS server. Use the IP address intended for a Storage network. 
+
+    ``` java
+    echo "10.200.200.11:2510" >> /etc/vstorage/clusters/Cluster_Name/bs.list
+    echo "10.200.200.12:2510" >> /etc/vstorage/clusters/Cluser_Name/bs.list
+    ```
+
+3.  Prepare disks for chunk servers:
+
+    ``` java
+    uuid=$(uuidgen)
+    mkfs.ext4 "/dev/sdX" -q -E lazy_itable_init=1 -O uninit_bg -m 0 -U "$uuid"  
+    tune2fs -e remount-ro /dev/sdX
+    ```
+
+4.  Add a new partition to /etc/fstab by UUID and specify the noatime, nofail, and lazytime mount options. 
+
+    ``` java
+    echo "UUID=$uuid /vstorage/Cluster_Name-cs<0N> ext4 defaults,nofail,lazytime,noatime  0 0" >> /etc/fstab
+    ```
+
+5.  Create a mount point and remove redundant details:
+
+    ``` java
+    mkdir -p "/vstorage/Cluster_Name-cs<0N>" 
+    mount -a
+    rm -rf "/vstorage/Cluster_Name-cs<0N>/lost+found"
+    ```
+
+6.  Create the first MDS server:
+
+    ``` java
+    vstorage -c Cluster_Name make-mds -I -a 10.200.200.11 -r /vstorage/Cluster_Name-mds -p
+    ```
+
+    The specified password is encrypted and saved to the /etc/vstorage/clusters/Cluster\_Name/auth\_digest.key file on the MDS server.
+
+7.  Start and enable the MDS management service (vstorage-mdsd):
+
+    ``` java
+    systemctl start vstorage-mdsd.target
+    systemctl enable vstorage-mdsd.target
+    ```
+
+8.  Add the next node to the Virtuozzo Storage cluster. Complete steps 1-5, correspondingly.
+
+    ``` java
+    vstorage -c Cluster_Name auth-node
+    Please enter password for cluster:
+    ```
+
+9.  Add the other MDS servers. Use the `-b` option and specify the IP addresses of the first MDS server (and all the other MDS servers if you have more than one in your cluster).
+
+    ``` java
+    vstorage -c Cluster_Name make-mds -a 10.200.200.12 -r /vstorage/Cluster_Name-mds -b 10.200.200.11
+    systemctl start vstorage-mdsd.target
+    systemctl enable vstorage-mdsd.target
+    ```
+
+10. Create a chunk server. To specify a specific tier, use the `-t` key with possible arguments \[`0-3`\]. Omitting this key will add it to the tier `0`. There should be a custom mount point for each chunk server you want to create, each pointing to its exclusive hard disk.
+
+    ``` java
+    vstorage -c Cluster_Name -t 0 make-cs -r /vstorage/Cluster_Name-cs<0N>
+    ```
+
+11. Add all disks intended to be chunk servers on each node. Start and enable the corresponding service:
+
+    ``` java
+    systemctl start vstorage-csd.target
+    systemctl enable vstorage-csd.target
+    ```
+
+    The commands above will start and enable all the chunk servers you have created on this node.
+
+12. Prepare to mount the cluster. (Optional, if you have BSs). Install the client package and authorize a BS to mount the cluster on the backup server:
+
+    ``` java
+    yum install vstorage-client
+    vstorage -c Cluster_Name auth-node
+    Please enter password for cluster:
+    ```
+
+13. Create a mount point and mount it:
+
+    ``` java
+    mkdir -p /vstorage/Cluster_Name
+    vstorage-mount -c Cluster_Name /vstorage/Cluster_Name
+    ```
+
+14. Add the mount point to /etc/fstab to make it permanent:
+
+    ``` java
+    echo "vstorage://Cluster_Name /vstorage/Cluster_Name fuse.vstorage rw,nosuid,nodev,_netdev 0 0" >> /etc/fstab
+    ```
+
+15. Configure the Virtuozzo Storage parameters. Check the current Virtuozzo Storage cluster parameters:
+
+    ``` java
+    vstorage get-attr /vstorage/Cluster_Name
+    ```
+
+    You may set the required configuration recursive to the whole cluster:
+
+    ``` java
+    vstorage -c Cluster_Name set-attr -R /vstorage/Cluster_Name replicas=<1,2,3..15> or encoding=<1+0,3+2,5+2,7+2,17+3> -p /failure-domain=<disk|host> tier=<0,1,2,3>
+    ```
+
+    Enclosed directories extend the Virtuozzo Storage settings from the parent directory by default. However, they can be changed if required.
+
+    ``` java
+    vstorage -c Cluster_Name set-attr -R /vstorage/Cluster_Name/directory ...
+    ```
+
+16. To display information about the cluster, use the `vstorage -c Cluster_Name top` command.
+

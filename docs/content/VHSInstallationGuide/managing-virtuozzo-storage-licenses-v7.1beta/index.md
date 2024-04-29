@@ -1,0 +1,170 @@
+---
+draft: false
+title: "Managing Virtuozzo Storage Licenses v7.1Beta"
+aliases: "/managing-virtuozzo-storage-licenses-v7.1beta/"
+seoindex: "index, follow"
+seotitle: "Managing Virtuozzo Storage Licenses v7.1Beta"
+seokeywords: ""
+seodesc: ""
+menu:
+    docs:
+        title: "Managing Virtuozzo Storage Licenses v7.1Beta"
+        url: "/managing-virtuozzo-storage-licenses-v7.1beta/"
+        weight: 10
+        parent: "get-started"
+        identifier: "managing-virtuozzo-storage-licenses-v7.1beta.md"
+---
+# Managing Virtuozzo Storage Licenses v7.1Beta
+
+This section describes the process of managing Virtuozzo Storage licenses. You will learn to do the following:
+
+-   Install a new license for a Virtuozzo Storage cluster.
+-   Update the installed license.
+-   View the installed license contents.
+-   Check the current license status.
+
+## Obtaining the Hardware Node ID
+
+------------------------------------------------------------------------
+
+The Hardware Node ID (HWID) is required to purchase a Virtuozzo Storage license. You can obtain the HWID with the `vstorage stat --license-hwid` command.
+
+For example:
+
+``` java
+# vstorage -c stor1 stat --license-hwid
+...
+3F96.DFF2.EAF6.CE86.DD49.786C.DC01.3D53
+```
+
+A Virtuozzo Storage Hardware Node ID is not the same as a Virtuozzo Hardware Node ID shown by the `vzlicview` command.
+
+## Installing the License
+
+------------------------------------------------------------------------
+
+Along with installing Virtuozzo licenses on all clients in a cluster, you need to install a separate license to start using the Virtuozzo Storage functionality. One license is required per cluster. You can install the license from any server participating in the cluster: an MDS server, a chunk server, or a client.
+
+To install the license, use the `vstorage load-license` command:
+
+``` java
+# vstorage -c stor1 load-license -p XXXXXX-XXXXXX-XXXXXX-XXXXXX-XXXXXX
+```
+
+If you have obtained the license in the form of a file, you can install it by using the `-f` option instead of `-p` and specifying the full path to the license file:
+
+``` java
+# vstorage -c stor1 load-license -f /etc/storlicense
+```
+
+## Updating the License
+
+------------------------------------------------------------------------
+
+In Virtuozzo, you can use the `vstorage update-license` command to update the license currently installed on your server. When executed, the utility connects to the Key Authentication (KA) server, retrieves a new license, downloads it to the server, and installs it there.
+
+To update a license, do the following:
+
+1.  Ensure the server where you want to update the license is connected to the Internet.
+2.  Run the `vstorageupdate-license` command to update the license.
+
+For example, to update a license installed in the `pcs1` cluster, execute this command:
+
+``` java
+# vstorage -c pcs1 update-license
+```
+
+By default, `vstorage` obtains a new license from the default KA server. However, you can explicitly specify what KA server to use by passing the `--server` option to the command:
+
+``` java
+# vstorage -c pcs1 update-license --server ka.server.com
+```
+
+Once you run the command, `vstorage` will connect to the KA server with the hostname of `ka.server.com`, download a new license, and install it on your server.
+
+** **
+
+## Viewing the License Contents
+
+------------------------------------------------------------------------
+
+You can use the `vstorage view-license` command to view the information on the license currently installed in your cluster. When executed, the utility processes the license and shows its contents on the screen. A sample output of `vstorage view-license` is given below:
+
+``` java
+# vstorage -c stor1 view-license
+HWID: XXXX.XXXX.XXXX.XXXX.XXXX.XXXX.XXXX.XXXX
+PCSSTOR   
+
+    status="ACTIVE"   
+    version=1.0   
+    expiration="08/24/2012 19:59:59"   
+    graceperiod=3600   
+    key_number="PCSS.XXXXXXXX.XXXX"   
+    platform="Linux"   
+    product="PCSS"   
+    gracecapacity=5   
+    autorecovery=0   
+    autorebalance=0   
+    snapshots=1   
+    capacity=500   
+    replicas=5
+```
+
+The main license parameters are explained in the table below.
+
+|               |                                                                                                                                                    |
+|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Name**      | **Description**                                                                                                                                    |
+| HWID          | Cluster ID.                                                                                                                                        |
+| status        | License status. For details, see [Checking the License Status](#id-.ManagingVirtuozzoStorageLicensesv7.1Beta-CheckingtheLicenseStatus).            |
+| version       | The version of Virtuozzo Storage for which the license was issued.                                                                                 |
+| expiration    | License expiration date and time.                                                                                                                  |
+| graceperiod   | Period, in seconds, during which Virtuozzo Storage continues functioning after the license has expired.                                            |
+| key\_number   | The key number under which the license is registered on the Key Authentication server.                                                             |
+| platform      | Operating system with which the license is compatible.                                                                                             |
+| product       | Product for which the license has been issued.                                                                                                     |
+| gracecapacity | The amount of disk space that data chunks may occupy in the cluster, in percent to the capacity limit value.                                       
+                                                                                                                                                                     
+                 For example, if the capacity limit is set to 1 TB, and the grace capacity is 5%, data chunks may use 50 GB above the capacity limit.                |
+| capacity      | The total amount of disk space, in GB, data chunks may occupy in the cluster.                                                                      
+                                                                                                                                                                     
+                 To view the disk space currently used by chunks, run the `vstorage top` command, press the **V** key on your keyboard, and check the **FS** field.  |
+| replicas      | Maximum number of replicas a data chunk may have.                                                                                                  |
+| autorecovery  | Denotes whether the auto-recovery feature is enabled (1) or disabled (0).                                                                          |
+| autorebalance | Denotes whether the auto-rebalance feature is enabled (1) or disabled (0).                                                                         |
+| snapshots     | Denotes whether the snapshots feature is enabled (1) or disabled (0).                                                                              |
+
+## Checking the License Status
+
+------------------------------------------------------------------------
+
+You can check the status of your license in one of the following ways:
+
+-   Using the `vstorage view-license`, for example:
+
+    ``` java
+    # vstorage -c stor1 view-license | grep status
+    status="ACTIVE"
+    ```
+
+<!-- -->
+
+-   Using the `vstorage stat` or `vstorage top` command, for example:
+
+    ``` java
+    # vstorage -c stor1 stat | grep License        
+    connected to MDS#1       
+    License: PCSS.XXXXXXXX.XXXX is ACTIVE
+    ```
+
+The table below lists all the statuses a license can have.
+
+| Status  | Description                                                                                                         |
+|---------|---------------------------------------------------------------------------------------------------------------------|
+| ACTIVE  | The license is valid and active.                                                                                    |
+| VALID   | The license is valid and can be installed in the cluster.                                                           |
+| EXPIRED | The license has expired.                                                                                            |
+| GRACED  | The license is currently on the grace period, or data chunks in the cluster use disk space from the grace capacity. |
+| INVALID | The license is invalid (for example, because its start date is in the future).                                      |
+
+

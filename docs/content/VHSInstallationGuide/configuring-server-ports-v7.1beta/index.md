@@ -1,0 +1,89 @@
+---
+draft: false
+title: "Configuring Server Ports v7.1Beta"
+aliases: "/configuring-server-ports-v7.1beta/"
+seoindex: "index, follow"
+seotitle: "Configuring Server Ports v7.1Beta"
+seokeywords: ""
+seodesc: ""
+menu:
+    docs:
+        title: "Configuring Server Ports v7.1Beta"
+        url: "/configuring-server-ports-v7.1beta/"
+        weight: 10
+        parent: "get-started"
+        identifier: "configuring-server-ports-v7.1beta.md"
+---
+# Configuring Server Ports v7.1Beta
+
+Virtuozzo Hybrid Server enables Linux kernel firewall during installation. This section lists ports opened by default. The set of ports differs depending on your system configuration:
+
+-   If the server does not participate in a Virtuozzo Storage cluster, see [Opened Ports on Standalone Servers](#id-.ConfiguringServerPortsv7.1Beta-OpenedPortsOnStandaloneServers) for information on ports used by Virtuozzo Hybrid Server.
+
+-   If the server is part of a Virtuozzo Storage cluster, in addition, see [Opened Ports on Servers in Virtuozzo Storage Clusters](#id-.ConfiguringServerPortsv7.1Beta-OpenedPortsOnServersInVirtuozzoStorageClusters) for information on ports used by the cluster.
+
+## Opened Ports on Standalone Servers
+
+------------------------------------------------------------------------
+
+The table below lists the ports for servers not participating in Virtuozzo Storage clusters. `I` in the **Description** column signals that the port should be open for incoming traffic, and `O` means the same for outgoing traffic.
+
+| Port      | Description                                                                                                                                                                                                                            |
+|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 22        | (IO) Used for secure logins via SSH.                                                                                                                                                                                                   |
+| 80        | (IO) Used for HTTP connections, for example, to download Virtuozzo Hybrid Server updates.                                                                                                                                              |
+| 443       | (O) Used to send problem reports to the support ** team.                                                                                                                                                                               |
+| 5224      | (O) Used to connect to the Key Administrator server to update Virtuozzo Hybrid Server lease licenses.                                                                                                                                  |
+| 64000     | (IO) Used to connect SDK with the dispatcher running on the remote server and for communication between the dispatchers on different servers.                                                                                          |
+| 67        | Used to support host-only adapters in virtual servers. Virtuozzo Hybrid Server does not use port 67 for any external connections.                                                                                                      |
+| ` ports>` | Used by various RPC services (for example, to support NFS shares). Port numbers may differ from system to system. To learn what RPC services are registered on your server and what ports they are using, run `# rpcinfo -p localhost` |
+| 647, 847  | Reserved by the Linux `portreserve` program for the DHCP server, if you use one.                                                                                                                                                       |
+| 5700-6900 | Range of ports used for VNC connections.                                                                                                                                                                                               |
+
+You may also need to open ports used to connect to remote yum repositories. Though most of the repositories can be accessed via HTTP, some may require access via HTTPS or FTP. You can check what repositories are currently configured for your system and what protocols are used to connect to them as follows:
+
+``` java
+# yum repolist -v | egrep -e 'baseurl|mirrors'
+Repo-mirrors : <VZ9_mirrorlist_URL>
+Repo-baseurl : <VZ9_base_URL>
+# curl <VZ9_mirrorlist_URL>
+```
+
+## Opened Ports on Servers in Virtuozzo Storage Clusters
+
+------------------------------------------------------------------------
+
+A Virtuozzo Storage cluster requires ports listed below to be opened in addition to those on standalone servers. If you use the Virtuozzo Storage management panel to create clusters, all the necessary ports are opened automatically. Otherwise, open these ports manually on each node participating in the cluster.
+
+Port
+
+Description
+
+**MDS Servers**
+2510
+
+(IO) Used for communication between MDS servers.
+
+2511
+
+(IO) Used for communication with chunks servers and clients.
+
+**Chunk Servers**
+2511
+
+(O) Used for communication with MDS servers.
+
+``
+
+(I) Used for communication with clients. The chunk server management service automatically binds to any available port. You can also manually assign the service to a specific port.
+
+**Clients**
+2511
+
+(O) Used for communication with MDS servers.
+
+``
+
+(O) Used for communication with chunk servers. The client management service automatically binds to any available port. You can also manually assign the service to a specific port.
+
+
