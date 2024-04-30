@@ -18,9 +18,9 @@ menu:
 
 This chapter explains how to install Virtuozzo Hybrid Server.
 
--   [Starting Installation](.Starting_Installation_v7.1Beta)
--   [Installing Virtuozzo Hybrid Server in the Default Graphics Mode](.Installing_Virtuozzo_Hybrid_Server_in_the_Default_Graphics_Mode_v7.1Beta)
--   [PXE Installation](.PXE_Installation_v7.1Beta)
--   [Configuring Server Ports](.Configuring_Server_Ports_v7.1Beta)
+-   [Starting Installation](starting-installation-v7.1beta)
+-   [Installing Virtuozzo Hybrid Server in the Default Graphics Mode](installing-virtuozzo-hybrid-server-in-the-default-graphics-mode-v7.1beta)
+-   [PXE Installation](pxe-installation-v7.1beta)
+-   [Configuring Server Ports](configuring-server-ports-v7.1beta)
 
 

@@ -32,8 +32,8 @@ In a nutshell, the PXE network installation procedure involves these steps:
 
 3.  Boot the client server from network and install Virtuozzo Hybrid Server in one of the two modes.
 
--   [Preparing for PXE Installation](.Preparing_for_PXE_Installation_v7.1Beta)
--   [Preparing a Kickstart File](.Preparing_a_Kickstart_File_v7.1Beta)
--   [Launching Installation](.Launching_Installation_v7.1Beta)
+-   [Preparing for PXE Installation](preparing-for-pxe-installation-v7.1beta)
+-   [Preparing a Kickstart File](preparing-a-kickstart-file-v7.1beta)
+-   [Launching Installation](launching-installation-v7.1beta)
 
 

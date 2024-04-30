@@ -18,9 +18,9 @@ menu:
 
 This chapter describes how to plan the standalone installation of Virtuozzo Hybrid Server 9. It also explains how to obtain the Virtuozzo Hybrid Server distribution image and prepare for installing Virtuozzo Hybrid Server from a USB flash drive.
 
--   [Requirements for Standalone Installations](.Requirements_for_Standalone_Installations_v7.1Beta)
--   [Obtaining the Distribution Image](.Obtaining_the_Distribution_Image_v7.1Beta)
--   [Preparing for Installation from USB Storage Drives](.Preparing_for_Installation_from_USB_Storage_Drives_v7.1Beta)
+-   [Requirements for Standalone Installations](requirements-for-standalone-installations-v7.1beta)
+-   [Obtaining the Distribution Image](obtaining-the-distribution-image-v7.1beta)
+-   [Preparing for Installation from USB Storage Drives](preparing-for-installation-from-usb-storage-drives-v7.1beta)
 
 ## Attachments:
 
