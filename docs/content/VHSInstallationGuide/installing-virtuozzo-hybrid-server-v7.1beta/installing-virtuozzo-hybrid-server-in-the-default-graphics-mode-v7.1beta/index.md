@@ -134,7 +134,7 @@ vzlicload -p <your_license_key>
 
 is an activation key that you can get from your sales manager or by filling in the [contact form](https://www.virtuozzo.com/company/contact/).
 
-For more information about licenses, see [Installing the License](installing-the-license-v7.1beta).
+For more information about licenses, see [Installing the License](.Installing_the_License_v7.1Beta).
 
 ## Attachments:
 

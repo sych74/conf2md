@@ -23,4 +23,4 @@ This chapter describes how to install, update, view, and transfer licenses on yo
 -   [Transferring the License to Another Server](transferring-the-license-to-another-server-v7.1beta)
 -   [Viewing the License](viewing-the-license-v7.1beta)
 
-If you want to use the Virtuozzo Storage functionality, install a separate license besides a Virtuozzo Hybrid Server license. For more details, see [Managing Virtuozzo Storage Licenses](managing-virtuozzo-storage-licenses-v7.1beta).
+If you want to use the Virtuozzo Storage functionality, install a separate license besides a Virtuozzo Hybrid Server license. For more details, see [Managing Virtuozzo Storage Licenses](.Managing_Virtuozzo_Storage_Licenses_v7.1Beta).

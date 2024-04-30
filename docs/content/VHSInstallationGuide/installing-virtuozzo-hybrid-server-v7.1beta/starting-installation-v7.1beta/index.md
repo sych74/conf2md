@@ -20,9 +20,9 @@ Virtuozzo Hybrid Server can be installed from:
 
 -   IPMI virtual drives
 
--   USB drives (see [Preparing for Installation from USB Storage Drives](preparing-for-installation-from-usb-storage-drives-v7.1beta))
+-   USB drives (see [Preparing for Installation from USB Storage Drives](.Preparing_for_Installation_from_USB_Storage_Drives_v7.1Beta))
 
--   PXE servers (see [Installation Using PXE](pxe-installation-v7.1beta) for information on installing Virtuozzo Hybrid Server over the network)
+-   PXE servers (see [Installation Using PXE](.PXE_Installation_v7.1Beta) for information on installing Virtuozzo Hybrid Server over the network)
 
     In Virtuozzo Hybrid Server 9, time synchronization via NTP is enabled by default using the `chronyd` service. If you want to use `ntpdate` or `ntpd`, stop and disable `chronyd` first.
 

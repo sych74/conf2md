@@ -24,7 +24,7 @@ You will need the following servers to install Virtuozzo Hybrid Server over netw
 
 -   A DHCP server that will provide network configuration for other servers.
 
--   One or more client servers where Virtuozzo Hybrid Server will be installed. The client servers must meet the requirements described in [Preparing for Installation](preparing-for-installation-v7.1beta). In addition, they must have network cards with PXE support.
+-   One or more client servers where Virtuozzo Hybrid Server will be installed. The client servers must meet the requirements described in [Preparing for Installation](.Preparing_for_Installation_v7.1Beta). In addition, they must have network cards with PXE support.
 
 Unless they already exist in your infrastructure, the TFTP, HTTP (FTP), and DHCP servers can share the same physical machine.
 
