@@ -31,11 +31,11 @@ On Linux, you can use `dd`:
 On Windows, you can use [Rufus](https://rufus.ie/):
 
 1.  In the **Drive Properties** section, select your flash drive from the **Device** drop-down menu and click **SELECT**. Then, select the distribution image from your local machine.
-2.  Click **START**.
+2.  Click **START**.  
     ![](194478115.png)
 
-3.  In the dialog, select **Write in DD Image mode** and click **OK**.
-    ![](194478116.png){.image-center width="450"}
+3.  In the dialog, select **Write in DD Image mode** and click **OK**.  
+    ![](194478116.png)
 
 ## Attachments:
 
