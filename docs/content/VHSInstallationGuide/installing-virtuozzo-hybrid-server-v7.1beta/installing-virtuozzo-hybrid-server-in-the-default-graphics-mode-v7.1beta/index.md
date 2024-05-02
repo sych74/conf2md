@@ -26,7 +26,7 @@ You need to accept the Virtuozzo Hybrid Server End-User License Agreement to ins
 
 To accept the Virtuozzo Hybrid Server EULA, open the **EULA** screen, select **Accept**, and click **Done**.
 
-![](attachments/194478151/194478387.png){.image-center width="450"}
+![](194478387.png){.image-center width="450"}
 
 ## Setting Date and Time
 
@@ -42,7 +42,7 @@ The selected keyboard layout can be used during installation and, once the insta
 
 If you need to change the default English (US) keyboard layout, open the **KEYBOARD** screen, click the plus sign to add a layout, and click **Options** to choose a key combination for switching layouts.
 
-![](attachments/194478151/194478391.png){.image-center width="450"}
+![](194478391.png){.image-center width="450"}
 
 ## Configuring Network
 
@@ -52,7 +52,7 @@ Usually network is configured automatically by the installation program. If you 
 
 To install Virtuozzo Hybrid Server, you will need to have at least one network card configured and you will also need to provide a hostname: either a fully qualified domain name (`.`) or a short name (``).
 
-![](attachments/194478151/194478393.png){.image-center width="450"}
+![](194478393.png){.image-center width="450"}
 
 ### Creating Bonded and Teamed Connections
 
@@ -108,7 +108,7 @@ Click **Done** and proceed to finish the installation.
 
 Click **ROOT PASSWORD** to create a password for the root account. Installation will not begin until the password is created.
 
-![](attachments/194478151/194478400.png){.image-center width="450"}
+![](194478400.png){.image-center width="450"}
 
 ## Finishing the Installation
 
@@ -138,15 +138,15 @@ For more information about licenses, see [Installing the License](.Installing_th
 
 ## Attachments:
 
-![](images/icons/bullet_blue.gif){width="8" height="8"} [vzinstall1\_0.png](attachments/194478151/194478288.png) (image/png)
-![](images/icons/bullet_blue.gif){width="8" height="8"} [vzinstall1\_1.png](attachments/194478151/194478290.png) (image/png)
-![](images/icons/bullet_blue.gif){width="8" height="8"} [vzinstall2.png](attachments/194478151/194478293.png) (image/png)
-![](images/icons/bullet_blue.gif){width="8" height="8"} [vzinstall3.png](attachments/194478151/194478296.png) (image/png)
-![](images/icons/bullet_blue.gif){width="8" height="8"} [vzinstall4.png](attachments/194478151/194478299.png) (image/png)
-![](images/icons/bullet_blue.gif){width="8" height="8"} [image2024-1-31\_15-18-51.png](attachments/194478151/194478385.png) (image/png)
-![](images/icons/bullet_blue.gif){width="8" height="8"} [image2024-1-31\_15-21-18.png](attachments/194478151/194478387.png) (image/png)
-![](images/icons/bullet_blue.gif){width="8" height="8"} [image2024-1-31\_15-23-30.png](attachments/194478151/194478389.png) (image/png)
-![](images/icons/bullet_blue.gif){width="8" height="8"} [image2024-1-31\_15-24-39.png](attachments/194478151/194478391.png) (image/png)
-![](images/icons/bullet_blue.gif){width="8" height="8"} [image2024-1-31\_15-25-53.png](attachments/194478151/194478393.png) (image/png)
-![](images/icons/bullet_blue.gif){width="8" height="8"} [image2024-1-31\_15-42-39.png](attachments/194478151/194478400.png) (image/png)
+![](images/icons/bullet_blue.gif){width="8" height="8"} [vzinstall1\_0.png](194478288.png) (image/png)
+![](images/icons/bullet_blue.gif){width="8" height="8"} [vzinstall1\_1.png](194478290.png) (image/png)
+![](images/icons/bullet_blue.gif){width="8" height="8"} [vzinstall2.png](194478293.png) (image/png)
+![](images/icons/bullet_blue.gif){width="8" height="8"} [vzinstall3.png](194478296.png) (image/png)
+![](images/icons/bullet_blue.gif){width="8" height="8"} [vzinstall4.png](194478299.png) (image/png)
+![](images/icons/bullet_blue.gif){width="8" height="8"} [image2024-1-31\_15-18-51.png](194478385.png) (image/png)
+![](images/icons/bullet_blue.gif){width="8" height="8"} [image2024-1-31\_15-21-18.png](194478387.png) (image/png)
+![](images/icons/bullet_blue.gif){width="8" height="8"} [image2024-1-31\_15-23-30.png](194478389.png) (image/png)
+![](images/icons/bullet_blue.gif){width="8" height="8"} [image2024-1-31\_15-24-39.png](194478391.png) (image/png)
+![](images/icons/bullet_blue.gif){width="8" height="8"} [image2024-1-31\_15-25-53.png](194478393.png) (image/png)
+![](images/icons/bullet_blue.gif){width="8" height="8"} [image2024-1-31\_15-42-39.png](194478400.png) (image/png)
 

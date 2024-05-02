@@ -28,9 +28,9 @@ The Virtuozzo Hybrid Server EULA is accepted automatically during kickstart inst
 
 The following sections describe both groups in detail, explain how to create your own kickstart file, and make it accessible over the network.
 
--   [Standard Kickstart Options](standard-kickstart-options-v7.1beta)
--   [Additional Kickstart Options](additional-kickstart-options-v7.1beta)
--   [Kickstart File Example](kickstart-file-example-v7.1beta)
--   [Making Kickstart File Accessible Over Network](making-kickstart-file-accessible-over-network-v7.1beta)
+-   [Standard Kickstart Options](.Standard_Kickstart_Options_v7.1Beta)
+-   [Additional Kickstart Options](.Additional_Kickstart_Options_v7.1Beta)
+-   [Kickstart File Example](.Kickstart_File_Example_v7.1Beta)
+-   [Making Kickstart File Accessible Over Network](.Making_Kickstart_File_Accessible_Over_Network_v7.1Beta)
 
 

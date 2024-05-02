@@ -32,13 +32,13 @@ On Windows, you can use [Rufus](https://rufus.ie/):
 
 1.  In the **Drive Properties** section, select your flash drive from the **Device** drop-down menu and click **SELECT**. Then, select the distribution image from your local machine.
 2.  Click **START**.
-    ![](attachments/194478110/194478115.png){.image-center width="450"}
+    ![](194478115.png){.image-center width="450"}
 
 3.  In the dialog, select **Write in DD Image mode** and click **OK**.
-    ![](attachments/194478110/194478116.png){.image-center width="450"}
+    ![](194478116.png){.image-center width="450"}
 
 ## Attachments:
 
-![](images/icons/bullet_blue.gif){width="8" height="8"} [rufus1.png](attachments/194478110/194478115.png) (image/png)
-![](images/icons/bullet_blue.gif){width="8" height="8"} [rufus2.png](attachments/194478110/194478116.png) (image/png)
+![](images/icons/bullet_blue.gif){width="8" height="8"} [rufus1.png](194478115.png) (image/png)
+![](images/icons/bullet_blue.gif){width="8" height="8"} [rufus2.png](194478116.png) (image/png)
 

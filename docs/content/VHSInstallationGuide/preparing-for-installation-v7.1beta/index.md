@@ -24,5 +24,5 @@ This chapter describes how to plan the standalone installation of Virtuozzo Hybr
 
 ## Attachments:
 
-![](images/icons/bullet_blue.gif){width="8" height="8"} [rufus1.png](attachments/194478123/194478122.png) (image/png)
+![](images/icons/bullet_blue.gif){width="8" height="8"} [rufus1.png](194478122.png) (image/png)
 
