@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing template software licenses vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Templates_195791696.html">Templates</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Manage-Template-Software-Licenses_195791731.html">Manage Template Software Licenses</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing template software licenses vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span>To create a virtual machine from a template that is based on paid software, such as MS Windows, you must have a valid license. The system verifies if you have a license before allowing the VM to be created, so before creating a VM you must first upload the license keys you've bought to OnApp, or connect to a licensing server.</span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ignore the options specified in your Control Panel but not mentioned in the documents.</p></div></div><p>OnApp supports three license types:</p><ul><li><em>MAK licensing:</em> the default licensing type applied to all Windows-based VMs. </li><li><em>KMS licensing:</em> <span style="color: rgb(34,34,34);">this is applicable to every VM since Windows 7 \ Server 2008 or later Windows versions.</span></li><li><em>User licenses:</em> allow end users to input a license key when creating a VM. </li></ul><p>The template licenses in OnApp are managed in two places:</p><ul><li><strong>Cloud</strong> &gt;<strong> Templates </strong>&gt;<strong> Template Store</strong> – where you specify which license types can be applied to templates assigned to the particular template group.</li><li><strong>Admin</strong> &gt;<strong> Buckets </strong>– where you specify which license types a user on this plan can apply to their Windows-based VMs.</li></ul><div class="confluence-information-macro confluence-information-macro-warning"><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul><li>To avoid billing issues, do not use different Windows licensing types for the same template in one bucket. In case you assign a template to template groups with different licensing types or different prices, it will be charged at a smaller price.</li><li>The bucket settings override the template group settings. For example, if the KMS licensing is allowed by template group settings, but is not enabled in bucket configuration, the user will not be able to create VMs using KMS licensing.</li></ul></div></div><p>The user specifies the license type for a particular virtual machine during the VM creation process. The list of available license types depends on the template that is chosen for the VM and the bucket the user is signed up to. </p><p>To enable users to choose the license type:</p>                    
+    
+
+
+<div class="rwui_steps rwui_size_small">
+                        
+    
+
+<div class="rwui_step">
+    <div class="rwui_item_number"></div>
+    <div class="rwui_item_content">
+        <p><a href=".Template-store-vVHS9.0_195791750.html">Create a template group</a>.</p>
+    </div>
+</div>
+                    
+    
+
+<div class="rwui_step">
+    <div class="rwui_item_number"></div>
+    <div class="rwui_item_content">
+        <p><a href=".Template-store-vVHS9.0_195791750.html">Specify licenses that can be used within this group</a>.</p>
+    </div>
+</div>
+                    
+    
+
+<div class="rwui_step">
+    <div class="rwui_item_number"></div>
+    <div class="rwui_item_content">
+        <p><a href=".Template-store-vVHS9.0_195791750.html">Assign the templates to this group</a>.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>If<span> you do not assign a template to a template group, the default MAK licensing is applied to that template.</span></p></div></div>
+    </div>
+</div>
+                    
+    
+
+<div class="rwui_step">
+    <div class="rwui_item_number"></div>
+    <div class="rwui_item_content">
+        <p><a href=".Creating-and-managing-buckets-vVHS9.0_195792047.html">Create a bucket</a>.</p>
+    </div>
+</div>
+                    
+    
+
+<div class="rwui_step">
+    <div class="rwui_item_number"></div>
+    <div class="rwui_item_content">
+        <a href=".Creating-and-managing-buckets-vVHS9.0_195792047.html">Specify which license types can be used within this bucket</a>.
+    </div>
+</div>
+                    
+    
+
+<div class="rwui_step">
+    <div class="rwui_item_number"></div>
+    <div class="rwui_item_content">
+        <p><a href=".Creating-and-managing-buckets-vVHS9.0_195792047.html">Assign template groups to a bucket</a> (optional).</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span>If you do not assign any template group to a bucket, the user can build VMs on any template available in the cloud. The choice of licenses will depend on the settings specified for the template group to which this template belongs.</span></p></div></div>
+    </div>
+</div>
+                    
+    
+
+<div class="rwui_step">
+    <div class="rwui_item_number"></div>
+    <div class="rwui_item_content">
+        <p><a href=".Creating-and-managing-buckets-vVHS9.0_195792047.html">Assign a user to this bucket</a>.</p>
+    </div>
+</div>
+
+</div>
+
+</div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingtemplatesoftwarelicensesvVHS9.0-kmsKMSLicensing"><span class="confluence-anchor-link" id="id-.ManagingtemplatesoftwarelicensesvVHS9.0-kms"></span>KMS Licensing</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>To allow your users to create virtual machines (<span style="color: rgb(34,34,34);">applicable to every VM since Windows 7 \ Server 2008 or newer Windows versions</span>) using KMS licensing:</p><ol><li>Log in to your Control Panel as an Admin.</li><li><p>Enable KMS licensing for a particular template group, and attach the templates for which you plan to enable KMS licensing to this group (see <a href=".Template-store-vVHS9.0_195791750.html">Template </a><a href=".Template-store-vVHS9.0_195791750.html">Store</a> in the next section).</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span>Windows 2003 and XP templates do not support KMS licensing.</span></p></div></div></li><li>Enable KMS licensing for a <a href=".Buckets-vVHS9.0_195792028.html">bucket</a>, and assign this template group to a bucket.</li><li>Sign up a user to this bucket.</li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingtemplatesoftwarelicensesvVHS9.0-macMAKLicensing"><span class="confluence-anchor-link" id="id-.ManagingtemplatesoftwarelicensesvVHS9.0-mac"></span>MAK Licensing</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>To add a MAK license to OnApp:</p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Templates</strong> &gt; <strong>Software Licenses</strong> menu.</li><li>Click the<strong> Add new License</strong> button.</li><li>Set the necessary parameters in the form that appears:<br/><ul><li><em>Distribution</em> – Windows OS distribution (2003, 2008, 7).</li><li><em>R2</em> – move the slider to the right if your license is for the second edition of Windows OS distribution.</li><li><em>Architecture - </em>select <em>x64 </em>or <em>x86</em>.</li><li><em>Edition</em> – select the edition of the OS: <em>STD</em> (Standard), <em>ENT</em> (Enterprise), <em>WEB</em> (web), <em>DC</em> (Data Center), <em>PRO</em> (Professional).</li><li><em>License</em> – enter the license code, for example, <em>TZXTC-R4GGG-9TT3V-DYDY4-T628B</em>.</li><li><em>Total</em> - the total number of machines allowed by the license (the amount of licenses you bought from Microsoft).</li></ul></li><li>Click <strong>Save.</strong></li></ol><p>To view MAK license details, g<span>o to your Control Panel &gt; </span><strong>Cloud</strong><span> &gt; </span><strong>Templates</strong><span> &gt; </span><strong>Software Licenses</strong><span> menu. This screen lists all the licenses you've added to your OnApp installation with their details:</span></p><ul><li><em>Label </em>– the license name specifying the OS distribution, architecture, and edition, for example, Windows 2008 R2 x64 STD/ENT.</li><li><em>License</em> - the license code.</li><li><em>Total</em> - the number of VMs allowed by the license.</li><li><em>Count</em> - the number of licenses used.</li></ul><p>To edit/delete an existing MAK license:</p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Templates</strong> &gt; <strong>Software Licenses </strong>menu. This screen lists all the licenses you've added to your OnApp installation.</li><li>Click the<strong> Edit</strong>/<strong>Delete </strong>buttons next to the license you're interested in.</li></ol><p><br/></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

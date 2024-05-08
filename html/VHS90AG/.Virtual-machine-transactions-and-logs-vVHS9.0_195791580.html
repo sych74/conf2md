@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Virtual machine transactions and logs vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtual-Servers_195791495.html">Virtual Servers</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtual-Server-Transactions-and-Logs_195791581.html">Virtual Server Transactions and Logs</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Virtual machine transactions and logs vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>The system records a detailed log of all the transactions taking place on your virtual machines. The list of transactions logged by the system includes:</p><ul><li><em>Provision virtual server</em></li><li><em>Startup virtual server </em></li><li><em>Stop virtual server</em></li><li><em>Resize virtual server without reboot</em></li><li><em>Configure Operating System</em></li><li><em>Build disk</em></li><li><em>Resize disk</em></li><li><em>Format disk</em></li><li><em>Destroy disk</em></li><li><em>Take backup</em></li><li><em>Convert backup</em></li><li><em>Restore backup</em></li><li><em>Destroy backups</em></li><li><em>Destroy virtual server</em></li><li><em>Destroy template</em></li><li><em>Download template</em></li><li><em>Update firewall</em></li></ul><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ignore the options specified in your Control Panel but not mentioned in the documents.</p></div></div><p>To view transactions for a virtual machine:</p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Virtual Servers</strong> menu.</li><li>Click the label of the virtual machine you're interested in.</li><li>The details screen for that virtual machine shows recent transactions in the <strong>Activity Log </strong>section. </li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span class="confluence-anchor-link" id="id-.VirtualmachinetransactionsandlogsvVHS9.0-_Toc302559122"></span><span style="color: rgb(0,0,0);">To cancel all pending tasks, click the</span><strong> <span style="color: rgb(0,0,0);">Cancel All Pending Tasks for this virtual server</span></strong> <span style="color: rgb(0,0,0);">button.</span><span class="confluence-anchor-link" id="id-.VirtualmachinetransactionsandlogsvVHS9.0-_Add_an_Administrator’s"></span></p><p><span style="color: rgb(0,0,0);">To cancel the <em>TakeBackup</em> transaction which is running longer and exceeding the time set for a zombie transaction:</span></p><ol><li><span style="color: rgb(0,0,0);">Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Virtual Servers</strong> menu.</span></li><li><span style="color: rgb(0,0,0);">Click the label of the required virtual machine.</span></li><li><p><span style="color: rgb(255,0,0);"><span style="color: rgb(0,0,0);">On the following page, in the <em>Activity Log </em>section, hover over the icon of the transaction and then click <span style="color: rgb(255,0,0);"><span style="color: rgb(0,0,0);"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" draggable="false" width="18" src="attachments/195791580/195791579.png" data-image-src="attachments/195791580/195791579.png" data-unresolved-comment-count="0" data-linked-resource-id="195791579" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="cross.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195791580" data-linked-resource-container-version="12" alt=""></span> </span></span>that appears on the icon of</span><span><span style="color: rgb(0,0,0);"> this transaction.</span><br/></span></span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">Please note that this option becomes available if the transaction has been running for the period of time specified in the <em>Zombie </em><em>transaction time</em> parameter, which can be found at your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings </strong>&gt; <strong>Configuration </strong>icon.</span></p></div></div></li><li><p><span style="color: rgb(255,0,0);"><span style="color: rgb(0,0,0);">In the dialog box, click <strong>Proceed</strong></span><span><span style="color: rgb(0,0,0);">.</span><br/></span></span></p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">The rollback is executed starting from the command that has been canceled. </span></p></div></div></li></ol><p><span>You can also view the details of a particular log item by clicking its reference number. The following page shows the log output and the details:</span></p><ul><li><em>Date</em> - time in the [YYYY][MM][DD]T[hh][mm][ss]Z format.</li><li><em>Action</em> - the action name.</li><li><em>Status</em> - the action status (<em>Complete</em>, <em>Warn</em>, <em>Pending</em>, or <em>Failed</em>).</li><li><em>Ref</em> - the log item's reference number.</li><li><em>Target</em> - the action target.</li><li><em>Dependent</em> - the reference number of the previous transaction on which the current transaction depends.</li><li><em>Started at</em> - the time when the action is started.</li><li><em>Completed at</em> - the time when the action is completed.</li><li><em>Data Store </em>- the datastore label.</li><li><em>Virtual Server</em> - the virtual machine label.</li><li><em>Compute resource</em> - the label of compute resource.</li><li><em>Initiator</em> - the user who initiated the action.</li></ul><p>If you want to see only the detailed output, you can hide log info with the arrow button in the upper-right corner.</p><p><br/></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791580/195791579.png">cross.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Storage and backups vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Storage-and-Backups_195792106.html">Storage and Backups</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Storage and backups vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><span style="color: rgb(38,38,38);">The Control Panel's Storage Settings menu is where you get detailed control over low-level cloud settings for data stores, data store zones, and disks. With OnApp, you can also create backups and manage low-level cloud settings for backup servers and backup server zones.</span></p><p><br/></p><div class="columnMacro" style="width:615px;min-width:615px;max-width:615px;"><div class="columnMacro" style="width:300px;min-width:300px;max-width:300px;"><p style="text-align: left;">                    
+    
+
+
+<a  href="https://docs.onapp.com/vhs90ag/vhs9.0/storage-and-backups/backup-settings"  class="rwui_button rwui_block  rwui_size_large  rwui_id_ca43b0be-c0e9-4aa2-a27d-c3ff76e253e9 " style=" color: #FFFFFF !important; background-color: rgb(121,201,123); "target="_blank" rel="noopener noreferrer"title="The Control Panel&#39;s Backup Settings menu is where you get detailed control over low-level cloud settings for backup servers and backup server zones. "><style>.rwui_id_ca43b0be-c0e9-4aa2-a27d-c3ff76e253e9 {color: #FFFFFF !important; background: rgb(121,201,123);}.rwui_id_ca43b0be-c0e9-4aa2-a27d-c3ff76e253e9:hover {background: rgb(112,186,114);}.rwui_id_ca43b0be-c0e9-4aa2-a27d-c3ff76e253e9 .rwui_icon {color: #FFFFFF !important;}</style><span class="rwui_icon rwui_iconfont_new_window" style="float: right;"></span><span class="rwui_content rwui_has_icon_right " >Backup Settings</span></a>
+</p><p style="text-align: left;">                    
+    
+
+
+<a  href="https://docs.onapp.com/vhs90ag/vhs9.0/storage-and-backups/data-stores-settings"  class="rwui_button rwui_block  rwui_size_large  rwui_id_cf1c4ca6-b945-4df2-9e2f-479f638e9384 " style=" color: #FFFFFF !important; background-color: rgb(121,201,123); "target="_blank" rel="noopener noreferrer"title="Data stores provide disk space for your virtual servers and operating systems. Data stores are attached to compute resources."><style>.rwui_id_cf1c4ca6-b945-4df2-9e2f-479f638e9384 {color: #FFFFFF !important; background: rgb(121,201,123);}.rwui_id_cf1c4ca6-b945-4df2-9e2f-479f638e9384:hover {background: rgb(112,186,114);}.rwui_id_cf1c4ca6-b945-4df2-9e2f-479f638e9384 .rwui_icon {color: #FFFFFF !important;}</style><span class="rwui_icon rwui_iconfont_new_window" style="float: right;"></span><span class="rwui_content rwui_has_icon_right " >Data Stores Settings</span></a>
+</p></div><div class="columnMacro" style="width:15px;min-width:15px;max-width:15px;"><p><br/></p></div><div class="columnMacro" style="width:300px;min-width:300px;max-width:300px;"><p style="text-align: left;">                    
+    
+
+
+<a  href="https://docs.onapp.com/vhs90ag/vhs9.0/storage-and-backups/data-store-zones-settings"  class="rwui_button rwui_block  rwui_size_large  rwui_id_8c342dd8-2c3d-46cc-9502-b13261687b05 " style=" color: #666666 !important; background-color: rgb(237,237,237); "target="_blank" rel="noopener noreferrer"title="Data store zones can be used to create different tiers of service – for example, by setting up different zones for ordinary and high-performance SANs in the cloud."><style>.rwui_id_8c342dd8-2c3d-46cc-9502-b13261687b05 {color: #666666 !important; background: rgb(237,237,237);}.rwui_id_8c342dd8-2c3d-46cc-9502-b13261687b05:hover {background: rgb(219,219,219);}.rwui_id_8c342dd8-2c3d-46cc-9502-b13261687b05 .rwui_icon {color: #666666 !important;}</style><span class="rwui_icon rwui_iconfont_new_window" style="float: right;"></span><span class="rwui_content rwui_has_icon_right " >Data Store Zone Settings</span></a>
+</p><p style="text-align: left;">                    
+    
+
+
+<a  href="https://docs.onapp.com/vhs90ag/vhs9.0/storage-and-backups/disks-settings"  class="rwui_button rwui_block  rwui_size_large  rwui_id_6e94c6d9-9dbe-4c50-b5cf-fc1b495b25b3 " style=" color: #666666 !important; background-color: rgb(237,237,237); "target="_blank" rel="noopener noreferrer"title="Virtual server storage is provided by disks. A disk is a partition of a data store that is allocated to a specific virtual server."><style>.rwui_id_6e94c6d9-9dbe-4c50-b5cf-fc1b495b25b3 {color: #666666 !important; background: rgb(237,237,237);}.rwui_id_6e94c6d9-9dbe-4c50-b5cf-fc1b495b25b3:hover {background: rgb(219,219,219);}.rwui_id_6e94c6d9-9dbe-4c50-b5cf-fc1b495b25b3 .rwui_icon {color: #666666 !important;}</style><span class="rwui_icon rwui_iconfont_new_window" style="float: right;"></span><span class="rwui_content rwui_has_icon_right " >Disks Settings</span></a>
+</p></div></div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

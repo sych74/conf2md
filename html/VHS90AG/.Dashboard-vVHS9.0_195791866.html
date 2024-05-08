@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Dashboard vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Identity-Management_195791864.html">Identity Management</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Dashboard_195791867.html">Dashboard</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Dashboard vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ignore the options specified in your Control Panel but not mentioned in the documents.</p></div></div><p style="text-align: left;">After you log in to the system, you can see the OnApp dashboard. The dashboard provides resource usage statistics, activity log, and your cloud summary. The sidebar menu consists of the following tabs: </p><ul><li><strong>Cloud </strong>that includes <em>Dashboard</em>, <em>Service Catalog</em>, <em>Appliances</em>, and <em>Components</em>, such as templates, service add-ons, recipes, etc.</li><li><strong>Metrics </strong>that provide statistics<strong> </strong>on the usage of Cloud, Storage, and other available resources. </li><li><strong>Admin </strong>that<strong> </strong>allows administrators to manage compute resources, users, billing, notifications, settings, etc. </li></ul><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" width="900" src="attachments/195791866/195792256.png" data-image-src="attachments/195791866/195792256.png" data-unresolved-comment-count="0" data-linked-resource-id="195792256" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2024-4-19_14-32-53.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195791866" data-linked-resource-container-version="7" alt=""></span></p><hr/><h2 id="id-.DashboardvVHS9.0-Statisticsstatistics">Statistics<span class="confluence-anchor-link" id="id-.DashboardvVHS9.0-statistics"></span></h2><p>You can choose the time period (24 hours, 7 or 30 days), for which the statistics will be shown. Resource statistics are represented in the form of bars and charts, which show the following.</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="table-wrap"><table class="relative-table wrapped confluenceTable" style="width: 78.9674%;"><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Resource</th><th class="confluenceTh">Used</th><th class="confluenceTh">Total</th><th class="confluenceTh">Chart</th></tr><tr><td class="confluenceTd"><strong>CPU</strong></td><td class="confluenceTd"><p>Total virtual cores assigned to running VMs (may be higher than active cores if overselling).</p></td><td class="confluenceTd">Total physical cores on all compute resources configured in OnApp.</td><td class="confluenceTd">The points on the graph show daily peaks of used CPU (in cores) for a particular time period. Hover over a particular point, to view the peak of used CPU that will appear below the chart.</td></tr><tr><td class="confluenceTd"><strong>Memory</strong></td><td class="confluenceTd">The total amount of memory used currently.</td><td class="confluenceTd">Sum total of RAM allocated to VMs + RAM allocated to <a href=".Alerts-vVHS9.0_195792014.html">orphaned VMs</a>.</td><td class="confluenceTd">The points on the graph show daily peaks of used memory (in MB) for a particular time period. Hover over a particular point, to view the peak of used memory that will appear below the chart.</td></tr><tr><td class="confluenceTd"><strong>Storage</strong></td><td class="confluenceTd">The total amount of storage currently used.</td><td class="confluenceTd">Sum total of all VM disks unused capacities + <a href=".Alerts-vVHS9.0_195792014.html">orphan disks</a> capacities.</td><td class="confluenceTd">The points on the graph show daily peaks of used storage space (in GB) for a particular time period. Hover over a particular point, to view the peak of used storage space that will appear below the chart.</td></tr><tr><td class="confluenceTd"><strong>IOPS /h usage</strong></td><td colspan="2" class="confluenceTd">The amount of input/output requests for the entire cloud (blue part of the bar- data read, dark blue - data written) for the last hour.</td><td class="confluenceTd">The points on the graph show the total amount of input/output requests for a particular time period. Hover over a particular point, to view the peak of input/output requests that will appear below the chart.</td></tr></tbody></table></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Click the <strong>Admin</strong> tab and go to <strong>Settings </strong>&gt;<strong> </strong><strong>Configuration </strong>&gt;<strong> Interface </strong>&gt;<strong> Dashboard Statistics </strong>to choose which statistics will be shown on the dashboard.</p><p>Ensure that <em>Dashboard </em>permissions are enabled before viewing dashboard statistics. For more information about permissions, refer to the <a href=".Permissions-vVHS9.0_195791917.html">Permissions</a> section of this guide.</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.DashboardvVHS9.0-YourSummarysummary">Your Summary<span class="confluence-anchor-link" id="id-.DashboardvVHS9.0-summary"></span></h2><p>This section shows details of the entire cloud:</p><ul><li>For users, it shows the total number of virtual machines, RAM, data stores, backups, and disk space they're using.</li><li>For administrators, it shows the total number of virtual machines, compute resources, data stores, and backups on the entire cloud.</li></ul></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.DashboardvVHS9.0-ActivityLogactivity_log">Activity Log<span class="confluence-anchor-link" id="id-.DashboardvVHS9.0-activity_log"></span></h2><p>At the bottom of the screen, there is a record of recent transactions. To view details of a transaction, click a <em>Ref</em> number.</p><ul><li>Users see recent transactions for their virtual machines.</li><li>Administrators see recent transactions for the entire cloud.</li></ul></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.DashboardvVHS9.0-AdditionalNavigationnavigation">Additional Navigation<span class="confluence-anchor-link" id="id-.DashboardvVHS9.0-navigation"></span></h2><p>From the top pane, you can run the following actions: </p><ul><li>Click the <strong>Arrow</strong> button to hide the sidebar menu.</li><li>Use<strong> Search </strong>to run a global search across the cloud.</li><li>Click your login to view <em>My Profile</em> or to log out. </li><li>Click the<strong> Create Server </strong>button to create a new virtual machine, application server, load balancer, edge server, or storage server.</li><li>To hide the infobox on a particular page, click the <strong>Close</strong> button in the upper-right corner of the infobox. For more infobox settings, refer to the <a href=".User-accounts-vVHS9.0_195791896.html">User accounts</a> section.</li></ul><p><br/></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791866/195792256.png">image2024-4-19_14-32-53.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

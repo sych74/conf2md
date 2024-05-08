@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Using 1 GbE and 10 GbE networks vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Storage-Administration_195792531.html">Virtuozzo Storage Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Maximizing-Cluster-Performance_195792745.html">Maximizing Cluster Performance</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Using-1-GbE-and-10-GbE-Networks_195792771.html">Using 1 GbE and 10 GbE Networks</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Using 1 GbE and 10 GbE networks vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>1 Gbps Ethernet networks can deliver 110-120 MBps, which is close to a single drive performance on sequential I/O. Since several drives on a single server can deliver higher throughput than a single 1 Gbps Ethernet link, networking may become a bottleneck.</p><p>However, in real-life applications and virtualized environments, sequential I/O is not common (backups mainly) and most I/O operations are random. Thus, typical HDD throughput is usually much lower, close to 10-20 MBps, according to statistics accumulated from hundreds of servers by several major hosting companies.</p><p>Based on these two observations, we recommend to use one of the following network configurations (or better):</p><ul class="simple"><li><p>A 1 Gbps link per every two HDDs on the Hardware Node. However, if you have one or two HDDs on a Hardware Node, two bonded network adapters are still recommended for better reliability (see<span> </span><a href=".Setting-up-network-bonding-vVHS9.0_195792773.html"><span class="std std-ref">Setting Up Network Bonding</span></a>).</p></li><li><p>A 10 Gbps link per Hardware Node for maximum performance.</p></li></ul><p>The table below illustrates how these recommendations may apply to a Hardware Node with one to six HDDs:</p><div class="table-wrap"><table class="wrapped confluenceTable"><thead><tr><th style="text-align: left;" class="confluenceTh"><p>HDDs</p></th><th style="text-align: left;" class="confluenceTh"><p>1 GbE Links</p></th><th style="text-align: left;" class="confluenceTh"><p>10 GbE Links</p></th></tr></thead><tbody><tr><td class="confluenceTd"><p>1</p></td><td class="confluenceTd"><p>1 (2 for HA)</p></td><td class="confluenceTd"><p>1 (2 for HA)</p></td></tr><tr><td class="confluenceTd"><p>2</p></td><td class="confluenceTd"><p>1 (2 for HA)</p></td><td class="confluenceTd"><p>1 (2 for HA)</p></td></tr><tr><td class="confluenceTd"><p>3</p></td><td class="confluenceTd"><p>2</p></td><td class="confluenceTd"><p>1 (2 for HA)</p></td></tr><tr><td class="confluenceTd"><p>4</p></td><td class="confluenceTd"><p>2</p></td><td class="confluenceTd"><p>1 (2 for HA)</p></td></tr><tr><td class="confluenceTd"><p>5</p></td><td class="confluenceTd"><p>3</p></td><td class="confluenceTd"><p>1 (2 for HA)</p></td></tr><tr><td class="confluenceTd"><p>6</p></td><td class="confluenceTd"><p>3</p></td><td class="confluenceTd"><p>1 (2 for HA)</p></td></tr></tbody></table></div><p>Note the following:</p><ul class="simple"><li><p>For the maximum sequential I/O performance, we recommend using one 1 Gbps link per hard drive, or one 10 Gbps link per Hardware Node.</p></li><li><p>We recommend configuring 1 Gbps network adapters to use non-default MTUs (for example, 9000-byte jumbo frames). Such settings require switch configuration and often lead to human errors. 10 Gbps network adapters, on the other hand, need to be configured to use jumbo frames to achieve full performance.</p></li><li><p>For maximum efficiency, use the<span> </span><code class="docutils literal notranslate"><span class="pre">balance-xor</span></code><span> </span>bonding mode with the<span> </span><code class="docutils literal notranslate"><span class="pre">layer3+4</span></code><span> </span>hash policy. If you want to use the<span> </span><code class="docutils literal notranslate"><span class="pre">802.3ad</span></code><span> </span>bonding mode, also configure your switch to use the<span> </span><code class="docutils literal notranslate"><span class="pre">layer3+4</span></code><span> </span>hash policy.</p></li></ul>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

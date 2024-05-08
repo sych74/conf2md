@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Virtuozzo Storage ports vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Storage-Administration_195792531.html">Virtuozzo Storage Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Managing-Cluster-Security_195792727.html">Managing Cluster Security</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Storage-Ports_195792739.html">Virtuozzo Storage Ports</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Virtuozzo Storage ports vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>This section lists the ports that must be open on servers that participate in a Virtuozzo Storage cluster, in addition to the ports used by Virtuozzo.</p><p><strong>MDS Servers</strong></p><p>The following ports must be open on an MDS server:</p><ul class="simple"><li><p><strong>Listening ports</strong>: 2510 for incoming connections from other MDS serves and 2511 for incoming connections from chunk servers and clients.</p></li><li><p><strong>Outbound ports</strong>: 2510 for outgoing connections to other MDS servers.</p></li></ul><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image align-center confluence-external-resource image-center" draggable="false" src="https://docs.virtuozzo.com/virtuozzo_storage_administrators_command_line_guide/_images/image031.png" data-image-src="https://docs.virtuozzo.com/virtuozzo_storage_administrators_command_line_guide/_images/image031.png"></span></p><p><br/></p><p>By default, Virtuozzo Storage uses port 2510 for communication between MDS servers and port 2511 for incoming connections from chunk servers and clients. You can override the default ports when creating MDS servers:</p><ol class="arabic"><li><p>Reserve two unoccupied consecutive ports.</p><p>The ports must be the same on all MDS servers you plan to set up in the cluster.</p></li><li><p>Execute the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">make-mds</span></code><span> </span>command to create the MDS server and specify the lower port after the server IP address.</p></li></ol><p>For example, to set up ports 4110 and 4111 for MDS communication in the<span> </span><code class="docutils literal notranslate"><span class="pre">stor1</span></code><span> </span>cluster, you can run this command:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 make-mds -I -a 10.30.100.101:4110 -r /vstorage/stor1-mds -p</pre>
+</div></div><p>If you choose to use custom ports 4110 and 4111, do the following:</p><ul class="simple"><li><p>On each MDS server with custom ports, open ports 4110 and 4111 for inbound traffic and port 4110 for outbound traffic.</p></li><li><p>On all chunk servers and clients in the cluster, open port 4111 for outbound traffic.</p></li></ul><p><strong>Chunk Servers</strong></p><p>The following ports must be open on a chunk server:</p><ul class="simple"><li><p><strong>Listening ports</strong>: a randomly chosen port for incoming connections from clients and other chunk servers.</p></li><li><p><strong>Outbound ports</strong>: 2511 for outgoing connections to MDS servers and a randomly chosen port for outgoing connections to other chunk servers.</p></li></ul><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image align-center confluence-external-resource image-center" draggable="false" src="https://docs.virtuozzo.com/virtuozzo_storage_administrators_command_line_guide/_images/image032.png" data-image-src="https://docs.virtuozzo.com/virtuozzo_storage_administrators_command_line_guide/_images/image032.png"></span></p><p>The chunk server management service requires</p><ul class="simple"><li><p>A port to communicate with MDS servers (either the default port 2511 or your custom port).</p></li><li><p>A port to communicate with chunk servers and clients.</p></li></ul><p>By default, the service binds to any available port. You can manually redefine the port by passing the<span> </span><code class="docutils literal notranslate"><span class="pre">-a</span></code><span> </span>option to the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">make-cs</span></code><span> </span>command when creating a chunk server. For example, to configure the management service to use port 3000, run this command:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage make-cs -r /vstorage/stor1-cs -a 132.132.1.101:3000</pre>
+</div></div><p>Once you set a custom port, open this port for outbound traffic on all clients and other chunk servers in the cluster.</p><p><strong>Clients</strong></p><p>The following ports must be open on a client:</p><ul class="simple"><li><p><strong>Listening ports</strong>: no.</p></li><li><p><strong>Outbound ports</strong>: 2511 for outgoing connections to MDS servers and a port configured as the listening one on chunk servers.</p></li></ul><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image align-center confluence-external-resource image-center" draggable="false" src="https://docs.virtuozzo.com/virtuozzo_storage_administrators_command_line_guide/_images/image033.png" data-image-src="https://docs.virtuozzo.com/virtuozzo_storage_administrators_command_line_guide/_images/image033.png"></span></p><p>By default, Virtuozzo Storage automatically opens on a client the following outbound ports:</p><ul class="simple"><li><p>For communication with MDS servers, the default port is 2511.</p></li><li><p>For communication with chunk servers, the port that was configured as the listening one on your chunk servers.</p></li></ul><p>If you specify custom ports for MDS and chunk server communication, open these ports on the client for outgoing traffic. For example, if you configure port 4111 on MDS servers and port 3000 on chunk servers for communication with clients, open outbound ports 2511 and 3000 on the client.</p>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

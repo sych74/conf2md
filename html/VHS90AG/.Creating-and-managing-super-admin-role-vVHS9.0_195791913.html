@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Creating and managing super admin role vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Identity-Management_195791864.html">Identity Management</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Roles_195791905.html">Roles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Create-and-Manage-Super-Admin-Role_195791914.html">Create and Manage Super Admin Role</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Creating and managing super admin role vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><span>When a user enables the </span><em><span>Enable Super Admin permissions</span></em><span> option via Settings, the option activates the permission,</span><span> but the corresponding role does not appear in the list of roles at </span>Control Panel<span> &gt; </span><strong>Roles</strong><span> and is not assigned to any user. </span></p><h2 id="id-.CreatingandmanagingsuperadminrolevVHS9.0-CreateSuperAdminRole">Create Super Admin Role</h2><p>To create a super admin role:</p><ol><li><p>At the command prompt, run the following rake task:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">rake role:generate_super_admin  </pre>
+</div></div></li><li><p><span style="color: rgb(51,51,51);">Assign this role to a specific user:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">rake &#39;role:assign_super_admin_to_user[login]&#39;</pre>
+</div></div></li></ol><hr/><h2 id="id-.CreatingandmanagingsuperadminrolevVHS9.0-DeleteSuperAdminRole"><span style="color: rgb(51,51,51);">Delete Super Admin Role</span></h2><p><span style="color: rgb(51,51,51);">To delete a super admin role, run the following rake task:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">rake role:destroy_super_admin</pre>
+</div></div><p><br/></p><p><span style="color: rgb(51,51,51);">Refer to the <a href=".Editing-system-configuration-vVHS9.0_195791608.html">Editing system configuration</a><span> </span>section for more information about activating the permission via the Settings menu</span><span style="color: rgb(51,51,51);">.</span></p><p><br/></p>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

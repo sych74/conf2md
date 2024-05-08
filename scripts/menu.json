@@ -1,0 +1,288 @@
+[
+    {
+        "type": "normal",
+        "id": "194478123",
+        "title": "Preparing for Installation",
+        "link": "/vhsinstallationguide/7.1beta/preparing-for-installation",
+        "labels": [],
+        "parentId": null,
+        "children": [
+            {
+                "type": "normal",
+                "id": "194478101",
+                "title": "Requirements for Standalone Installations",
+                "link": "/vhsinstallationguide/7.1beta/preparing-for-installation/requirements-for-standalone-installations",
+                "labels": [],
+                "parentId": "194478123"
+            },
+            {
+                "type": "normal",
+                "id": "194478107",
+                "title": "Obtaining the Distribution Image",
+                "link": "/vhsinstallationguide/7.1beta/preparing-for-installation/obtaining-the-distribution-image",
+                "labels": [],
+                "parentId": "194478123"
+            },
+            {
+                "type": "normal",
+                "id": "194478110",
+                "title": "Preparing for Installation from USB Storage Drives",
+                "link": "/vhsinstallationguide/7.1beta/preparing-for-installation/preparing-for-installation-from-usb-storage-drives",
+                "labels": [],
+                "parentId": "194478123"
+            }
+        ]
+    },
+    {
+        "type": "normal",
+        "id": "194478137",
+        "title": "Installing Virtuozzo Hybrid Server",
+        "link": "/vhsinstallationguide/7.1beta/installing-virtuozzo-hybrid-server",
+        "labels": [],
+        "parentId": null,
+        "children": [
+            {
+                "type": "normal",
+                "id": "194478140",
+                "title": "Starting Installation",
+                "link": "/vhsinstallationguide/7.1beta/installing-virtuozzo-hybrid-server/starting-installation",
+                "labels": [],
+                "parentId": "194478137"
+            },
+            {
+                "type": "normal",
+                "id": "194478151",
+                "title": "Installing Virtuozzo Hybrid Server in the Default Graphics Mode",
+                "link": "/vhsinstallationguide/7.1beta/installing-virtuozzo-hybrid-server/installing-virtuozzo-hybrid-server-in-the-default-graphics-mode",
+                "labels": [],
+                "parentId": "194478137"
+            },
+            {
+                "type": "normal",
+                "id": "194478167",
+                "title": "PXE Installation",
+                "link": "/vhsinstallationguide/7.1beta/installing-virtuozzo-hybrid-server/pxe-installation",
+                "labels": [],
+                "parentId": "194478137",
+                "children": [
+                    {
+                        "type": "normal",
+                        "id": "194478170",
+                        "title": "Preparing for PXE Installation",
+                        "link": "/vhsinstallationguide/7.1beta/installing-virtuozzo-hybrid-server/pxe-installation/preparing-for-pxe-installation",
+                        "labels": [],
+                        "parentId": "194478167",
+                        "children": [
+                            {
+                                "type": "normal",
+                                "id": "194478174",
+                                "title": "Configuring the TFTP Server",
+                                "link": "/vhsinstallationguide/7.1beta/installing-virtuozzo-hybrid-server/pxe-installation/preparing-for-pxe-installation/configuring-the-tftp-server",
+                                "labels": [],
+                                "parentId": "194478170"
+                            },
+                            {
+                                "type": "normal",
+                                "id": "194478188",
+                                "title": "Configuring the HTTP Server",
+                                "link": "/vhsinstallationguide/7.1beta/installing-virtuozzo-hybrid-server/pxe-installation/preparing-for-pxe-installation/configuring-the-http-server",
+                                "labels": [],
+                                "parentId": "194478170"
+                            },
+                            {
+                                "type": "normal",
+                                "id": "194478191",
+                                "title": "Configuring the DHCP Server",
+                                "link": "/vhsinstallationguide/7.1beta/installing-virtuozzo-hybrid-server/pxe-installation/preparing-for-pxe-installation/configuring-the-dhcp-server",
+                                "labels": [],
+                                "parentId": "194478170"
+                            },
+                            {
+                                "type": "normal",
+                                "id": "194478194",
+                                "title": "Configuring Client Servers",
+                                "link": "/vhsinstallationguide/7.1beta/installing-virtuozzo-hybrid-server/pxe-installation/preparing-for-pxe-installation/configuring-client-servers",
+                                "labels": [],
+                                "parentId": "194478170"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "normal",
+                        "id": "194478200",
+                        "title": "Preparing a Kickstart File",
+                        "link": "/vhsinstallationguide/7.1beta/installing-virtuozzo-hybrid-server/pxe-installation/preparing-a-kickstart-file",
+                        "labels": [],
+                        "parentId": "194478167",
+                        "children": [
+                            {
+                                "type": "normal",
+                                "id": "194478203",
+                                "title": "Standard Kickstart Options",
+                                "link": "/vhsinstallationguide/7.1beta/installing-virtuozzo-hybrid-server/pxe-installation/preparing-a-kickstart-file/standard-kickstart-options",
+                                "labels": [],
+                                "parentId": "194478200"
+                            },
+                            {
+                                "type": "normal",
+                                "id": "194478212",
+                                "title": "Additional Kickstart Options",
+                                "link": "/vhsinstallationguide/7.1beta/installing-virtuozzo-hybrid-server/pxe-installation/preparing-a-kickstart-file/additional-kickstart-options",
+                                "labels": [],
+                                "parentId": "194478200"
+                            },
+                            {
+                                "type": "normal",
+                                "id": "194478231",
+                                "title": "Kickstart File Example",
+                                "link": "/vhsinstallationguide/7.1beta/installing-virtuozzo-hybrid-server/pxe-installation/preparing-a-kickstart-file/kickstart-file-example",
+                                "labels": [],
+                                "parentId": "194478200"
+                            },
+                            {
+                                "type": "normal",
+                                "id": "194478238",
+                                "title": "Making Kickstart File Accessible Over Network",
+                                "link": "/vhsinstallationguide/7.1beta/installing-virtuozzo-hybrid-server/pxe-installation/preparing-a-kickstart-file/making-kickstart-file-accessible-over-network",
+                                "labels": [],
+                                "parentId": "194478200"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "normal",
+                        "id": "194478197",
+                        "title": "Launching Installation",
+                        "link": "/vhsinstallationguide/7.1beta/installing-virtuozzo-hybrid-server/pxe-installation/launching-installation",
+                        "labels": [],
+                        "parentId": "194478167"
+                    }
+                ]
+            },
+            {
+                "type": "normal",
+                "id": "194478154",
+                "title": "Configuring Server Ports",
+                "link": "/vhsinstallationguide/7.1beta/installing-virtuozzo-hybrid-server/configuring-server-ports",
+                "labels": [],
+                "parentId": "194478137"
+            }
+        ]
+    },
+    {
+        "type": "normal",
+        "id": "194478125",
+        "title": "Exploring Additional Installation Options",
+        "link": "/vhsinstallationguide/7.1beta/exploring-additional-installation-options",
+        "labels": [],
+        "parentId": null,
+        "children": [
+            {
+                "type": "normal",
+                "id": "194478128",
+                "title": "Booting into the Rescue Mode",
+                "link": "/vhsinstallationguide/7.1beta/exploring-additional-installation-options/booting-into-the-rescue-mode",
+                "labels": [],
+                "parentId": "194478125"
+            },
+            {
+                "type": "normal",
+                "id": "194478131",
+                "title": "Enabling the Expert Mode",
+                "link": "/vhsinstallationguide/7.1beta/exploring-additional-installation-options/enabling-the-expert-mode",
+                "labels": [],
+                "parentId": "194478125"
+            }
+        ]
+    },
+    {
+        "type": "normal",
+        "id": "194479555",
+        "title": "Installing Control Panel Server",
+        "link": "/vhsinstallationguide/7.1beta/installing-control-panel-server",
+        "labels": [],
+        "parentId": null
+    },
+    {
+        "type": "normal",
+        "id": "194478995",
+        "title": "Installing Compute Resources",
+        "link": "/vhsinstallationguide/7.1beta/installing-compute-resources",
+        "labels": [],
+        "parentId": null
+    },
+    {
+        "type": "normal",
+        "id": "194478992",
+        "title": "Installing Data Stores",
+        "link": "/vhsinstallationguide/7.1beta/installing-data-stores",
+        "labels": [],
+        "parentId": null
+    },
+    {
+        "type": "normal",
+        "id": "195788803",
+        "title": "Installing Backup Server",
+        "link": "/vhsinstallationguide/7.1beta/installing-backup-server",
+        "labels": [],
+        "parentId": null
+    },
+    {
+        "type": "normal",
+        "id": "195788944",
+        "title": "Standalone Virtuozzo Hybrid Server Licensing",
+        "link": "/vhsinstallationguide/7.1beta/standalone-virtuozzo-hybrid-server-licensing",
+        "labels": [],
+        "parentId": null,
+        "children": [
+            {
+                "type": "normal",
+                "id": "195788950",
+                "title": "Installing the License",
+                "link": "/vhsinstallationguide/7.1beta/standalone-virtuozzo-hybrid-server-licensing/installing-the-license",
+                "labels": [],
+                "parentId": "195788944"
+            },
+            {
+                "type": "normal",
+                "id": "195788972",
+                "title": "Updating the License",
+                "link": "/vhsinstallationguide/7.1beta/standalone-virtuozzo-hybrid-server-licensing/updating-the-license",
+                "labels": [],
+                "parentId": "195788944"
+            },
+            {
+                "type": "normal",
+                "id": "195788981",
+                "title": "Transferring the License to Another Server",
+                "link": "/vhsinstallationguide/7.1beta/standalone-virtuozzo-hybrid-server-licensing/transferring-the-license-to-another-server",
+                "labels": [],
+                "parentId": "195788944"
+            },
+            {
+                "type": "normal",
+                "id": "195788993",
+                "title": "Viewing the License",
+                "link": "/vhsinstallationguide/7.1beta/standalone-virtuozzo-hybrid-server-licensing/viewing-the-license",
+                "labels": [],
+                "parentId": "195788944"
+            }
+        ]
+    },
+    {
+        "type": "normal",
+        "id": "195789043",
+        "title": "Managing Virtuozzo Storage Licenses",
+        "link": "/vhsinstallationguide/7.1beta/managing-virtuozzo-storage-licenses",
+        "labels": [],
+        "parentId": null
+    },
+    {
+        "type": "normal",
+        "id": "195789112",
+        "title": "Virtuozzo Storage Cluster",
+        "link": "/vhsinstallationguide/7.1beta/virtuozzo-storage-cluster",
+        "labels": [],
+        "parentId": null
+    }
+]

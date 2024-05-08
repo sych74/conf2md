@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Quantity of disks per node vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Storage-Administration_195792531.html">Virtuozzo Storage Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="System-Requirements_195792839.html">System Requirements</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Disk-Requirements_195792896.html">Disk Requirements</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Quantity-of-Disks-per-Node_195792900.html">Quantity of Disks per Node</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Quantity of disks per node vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Each management node must have at least two disks (one for system and metadata, one for storage). Each secondary node must have at least two disks (one for the system, and one for storage). We recommend having at least three but not more than five metadata disks in a cluster.</p><p>The more disks per node, the lower the CAPEX. For example, a cluster created from ten nodes with two disks in each will be less expensive than a cluster created from twenty nodes with one disk.</p><p>Generally, a cluster with many nodes and few disks per node offers higher performance, while a cluster with the minimum number of nodes (3) and many disks per node is cheaper. Refer to the following table for more details.</p><p><strong><span style="color: rgb(0,0,0);">Cluster composition recommendations</span></strong></p><div class="table-wrap"><table class="wrapped confluenceTable"><thead><tr><th class="confluenceTh">Design considerations</th><th class="confluenceTh">Minimum nodes (3), many disks per node</th><th class="confluenceTh">Many nodes, few disks per node (all-flash configuration)</th></tr></thead><tbody><tr><td class="confluenceTd">Optimization</td><td class="confluenceTd">Lower cost.</td><td class="confluenceTd">Higher performance.</td></tr><tr><td class="confluenceTd">Free disk space to reserve</td><td class="confluenceTd">There is more space to reserve for cluster rebuilding, as fewer healthy nodes will have to store the data from a failed node.</td><td class="confluenceTd">There is less space to reserve for cluster rebuilding, as more healthy nodes will have to store the data from a failed node.</td></tr><tr><td class="confluenceTd">Redundancy</td><td class="confluenceTd">Fewer erasure coding choices.</td><td class="confluenceTd">More erasure coding choices.</td></tr><tr><td class="confluenceTd">Cluster balance and rebuilding performance</td><td class="confluenceTd">Worse balance and slower rebuilding.</td><td class="confluenceTd">Better balance and faster rebuilding.</td></tr><tr><td class="confluenceTd">Network capacity</td><td class="confluenceTd">More network bandwidth required to maintain cluster performance during rebuilding.</td><td class="confluenceTd">Less network bandwidth required to maintain cluster performance during rebuilding.</td></tr><tr><td class="confluenceTd">Favorable data type</td><td class="confluenceTd">Cold data (for example, backups).</td><td class="confluenceTd">Hot data (for example, virtual environments).</td></tr><tr><td class="confluenceTd">Sample server configuration</td><td class="confluenceTd">Supermicro SSG-6047R-E1R36L (Intel Xeon E5-2620 v1/v2 CPU, 32 GB RAM, 36 x 12 TB HDDs, a 500 GB system disk).</td><td class="confluenceTd">Supermicro SYS-2028TP-HC0R-SIOM (4 x Intel E5-2620 v4 CPUs, 4 x 16 GB RAM, 4 x 1.9 TB Samsung PM1643 SSDs).</td></tr></tbody></table></div><p>Take note of the following:</p><ul><li>These considerations only apply if the failure domain is the host.</li><li><span>Virtuozzo Hybrid Server</span><span> </span>supports hundreds of disks per node. If you plan to use more than 36 disks per node, contact our sales engineers to help you design a more efficient cluster.</li></ul>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

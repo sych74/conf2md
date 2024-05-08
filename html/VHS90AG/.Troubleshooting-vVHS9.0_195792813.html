@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Troubleshooting vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Troubleshooting_195792814.html">Troubleshooting</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Troubleshooting vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on Apr 30, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(0,0,0);">This chapter describes common issues you may encounter when working with Virtuozzo Storage clusters and ways to resolve them. The main tool you use to solve cluster problems and detect hardware failures is<span> </span></span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">top</span></code><span style="color: rgb(0,0,0);">.</span></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.TroubleshootingvVHS9.0-SubmittingProblemReportstoTechnicalSupport">Submitting Problem Reports to Technical Support</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>If your cluster is experiencing a problem you cannot solve on your own, you can use the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">make-report</span></code><span> </span>command to compile a detailed report about the cluster. You can then send the report to the support team which will closely examine your problem and do its best to solve it as quickly as possible.</p><p>To generate a report:</p><ol class="arabic"><li><p>Configure passwordless SSH access for the<span> </span><code class="docutils literal notranslate"><span class="pre">root</span></code><span> </span>user from the server where you plan to run the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">make-report</span></code><span> </span>command to all servers that participate in the cluster.</p><p>The easiest way to do this is to create an SSH key with<span> </span><code class="docutils literal notranslate"><span class="pre">ssh-keygen</span></code><span> </span>and use<span> </span><code class="docutils literal notranslate"><span class="pre">ssh-copy-id</span></code><span> </span>to configure all servers to trust this key. For details, see the man pages for<span> </span><code class="docutils literal notranslate"><span class="pre">ssh-keygen</span></code><span> </span>and<span> </span><code class="docutils literal notranslate"><span class="pre">ssh-copy-id</span></code>.</p></li><li><p>Run the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">make-report</span></code><span> </span>command to compile the report:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 make-report
+The report is created and saved to vstorage-report-20121023-90630.tgz</pre>
+</div></div><p style="text-align: left;">The command collects cluster-related information on all servers participating in the cluster and saves it to a file in your current working directory. You can find the exact file name by checking the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span></code><span> </span>output (<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage-report-20121023-90630.tgz</span></code><span> </span>in the example above).</p><p style="text-align: left;">If necessary, you can save the report to a file with a custom name and put it in a custom location. To do this, pass the<span> </span><code class="docutils literal notranslate"><span class="pre">-f</span></code><span> </span>option to the command and specify the desired file name (with the<span> </span><code class="docutils literal notranslate"><span class="pre">.tgz</span></code><span> </span>extension) and location, for example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 make-report -f /home/reportSTOR1.tgz</pre>
+</div></div></li></ol><p><span style="color: rgb(0,0,0);">Once it is ready,<span> </span></span><a class="external-link" href="https://support.virtuozzo.com/" style="text-decoration: none;" rel="nofollow">submit the report</a><span style="color: rgb(0,0,0);"><span> </span>to the support team.</span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">The report contains only information related to your cluster settings and configuration. It does not contain any private information.</span></p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.TroubleshootingvVHS9.0-OutofDiskSpace">Out of Disk Space</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(0,0,0);">When very little free disk space remains in a Virtuozzo Storage cluster, it is critically important to increase it as soon as possible by adding more chunk servers or removing some data. As soon as 95% of cluster disk space becomes occupied, the allocation of new data chunks is no longer possible, and such requests are blocked until the cluster can satisfy the demand. As a result, user I/O becomes blocked as well, effectively freezing containers and virtual machines.</span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">It is highly recommended to keep at least 10% of disk space free for recovery in case of host machine failures. You should also monitor usage history, for example, using the<span> </span></span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">top</span></code><span style="color: rgb(0,0,0);"><span> </span>or<span> </span></span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">get-event</span></code><span style="color: rgb(0,0,0);"><span> </span>commands (for more information, see<span> </span></span><a href=".Monitoring-Virtuozzo-Storage-clusters-vVHS9.0_195792689.html"><span class="std std-ref">Monitoring Virtuozzo Storage Clusters</span></a><span style="color: rgb(0,0,0);">).</span></p></div></div><h3 id="id-.TroubleshootingvVHS9.0-Symptoms">Symptoms</h3><ol class="arabic simple"><li><p>Stuck I/O or unresponsive mount point,<span> </span><code class="docutils literal notranslate"><span class="pre">dmesg</span></code><span> </span>messages about stuck I/O, frozen containers and virtual machines.</p></li><li><p><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">top</span></code><span> </span>and<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">get-event</span></code><span> </span>show error messages like “Failed to allocate X replicas at tier Y since only Z chunk servers are available for allocation”.</p></li></ol><h3 id="id-.TroubleshootingvVHS9.0-Solutions">Solutions</h3><ol><li><p><span style="color: rgb(0,0,0);">Remove any unnecessary data to free disk space.<br/></span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">An additional effect that may surprise you at first is that as soon as I/O queues in the kernel are full with the blocked I/O, a mount point on the client machine may stuck responding altogether and no longer be able to service the requests even such as file listing. In this case, an additional mount point can be created to list, access, and remove the unneeded data.</span></p></div></div></li><li><span style="color: rgb(0,0,0);">Add more Chunk Servers on unused disks (see<span> </span><a href=".Setting-up-chunk-servers-vVHS9.0_195792577.html"><span class="std std-ref">Setting Up Chunk Servers</span></a>).</span></li></ol><p>If the solutions above are not possible, you can use one of the following<span> </span><em>temporary</em><span> </span>workarounds:</p><ol class="arabic"><li><p>Lower the replication factor for some of the least critical user data (see<span> </span><a href=".Managing-cluster-parameters-vVHS9.0_195792646.html"><span class="std std-ref">Configuring Replication Parameters</span></a>). Remember to revert the changes afterward.</p></li><li><p>Reduce the allocation reserve. For example, for cluster<span> </span><code class="docutils literal notranslate"><span class="pre">stor1</span></code>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 set-config mds.alloc.fill_margin=2</pre>
+</div></div><p><span style="color: rgb(0,0,0);">Where<span> </span></span><code class="docutils literal notranslate" style="text-align: left;"><span class="pre">mds.alloc.fill_margin</span></code><span style="color: rgb(0,0,0);"><span> </span>is the percentage of reserved disk space for CS operation needs (the default value is 5). Remember to revert the changes afterward.</span></p></li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.TroubleshootingvVHS9.0-PoorWritePerformance">Poor Write Performance</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Some network adapters, like RTL8111/8168B, are known to fail to deliver full-bandwidth, full-duplex network traffic. It can result in poor write performance.</p><p>So before deploying a Virtuozzo Storage cluster, you are highly recommended to test networks for full-duplex support. You can use the<span> </span><code class="docutils literal notranslate"><span class="pre">netperf</span></code><span> </span>utility to simultaneously generate in and out traffic. For example, in 1 GbE networks, it should constantly deliver about 2 Gbps of total traffic (1 Gbps for incoming and 1 Gbps for outgoing traffic).</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.TroubleshootingvVHS9.0-PoorDiskI/OPerformance">Poor Disk I/O Performance</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(0,0,0);">In most BIOS setups, AHCI mode is configured to work by default with the<span> </span></span><strong>Legacy</strong><span style="color: rgb(0,0,0);"><span> </span>option enabled. With this option, your servers work with SATA devices via the legacy IDE mode, which may affect the cluster performance, making it up to 2 times slower than expected. You can check that the option is currently enabled by running the<span> </span></span><code class="docutils literal notranslate"><span class="pre">hdparm</span></code><span style="color: rgb(0,0,0);"><span> </span>command, for example:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># hdparm -i /dev/sda
+...
+ PIO modes:  pio0 pio1 pio2 pio3 *pio4
+ DMA modes:  mdma0 mdma1 mdma2
+ UDMA modes: udma0 udma1 udma2 udma3 udma4 udma5 udma6</pre>
+</div></div><p>The asterisk before<span> </span><code class="docutils literal notranslate"><span class="pre">pio4</span></code><span> </span>in the<span> </span><strong>PIO modes</strong><span> </span>field indicates that your hard drive<span> </span><code class="docutils literal notranslate"><span class="pre">/dev/sda</span></code><span> </span>is currently operating in the legacy mode.</p><p>To solve this problem and maximize the cluster performance, always enable the<span> </span><strong>AHCI</strong><span> </span>option in your BIOS settings.</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.TroubleshootingvVHS9.0-HardwareRAIDControllerandDiskWriteCaches">Hardware RAID Controller and Disk Write Caches</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>It is important that all hard disk drives obey the “flush” command and write their caches before the command completes. Unfortunately, not all hardware RAID controllers and drives do this, which may lead to data inconsistencies and file system corruption on a power failure.</p><p>Some 3ware RAID controllers do not disable disk write caches and do not send “flush” commands to disk drives. As a result, the file system may sometimes become corrupted even though the RAID controller itself has a battery. To solve this problem, disable writes caches on all disk drives in the RAID.</p><p>Also, ensure your configuration is thoroughly tested for consistency before deploying a Virtuozzo Storage cluster. For information on how you can do it, see<span> </span><a href="#id-.TroubleshootingvVHS9.0-ssd_drives_ignore_disk_flushes"><span class="std std-ref">SSD Drives Ignore Disk Flushes</span></a>.</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.TroubleshootingvVHS9.0-ssd_drives_ignore_disk_flushesSSDDrivesIgnoreDiskFlushes"><span class="confluence-anchor-link" id="id-.TroubleshootingvVHS9.0-ssd_drives_ignore_disk_flushes"></span>SSD Drives Ignore Disk Flushes</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Many desktop-grade SSD drives can ignore disk flushes and fool operating systems by reporting that data was written while it was actually not. Examples of such drives are OCZ Vertex 3 and Intel X25-E, X-25-M G2 known to be unsafe on data commits. Such disk drives should not be used with databases and may easily corrupt the file system on a power failure.</p><p>The 3rd generation Intel SSD drives (S3700 and 710 series) do not have these problems, featuring a capacitor to provide a battery backup for flushing the drive cache when the power goes out.</p><p>Use SSD drives carefully and only when you are sure that drives are server-grade drives and obey “flush” rules. For more information on this issue, read<span> </span><a class="external-link" href="http://www.postgresql.org/docs/current/static/wal-reliability.html" style="text-decoration: none;" rel="nofollow">this article about PostreSQL</a>.</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.TroubleshootingvVHS9.0-ClusterCannotCreateEnoughReplicas">Cluster Cannot Create Enough Replicas</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Sometimes, the cluster might not create the required number of data chunks even if enough chunk servers are present in the cluster.</p><p>It may be the case when you create new chunk servers by making copies of an existing chunk server (for example, you set up a chunk server in a virtual machine and then clone this machine). In this case, all copied chunk servers have the same UUID — i.e., the UUID of the original server. The cluster has information that all chunk servers are located on the original host and cannot allocate new data chunks.</p><p>To solve the problem, generate a new UUID for a cloned chunk server by running the following command on the destination host:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># /usr/bin/uuidgen -r | tr &#39;-&#39; &#39; &#39; | awk &#39;{print $1$2$3}&#39; &gt; /etc/vstorage/host_id</pre>
+</div></div><span style="color: rgb(0,0,0);">For more information on the<span> </span></span><code class="docutils literal notranslate"><span class="pre">uuidgen</span></code><span style="color: rgb(0,0,0);"><span> </span>utility, see its man page.</span></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.TroubleshootingvVHS9.0-FailedChunkServers">Failed Chunk Servers</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>If a chunk server in your Virtuozzo Storage cluster fails, you need to identify the cause of the failure and choose the correct way to solve the problem.</p><p>Do the following:</p><ol><li><p><span style="color: rgb(0,0,0);">Run the<span> </span></span><code class="docutils literal notranslate" style="text-align: left;"><span class="pre">vstorage</span><span> </span><span class="pre">top</span></code><span style="color: rgb(0,0,0);"><span> </span>command. For example:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 top</pre>
+</div></div><p><span style="color: rgb(0,0,0);"><br/></span></p></li><li><p>Press<span> </span><strong>i</strong><span> </span>to cycle to the<span> </span><code class="docutils literal notranslate"><span class="pre">FLAGS</span></code><span> </span>column in the chunk server section and find the flags corresponding to the failed CS.</p></li><li><p>Find the shown flags in the table below to identify the cause of failure and the way to solve the problem.</p></li></ol><div class="table-wrap"><table class="wrapped confluenceTable"><thead><tr><th style="text-align: left;" class="confluenceTh"><p>Flag</p></th><th style="text-align: left;" class="confluenceTh"><p>Issue</p></th><th style="text-align: left;" class="confluenceTh"><p>What to do</p></th></tr></thead><tbody><tr><td class="confluenceTd"><p>H</p></td><td class="confluenceTd"><p>An I/O error.</p><p>The disk on which the chunk server runs is broken.</p></td><td class="confluenceTd"><p>Check the disk for errors. If the disk is broken, replace it and recreate the CS, as described in<span> </span><a href="#id-.TroubleshootingvVHS9.0-replacing_disks_used_as_chunk_servers"><span class="std std-ref">Replacing Disks Used as Chunk Servers</span></a>. Otherwise, contact technical support.</p></td></tr><tr><td class="confluenceTd"><p>h</p></td><td class="confluenceTd"><p>A chunk checksum mismatch.</p><p>Either the chunk is corrupt, or the disk, where the chunk is stored, is broken.</p></td><td class="confluenceTd"><p>Check the disk for errors. If the disk is broken, replace it and recreate the CS, as described in<span> </span><a href="#id-.TroubleshootingvVHS9.0-replacing_disks_used_as_chunk_servers"><span class="std std-ref">Replacing Disks Used as Chunk Servers</span></a>. Otherwise, contact technical support.</p></td></tr><tr><td class="confluenceTd"><p>S</p></td><td class="confluenceTd"><p>The CS journal stored on a journaling SSD is not accessible.</p><p>Either the journal is corrupt, or the journaling SSD is broken.</p></td><td class="confluenceTd"><p>Check the journaling SSD for errors. If the disk is broken, replace it as described in<span> </span><a href="#id-.TroubleshootingvVHS9.0-failed_write_journaling_ssds"><span class="std std-ref">Failed Write Journaling SSDs</span></a>.</p></td></tr><tr><td class="confluenceTd"><p>R</p></td><td class="confluenceTd"><p>The path to the chunk repository is invalid on CS start.</p><p>The disk on which the chunk server runs is not attached or mounted.</p></td><td class="confluenceTd"><p>Ensure the disk is attached and correctly mounted. Make sure the disk’s entry in<span> </span><code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code><span> </span>is correct.</p></td></tr><tr><td class="confluenceTd"><p>T</p></td><td class="confluenceTd"><p>An I/O request timeout.</p><p>The disk may only be inaccessible for some reason and not necessarily broken.</p></td><td class="confluenceTd"><p>Ensure the disk is attached and check the dmesg output for I/O request timeout messages to discover why the disk might be inaccessible.</p></td></tr></tbody></table></div><h3 id="id-.TroubleshootingvVHS9.0-replacing_disks_used_as_chunk_serversReplacingDisksUsedasChunkServers"><span class="confluence-anchor-link" id="id-.TroubleshootingvVHS9.0-replacing_disks_used_as_chunk_servers"></span>Replacing Disks Used as Chunk Servers</h3><p>To replace a broken HDD or SSD disk used as a chunk server, do the following:</p><ol class="arabic"><li><p>Remove the failed CS from the cluster as described in<span> </span><a href=".Configuring-chunk-servers-vVHS9.0_195792622.html"><span class="std std-ref">Removing Chunk Servers</span></a>.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">Do not detach the broken disk until you remove the CS.</span></p></div></div></li><li><p>Replace the broken disk with a new one.</p></li><li><p>Prepare the SSD as described in<span> </span><a href=".Preparing-disks-for-Virtuozzo-Storage-vVHS9.0_195792550.html"><span class="std std-ref">Preparing Disks for Virtuozzo Storage</span></a>.</p></li><li><p>Create a new CS as described in<span> </span><a href=".Setting-up-chunk-servers-vVHS9.0_195792577.html"><span class="std std-ref">Stage 2: Creating a Chunk Server</span></a>.</p></li></ol><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.TroubleshootingvVHS9.0-failed_write_journaling_ssdsFailedWriteJournalingSSDs"><span class="confluence-anchor-link" id="id-.TroubleshootingvVHS9.0-failed_write_journaling_ssds"></span>Failed Write Journaling SSDs</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>If the SSD used to store write journals breaks, all chunk servers that had journals on this SSD will fail. The cluster will continue to work and will create new replicas to make up for those that have been lost. If you need to set up the same write journals on a replacement SSD, do the following:</p><ol class="arabic simple"><li><p>Remove the failed chunk servers as described in<span> </span><a href=".Configuring-chunk-servers-vVHS9.0_195792622.html"><span class="std std-ref">Removing Chunk Servers</span></a>.</p></li><li><p>Prepare the SSD as described in<span> </span><a href=".Preparing-disks-for-Virtuozzo-Storage-vVHS9.0_195792550.html"><span class="std std-ref">Preparing Disks for Virtuozzo Storage</span></a>.</p></li><li><p>Create new chunk servers that will keep write journals on the new SSD as described in<span> </span><a href=".Using-SSD-drives-vVHS9.0_195792778.html"><span class="std std-ref">Using SSD Drives</span></a>.</p></li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.TroubleshootingvVHS9.0-FailedMDSServers">Failed MDS Servers</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>If the disk hosting an MDS server fails, replace it as follows:</p><ol class="arabic simple"><li><p>Delete the failed MDS server as described in<span> </span><a href=".Configuring-MDS-servers-vVHS9.0_195792601.html"><span class="std std-ref">Removing MDS Servers</span></a>.</p></li><li><p>Create a new MDS server as described in<span> </span><a href=".Configuring-MDS-servers-vVHS9.0_195792601.html"><span class="std std-ref">Adding MDS Servers</span></a>.</p></li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.TroubleshootingvVHS9.0-vzreportUtility">vzreport Utility</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>The <code>vzreport</code> command collects system information and optionally sends it to a server. Run this command on a compute resource.</p><p><code>vzreport [-h] [-s] [-d] [vm_uuid]</code></p><p><br/></p><div class="table-wrap"><table class="confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Name </th><th class="confluenceTh">Description</th></tr><tr><td class="confluenceTd"><code>vm_uuid</code></td><td class="confluenceTd">The UUID of the virtual machine for which the problem report is compiled.</td></tr><tr><td class="confluenceTd"><code>-h, --help</code></td><td class="confluenceTd">Provides the list of flags used with the <code>vzreport</code> command.</td></tr><tr><td class="confluenceTd"><code>-s, --send</code></td><td class="confluenceTd">Sends the report to the server.</td></tr><tr><td class="confluenceTd"><code>-d, --dump</code></td><td class="confluenceTd">Stores the report locally.</td></tr></tbody></table></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.TroubleshootingvVHS9.0-KnownIssuesandLimitations">Known Issues and Limitations</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ul><li>When installing the Virtuozzo Hybrid Server with the default graphic mode and automatically configured partitioning, the default file system of the root partition is ext4. The option of manually selecting the XFS file system in the manual partitioning mode is unavailable. This feature will be implemented in future versions.</li><li>Ensure you have sufficiently powerful servers and environments to perform multiple high-cost operations, such as the simultaneous creation of Windows virtual servers.</li></ul></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

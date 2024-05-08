@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Setting up chunk servers vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Storage-Administration_195792531.html">Virtuozzo Storage Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Setting-Up-a-Virtuozzo-Storage-Cluster_195792536.html">Setting Up a Virtuozzo Storage Cluster</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Setting-Up-Chunk-Servers_195792578.html">Setting Up Chunk Servers</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Setting up chunk servers vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span>A chunk server stores actual data of virtual machines, containers, and service requests. </span>All data is split into chunks and can be stored in a Virtuozzo Storage cluster in multiple copies called replicas.</p><p>Initially, any cluster is configured to have only one replica per data chunk, which is sufficient to evaluate the Virtuozzo Storage functionality using one server only. In production, however, to provide high availability for your data, you need to configure the cluster for each data chunk to have at least three replicas. It requires at least three chunk servers to be set up in the cluster. You can modify the default replication parameter using the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span></code><span> </span>utility. For details, see<span> </span><a href=".Managing-cluster-parameters-vVHS9.0_195792646.html"><span class="std std-ref">Configuring Replication Parameters</span></a>.</p><p>Note the following:</p><ul class="simple"><li><p>Using shared JBOD arrays across multiple nodes running CS services may introduce a single point of failure and make the cluster unavailable if all data replicas happen to be allocated and stored on the failed JBOD. For more information, see<span> </span><a href=".Managing-cluster-parameters-vVHS9.0_195792646.html"><span class="std std-ref">Configuring Failure Domains</span></a>.</p></li><li><p>Do not place chunk servers on disks already used in other I/O workloads, for example, system or swap. Sharing disks between CS and other sources of I/O will result in severe performance loss and high I/O latencies.</p></li></ul><p>The process of setting up a chunk server includes two stages:</p><ol class="arabic simple"><li><p>Preparing to create a chunk server.</p></li><li><p>Creating the chunk server.</p></li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.SettingupchunkserversvVHS9.0-Topreparetocreateachunkserver(Stage1)">To prepare to create a chunk server (Stage 1)</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ol class="arabic"><li><p>Log in to the computer you want to act as a chunk server as root or as a user with root privileges.</p></li><li><p>Open the firewall for storage traffic. For a list of ports to open, consult<span> </span><a class="external-link" href="https://docs.virtuozzo.com/virtuozzo_hybrid_server_7_installation_guide/installing/configuring-server-ports.html#opened-ports-on-servers-in-vstorage-clusters" title="(in the Virtuozzo Hybrid Server 7 Installation Guide)" style="text-decoration: none;" rel="nofollow"><span class="xref std std-ref">Opened Ports on Servers in Virtuozzo Storage Clusters</span></a>.</p></li><li><p>Download and install the following RPM packages:<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage-ctl</span></code>,<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage-libs-shared</span></code>, and<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage-chunk-server</span></code>. These packages are available in the Virtuozzo remote repository (this repository is automatically configured for your system when you install Virtuozzo) and can be installed with this command:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># yum install vstorage-chunk-server</pre>
+</div></div></li><li><span style="color: rgb(0,0,0);">Ensure that cluster discovery is configured for the server. For details, see<span> </span></span><a href=".Configuring-cluster-discovery-vVHS9.0_195792541.html"><span class="std std-ref">Configuring Cluster Discovery</span></a><span style="color: rgb(0,0,0);">.</span></li><li><p>Authenticate the server in the cluster. This step is required only if the server where you are setting up the chunk server has never been authenticated in the cluster before. For example, you can skip this step if this is the same server where you set up the first MDS server. Otherwise, run the following command to authenticate the server in the cluster:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 auth-node
+Please enter password for cluster:</pre>
+</div></div><p><span style="color: rgb(0,0,0);">During its execution, the command asks you for the password to validate the server. Type the password specified when setting up the first MDS server and press Enter.<span> </span></span><code class="docutils literal notranslate" style="text-align: left;"><span class="pre">vstorage</span></code><span style="color: rgb(0,0,0);"><span> </span>then compares the provided password with the one stored on the MDS server, and if the passwords match, successfully authenticates the server.</span></p></li><li><span style="color: rgb(0,0,0);"><span>Prepare the disk on which </span><span>the CS will be created</span><span> for Virtuozzo Storage as described in <a href=".Preparing-disks-for-Virtuozzo-Storage-vVHS9.0_195792550.html"><span class="std std-ref">Preparing Disks for Virtuozzo Storage</span></a></span><span>. Otherwise, skip this step</span>.</span></li><li><span style="color: rgb(0,0,0);">Mount the prepared disk.</span></li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.SettingupchunkserversvVHS9.0-Tocreateachunkserver(Stage2)">To create a chunk server (Stage 2)</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul class="simple"><li><p>For large clusters (according to <a style="text-decoration: none;" class="external-link" href="https://docs.virtuozzo.com/virtuozzo_hybrid_server_7_installation_guide/preparing-for-installation/planning-storage-cli.html#recommended-configuration-cli" title="(in the Virtuozzo Hybrid Server 7 Installation Guide)" rel="nofollow"><span class="xref std std-ref">Recommended Configuration</span></a>), it is critically important to configure proper failure domains to improve data availability. For more information, see <a href=".Managing-cluster-parameters-vVHS9.0_195792646.html"><span class="std std-ref">Configuring Failure Domains</span></a>.</p></li><li><p>For details on creating chunk servers with journals on SSD, see <a href=".Using-SSD-drives-vVHS9.0_195792778.html"><span class="std std-ref">Setting Up Chunk Servers with a Journal on SSD</span></a>.</p></li></ul></div></div><p><span style="letter-spacing: 0.0px;">Use the</span><span style="letter-spacing: 0.0px;"> </span><code class="docutils literal notranslate" style="letter-spacing: 0.0px;"><span class="pre">vstorage</span> <span class="pre">make-cs</span></code><span style="letter-spacing: 0.0px;"> </span><span style="letter-spacing: 0.0px;">command, for example:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 make-cs -r /vstorage/stor1-cs</pre>
+</div></div><p>This command:</p><ol class="arabic simple"><li><p>Creates the<span> </span><code class="docutils literal notranslate"><span class="pre">/vstorage/stor1-cs</span></code><span> </span>directory if it does not exist and configures it for storing data chunks.</p></li><li><p>Configures your disk as a chunk server and joins it to the<span> </span><code class="docutils literal notranslate"><span class="pre">stor1</span></code><span> </span>cluster.</p></li><li><p>Assigns the chunk server to the default storage tier. Storage tiers allow you to keep different kinds of data on separate chunk servers. To assign the CS to a specific tier, add<span> the </span><code class="docutils literal notranslate"><span class="pre">-t</span><span> </span><span class="pre">&lt;tier&gt;</span></code><span> </span>parameter to the command, for example,<span> </span><code class="docutils literal notranslate"><span class="pre">-t</span><span> </span><span class="pre">1</span></code><span> </span>to assign the CS to tier 1. For details, see<span> </span><a href=".Managing-cluster-parameters-vVHS9.0_195792646.html"><span class="std std-ref">Configuring Storage Tiers</span></a>.</p></li></ol><p><span style="color: rgb(0,0,0);">After you have created the chunk server, start the chunk management service (<span> </span></span><code class="docutils literal notranslate"><span class="pre">vstorage-csd</span></code><span style="color: rgb(0,0,0);">) and configure it to start automatically when the chunk server boots:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># systemctl start vstorage-csd.target
+# systemctl enable vstorage-csd.target</pre>
+</div></div><p><span style="color: rgb(0,0,0);">Once you set up the first chunk server, proceed to create other chunk servers.</span></p><h3 id="id-.SettingupchunkserversvVHS9.0-CreatehostUUIDsforchunkservers">Create host UUIDs for chunk servers</h3><p>Virtuozzo Storage distinguishes hosts from the CS services run on by unique host UUIDs generated during installation. <span>If you plan to set up new hosts by deploying a golden image with an OS and preinstalled Virtuozzo Storage packages, you must generate new host UUIDs instead of those inherited from the golden image.</span></p><p>To create a CS on a copy of the host, do the following:</p><ol class="arabic"><li><p>Ensure the golden image does not contain metadata servers, chunk servers, or clients.</p></li><li><p>Deploy the golden image on a clean host.</p></li><li><p>Generate a new UUID for the host to replace the one inherited from the golden image:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># /usr/bin/uuidgen -r | tr &#39;-&#39; &#39; &#39; | awk &#39;{print $1$2$3}&#39; &gt; /etc/vstorage/host_id</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">For more information on the<span> </span></span><code class="docutils literal notranslate" style="text-align: left;"><span class="pre">uuidgen</span></code><span style="color: rgb(0,0,0);"><span> </span>utility, see its man page.</span></p></div></div></li><li><span style="color: rgb(0,0,0);">Create a CS on the host.</span></li></ol></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

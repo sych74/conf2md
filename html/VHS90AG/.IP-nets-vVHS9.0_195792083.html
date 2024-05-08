@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .IP nets vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Networking_195792073.html">Networking</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Create-and-Manage-Networks_195792076.html">Create and Manage Networks</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="IP-Nets_195792084.html">IP Nets</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .IP nets vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>IP nets contain the IP address ranges of the network. You can add new IP nets to the network, edit and delete the existing nets, and add and edit IP ranges in the IP nets. For information on how to add IP ranges to IP nets, refer to <a href=".IP-ranges-vVHS9.0_195792088.html">IP ranges</a>.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>You can add IP nets only to shared networks.</p></div></div><hr/><h2 id="id-.IPnetsvVHS9.0-CreateIPNet">Create IP Net</h2><p>To add an IP net to a network:</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ol><li>Go to your Control Panel &gt;<strong> Admin</strong> &gt; <strong>Settings</strong> &gt; <strong>Networks </strong>icon. The page that loads shows the shared networks in your cloud.</li><li>Click the label of the network to which you want to add an IP net.</li><li>On the page that loads, click the <strong>New IP Net</strong> button.</li><li>Fill in the details of the new IP net:<br/><ul><li><em>Label</em> - the name of the IP net.</li><li><em>Network address</em> - the network address of the IP net.</li><li><em>Network mask</em> - the network mask. Must be less or equal to 32.</li><li><em>Default gateway</em> - the default gateway to be added to the IP net automatically.</li><li><em>Allow gateway to be outside from Ip Net</em> - select the checkbox to allow the gateway to be outside from the IP net.</li><li><em>Add default IP range</em> - select the checkbox for the default IP range to be added to the IP net automatically. Otherwise, you'll need to add the required IP ranges after the IP net is created.</li></ul></li><li>Click <strong>Submit</strong> to finish.</li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.IPnetsvVHS9.0-EditIPNet">Edit IP Net</h2><p>To edit an IP net:</p><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> &gt; <strong>Networks </strong>icon. The page that loads shows the shared networks in your cloud.</li><li>Click the label of the network which contains the IP net you wish to edit.</li><li>Click the <strong>Actions</strong> button next to the IP net you want to modify and select <strong>Edit</strong>.</li><li>Edit the details of the IP net:<br/><ul><li><em>Label</em> - the name of the IP net.<br/>If the IP net does not contain any IP ranges, you can also edit the following parameters:</li><li><em>network address</em> - the network address of the IP net.</li><li><em>network mask</em> - the network mask.</li></ul></li><li>Click <strong>Submit</strong> to save changes.</li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.IPnetsvVHS9.0-DeleteIPNet">Delete IP Net</h2><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>You can delete only those IP nets that do not contain any IP ranges.</p></div></div><p>To delete an IP net:</p><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> &gt; <strong>Networks </strong>icon. The page that loads shows the shared networks in your cloud. </li><li>Click the label of the network to which you want to add an IP net.</li><li>Click the <strong>Actions</strong> button next to the required IP net and select <strong>Delete</strong>.</li></ol><hr/><p><br/></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

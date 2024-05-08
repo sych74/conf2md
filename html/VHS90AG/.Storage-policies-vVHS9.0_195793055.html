@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Storage policies vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Storage-Administration_195792531.html">Virtuozzo Storage Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Concepts-and-Features_195793067.html">Concepts and Features</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Storage-Policies_195793056.html">Storage Policies</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Storage policies vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>In<span> </span><span>Virtuozzo Storage</span>, the common unit of data is volume. When you create a volume, you need to define its redundancy mode, tier, and failure domain. These parameters make up a storage policy defining how redundant a volume must be and where it needs to be located.</p><p>Let’s look at the storage policy's main components (tiers, failure domains, and redundancy) and a sample scenario. For example, you have three nodes with a number of storage nodes: fast SSDs and high-capacity HDDs. Node 1 has only SSDs; nodes 2 and 3 have both SSDs and HDDs. You want to export storage space via iSCSI and S3, so you should define a suitable storage policy for each workload.</p><ul><li>The first parameter, tier, defines a group of disks united by criteria (drive type, as a rule) tailored to a specific storage workload. For this sample scenario, you can group your SSD drives into tier 2, and HDD drives into tier 3. You can assign a disk to a tier when creating a storage cluster or adding nodes thereto. Note only nodes 2 and 3 have HDDs and will be used for tier 3. The first node’s SSDs cannot be used for tier 3.</li><li>The second parameter, the failure domain, defines a scope within which a set of storage services can fail in a correlated manner. The default failure domain is a host. Each data chunk is copied to different storage nodes, just one copy per node. If a node fails, the data is still accessible from the healthy nodes. A disk can also be a failure domain, though it is only relevant for one-node clusters. As you have three nodes in this scenario, we recommend choosing the host failure domain.</li><li>The third parameter, redundancy, should be configured to fit the available disks and tiers. In our example, you have three nodes: all of them have SSDs on tier 2. So, if you select tier 2 in your storage policy, you can use the three nodes for 1, 2, or 3 replicas. But only two of your nodes have HDDs on tier 3. So, if you select tier 3 in your storage policy, you can only store 1 or 2 replicas on the two nodes. In both cases, you can also use encoding, but in this scenario, let’s stick to replication: 3 replicas for SSDs and 2 replicas for HDDs.</li></ul><p>To sum it up, the resulting storage policies are:</p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image confluence-external-resource" draggable="false" src="https://docs.virtuozzo.com/virtuozzo_hybrid_infrastructure_6_1_admins_guide/resources/images/eg_volumes_chunks.png" data-image-src="https://docs.virtuozzo.com/virtuozzo_hybrid_infrastructure_6_1_admins_guide/resources/images/eg_volumes_chunks.png"></span></p>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Monitoring event logs vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Storage-Administration_195792531.html">Virtuozzo Storage Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Monitoring-Virtuozzo-Storage-Clusters_195792690.html">Monitoring Virtuozzo Storage Clusters</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Monitoring-Event-Logs_195792718.html">Monitoring Event Logs</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Monitoring event logs vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(0,0,0);">You can use the<span> </span></span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">-c</span><span> </span><span class="pre">&lt;cluster_name&gt;</span><span> </span><span class="pre">top</span></code><span style="color: rgb(0,0,0);"><span> </span>utility to monitor significant events happening in a Virtuozzo Storage cluster, for example:</span></p><p><span style="color: rgb(0,0,0);"><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image align-center confluence-external-resource image-center" draggable="false" src="https://docs.virtuozzo.com/virtuozzo_storage_administrators_command_line_guide/_images/image029.png" data-image-src="https://docs.virtuozzo.com/virtuozzo_storage_administrators_command_line_guide/_images/image029.png"></span></span></p><p><span style="color: rgb(0,0,0);">The command above shows the latest events in the<span> </span><code class="docutils literal notranslate"><span class="pre">stor1</span></code><span> </span>cluster. The information on events (highlighted in red) is given in the table with the following columns:</span></p><div class="table-wrap"><table class="wrapped confluenceTable"><thead><tr><th style="text-align: left;" class="confluenceTh"><p>Column</p></th><th style="text-align: left;" class="confluenceTh"><p>Description</p></th></tr></thead><tbody><tr><td class="confluenceTd"><p>TIME</p></td><td class="confluenceTd"><p>The time when the event happened.</p></td></tr><tr><td class="confluenceTd"><p>SYS</p></td><td class="confluenceTd"><p>Component of the cluster where the event happened (for example, MDS for an MDS server or JRN for local journal).</p></td></tr><tr><td class="confluenceTd"><p>SEV</p></td><td class="confluenceTd"><p>Event severity.</p></td></tr><tr><td class="confluenceTd"><p>MESSAGE</p></td><td class="confluenceTd"><p>Event description.</p></td></tr></tbody></table></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.MonitoringeventlogsvVHS9.0-ExploringBasicEvents">Exploring Basic Events</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>The table below describes basic events displayed when you run the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">top</span></code><span> </span>utility.</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col style="width: 240.325px;"/><col style="width: 102.125px;"/><col style="width: 396.75px;"/></colgroup><thead><tr><th style="text-align: left;" class="confluenceTh"><p>Event</p></th><th style="text-align: left;" class="confluenceTh"><p>Severity</p></th><th style="text-align: left;" class="confluenceTh"><p>Description</p></th></tr></thead><tbody><tr><td class="confluenceTd"><p>MDS#&lt;N&gt; (&lt;addr&gt;:&lt;port&gt;) lags behind for more than 1000 rounds</p></td><td class="confluenceTd"><p>JRN err</p></td><td class="confluenceTd"><p>Generated by the MDS master server when it detects that MDS#&lt;N&gt; is stale.</p><p>This message may indicate that an MDS server is very slow and lags behind.</p></td></tr><tr><td class="confluenceTd"><p>MDS#&lt;N&gt; (&lt;addr&gt;:&lt;port&gt;) didn’t accept commits for<span> </span><em>M</em><span> </span>sec</p></td><td class="confluenceTd"><p>JRN err</p></td><td class="confluenceTd"><p>Generated by the MDS master server if MDS#&lt;N&gt; did not accept commits for<span> </span><em>M</em><span> </span>seconds. MDS#&lt;N&gt; gets marked as<span> </span><em>stale</em>.</p><p>This message may indicate that the MDS service on MDS#&lt;N&gt; is experiencing a problem. Since the problem may be critical, resolve it as soon as possible.</p></td></tr><tr><td class="confluenceTd"><p>MDS#&lt;N&gt; (&lt;addr&gt;:&lt;port&gt;) state is outdated and will do a full resync</p></td><td class="confluenceTd"><p>JRN err</p></td><td class="confluenceTd"><p>Generated by the MDS master server when MDS#&lt;N&gt; will do a full resync. MDS#&lt;N&gt; gets marked as<span> </span><em>stale</em>. This message may indicate that an MDS server was too slow or disconnected for such a long time that it is not managing the state of metadata and must be resynchronized. Since the problem may be critical, resolve it as soon as possible.</p></td></tr><tr><td class="confluenceTd"><p>MDS#&lt;N&gt; at &lt;addr&gt;:&lt;port&gt; became master</p></td><td class="confluenceTd"><p>JRN info</p></td><td class="confluenceTd"><p>Generated every time a new MDS master server is elected in the cluster.</p><p>Frequent changes in MDS masters may indicate poor network connectivity and may affect the cluster operation.</p></td></tr><tr><td class="confluenceTd"><p>The cluster is healthy with<span> </span><em>N</em><span> </span>active CS</p></td><td class="confluenceTd"><p>MDS info</p></td><td class="confluenceTd"><p>Generated when the cluster status changes to<span> </span><em>healthy</em><span> </span>or when a new MDS master server is elected.</p><p>This message indicates that all chunk servers in the cluster are active and the number of replicas meets the set cluster requirements.</p></td></tr><tr><td class="confluenceTd"><p>The cluster is degraded with<span> </span><em>N</em><span> </span>active,<span> </span><em>M</em><span> </span>inactive,<span> </span><em>K</em><span> </span>offline CS</p></td><td class="confluenceTd"><p>MDS warn</p></td><td class="confluenceTd"><p>Generated when the cluster status changes to<span> </span><em>degraded</em><span> </span>or when a new MDS master server is elected.</p><p>This message indicates that some chunk servers in the cluster are</p><ul class="simple"><li><p>Inactive (do not send any registration messages) or</p></li><li><p>Offline (are inactive for a period longer than mds.wd.offline_tout = 5 min (by default)).</p></li></ul></td></tr><tr><td class="confluenceTd"><p>The cluster failed with<span> </span><em>N</em><span> </span>active,<span> </span><em>M</em><span> </span>inactive,<span> </span><em>K</em><span> </span>offline CS (mds.wd.max_offline_cs=&lt;n&gt;)</p></td><td class="confluenceTd"><p>MDS err</p></td><td class="confluenceTd"><p>Generated when the cluster status changes to<span> </span><em>failed</em><span> </span>or when a new MDS master server is elected.</p><p>This message indicates that the number of offline chunk servers exceeds mds.wd.max_offline_cs (2 by default). When the cluster fails, the automatic replication is not scheduled anymore. So the cluster administrator must take some actions to either repair failed chunk servers or increase the mds.wd.max_offline_cs parameter. Setting the value of this parameter to 0 disables the failed mode completely.</p></td></tr><tr><td class="confluenceTd"><p>The cluster is filled up to &lt;N&gt;%</p></td><td class="confluenceTd"><p>MDS info/warn</p></td><td class="confluenceTd"><p>Shows the current space usage in the cluster. A warning is generated if the disk space consumption equals or exceeds 80%.</p><p>It is important to have spare disk space for data replicas if one of the chunk servers fails.</p></td></tr><tr><td class="confluenceTd"><p>Replication started, N chunks are queued</p></td><td class="confluenceTd"><p>MDS info</p></td><td class="confluenceTd"><p>Generated when the cluster starts the automatic data replication to recover the missing replicas.</p></td></tr><tr><td class="confluenceTd"><p>Replication completed</p></td><td class="confluenceTd"><p>MDS info</p></td><td class="confluenceTd"><p>Generated when the cluster finishes the automatic data replication.</p></td></tr><tr><td class="confluenceTd"><p>CS#&lt;N&gt; has reported hard error on<span> </span><em>path</em></p></td><td class="confluenceTd"><p>MDS warn</p></td><td class="confluenceTd"><p>Generated when the chunk server CS#&lt;N&gt; detects disk data corruption.</p><p>You are recommended to replace chunk servers with corrupted disks as soon as possible with new ones and to check the hardware for errors.</p></td></tr><tr><td class="confluenceTd"><p>CS#&lt;N&gt; has not registered during the last<span> </span><em>T</em><span> </span>sec and is marked as inactive/offline</p></td><td class="confluenceTd"><p>MDS warn</p></td><td class="confluenceTd"><p>Generated when the chunk server CS#&lt;N&gt; has been unavailable for a while. In this case, the chunk server first gets marked as inactive. After 5 minutes, the state is changed to offline, which starts the automatic replication of data to restore the replicas that were stored on the offline chunk server.</p><p>You are recommended to replace chunk servers with corrupted disks as soon as possible with new ones and to check the hardware for errors.</p></td></tr><tr><td class="confluenceTd"><p>Failed to allocate<span> </span><em>N</em><span> </span>replicas for ‘<em>path</em>’ by request from &lt;&lt;addr&gt;:&lt;port&gt;&gt; -<span> </span><em>K</em><span> </span>out of<span> </span><em>M</em><span> </span>chunks servers are available</p></td><td class="confluenceTd"><p>MDS warn</p></td><td class="confluenceTd"><p>Generated when the cluster cannot allocate chunk replicas, for example, when it runs out of disk space.</p><p>You are recommended to replace chunk servers with corrupted disks as soon as possible with new ones and to check the hardware for errors.</p></td></tr><tr><td class="confluenceTd"><p>Failed to allocate<span> </span><em>N</em><span> </span>replicas for ‘<em>path</em>’ by request from &lt;&lt;addr&gt;:&lt;port&gt;&gt; since only<span> </span><em>K</em><span> </span>chunk servers are registered</p></td><td class="confluenceTd"><p>MDS warn</p></td><td class="confluenceTd"><p>Generated when the cluster cannot allocate chunk replicas because not enough chunk servers are registered in the cluster.</p><p>You are recommended to replace chunk servers with corrupted disks as soon as possible with new ones and to check the hardware for errors.</p></td></tr></tbody></table></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

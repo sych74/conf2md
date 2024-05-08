@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Using SSD drives vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Storage-Administration_195792531.html">Virtuozzo Storage Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Maximizing-Cluster-Performance_195792745.html">Maximizing Cluster Performance</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Using-SSD-Drives_195792779.html">Using SSD Drives</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Using SSD drives vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(0,0,0);">Virtuozzo Storage supports SSD drives formatted to the ext4 file system and optionally mounted with TRIM support enabled.</span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">Virtuozzo Storage SSD usage scenario does not generate TRIM commands. Also, modern drives like Intel SSD DC S3700 do not need TRIM at all.</span></p></div></div><p>Along with all-flash setups where SSD drives are used for storing data chunks, Virtuozzo Storage also supports hybrid clusters where SSDs are used for write journaling. You can attach an SSD drive to an HDD-based chunk server and configure the drive to store a write journal. By doing so, you can boost the performance of write operations in the cluster by up to two or more times.</p><p>The following sections provide detailed information on configuring SSD drives for write journaling and data caching.</p><p>Take note of the following:</p><ul class="simple"><li><p>Not all solid-state drives obey flush semantics and commit data by the protocol. It may result in arbitrary data loss or corruption in case of a power failure. Always check your SSDs with the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage-hwflush-check</span></code><span> </span>tool (for more information, see<span> </span><a href=".Checking-data-flushing-vVHS9.0_195792749.html"><span class="std std-ref">Checking Data Flushing</span></a>).</p></li><li><p>It is recommended to use Intel SSD DC S3700 drives. However, you can also use Samsung SM1625, Intel SSD 710, Kingston SSDNow E, or any other SSD drive with support for data protection on power loss. Some of the names of this technology are Enhanced Power Loss Data Protection (Intel), Cache Power Protection (Samsung), Power-Failure Support (Kingston), and Complete Power Fail Protection (OCZ). For more information, see<span> </span><a href=".Troubleshooting-vVHS9.0_195792813.html"><span class="std std-ref">SSD Drives Ignore Disk Flushes</span></a>.</p></li></ul><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.UsingSSDdrivesvVHS9.0-CalculatingWriteJournalSize">Calculating Write Journal Size</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(0,0,0);">Using SSD drives for write journaling can help you reduce write latencies, thus improving the overall cluster performance. If you have multiple chunk servers on a single host, create a separate SSD journal for each CS.</span></p><p><span style="color: rgb(0,0,0);">To determine the size of each CS journal on the SSD, follow these guidelines:</span></p><ol><li><p><span style="color: rgb(0,0,0);">Find out how many HDDs the SSD can service based on<span> </span><a href="https://docs.virtuozzo.com/virtuozzo_hybrid_server_7_installation_guide/preparing-for-installation/planning-storage-gui.html#hardware-requirements" class="external-link" style="text-decoration: none;text-align: left;" title="(in the Virtuozzo Hybrid Server 7 Installation Guide)" rel="nofollow"><span class="xref std std-ref">Hardware Requirements</span></a>. You can also use this formula:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">SSD_SSWS * 0.8 / HDD_SSWS</pre>
+</div></div><p style="text-align: left;">Where:</p><ul class="simple" style="text-align: left;"><li><p>SSD_SSWS is the sustained sequential write speed of the SSD.</p></li><li><p>HDD_SSWS is the sustained sequential write speed of an HDD (provided that identical HDD models are used as recommended).</p></li><li><p>0.8 is the approximate percentage of error.</p></li></ul><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">The sustained sequential write speed is the average sequential write speed measured over 60 seconds.</span></p></div></div></li><li><span style="color: rgb(0,0,0);"><span style="color: rgb(0,0,0);">Reserve 20% of the SSD volume for normal operation, checksum storage, and metadata if needed. Typically, reserve 1 GB of SSD space for checksums per each 1 TB of HDD space. The rest of this 20% is reserved for emergency needs and also to prevent the SSD from filling up completely because its performance would then degrade.</span></span></li><li><span style="color: rgb(0,0,0);">Divide the remaining 80% of the SSD volume by the allowed number of HDDs.</span></li></ol><p><span style="color: rgb(0,0,0);">For example, a 512 GB SSD rated at 1500 MBps SSWS will be able to service 1500 * 0.8 / 150 = 8 HDDs rated at 150 MBps SSWS. And the journal size for each CS (i.e., HDD) will be (512 - 20%) / 8 = 51 GB.</span></p><p><br/></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">Ensure your hardware follows the<span> </span></span><a title="(in the Virtuozzo Hybrid Server 7 Installation Guide)" style="text-decoration: none;" href="https://docs.virtuozzo.com/virtuozzo_hybrid_server_7_installation_guide/preparing-for-installation/planning-storage-gui.html#hardware-recommendations" class="external-link" rel="nofollow"><span class="xref std std-ref">Hardware Recommendations</span></a>.</p></div></div><p>The following table gives a few examples of SSD models and the number of HDDs they can service:</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col style="width: 480.475px;"/><col style="width: 258.725px;"/></colgroup><thead><tr><th style="text-align: left;" class="confluenceTh"><p>SSD type</p></th><th style="text-align: left;" class="confluenceTh"><p>Number of SSDs</p></th></tr></thead><tbody><tr><td class="confluenceTd"><p>Intel SSD 320 Series, Intel SSD 710 Series, Kingston SSDNow E enterprise series, or other SATA 3Gbps SSD models providing 150-200MBps of sequential write of random data.</p></td><td class="confluenceTd"><p>One SSD per up to three HDDs</p></td></tr><tr><td class="confluenceTd"><p>Intel SSD DC S3700 Series, Samsung SM1625 enterprise series, or other SATA 6 Gbps SSD models providing at least 300 MBps of sequential write of random data.</p></td><td class="confluenceTd"><p>One SSD per up to five-six HDDs</p></td></tr></tbody></table></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.UsingSSDdrivesvVHS9.0-SettingUpChunkServerswithaJournalonSSD">Setting Up Chunk Servers with a Journal on SSD</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>To set up a CS that stores a journal on an SSD drive, do the following:</p><ol class="arabic"><li><p>Log in to the Node you want to act as a chunk server as root or as a user with root privileges. The Node must have at least one hard disk drive (HDD) and one solid-state drive (SSD).</p></li><li><p>Download and install the following RPM packages:<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage-ctl</span></code>,<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage-libs-shared</span></code>, and<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage-chunk-server</span></code>.<br/><span style="color: rgb(0,0,0);">These packages are available in the Virtuozzo remote repository (this repository is automatically configured for your system when you install Virtuozzo) and can be installed with this command:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># yum install vstorage-chunk-server</pre>
+</div></div></li><li><span style="color: rgb(0,0,0);">Ensure that cluster discovery is configured for the server. For details, see<span> </span></span><a href=".Configuring-cluster-discovery-vVHS9.0_195792541.html"><span class="std std-ref">Configuring Cluster Discovery</span></a><span style="color: rgb(0,0,0);">.</span></li><li><p><span style="color: rgb(0,0,0);">Authenticate the server in the cluster if it is not yet authenticated:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 auth-node</pre>
+</div></div><p><span style="color: rgb(0,0,0);"><br/></span></p></li><li><span style="color: rgb(0,0,0);">If required, prepare the SSD, as described in<span> </span><a href=".Preparing-disks-for-Virtuozzo-Storage-vVHS9.0_195792550.html"><span class="std std-ref">Preparing Disks for Virtuozzo Storage</span></a>.</span></li><li><p><span style="color: rgb(0,0,0);"><span style="color: rgb(0,0,0);"><span style="color: rgb(0,0,0);">Create the chunk server configuration, repository, and the journal, for example:<br/></span></span></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 make-cs -r /vstorage/stor1-cs -j /ssd/stor1/cs1 -s 30720 -T ssd</pre>
+</div></div><p style="text-align: left;">This command:</p><ol class="arabic simple" style="text-align: left;"><li><p>Makes the<span> </span><code class="docutils literal notranslate"><span class="pre">/vstorage/stor1-cs</span></code><span> </span>directory on your computer’s hard disk drive and configures it for storing data chunks.</p></li><li><p>Configures your computer as a chunk server and joins it to the<span> </span><code class="docutils literal notranslate"><span class="pre">stor1</span></code><span> </span>Virtuozzo Storage cluster.</p></li><li><p>Creates the journal in the<span> </span><code class="docutils literal notranslate"><span class="pre">/ssd/stor1/cs1</span></code><span> </span>directory on the SSD drive and allocates 30 GB of disk space to this journal.</p></li><li><p>Tunes the journal for improved write and read performance on SSD, with the best results noticeable on random writes on all-flash clusters.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">When choosing a directory for the journal and deciding on its size, allocate the required space for the journal and make sure there is 1 GB of SSD space per 1 TB of HDD space for checksums.</span></p></div></div></li></ol></li><li><p><span style="color: rgb(0,0,0);">Start the chunk server management service<span> </span><code class="docutils literal notranslate" style="text-align: left;"><span class="pre">vstorage-csd</span></code><span> </span>and configure it to start automatically on the chunk server boot:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># systemctl start vstorage-csd.target
+# systemctl enable vstorage-csd.target</pre>
+</div></div><p><span style="color: rgb(0,0,0);"><br/></span></p></li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.UsingSSDdrivesvVHS9.0-Adding,Destroying,andConfiguringCSJournalsinLiveStorageClusters">Adding, Destroying, and Configuring CS Journals in Live Storage Clusters</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">To obtain CS repository paths, use the </span><code class="docutils literal notranslate"><span class="pre">vstorage</span> <span class="pre">-c</span> <span class="pre">&lt;cluster&gt;</span> <span class="pre">list-services</span> <span class="pre">-C</span></code><span style="color: rgb(0,0,0);"> command.</span></p></div></div><h3 id="id-.UsingSSDdrivesvVHS9.0-AddingCSJournals">Adding CS Journals</h3><p><span style="color: rgb(0,0,0);">To add a new journal to a chunk server, use the<span> </span></span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">configure-cs</span><span> </span><span class="pre">-a</span><span> </span><span class="pre">-s</span></code><span style="color: rgb(0,0,0);"><span> </span>command. For example, to add a 2048 MB journal to the chunk server CS#1, place it in a directory on an SSD drive mounted to<span> </span></span><code class="docutils literal notranslate"><span class="pre">/ssd</span></code><span style="color: rgb(0,0,0);">, and tune the journal for SSDs, run:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 configure-cs -r &lt;CS_repository_path&gt; \
+-a /ssd/stor1-cs1-journal -s 2048 -T ssd</pre>
+</div></div><p><span style="color: rgb(0,0,0);">Restart the CS service to apply changes implied by the<span> </span><code class="docutils literal notranslate"><span class="pre">-T</span></code><span> </span>parameter:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># systemctl status vstorage-csd* | grep -m1 &quot;stor1-cs1&quot;
+vstorage-csd.stor1.1027.service - vstorage-csd(/vstorage/stor1-cs1)
+# systemctl restart vstorage-csd.stor1.1027.service</pre>
+</div></div><h3 id="id-.UsingSSDdrivesvVHS9.0-DestroyingCSJournals">Destroying CS Journals</h3><p><span style="color: rgb(0,0,0);">To destroy a chunk server journal, use the<span> </span></span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">configure-cs</span><span> </span><span class="pre">-d</span></code><span style="color: rgb(0,0,0);"><span> </span>command. For example:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 configure-cs -r &lt;CS_repository_path&gt; -d</pre>
+</div></div><h3 id="id-.UsingSSDdrivesvVHS9.0-MovingCSJournals">Moving CS Journals</h3><p>To change the chunk server journal directory, do the following using the commands above:</p><ol class="arabic simple"><li><p>Destroy the existing journal</p></li><li><p>Add a new journal with the required size at the required location.</p></li></ol><h3 id="id-.UsingSSDdrivesvVHS9.0-ResizingCSJournals">Resizing CS Journals</h3><p>To resize a chunk server journal, use the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">configure-cs</span><span> </span><span class="pre">-s</span></code><span> </span>command. For example, to resize a CS journal to 4096 MB:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 configure-cs -r &lt;CS_repository_path&gt; -s 4096</pre>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.UsingSSDdrivesvVHS9.0-DisablingChecksumming">Disabling Checksumming</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Using checksumming, you can provide better reliability and integrity of all data in the cluster. When checksumming is enabled, Virtuozzo Storage generates checksums each time some data in the cluster is modified. When this data is then read, the checksum is computed once more and compared with the already existing value.</p><p>By default, data checksumming is automatically enabled for newly created chunk servers that use journaling. If necessary, you can disable this functionality using the<span> </span><code class="docutils literal notranslate"><span class="pre">-S</span></code><span> </span>option when you set up a chunk server, for example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 make-cs -r /vstorage/stor1-cs -j /ssd/stor1/cs1 -s 30720 -S</pre>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.UsingSSDdrivesvVHS9.0-ConfiguringDataScrubbing">Configuring Data Scrubbing</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(0,0,0);">Data scrubbing is the process of checking data chunks for durability and verifying their contents for readability and correctness. By default, Virtuozzo Storage is set to examine two data chunks per minute on each chunk server in the cluster. If necessary, you can configure this number using the<span> </span></span><code class="docutils literal notranslate"><span class="pre">vstorage</span></code><span style="color: rgb(0,0,0);"><span> </span>utility, for example:</span></p><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 set-config mds.wd.verify_chunks=3</pre>
+</div></div><p><span style="color: rgb(0,0,0);">This command sets the number of chunks to be examined on each chunk server in the<span> </span><code class="docutils literal notranslate"><span class="pre">stor1</span></code><span> </span>cluster to 3.</span></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

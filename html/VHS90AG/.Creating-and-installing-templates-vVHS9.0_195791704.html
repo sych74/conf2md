@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Creating and installing templates vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Templates_195791696.html">Templates</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Create-and-Install-Templates_195791705.html">Create and Install Templates</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Creating and installing templates vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(0,12,52);">OnApp provides separate documents to explain how to create Windows and Linux templates from scratch, rather than from existing VM templates. Please refer to the<span> </span></span><a style="text-decoration: none;" href="https://docs.onapp.com/misc" class="conf-macro output-inline" rel="nofollow">Miscellaneous Documentation</a><span style="color: rgb(0,12,52);"><span> </span>for details.</span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ignore the options specified in your Control Panel but not mentioned in the documents.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.CreatingandinstallingtemplatesvVHS9.0-Install/UpdateTemplatesinstall">Install/Update Templates<span class="confluence-anchor-link" id="id-.CreatingandinstallingtemplatesvVHS9.0-install"></span></h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="confluence-information-macro confluence-information-macro-warning"><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The Template server URL has to be set at Control Panel<strong> </strong>&gt; <strong>Admin</strong> &gt;<strong> Settings </strong>&gt;<strong> Configuration </strong>&gt; <strong>Backups/Templates</strong> tab as a prerequisite for installing/upgrading templates.</p></div></div><p>OnApp template manager allows you to update the system templates already installed and download new templates available on a template server.</p><p>The OnApp template library includes over 100 VM templates based on various 32-bit and 64-bit flavours of Windows and Linux operating systems. </p><p><span style="color: rgb(51,51,51);">The OnApp template manager includes templates with guest tools installed. The guest tools enable you to configure running virtual machines from the compute resource.</span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span>Only customers with a Paid license have access to the complete template library.</span></p></div></div><p><span>Installing Templates</span></p><p><br/>To download and install a template from the remote template server: </p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Templates</strong> menu.</li><li>Click the <strong>System Templates</strong> tab. The page that loads will list the installed templates.</li><li>Click the <strong>Available</strong> tab to view a list of templates available for installation.</li><li><span style="color: rgb(51,51,51);">In the <strong>Search</strong> box, select the checkbox next to the desired filter option to filter the templates by operating system, virtualization, architecture, and the availability of guest agents.</span></li><li><span style="color: rgb(51,51,51);">Click <span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" draggable="false" width="26" src="attachments/195791704/195791706.png" data-image-src="attachments/195791704/195791706.png" data-unresolved-comment-count="0" data-linked-resource-id="195791706" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2022-9-19_12-45-44.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195791704" data-linked-resource-container-version="5" alt=""></span> next to the desired template to install.</span></li></ol><h3 id="id-.CreatingandinstallingtemplatesvVHS9.0-UpgradingTemplates">Upgrading Templates</h3><p>Template manager allows you to update the installed templates from the template server.</p><p>To update a template:</p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Templates</strong> menu.</li><li>Click the <strong>System Templates</strong> tab.</li><li>On the page that appears, the <strong>Updates</strong> tab will show the list of templates with more recent version than you have installed.</li><li>Click the plus button next to a required update to install.</li></ol><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body">If you update an existing template (by downloading a more recent version) it will not update existing VMs built on the previous version. Only new VMs, or those that are rebuilt, will use the new template.</div></div><h3 id="id-.CreatingandinstallingtemplatesvVHS9.0-Installations"><span>Installations</span></h3><p>You can see the status of the active downloads.</p><p>For this:</p><ol><li>Go to the Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Templates</strong> menu.</li><li>Click the <strong>System Templates</strong> tab. The page that loads will list all the templates installed to your cloud.</li><li>Click the <strong>Installations</strong> tab.</li><li>You will see the list of all templates that are currently being installed with their details and status.</li></ol><h3 id="id-.CreatingandinstallingtemplatesvVHS9.0-WhereTemplatesAreStored">Where Templates Are Stored</h3><p>Depending on the configuration, new templates are stored at different locations.</p><p><strong>No backup servers </strong></p><p>In this configuration, the templates will be uploaded to all сompute resources. If this template already exists somewhere, the action is skipped. In such case, NFS or any other sharing service should be enabled between сompute resources.</p><p><strong>Backup servers are available</strong></p><p>The templates are uploaded to all backup servers. The action is skipped if such a template already exists. In this configuration ensure that some sharing service is between backup servers. Provisioning is performed at backup servers only. If there is more than one backup server in the cloud, the user is prompted to choose to which BS a template will be stored.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>While <a href=".Creating-virtual-machines-vVHS9.0_195792484.html">creating a virtual machine</a> from a template, make sure that the template is located on a backup server that is <span>attached to the compute resource on which you wish to build the VM, otherwise, the creation of the VM will fail.</span></p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.CreatingandinstallingtemplatesvVHS9.0-CreateCustomTemplatescreate">Create Custom Templates<span class="confluence-anchor-link" id="id-.CreatingandinstallingtemplatesvVHS9.0-create"></span></h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>You can create custom templates by making a backup of an existing virtual machine and saving it as a template for future use. To create a custom template:</p><ol><li>Create a new virtual machine and configure it as you would like for your template.</li><li>Click the <strong>Actions </strong>button next to this virtual machine, then choose <strong>Backups</strong>.</li><li>In the list of backups, click <strong>Convert to Template</strong> next to the backup you want to convert.</li><li>Click <strong>OK </strong>to proceed.</li><li>On the next screen, enter the following:<br/><ul><li>A label for your template.</li><li>The minimum memory size: make sure the minimum memory size takes into account the settings for the template on which the VM was built, plus any modifications you may have made to the template before making the backup.</li><li>The minimum disk size: ensure the value is based on the template settings and any possible modifications you may have made, for example, installing additional software.</li><li>Click the<strong> Convert Backup</strong> button.</li></ul></li><li>The backup will be scheduled for creation. When the conversion is complete, it will be then listed on the<strong> Templates </strong>&gt;<strong> Templates List</strong> &gt;<strong> User Templates</strong> tab, from where you can edit it.</li></ol><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul><li>If the template limit has been exceeded, you will get the following error message: &quot;You have reached your template creation limit&quot;.</li><li>During the custom Windows template creation the Admin account is created anew.</li><li>To select a preferred licensing type (KMS, MAK, own) for a Windows virtual machine built on a custom template you need to add this custom template to <a href=".My-template-groups-vVHS9.0_195791737.html">My template groups</a> and associate the desired licensing type with such group.</li><li>When updating a custom template (by converting a more recent backup of a VM, for example), existing VMs built on previous versions will not be updated. Only new VMs, or those that are rebuilt, will use the new template.</li></ul></div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791704/195791706.png">image2022-9-19_12-45-44.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

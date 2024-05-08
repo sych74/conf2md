@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing templates vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Templates_195791696.html">Templates</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Manage-Templates_195791720.html">Manage Templates</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing templates vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>You can perform a set of actions with the templates:</p><ul><li>View, edit, and delete system templates.</li><li>Create, edit, delete, and make public custom templates.</li><li><p>Download new and update existing templates.</p></li></ul><hr/><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ignore the options specified in your Control Panel but not mentioned in the documents.</p></div></div><h2 id="id-.ManagingtemplatesvVHS9.0-ViewTemplateDetailsview">View Template Details<span class="confluence-anchor-link" id="id-.ManagingtemplatesvVHS9.0-view"></span></h2><p><span>The Control Panel's Templates List menu lists all of the templates available on your system, their version number, the Operating System they install, whether swap disk is allowed, whether you can adjust their CPU cores/priority &amp; RAM without rebooting a virtual machine based on that template (&quot;resize without reboot&quot;), and whether hot migration is allowed.</span></p><p><span style="color: rgb(51,51,51);">The templates are organized into five tabs:</span></p><ul><li><span style="color: rgb(51,51,51);"><strong>All templates</strong> - a list of available and installed templates.</span></li><li><strong>System templates</strong> - the OS images provided by OnApp.</li><li><strong>My templates</strong> - the list of custom templates created by the user who is currently logged in. </li><li><p><strong>User templates</strong> - the list of templates converted by all users in the cloud from VM backups. To see user templates, make sure the <em>See User Templates</em> permission is enabled.</p></li><li><strong>Inactive</strong> - the templates that are currently unavailable to build VM on.</li></ul><p><span style="color: rgb(51,51,51);">In the <strong>Search</strong> box, select the checkbox next to the desired filter option to filter the templates by operating system, virtualization, architecture, and the availability of guest agents.</span></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>To see which virtual machines are based on a specific template:</p><ol><li>Go to your Сontrol Panel &gt; <strong>Cloud</strong> &gt; <strong>Templates</strong> &gt;<strong> Templates List </strong>menu to bring up the list of templates.</li><li>Click the template's label (name) in the list.</li></ol><p>If you are viewing the templates list on a narrow screen, you can customize the way the table is displayed by clicking the <strong>Actions</strong> button at the top of the table. In the drop-down list that appears, check the columns you want to be displayed and click <strong>Apply</strong>. The narrower your screen is, the more unchecked columns will be hidden from the table. If your screen is too narrow to fit all the columns you have checked, a scrollbar will appear at the bottom of the templates list. You can always alter your column selection later. Note that by default the Backup server column is not visible in the table on narrow screens.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Column selection is currently set for one browser. If you have checked some columns in one browser and opened the list in some other browser, the column selection will be the default one for that other browser.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingtemplatesvVHS9.0-EditTemplateDetailsedit">Edit Template Details<span class="confluence-anchor-link" id="id-.ManagingtemplatesvVHS9.0-edit"></span></h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>You can edit a range of template details through the Control Panel, including the minimum disk size required, version number, filename, and label. To do so:</p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Templates </strong>&gt;<strong> Templates List</strong> menu. You'll see a list of templates on your system.</li><li>Click the<strong> Actions </strong>button next to the template you want to change, then choose<strong> Edit Template</strong>.</li><li>On the screen that follows, enter template details as required:<br/><ul><li><em>Label</em> – change the template name.</li><li><em>File name</em> – edit the template filename.</li><li><em>Version</em> – the template version.</li><li><em>Min disk size</em> – the minimum VM disk size required to build a VM on this template (in GB).</li><li><p><em>Min memory size</em> – the minimum VM RAM required to build a VM on this template (in MB).</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The maximum RAM that can be assigned to a VM is 168 GB regardless of the Max RAM value set in the bucket.</p></div></div></li><li><p><em>Allowed hot migrate</em> - move the slider to the right if you want to be able to hot-migrate VM created from this template.</p></li></ul></li><li>Click <strong>Save</strong> to finish.</li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingtemplatesvVHS9.0-DeleteSystemTemplatesdelete">Delete System Templates<span class="confluence-anchor-link" id="id-.ManagingtemplatesvVHS9.0-delete"></span></h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Templates </strong>&gt;<strong> Templates List</strong> menu.</li><li>Click the <strong>Actions</strong> button next to the template you wish to delete, then choose <strong>Delete Template</strong>.</li></ol><div class="confluence-information-macro confluence-information-macro-warning"><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>You cannot delete a template if there are virtual machines in your system built on that template. To delete the said template you will have to destroy such virtual machine first.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingtemplatesvVHS9.0-EditCustomTemplatesedit_custom">Edit Custom Templates<span class="confluence-anchor-link" id="id-.ManagingtemplatesvVHS9.0-edit_custom"></span></h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>You can edit your custom templates at any time. To do so:</p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Templates </strong>&gt;<strong> Templates List</strong> menu and click the <strong>User Templates </strong>tab. Your custom templates will be listed there.</li><li>Click the<strong> Actions </strong>button next to the template you want to change.</li><li>Choose<strong> Edit Template</strong>, and make your changes on the screen that follows.</li><li>Click <strong>Save</strong><span>.</span></li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingtemplatesvVHS9.0-DeleteCustomTemplatesdelete_custom">Delete Custom Templates<span class="confluence-anchor-link" id="id-.ManagingtemplatesvVHS9.0-delete_custom"></span></h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>You can delete your custom templates at any time. To do so:</p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Templates </strong>&gt;<strong> Templates List</strong> menu and click the <strong>User Templates </strong>tab. Your custom templates will be listed there.</li><li>Click the<strong> Actions </strong>button next to the template you want to delete.</li><li>Choose the<strong> Delete Template </strong>button next to a template if you want to delete it.</li></ol><div class="confluence-information-macro confluence-information-macro-warning"><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>You cannot delete a template if there are virtual machines in your system built on that template. To delete the said template, destroy such a virtual machine first.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingtemplatesvVHS9.0-MakeTemplatesPublicmake_public"><span>Make Templates Public</span><span class="confluence-anchor-link" id="id-.ManagingtemplatesvVHS9.0-make_public"></span></h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>The template list is organized into three tabs. The User templates tab lists all the custom templates created from the backups. By default those templates are available only to those users who created them. When you make templates public, you make your templates available to all users:</p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Templates </strong>&gt;<strong> Templates List </strong>menu.</li><li>Click the <strong>User templates</strong> tab.</li><li>Click the <strong>Actions</strong> button next to the template you want to make public, then select <strong>Make public</strong>.</li><li>Confirm the window that pops up.</li></ol><p>When you make a custom template public, it is moved to the <strong>System templates</strong> tab.</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingtemplatesvVHS9.0-AllowUserstoMakeTemplatesPublicallow_users">Allow Users to Make Templates Public<span class="confluence-anchor-link" id="id-.ManagingtemplatesvVHS9.0-allow_users"></span></h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>All custom templates are private by default, which means they are only available to the users who created them. As the administrator, you can give users the right to create templates that are available to all users – i.e. to create public templates. This is handled through the Control Panel's <strong>Roles</strong> menu:</p><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Roles</strong> menu.</li><li>Click the <strong>Edit</strong> icon next to the role you want to edit.</li><li>On the screen that follows, check the box next to the <em>Make own template public</em> permission and click <strong>Save</strong>.</li></ol><p><br/></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

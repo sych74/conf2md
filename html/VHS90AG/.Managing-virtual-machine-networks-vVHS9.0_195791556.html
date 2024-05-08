@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing virtual machine networks vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtual-Servers_195791495.html">Virtual Servers</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Manage-Virtual-Server-Networks_195791557.html">Manage Virtual Server Networks</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing virtual machine networks vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>The <strong>Networking</strong> menu in the <strong>Virtual Servers</strong> menu enables you to manage network interfaces, allocate IP addresses, and set firewall rules for virtual machines. In this document you can find information on how to manage virtual machine networks. </p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul><li>To run the VM, at least one network interface with an assigned IP address (or addresses) is required.</li><li>To allocate another physical network, add a new network interface.</li></ul></div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ignore the options specified in your Control Panel but not mentioned in the documents.</p></div></div><hr/><h2 id="id-.ManagingvirtualmachinenetworksvVHS9.0-network-interfacesConfiguringVirtualMachineNetworkInterface"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinenetworksvVHS9.0-network-interfaces"></span>Configuring Virtual Machine Network Interface</h2><p>The <strong>Networking</strong> &gt;<strong> Network Interfaces</strong> menu shows the virtual network interfaces allocated to this VM. Network interfaces join the physical network to the VM. <br/>When you create a VM a network interface is added automatically. This network interface will be assigned to the existing physical network using a spare IP (IPv4) and will be set primary by default.</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>OnApp supports IPv4 and IPv6. Since not every application supports IPv6, at least one IPv4 address must be allocated to a VM's primary network interface. </p><p>To see the list of all network interfaces allocated to the VM:</p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt;<strong> Virtual Servers </strong>menu.</li><li>Click the label of the virtual machine you're interested in.</li><li>Click the <strong>Networking</strong> tab, then click<strong> Network Interfaces</strong>.</li><li>On the page that follows you will see the following fields:<ul><li><em>Interface</em><span> – optional label of the network interface.</span></li><li><em>Network Join</em><span> – the name of the network and a сompute resource or сompute zone this network is joined to.</span></li><li><em>Port Speed</em><span> – the speed set to the interface.</span></li><li><em>Primary Interface</em><span> – the indication of whether the interface is primary or not.</span></li></ul></li></ol><p>Here you can also view <a href=".Managing-virtual-machine-statistics-vVHS9.0_195791567.html">Interface Usage</a>, Edit, and Delete network interface (using icon controls) and Add a new network interface using the button at the bottom of the screen.<br/><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinenetworksvVHS9.0-_Add_New_Network"></span>To add a network interface:</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(51,51,51);">After attaching a network interface to a virtual machine without assigning an IP address, rebuild the network. </span></p></div></div><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt;<strong> </strong><strong>Virtual Servers </strong>menu.</li><li>Click the label of the virtual machine you're interested in.</li><li>Click the <strong>Networking</strong> tab, then click<strong> Network Interfaces</strong>.</li><li>Click the <strong>New Network Interface </strong>button at the bottom of the screen.</li><li>On the screen that appears, input values for the following parameters:<br/><ul><li><em>Label</em> – the name for the new interface.</li><li><em>Physical Network</em> – choose a network join from the drop-down menu, which lists network joins assigned to the compute resource/compute zone on which the VM runs).</li><li><em>Port Speed</em> – set the port speed in Mbps, or make it unlimited.<br/><br/></li></ul></li><li>Click the <strong>Submit</strong> button.</li></ol><p><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinenetworksvVHS9.0-_Edit_Network_Interface"></span>To edit the network interface label, port speed or set it as primary (if none is marked as primary), click<strong> <span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" draggable="false" width="26" src="attachments/195791556/195791558.png" data-image-src="attachments/195791556/195791558.png" data-unresolved-comment-count="0" data-linked-resource-id="195791558" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2022-4-21_10-4-59.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195791556" data-linked-resource-container-version="8" alt=""></span></strong> next to the appropriate network interface. After editing the port speed, the virtual machine should be power-cycled for the change to take effect.<br/><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinenetworksvVHS9.0-_Delete_Network_Interface"></span>To delete a network interface, click <span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" draggable="false" width="26" src="attachments/195791556/195791559.png" data-image-src="attachments/195791556/195791559.png" data-unresolved-comment-count="0" data-linked-resource-id="195791559" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2022-4-21_10-5-28.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195791556" data-linked-resource-container-version="8" alt=""></span> next to the interface you want to delete.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(51,51,51);">If more than one network interfaces are attached to a virtual machine, check the virtual machine for the IP addresses after deleting one of the network interfaces. </span></p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingvirtualmachinenetworksvVHS9.0-rebuild-networkRebuildingVirtualMachineNetwork"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinenetworksvVHS9.0-rebuild-network"></span>Rebuilding Virtual Machine Network</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>To rebuild a network join, added to the virtual machine (required after allocating new IP addresses):</p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Virtual Servers</strong> menu.</li><li>Click the label of a required VM.</li><li>On the screen that appears, click the <strong>Actions </strong>button, point to <strong>Options</strong>, then click <strong>Rebuild Network</strong>.</li><li><p>In the pop-up window, move the <strong>Force Reboot</strong> slider to the right, then select the VM shutdown type.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>During the network rebuild, the system tries to reach a VM's network interface without rebooting a virtual machine. Then, if it is not possible, the transaction will quit. The force reboot action allows the option of rebuilding a VM network with the reboot action if a live rebuild is impossible. In case the force reboot option is disabled and the system cannot enter the virtual machine, the network rebuild operation will fail.</p></div></div></li><li>Move the <strong>Required Startup </strong>slider to the right to start up a VM when you're rebuilding the network of a powered-off VM.</li><li>Click the<strong> Rebuild Network </strong>button.</li></ol><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>In case of network interface replacement for Windows VMs running on Xen compute resources, the user has to add a new network interface, rebuild network, then remove the old network interface and perform network rebuild again.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingvirtualmachinenetworksvVHS9.0-set-firewall-rulesSettingVirtualMachineFirewallRules"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinenetworksvVHS9.0-set-firewall-rules"></span>Setting Virtual Machine Firewall Rules</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>With OnApp, you can set firewall rules for the network interfaces of virtual machines. There are two types of firewall rules:</p><ul><li><em>ACCEPT</em> – defines the packets that will be accepted by the firewall.</li><li><em>DROP</em> – defines the packets that will be rejected by the firewall.</li></ul><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ensure that the following permissions are enabled before setting firewall rules for your virtual machine:</p><ul><li>Create own firewall rules.</li><li>Destroy own firewall rules.</li><li>Read own firewall rules.</li><li>Update own firewall rules.</li><li>Update own virtual machine.</li><li><span>Read own virtual machine.</span></li></ul><p>You cannot apply firewall rules to virtual machines which are parts of a blueprint.</p></div></div><p>You can set the following:</p><ul><li><a href="#id-.ManagingvirtualmachinenetworksvVHS9.0-1">Add a specific firewall rule</a> - you can configure a firewall rule with specific parameters (source, destination port, protocol type, etc.)</li><li><a href="#id-.ManagingvirtualmachinenetworksvVHS9.0-2">Set default firewall rules</a> - you can set default firewall rules for an entire network interface</li></ul><h3 id="id-.ManagingvirtualmachinenetworksvVHS9.0-1Addingaspecificfirewallrule"><strong><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinenetworksvVHS9.0-1"></span>Adding a specific firewall rule</strong></h3><p>To configure a specific firewall rule:</p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Virtual Servers</strong> menu.</li><li>Click the label of the VM for which you want to configure a firewall rule.</li><li>Click the <strong>Networking</strong> tab, then click <strong>Firewall</strong>.</li><li>On the page that appears, set the following:<br/><ol><li><strong>Interface</strong> - choose the network interface.</li><li><strong>Command</strong> - specify if the rule defines requests that should be accepted or dropped.</li><li><strong>Source</strong> - set the IP address for which this rule is active.<br/><ul><li>Leave the empty field to apply this rule to all IPs.</li><li>Enter hyphen-separated IPs to apply the rule to an IP range (for example, 192.168.1.1-192.168.1.10).</li><li>Enter the IPs with a slash to apply the rule to CIDR (e.g. 192.168.1.1/24).</li></ul></li><li><strong>Destination Port</strong> - set the port for which this rule is effective.<br/><ul><li>Leave the empty field to apply the rule to all ports.</li><li>Enter colon-separated ports to apply the rule to a port range (for example, 1024:1028).</li><li>Enter comma-separated ports to apply the rule to the list of ports (for example, 80,443,21).</li></ul></li><li><strong>Protocol Type</strong> (for ICMP protocol only) - indicate a type of the ICMP protocol (range from 0 to 255).</li><li><strong>Protocol </strong>- choose the protocol (TCP, UDP, DCCP, SCTP, or ICMP). </li><li><strong>Comment</strong> - enter the comment to the firewall rule.</li></ol></li><li>Save the rule by clicking the <strong>Add Rule</strong> button. The rule will be saved in the UI, but the transaction won't be started until you click the Apply Firewall Rules button.</li><li>To start the transaction that runs firewall rules for a VM, click the <strong>Apply Firewall Rules</strong> button.</li><li>Use the <strong>Up </strong>and<strong> Down</strong> arrow buttons in the left column to change the firewall rule position.</li><li>To edit or delete a firewall rule click the appropriate icon in the last column.</li></ol><h4 id="id-.ManagingvirtualmachinenetworksvVHS9.0-2"><strong><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinenetworksvVHS9.0-2"></span></strong></h4><h3 id="id-.ManagingvirtualmachinenetworksvVHS9.0-Defaultfirewallrules">Default firewall rules</h3><p>To set default firewall rules for a network interface:</p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Virtual Servers</strong> menu.</li><li>Click the label of the VM for which you want to configure a firewall rule.</li><li>Click the <strong>Networking</strong> tab, then click <strong>Firewall</strong>.</li><li>On the page that appears, go to the <em>Default Firewall Rules</em> section.</li><li>Choose the ACCEPT or DROP command next to the network interface and click <strong>Save Default Firewall Rules</strong>. The rule will be saved in the UI, but the transaction won't be started until you click the <strong>Apply Firewall Rules</strong> button.</li></ol><p><strong>Example:</strong></p><p>The Int1 ACCEPT 122.158.111.21 22 TCP firewall rule means that the Int1 network interface will accept all requests and packets addressed from 122.158.111.21 using the TCP protocol on port 22.<br/>The Int2 DROP 122.158.111.21 22 UDP firewall rule means that the Int2 network interface will reject all requests and packets from 122.158.111.21 using the UDP protocol on port 22.</p><p><span><strong>Protocols:</strong></span></p><p><span>For IPv4, only the ICMP, IPV6-ICMP, TCP, UDP, DCCP, and SCTP protocols are available by default. However, if required, you can enable other protocols for IPv4.</span></p><ol><li><span>Go to the <code>/onapp/interface/config/network_protocols.yml</code> file.</span></li><li>The list contains all protocols available (IPv4). Set 'true' for the required protocols.</li><li><p>Restart httpd by running one of the following commands:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">service httpd restart</pre>
+</div></div><p>or</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/etc/init.d/httpd restart</pre>
+</div></div></li><li>The protocols you have enabled are now available at Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Virtual Servers</strong> &gt; <strong>Label</strong> &gt; <strong>Networking</strong> tab &gt; <strong>Firewall</strong> while adding new firewall rules.</li></ol><p>The following protocols can be enabled in the <code>/onapp/interface/config/network_protocols.yml</code> file:</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><td class="confluenceTd"><ul><li><p>IP</p></li><li><p>HOPOPT</p></li><li><p>ICMP</p></li><li><p>IGMP</p></li><li><p>GGP</p></li><li><p>IP-ENCAP</p></li><li><p>ST</p></li><li><p>TCP</p></li><li><p>CBT</p></li><li><p>EGP</p></li><li><p>IGP</p></li><li><p>BBN-RCC-MON</p></li><li><p>NVP-II</p></li><li><p>PUP</p></li><li><p>ARGUS</p></li><li><p>EMCON</p></li><li><p>XNET</p></li><li><p>CHAOS</p></li><li><p>UDP</p></li><li><p>MUX</p></li><li><p>DCN-MEAS</p></li><li><p>HMP</p></li><li><p>PRM</p></li><li><p>XNS-IDP</p></li><li><p>TRUNK-1</p></li><li><p>TRUNK-2</p></li><li><p>LEAF-1</p></li><li><p>LEAF-2</p></li><li>RSVP-E2E-IGNORE</li><li>FC</li><li>SCTP</li><li>IPLT</li></ul></td><td class="confluenceTd"><ul><li><p>RDP</p></li><li><p>IRTP</p></li><li><p>ISO-TP4</p></li><li><p>NETBLT</p></li><li><p>MFE-NSP</p></li><li><p>MERIT-INP</p></li><li><p>DCCP</p></li><li><p>3PC</p></li><li><p>IDPR</p></li><li><p>XTP</p></li><li><p>DDP</p></li><li><p>IDPR-CMTP</p></li><li><p>TP</p></li><li><p>IL</p></li><li><p>SDRP</p></li><li><p>IDRP</p></li><li><p>RSVP</p></li><li><p>GRE</p></li><li><p>DSR</p></li><li><p>BNA</p></li><li><p>ESP</p></li><li><p>AH</p></li><li><p>I-NLSP</p></li><li><p>SWIPE</p></li><li><p>NARP</p></li><li><p>MOBILE</p></li><li>HIP</li><li>manet</li><li>MPLS-in-IP</li><li>UDPLite</li><li>PIPE</li><li>SSCOPMCE</li></ul></td><td class="confluenceTd"><ul><li><p>TLSP</p></li><li><p>SKIP</p></li><li><p>CFTP</p></li><li><p>SAT-EXPAK</p></li><li><p>KRYPTOLAN</p></li><li><p>RVD</p></li><li><p>IPPC</p></li><li><p>SAT-MON</p></li><li><p>VISA</p></li><li><p>IPCV</p></li><li><p>CPNX</p></li><li><p>CPHB</p></li><li><p>WSN</p></li><li><p>PVP</p></li><li><p>BR-SAT-MON</p></li><li><p>SUN-ND</p></li><li><p>WB-MON</p></li><li><p>WB-EXPAK</p></li><li><p>ISO-IP</p></li><li><p>VMTP</p></li><li><p>SECURE-VMTP</p></li><li><p>VINES</p></li><li><p>TTP</p></li><li><p>NSFNET-IGP</p></li><li><p>DGP, TCF</p></li><li><p>EIGRP</p></li><li><p>OSPFIGP</p></li><li><p>Sprite-RPC</p></li><li><p>LARP</p></li><li><p>MTP</p></li><li>SPS</li><li>CRUDP</li></ul></td><td class="confluenceTd"><ul><li><p>AX.25</p></li><li><p>IPIP</p></li><li><p>MICP</p></li><li><p>SCC-SP</p></li><li><p>ETHERIP</p></li><li><p>ENCAP</p></li><li><p>GMTP</p></li><li><p>IFMP</p></li><li><p>PNNI</p></li><li><p>PIM</p></li><li><p>ARIS</p></li><li><p>SCPS</p></li><li><p>QNX</p></li><li><p>A/N</p></li><li><p>IPComp</p></li><li><p>SNP</p></li><li><p>Compaq-Peer</p></li><li><p>IPX-in-IP</p></li><li><p>VRRP</p></li><li><p>PGM</p></li><li><p>L2TP</p></li><li><p>DDX</p></li><li><p>IATP</p></li><li><p>STP</p></li><li><p>SRP</p></li><li><p>UTI</p></li><li><p>SMP</p></li><li><p>SM</p></li><li><p>PTP</p></li><li><p>ISIS</p></li><li><p>FIRE</p></li><li><p>CRTP</p></li></ul></td></tr></tbody></table></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingvirtualmachinenetworksvVHS9.0-ip-addressesVirtualMachineIPAddresses"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinenetworksvVHS9.0-ip-addresses"></span>Virtual Machine IP Addresses</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>In the <strong>Networking</strong> &gt;<strong> IP Addresses</strong> tab you can find the list of assigned IP addresses, allocate new IP addresses, and define the primary one, and rebuild a network.<br/>To allocate a new IP Address to the VM:</p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Virtual Servers</strong> menu.</li><li>Click the label of the virtual machine you're interested in.</li><li>Click the <strong>Networking</strong> tab &gt;<strong> IP Addresses</strong>.</li><li>Click the <strong>Allocate New IP Address </strong>button.</li><li>Select a network interface from the drop-down menu (only the <a href="#id-.ManagingvirtualmachinenetworksvVHS9.0-network-interfaces">network interfaces</a> you added to the VM will be available). The IP Address will be allocated automatically.</li><li><em>(Not available for federated VMs)</em> As an alternative, you can manually select an IP address from the IP Pool associated with the network interface. To enable this option, move the <strong>Specify IP Address</strong> slider to the right and choose an IP address from the drop-down list. You may select an IP address that's already assigned to a VM, but only one VM should be online at a time. Use <em>Please show me used IP Pool</em>, <em>Show only my IPs</em>, and <em>Show only IPv6</em> checkboxes to narrow the list of IPs in the drop-down list.</li><li><p>Click the<strong> Add IP Address</strong> button.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(51,51,51);">After adding an IP address to a virtual machine, we recommend that you click <span>the </span><strong>Rebuild Network</strong><span> button </span><span>t</span><span>o have the network rebuilt.</span></span></p></div></div></li><li><span>Click the </span><strong>Rebuild Network</strong><span> button to rebuild the network.</span></li></ol><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul><li><span>You must rebuild the network after making changes to IP address allocations.<br/></span></li><li>Currently, it is possible to assign only up to 320 IPs to an Ubuntu virtual machine.<span><br/></span></li><li>The external IP address can be managed by API only. If you want to add an external IP address, refer to the <a href="https://docs.onapp.com/pages/viewpage.action?pageId=69835798">Add/Edit External IP Address</a> section of the API Guide. </li><li><p>Currently, it is not possible to assign IPv6 addresses of the following ranges:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: py; gutter: false; theme: DJango" data-theme="DJango">::/128					fec0::/10
+::1/128					fc00::/7
+2001:db8::/32				ff00::/8
+fe80::/10</pre>
+</div></div></li></ul></div></div><p><br/></p><h4 id="id-.ManagingvirtualmachinenetworksvVHS9.0-EditIPaddressassignedtoVM"><span>Edit IP address assigned to VM</span></h4><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Virtual Servers </strong>menu.</li><li>Click the label of the virtual machine you're interested in.</li><li>Click the <strong>Networking</strong> &gt;<strong> IP Addresses</strong> tab.</li><li>Click the<strong> Edit </strong>button next to the IP address you want to edit.</li><li>On the page that loads, you can mark the IP address as primary by selecting the <em>Primary IP Address?</em> checkbox. Accordingly, this IP address will be used as source IP for outgoing traffic by default.</li></ol><p><br/></p><h4 id="id-.ManagingvirtualmachinenetworksvVHS9.0-RemoveIPaddressfromVM"><span>Remove IP address from VM</span></h4><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Virtual Servers </strong>menu.</li><li>Click the label of the virtual machine you're interested in.</li><li>Click the <strong>Networking</strong> &gt;<strong> IP Addresses</strong> tab.</li><li>Click the<strong> Delete</strong> button next to the IP address you want to delete.</li><li>In the pop-up window that appears:<br/><ul><li><p>Choose the <strong>Delete with Reboot </strong>option if you want to reboot a VM and rebuild the network immediately after deleting the IP address. After choosing the Delete with Reboot option you will be redirected to the VM's Overview page.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(51,51,51);">After removing an IP address from a virtual machine, we recommend that you choose the <strong>Delete with Reboot </strong>option to have the network rebuilt.</span></p></div></div></li><li>Choose the <strong>Delete</strong><strong> without Reboot</strong> option if you don't want to reboot a VM. In this case, to apply the changes, you will have to reboot the VM additionally.</li></ul></li></ol><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><span>If you delete the IP address that is used as primary - the next available IP will be marked as primary.</span></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingvirtualmachinenetworksvVHS9.0-display-network-speedDisplayingNetworkSpeedforNetworkInterfacesonVirtualMachinePage"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinenetworksvVHS9.0-display-network-speed"></span>Displaying Network Speed for Network Interfaces on Virtual Machine Page</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>The main <strong>Virtual Servers</strong> screen displays the network speed of each VM's primary network interface. To see the speed of all interfaces assigned to a VM:</p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Virtual Servers</strong> menu.</li><li>Click the label of the virtual machine you are interested in.</li><li>Click the <strong>Networking</strong> &gt;<strong> Network Interfaces</strong> tab.</li><li>On the screen that appears, the <strong>Port Speed</strong> column shows the network speed of the network interface.</li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingvirtualmachinenetworksvVHS9.0-edit-network-speedEditingVirtualMachineNetworkSpeed"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinenetworksvVHS9.0-edit-network-speed"></span>Editing Virtual Machine Network Speed</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>To edit a virtual machine's network speed:</p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Virtual Servers</strong> menu.</li><li>Click the label of the virtual machine you want to change.</li><li>Go to the <strong>Networking</strong> tab &gt; <strong>Network Interfaces</strong>.</li><li>In the last column, click the <strong>Edit</strong> button.</li><li>Change the port speed.</li><li>Click the <strong>Submit </strong>button to save changes.</li></ol></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791556/195791558.png">image2022-4-21_10-4-59.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791556/195791559.png">image2022-4-21_10-5-28.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

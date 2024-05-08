@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Editing system configuration vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Configuration_195791594.html">Control Panel Configuration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Configuration-Settings_195791606.html">Configuration Settings</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Edit-System-Configuration_195791609.html">Edit System Configuration</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Editing system configuration vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>This section contains information on how to edit OnApp Storage and other application settings. </p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ignore the options specified in your Control Panel but not mentioned in the documents.</p></div></div><p>To edit the system configuration, do the following:</p><ol><li><p>Go to your Control Panel &gt; <strong>Admin</strong> &gt;<strong> Settings </strong>menu, and click the <strong>Configuration </strong>icon.<strong><br/></strong></p></li><li><p>Click the <strong>System </strong>tab to change the following application settings:</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>If you change any settings here and save, the Control Panel server will restart OnApp services.</p></div></div></li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h3 id="id-.EditingsystemconfigurationvVHS9.0-licenseLicenseInfo"><strong><span class="confluence-anchor-link" id="id-.EditingsystemconfigurationvVHS9.0-license"></span>License Info</strong></h3></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ul><li><em>Key -</em> the key for your OnApp installation.</li><li><em>Enable isolated license </em>- move this slider to the right to enable the usage of an <a href=".License-vVHS9.0_195791599.html">Isolated License</a> on your CP. </li></ul><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h3 id="id-.EditingsystemconfigurationvVHS9.0-file_uploadFileUploadConfiguration"><strong><span class="confluence-anchor-link" id="id-.EditingsystemconfigurationvVHS9.0-file_upload"></span>File Upload Configuration</strong></h3></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ul><li><em>Max upload size</em> - the maximum file size in bytes for ISOs that can be uploaded to boot a VM.</li></ul><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h3 id="id-.EditingsystemconfigurationvVHS9.0-APIusageAPIusage"><span class="confluence-anchor-link" id="id-.EditingsystemconfigurationvVHS9.0-APIusage"></span>API usage</h3><ul><li><p><em>Disable plain password usage for API access -<span> </span></em>move the slider to the right to restrict the use of plain password and login for API access.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>We strongly recommend that you disable plain password usage for API access for security reasons.</p></div></div></li></ul></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h3 id="id-.EditingsystemconfigurationvVHS9.0-compute_resourcesComputeResources"><strong><span class="confluence-anchor-link" id="id-.EditingsystemconfigurationvVHS9.0-compute_resources"></span>Compute Resources</strong></h3></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ul><li><p><em>Requests before marked as failed </em>- determines how many times the Control Panel server will attempt to contact a <a href=".Compute-resources-vVHS9.0_195791811.html">compute resource</a> before failover is initiated.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The time before the CP initiates failover may differ depending on the number of compute resources and their load.</p></div></div></li><li><p><em>Ping hosted virtual servers before initiating failover</em> - enable this feature for the VMs to ping the compute resource on which they reside to make sure it is offline before migrating to another compute resource.</p></li></ul><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h3 id="id-.EditingsystemconfigurationvVHS9.0-vs_portsVMConsolePorts"><strong><span class="confluence-anchor-link" id="id-.EditingsystemconfigurationvVHS9.0-vs_ports"></span>VM Console Ports</strong></h3></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>These are the ports used to remotely connect to virtual machines using the integrated VNC console.</p><ul><li><p>Set the port range using the<em> First port</em> and <em>Last port</em> fields.<span style="color: rgb(128,0,0);"> </span></p></li></ul></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h3 id="id-.EditingsystemconfigurationvVHS9.0-miscellaneousMiscellaneous"><strong><span class="confluence-anchor-link" id="id-.EditingsystemconfigurationvVHS9.0-miscellaneous"></span>Miscellaneous</strong></h3></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ul><li><em>Support help email</em> - the email to which requests are sent from the <em>Help </em>form at Control Panel.<em><br/></em></li><li><em>System host </em>- enter a server IP or URL. Email alerts link to transaction logs for alert events, and those logs are opened from the server configured here.</li><li><em>Application name </em>– here you may change the application name, which is displayed on the welcome screen.</li><li><em>Block Size (MB)</em> - the block size in MB for disks which is used when migrating disks to another data store. This parameter also regulates the block size during backup creation. The default value is 8 MB.</li><li><p><em>Config comment</em> - this text is added by OnApp to system configuration files and is stored in the<em> </em><code>etc/resolv.conf, etc/network/interfaces and etc/hosts</code> files.</p></li><li><label class="integer required control-label" for="configuration_session_timeout"><em>Session Timeout (minutes)</em> - the timeout between sessions within OnApp where the default value is 480 minutes.</label></li><li><p><em>Enable super admin permissions</em> - <span style="color: rgb(14,16,26);">move this slider to the right to activate a super admin feature that will help to restrict a user from creating roles, assigning users to roles, and logging in to CP as users with permissions exceeding her or his own permissions.</span></p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Note that the corresponding role does not appear in the list of roles at the <strong>Dashboard</strong><span> &gt; </span><strong>Roles </strong>and is not assigned to any user. For more information on how to create and manage this role, refer to <a href=".Creating-and-managing-super-admin-role-vVHS9.0_195791913.html">Creating and managing super admin role</a>.</p></div></div></li><li><span style="color: rgb(51,51,51);"><em>Show IP address selection for new VS </em>– move this slider to the right to enable IP address assignment during VM creation.</span></li><li><span style="color: rgb(51,51,51);"><em>Transaction approvals - </em>move the slider to the right to enable approvals.</span></li><li><span style="color: rgb(51,51,51);"><em>Number of simultaneous transactions</em> - the number of transaction runners that the daemon will execute at the same time.</span></li><li><span style="color: rgb(51,51,51);"><em>Zombie transaction time</em> - set the duration in minutes after which the transaction running longer than the indicated time will be marked as zombie. </span></li><li><span style="color: rgb(51,51,51);"><em>System alert reminder period</em> - the duration in minutes for the system to email alerts to the admin if the failover resources are not enough. The default value is 60.</span></li><li><span style="color: rgb(51,51,51);"><em>Enable wrong activated logical volume alerts</em> - move the slider to the right to enable system alerts.</span></li><li><span style="color: rgb(51,51,51);"><em>Wrong activated logical volume minutes</em> - specify the alert emails frequency in minutes.</span></li><li><span style="color: rgb(51,51,51);"><em>Timeout before shutting down VS (30-600 sec) - </em>specify the VM shutdown period within the given range. This parameter indicates the time during which OnApp will try to shut down a VM gracefully; after the selected period the VM will be shut down forcefully. This will allow refusing the shutdown if the VM is booting and retry every 30 seconds till it is registered.</span></li><li><span style="color: rgb(51,51,51);"><em>IP address reservation time</em> - specify the duration in seconds during which the IP address will be reserved for a user and unavailable for other users. The default value is 60.</span></li><li><span style="color: rgb(51,51,51);"><em>Max number of IP addresses which can be assigned to user simultaneously</em> - specify the maximum number of IP addresses that can be assigned to the user simultaneously. The default value is 256.</span></li><li><p><span style="color: rgb(51,51,51);"><em>Allow VS password encryption</em> – move this slider to the right to enable root password encryption for virtual machines.</span></p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>For more information on the VM password encryption, refer to the <a href="https://docs.onapp.com/display/FAQ/Virtual+Server+Password+Encryption">FAQ</a>.</p></div></div></li><li><em>Allow VMware compute resource password encryption</em> – move this slider to the right to enable root password encryption for VMware compute resources.</li><li><p><em>Use HTML 5 VNC console</em> - move this slider to the right to enable the use of the HTML 5 VNC console. VNP ports from the CP server are not required if the HTML 5 console is enabled.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>It is only possible to use HTML 5 console if the Control Panel server is based on CentOS 6 or CentOS 7.</p></div></div></li><li><em>Max network interface port speed</em> - <span style="color: rgb(51,51,51);">maximum NIC port speed in MB for the appliance network.</span></li></ul><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h3 id="id-.EditingsystemconfigurationvVHS9.0-billingBillingManagement"><strong><span class="confluence-anchor-link" id="id-.EditingsystemconfigurationvVHS9.0-billing"></span>Billing Management</strong></h3></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ul><li><em>Disable billing</em> - move this slider to the right to disable the prices displa<span style="color: rgb(51,51,51);">y. All prices-related pages and fields will be hidden including but not limited to: </span><ul><li><span style="color: rgb(51,51,51);">Rate Cards in the Buckets menu</span></li><li><span style="color: rgb(51,51,51);">Virtual Machines (all types of machines)</span></li><li><span style="color: rgb(51,51,51);">User Profile  </span></li><li>User Group </li></ul></li></ul><p>Also, all price-related statistics will not be calculated on the VM overview details page and on the User P<span>rofile</span> page.</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h3 id="id-.EditingsystemconfigurationvVHS9.0-statisticsStatisticsManagement"><strong><span class="confluence-anchor-link" id="id-.EditingsystemconfigurationvVHS9.0-statistics"></span>Statistics Management</strong></h3></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ul><li><span style="color: rgb(51,51,51);"><em>Time of instant statistics storage (days)</em> - the number of days the instant statistics from сompute resource will be stored. Starting with OnApp version 5.0, the default value for new installations is 1. For the clouds that have been upgraded from OnApp version 4.3, the default value is 10.</span></li><li><span style="color: rgb(51,51,51);"><em>Enable hourly statistics archiving</em> - move the slider to the right to switch on archiving for hourly statistics. If enabled, hourly statistics will be converted into monthly and stored as an archive for all the period that exceeds the time specified in the <em>Time of hourly statistics storage (months)</em> parameter below. </span></li><li><p><span style="color: rgb(51,51,51);"><em>Time of hourly statistics storage (months) - </em>this parameter configures how long you want the detailed hourly statistics to be stored in the database before being converted into monthly statistics. The minimum default value is 2. For example, if you set that parameter to 10, the hourly statistics will be stored for the current month and the 10 previous months. And everything older than 10 months will be sent to the archive (which is converted into monthly statistics).</span></p></li><li><span style="color: rgb(51,51,51);"><em>Period to store IP reports (months)</em> - <span style="color: rgb(0,0,0);">the number of months the reports on IP address usage are stored. The statistics older than this period are cleaned. By default, the statistics are stored for six months. </span></span></li><li><p><span style="color: rgb(51,51,51);"><em>Enable logs cleaning - </em>this parameter enables logs cleaning after the time period, specified in the <em>Period to store logs (days)</em> parameter below.</span></p></li><li><span style="color: rgb(51,51,51);"><em>Period to store logs (days) - </em>this parameter configures how many days you want logs to be kept in a database before deletion.</span></li></ul><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h3 id="id-.EditingsystemconfigurationvVHS9.0-custom_toolsCustomToolsinRecoveryImages"><strong><span class="confluence-anchor-link" id="id-.EditingsystemconfigurationvVHS9.0-custom_tools"></span>Custom Tools in Recovery Images</strong></h3></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ul><li><p><em>URL for custom tools </em>- specify the full URL to the tools file packed with GNU Tar + Gzip, like <a href="http://domain.com/file.tgz" class="external-link" rel="nofollow">http://domain.com/file.tgz</a>. These tools will be copied to a recovery VM after rebooting in recovery mode. The users will then be able to unpack and use these tools as they wish to.</p></li></ul><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>If the recovery image file is too large, the virtual machines may fail to start up in the recovery mode. We highly recommend you test the custom recovery image on the virtual machine with minimum RAM size before using it.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h3 id="id-.EditingsystemconfigurationvVHS9.0-snmpSnmptrapSettings"><strong><span class="confluence-anchor-link" id="id-.EditingsystemconfigurationvVHS9.0-snmp"></span>Snmptrap Settings</strong></h3></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ul><li><p><em>Snmptrap addresses</em> - a set of IPv4 management network IP(s) from the CP server separated by a comma. These IP addresses will be used for communication between Control Panel and compute resources.</p></li><li><p><em>Snmptrap port</em> - port used for snmptrap. It must be greater than 1024.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>We recommend that you do not change the default value.<br/>In case you change the port value on your OnApp CP - the corresponding change of the port <em>VM_STATUS_SNMP_PORT</em> should be made for all compute resources in the <code>/etc/onapp.conf</code> file.  </p></div></div></li></ul></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h3 id="id-.EditingsystemconfigurationvVHS9.0-dashboardOnAppDashboardAPI"><strong><span class="confluence-anchor-link" id="id-.EditingsystemconfigurationvVHS9.0-dashboard"></span>OnApp Dashboard API</strong></h3></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ul><li><em>Access token</em> - enter the Access token that is displayed in your OnApp Dashboard for your user account details. This token is used to synchronize locations between OnApp CP and OnApp Dashboard. </li></ul><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h3 id="id-.EditingsystemconfigurationvVHS9.0-reportsAllowControlPaneltoSendCrashReports"><strong><span class="confluence-anchor-link" id="id-.EditingsystemconfigurationvVHS9.0-reports"></span>Allow Control Panel to Send Crash Reports</strong></h3></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ul><li><em>Allow to collect errors</em> - move the slider to the right to enable Control Panel to collect, aggregate, encrypt and send crash reports. If you enable this feature, the error list from your Control Panel will be sent to OnApp in a form of an encrypted API call. By default, this option is disabled.</li></ul><p>3. Click the <strong>Save Configuration</strong> button to finish.</p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

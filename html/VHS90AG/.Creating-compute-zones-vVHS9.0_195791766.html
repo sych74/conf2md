@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Creating compute zones vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Compute-Zones_195791762.html">Compute Zones</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Create-Compute-Zones_195791767.html">Create Compute Zones</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Creating compute zones vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Compute zones can be used to create different tiers of service and have data stores and networks attached to them. The combination of compute resource, data store, and network groups can be used to create private clouds for customers. Compute zones have types which are inherited by the compute resources in the zone.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ignore the options specified in your Control Panel but not mentioned in the documents.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.CreatingcomputezonesvVHS9.0-CreateComputeZonecreate_zone">Create Compute Zone<span class="confluence-anchor-link" id="id-.CreatingcomputezonesvVHS9.0-create_zone"></span></h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>After you create a compute zone you need to attach <a href=".Managing-compute-resource-data-store-vVHS9.0_195791825.html">compute resources</a>, <a href=".Managing-compute-zone-networks-vVHS9.0_195791788.html">networks</a> and <a href=".Managing-compute-zone-backup-servers-vVHS9.0_195791793.html">backup servers</a> to it.</p><p>Keep in mind that you can attach only those resources that have the same type as the compute zone. </p></div></div><p>To create a new compute zone:</p><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings </strong>menu.</li><li>Click the <strong>Compute Zones </strong>icon.</li><li>Click <span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" draggable="false" width="26" src="attachments/195791766/195792218.png" data-image-src="attachments/195791766/195792218.png" data-unresolved-comment-count="0" data-linked-resource-id="195792218" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2024-4-19_9-26-21.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195791766" data-linked-resource-container-version="7" alt=""></span> or the <strong>Create Compute Zone </strong>button in the lower-right corner.</li><li>On the screen that follows the parameters you need to input depend on the type of the compute zone you want to create:<br/><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1715073823418 {padding: 0px;}
+div.rbtoc1715073823418 ul {margin-left: 0px;}
+div.rbtoc1715073823418 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1715073823418'>
+<ul class='toc-indentation'>
+<li><a href='#id-.CreatingcomputezonesvVHS9.0-CreateComputeZonecreate_zone'>Create Compute Zone</a></li>
+<li><a href='#id-.CreatingcomputezonesvVHS9.0-CreateVirtualComputeZonecreate_virtual_compzone'>Create Virtual Compute Zone</a></li>
+</ul>
+</div></li><li>After you fill in all the parameters, click the <strong>Save </strong>button.</li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.CreatingcomputezonesvVHS9.0-CreateVirtualComputeZonecreate_virtual_compzone">Create Virtual Compute Zone<span class="confluence-anchor-link" id="id-.CreatingcomputezonesvVHS9.0-create_virtual_compzone"></span></h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Use only the<em> Extended CPU Configuration</em> option for the CPU model configuration in the Beta version.</p></div></div><ul><li><em>Label</em> - give your compute zone a name.</li><li><p><em>Server type -</em><strong> </strong>choose the server type from the drop-down box. Choose the <em>virtual</em> server type to create a KVM zone.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The zone's type cannot be changed after the zone is created.</p></div></div></li><li><p><em>Release resource type</em> - this option allows you to free up the compute resource resources and over-commit RAM, CPU, and CPU shares by means of the virtual machines that are shut down. By default, the compute zone is created with the <em>Memory Guarantee </em>option enabled. In this case, the over-committing cannot be used. </p><ul><li><p><em>Memory guarantee </em>- the actual free compute resource memory is calculated. All virtual machines residing on the compute resource will be able to start. </p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Select only the <em>Memory guarantee</em> option for <em>Release resource type</em> in the Beta version.</p></div></div></li></ul></li><li><p><em>Max VS to start at once</em> - specify the maximum number of virtual machines that can be started simultaneously on a compute resource (5 recommended). This option ensures that virtual machines with VIP status will be booted prior to other machines.</p></li><li><p><em>Placement type</em> - specify the compute resource selection algorithm, which will be used on virtual machine provisioning and recovery, per compute zone.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Select only the <em>Take HV with maximum free RAM (Sparse)</em> option for <em>Placement type</em>.</p></div></div><p><br/></p><ul><li><em>Take HV with maximum free RAM (Sparse)</em> - set this type to select the compute resource with maximum free RAM during the VM recovery. This option allows you to perform faster migration of virtual machines with a lesser (sparse) number of iterations during the failover.<br/>This option behaves in different ways, depending on the event:<br/><em>On provisioning</em>, the round-robin algorithm will be used on compute resource selection.<br/><em>On recovery</em>, the compute resource with maximum free RAM will be selected.</li></ul></li><li><p><em>Failover timeout</em> - the time period for which the iterations will run during the failover if the compute resource does not respond.</p></li><li><p><em>CPU units</em> - set the number of CPU units that will be assigned to each compute resource in this zone by default. </p></li><li><p><em>CPU guarantee </em>- move the slider to the right to ensure there is enough CPU on the compute zone to create a new VM. </p></li><li><p><em>Run sysprep - </em>move the slider to enable Windows virtual machine deployment with running sysprep. If there are several simple deployed virtual machines from the same template in the cloud, having identical SIDS, joined to the Active Directory Domain, it will provoke the system conflict.</p></li><li><em>Custom Config</em> - specify any custom commands you want to run when a compute zone is booted. </li></ul><p><span style="color: rgb(51,51,51);"><strong>Hot Migration Options</strong></span></p><ul><li><span style="color: rgb(51,51,51);"><em>Auto-converge - </em>select the preferable type of the auto-converge functionality:</span><ul><li><span style="color: rgb(51,51,51);"><em>Minor - </em><span>auto-converge with default CPU throttling during migration.</span></span></li><li><span style="color: rgb(51,51,51);"><em>Moderate - </em>auto-converge with moderate CPU throttling.</span></li><li><span style="color: rgb(51,51,51);"><em>Aggressive - </em><span>auto-converge with aggressive CPU throttling.</span></span></li></ul></li></ul><p><br/></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791766/195792218.png">image2024-4-19_9-26-21.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

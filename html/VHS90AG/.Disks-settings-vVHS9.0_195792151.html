@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Disks settings vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Storage-and-Backups_195792106.html">Storage and Backups</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Disks-Settings_195792152.html">Disks Settings</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Disks settings vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Virtual machine storage is provided by disks. A disk is a partition of a data store that is allocated to a specific virtual machine. Disks can be assigned as standard or swap disks. Managing disks for the entire cloud is handled through the Control Panel's Settings menu. This section contains information on how to view, edit, migrate, and delete every disk in the cloud, and get quick access to their backup and scheduling functions.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Do not create multiple partitions on one disk for virtual machines. OnApp Control Panel supports only one partition per disk. In cases when you change disk partition, the CP might lose control of such a disk and the VM associated with it. If required, create additional disks instead.</p></div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ignore the options specified in your Control Panel but not mentioned in the documents.</p></div></div><p><br/></p><hr/><h2 id="id-.DiskssettingsvVHS9.0-MigrateDisksmigrate_disks">Migrate Disks<span class="confluence-anchor-link" id="id-.DiskssettingsvVHS9.0-migrate_disks"></span></h2><ol><li>Go to your Control Panel &gt;  <strong>Admin</strong> &gt; <strong>Settings</strong> menu.</li><li>Click the <strong>Disks</strong> icon.</li><li>Click the <strong>Actions</strong> button next to the desired disk, then select <strong>Migrate</strong>.</li><li>Choose the cold type of migration.</li><li>Choose a target data store.</li><li>Click the <strong>Start Migrate </strong>button.</li></ol><hr/><h2 id="id-.DiskssettingsvVHS9.0-ViewDiskIOPSview_iops">View Disk IOPS<span class="confluence-anchor-link" id="id-.DiskssettingsvVHS9.0-view_iops"></span></h2><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> menu.</li><li>Click the <strong>Disks</strong> icon.</li><li>Click the <strong>Actions</strong> button next to the required disk, then select<strong> IOPS</strong>.</li><li>On the following screen, you will find four charts:<br/><ul><li>Instant IOPS - IOPS for the last hour.</li><li>Hourly IOPS - IOPS for the last 24 hours.</li><li>Instant data written/read - data written/read for the last 24 hours.</li><li>Hourly data written/read - data written/read for the last hour.</li></ul></li><li>To zoom into a period, click and drag in a chart. Click the <strong>Reset Zoom</strong> button to zoom out again.</li></ol><hr/><h2 id="id-.DiskssettingsvVHS9.0-EditDiskedit_disk"><span style="color: rgb(51,51,51);">Edit Disk <span class="confluence-anchor-link" id="id-.DiskssettingsvVHS9.0-edit_disk"></span></span></h2><ol><li><span style="color: rgb(51,51,51);">Go to your<strong> </strong>Control Panel<strong> </strong>&gt; <strong>Admin</strong> &gt; <strong>Settings</strong> menu.</span></li><li><span style="color: rgb(51,51,51);">Click the <strong>Disks</strong> icon. Click the <strong>Actions </strong>button next to the required disk and select <strong>Edit</strong>.</span></li><li><p><span style="color: rgb(51,51,51);">Move the <strong>Size</strong> slider to change the size of the disk. To decrease the size of the disk below 5 GB, move the <strong>Override Minimum Size</strong> slider to the right.<br/></span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(51,51,51);">Please note that decreasing disk size below 5 GB may lead to data loss.</span></p></div></div></li><li><span style="color: rgb(51,51,51);">Click <strong>Save Disk</strong> to confirm the change.</span></li></ol><hr/><h2 id="id-.DiskssettingsvVHS9.0-EditDiskIOLimitsedit_iol">Edit Disk IO Limits<span class="confluence-anchor-link" id="id-.DiskssettingsvVHS9.0-edit_iol"></span></h2><p>IOPS limiting functionality allows you to prioritize the load on a SAN for VMs. IOPS limiting can be set for <a href="https://docs.onapp.com/display/VHS9AG/Data+Stores+Settings">Data Stores Settings</a> or separate disks.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ensure that the<em> IO Limiting </em>permissions are on before managing IO limits. For more information refer to the <a href="https://docs.onapp.com/display/VHS9AG/OnApp+Permissions">OnApp Permissions</a> section of this guide.</p></div></div><p>To edit disk IO limits:</p><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> menu.</li><li>Click the <strong>Disks</strong> icon. You'll see a list of the disks on your system.</li><li>Click the <strong>Actions</strong> button next to the disk you want to change, then click <strong>Edit IO Limits</strong>.</li><li>On the following page move the <strong>Override DataStore IO Limits</strong> slider to the right to edit the appropriate details:<ol><li style="list-style-type: none;background-image: none;"><ul><li><em>Read IOPS - </em>set the read IOPS amount.</li><li><em>Write IOPS - </em>set the write IOPS amount.</li><li><em>Read throughput - </em>specify the read throughput<em> </em>(in MBps).</li><li><em>Write throughput - </em>specify the write throughput (in MBps).</li></ul></li></ol></li><li><p>Click the <strong>Save</strong> button to finish.</p></li></ol><p>To disable IOPS limiting:</p><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> menu.</li><li>Click the <strong>Disks</strong> icon. You'll see a list of the disks on your system.</li><li>Click the <strong>Actions</strong> button next to the disk you want to change, then click <strong>Edit IO Limits.</strong></li><li>On the following page set all parameters to Unlimited.</li><li><p>Click the <strong>Save</strong> button to finish.</p></li><li>Go to the <code>/onapp/interface/config/on_app.yml</code> file and set the <code>io_limiting_enabled</code> parameter as <code>false</code>. Disabling will only remove the feature from the UI, and old vDisk limits will be used if not set to unlimited. </li></ol><hr/><h2 id="id-.DiskssettingsvVHS9.0-DeleteDisksdelete">Delete Disks<span class="confluence-anchor-link" id="id-.DiskssettingsvVHS9.0-delete"></span></h2><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> menu.</li><li>Click the <strong>Disks</strong> icon.</li><li>Click the <strong>Actions</strong> button next to the desired disk and select<strong> Delete</strong>. You'll be asked for confirmation before the disk is removed. All backups for this disk will be removed too.</li></ol><h3 id="id-.DiskssettingsvVHS9.0-DiskWipedisk_wipe">Disk Wipe<span class="confluence-anchor-link" id="id-.DiskssettingsvVHS9.0-disk_wipe"></span></h3><p>OnApp Cloud provides two ways to clean VM data when deleting or migrating a VM's disk. By default, OnApp Cloud will format the physical disk space used by a virtual machine when that VM's virtual disk is deleted or the VM disk is migrated to another data store.<br/><br/>You can also choose to wipe/format a VM's disk (filling it with zeroes) by changing a configuration setting on the OnApp Control Panel server. To enable this behavior:</p><ol><li>Log in as <code>root</code> on your OnApp Control Panel server.</li><li>Edit the following configuration file: <code>/onapp/interface/config/on_app.yml </code>and set the <code>wipe_out_disk_on_destroy</code> parameter to <code>true</code>.</li><li>Restart the OnApp service: <code>service onapp restart</code>.</li></ol><p>The <code>wipe_out_disk_on_destroy</code> value is set to <code>FALSE</code> by default. If you wish to return disk wiping behavior to the default setting (formatting rather than zeroing disks), simply edit the config file and set the value to <code>FALSE</code> again.  </p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>If you are viewing the disk list on a narrow screen, you can customize the way the table is displayed by clicking the actions icon at the top of the table. In the drop-down list that appears, check the columns you want to be displayed and click <strong>Apply</strong>. The narrower your screen is, the more unchecked columns will be hidden from the table. If your screen is too narrow to fit all the columns you have checked, a scrollbar will appear at the bottom of the disk list. You can always alter your column selection later. </p></div></div><p>Column selection is currently set for one browser. If you have checked some columns in one browser and opened the list in some other browser, the column selection will be the default one for that other browser.</p><hr/><p><br/></p>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195792151/195793645.png">image2024-5-7_11-5-11.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

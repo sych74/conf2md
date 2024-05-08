@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing virtual machine disks vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtual-Servers_195791495.html">Virtual Servers</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Manage-Virtual-Server-Disks_195791551.html">Manage Virtual Server Disks</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing virtual machine disks vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Virtual machine storage is provided by disks. A disk is a partition of a data store that is allocated to a specific virtual machine. Disks can be assigned as the standard or swap disks (there are no swap disks for Windows-based templates). They can also be set as primary (that is, the disk from which an OS will boot).</p><p>Managing disks for the entire cloud is handled through the Control Panel's Settings menu. Disks for individual virtual machines are managed through the Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Virtual Servers</strong> menu, where you can:</p><ul><li><span class="toc-item-body"><a href="#id-.ManagingvirtualmachinedisksvVHS9.0-add">Add Disks to Virtual Machine<br class="_mce_tagged_br" /></a></span></li><li><a href="#id-.ManagingvirtualmachinedisksvVHS9.0-edit">Edit Virtual Machine Disks<br class="_mce_tagged_br" /></a></li><li><a href="#id-.ManagingvirtualmachinedisksvVHS9.0-migrate">Migrate Virtual Machine Disks<br class="_mce_tagged_br" /></a></li><li><a href="#id-.ManagingvirtualmachinedisksvVHS9.0-assign">Assign Disk to VM<br class="_mce_tagged_br" /></a></li><li><a href="#id-.ManagingvirtualmachinedisksvVHS9.0-delete">Delete Virtual Machine Disks</a><br/><br/></li></ul><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Do not create multiple partitions on one disk for virtual machines. OnApp Control Panel supports only one partition per disk. In cases when you change disk partition, the CP might lose control of such a disk and the VM associated with it. If required, create additional disks instead.</p></div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ignore the options specified in your Control Panel but not mentioned in the documents.</p></div></div><hr/><h2 id="id-.ManagingvirtualmachinedisksvVHS9.0-addAddingDiskstoVirtualMachines"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinedisksvVHS9.0-add"></span>Adding Disks to Virtual Machines</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Adding a disk to a virtual machine will require that VM should be rebooted. If a VM is running when you try to add a new disk to it, you'll be asked to confirm the reboot. To add a disk to a virtual machine:</p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Virtual Servers</strong> menu.</li><li>Click a VM's label to open its details screen.</li><li>Click the <strong>Storage </strong>tab &gt; <strong>Disks</strong>. </li><li>Click<strong> +</strong><strong> </strong>or<strong> </strong>the <strong>Create Disk </strong>button.</li><li>Fill in the details:<br/><ul><li>Specify disk label.</li><li>Choose the data store to create a disk on from the drop-down list.</li><li><p>Move the slider to the right to specify the desired disk size.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul><li>The disk size should not exceed 2 TB when a new disk is added. You can later resize the disk if you need it to be larger than 2 TB.</li><li>Resizing disks to a value larger than 2 TB is not supported for Windows VMs and all VMs on KVM.</li><li><p>OnApp provides support only for the MS-DOS partition table. If your disk size exceeds 2 TB, the MS-DOS partition table can be changed to GUID Partition Table (GPT) from inside a virtual machine and extended to more than 2 TB. However, such disks will be partially manageable by OnApp and the subsequent resizing operations will not be supported anymore and could lead to data loss.</p></li></ul></div></div></li><li><p>Move the <strong>Hot Attach</strong> slider to the right if you want to enable the hot adding of a disk. In this case, a virtual machine is not stopped when the disk is added.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>To run hot attach, a virtual machine template should support VirtIO virtualization. The hot attach option is available only on KVM compute resources based on CentOS 6.x/7.x for virtual machines with VirtIO support.</p></div></div></li><li>Move the <strong>Swap Space</strong> slider to the right if this disk is swap space.</li><li><p>Move the <strong>Require Format Disk</strong> slider to the right if this disk requires formatting.</p></li><li><p>Move the <strong>Mounted</strong> slider to the right if the disk should be added to Linux or FreeBSD FSTAB (for Linux/FreeBSD virtual machines).</p></li><li><p>Specify its mount point. The maximum length of a Mount Point is 256 characters. Spaces are not allowed. No more than one slash is allowed. If the mount point is not specified the default mount point will be used:  </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/mnt/onapp-disk-#{disk.identifier}</pre>
+</div></div></li><li>Indicate the <strong>file system </strong> - ext3, ext4, or xfs - for Linux-based VM.</li></ul></li><li><p>Click the<strong> Add Disk </strong>button to finish.</p></li></ol><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Restrictions:</p><ul><li>If the virtual machine and the Control Panel server belong to different networks, the hot attach transaction will fail.</li><li>If an additional disk has been created without the <strong>Require format disk</strong> option and formatted/partitioned in another way, resize disk action may work incorrectly. Use the<strong> Require format disk</strong> option when creating an additional disk, otherwise, use the disk resize option at your own risk.</li><li>To be able to take incremental backups for the virtual machine’s disk, you must mount this disk to FSTAB (either Linux or FreeBSD) and specify the proper mount point manually.</li><li>You cannot back up Swap disks.</li><li>When you add a new disk to a virtual machine, it automatically becomes available to that machine.</li></ul></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingvirtualmachinedisksvVHS9.0-editEditingVirtualMachineDisks"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinedisksvVHS9.0-edit"></span>Editing Virtual Machine Disks</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h3 id="id-.ManagingvirtualmachinedisksvVHS9.0-PrimaryandSwapdisks">Primary and Swap disks</h3><p>For primary and swap (Linux, FreeBSD) disks you can only change the label and size. You can resize the disks when you need to. The resize will fail if your current usage is greater than the new size you requested. Note that any changes to the disk size require rebooting of your VM. <span style="color: rgb(0,0,0);">For Windows-based virtual machine disks, you can enable or disable virtio mode.</span></p><p><span style="color: rgb(0,0,0);">To edit a disk:</span></p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Virtual Servers</strong> menu.</li><li>Make sure your virtual machine is powered off and click the VM label.</li><li>Click the <strong>Storage</strong> tab &gt;<strong> Disks</strong>.</li><li>Click the <strong>Actions</strong> button next to the target disk and then click<strong> Edit</strong>.</li><li><p><span style="color: rgb(0,0,0);">On the page that appears, you can edit the following:</span><br/><span style="color: rgb(0,0,0);"><strong>•</strong> <em>Label</em> - specify the name of the disk.</span><br/><span style="color: rgb(0,0,0);"><strong>• </strong><em>Size</em> - move the slider to the right to specify the desired disk size in GB.</span><br/><span style="color: rgb(0,0,0);"><strong>• </strong></span><span style="color: rgb(255,0,0);"><span style="color: rgb(0,0,0);"><em>Enable Virtio</em> - move the slider to the right to enable Virtio mode.</span><br/></span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(255,0,0);"><span style="color: rgb(29,28,29);">Please note that the </span><span style="color: rgb(0,0,0);"><em style="text-align: left;">Enable Virtio</em></span><span style="color: rgb(29,28,29);"><span style="color: rgb(0,0,0);"> opti</span>on is available only for Windows-based virtual machines with the template supporting <em>kvm_virtio</em>.</span></span></p></div></div></li><li>Click the <strong>Save Disk </strong>button. </li></ol><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul><li>You cannot resize a disk that uses GUID Partition Table (GPT).</li><li>You cannot decrease the disk size for Windows-based and FreeBSD-based virtual machines. Only the increase disk size option is available. </li><li>You cannot resize the primary disk for FreeBSD-based virtual machines. </li><li>If the disk file system can not be detected (the disk has more than one partition or some special partition table/file system), you can only increase the disk physical volume size.</li><li>If you start the disk resize and then decide to cancel it, there may be complications such as file system corruption.</li></ul></div></div><h3 id="id-.ManagingvirtualmachinedisksvVHS9.0-Newdisks">New disks</h3><p>For new disks - those which were added after the virtual machine was created - you can edit the following:</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Linux</th><th class="confluenceTh">Windows</th><th class="confluenceTh">FreeBSD</th></tr><tr><td class="confluenceTd"><ul><li>Label</li></ul></td><td class="confluenceTd"><ul><li>Label</li></ul></td><td class="confluenceTd"><ul><li>Label</li></ul></td></tr><tr><td class="confluenceTd"><ul><li>Size</li></ul></td><td class="confluenceTd"><ul><li>Size</li></ul></td><td class="confluenceTd"><ul><li>Size</li></ul></td></tr><tr><td class="confluenceTd"><ul><li>Require format </li></ul></td><td class="confluenceTd"><ul><li>Require format </li></ul></td><td class="confluenceTd"><ul><li>Require format</li></ul></td></tr><tr><td colspan="1" class="confluenceTd"><ul><li>Mounted</li></ul></td><td colspan="1" class="confluenceTd"><ul><li><span style="color: rgb(0,0,0);">Enable Virtio</span></li></ul></td><td colspan="1" class="confluenceTd"><ul><li>Mounted</li></ul></td></tr><tr><td colspan="1" class="confluenceTd"><ul><li>Mount point</li></ul></td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><ul><li>Mount point</li></ul></td></tr><tr><td colspan="1" class="confluenceTd"><ul><li>File system</li></ul></td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr></tbody></table></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingvirtualmachinedisksvVHS9.0-migrateMigratingVirtualMachineDisks"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinedisksvVHS9.0-migrate"></span>Migrating Virtual Machine Disks</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>OnApp allows cold migration of virtual machine disks. <span>Cold migration is </span><span style="color: rgb(51,51,51);">the migration of disks between compute resources with local storage or across compute zones.</span></p><p>You can migrate the disks of your virtual machines to other data stores, which are allocated to the same compute resource. Unlike <a href=".Managing-virtual-machines-vVHS9.0_195792186.html">VM migration</a>, disk cold migration requires the reboot of the VM (despite the template it is based on).</p><p>To migrate a disk:</p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt;<strong> Virtual Servers </strong>menu.</li><li>Click the label of your virtual machine to open its details screen.</li><li>Click the <strong>Storage </strong>tab &gt;<strong> Disks</strong>.</li><li>Click the<strong> Actions</strong> button next to the disk you want to move to another data store, then click the <strong>Migrate</strong> button.</li><li><p>On the screen that appears, select the following options: </p><ul><li><p><em>Type</em> - select the cold migration type.</p></li><li><p><em>Data store</em> - select the target data store to migrate the disk.</p></li></ul></li><li>Click the<strong> Start Migrate </strong>button. </li></ol><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul><li><span>It is recommended to take a backup of a virtual machine before migrating the VM disk. In case of any issues during VM disk migration, you will be able to restore the VM from the backup.</span></li><li><span>You can only migrate disks to data stores in data store zones assigned to your bucket. </span></li><li><span>You cannot migrate a disk to a data store with less capacity than the disk size.</span></li><li>If you move an 850 GB disk between aggregates with 10GB actual usage, the 'dd' image of the local volume manager will take 850 GB space, because the entire local volume manager is copied, including zero 'dspace which may not be able to be recovered.</li><li>If required, you can change the block size used during disk migration at Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> &gt; <strong>Configuration</strong> by editing the <em>Block Size (MB)</em> parameter.</li></ul></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingvirtualmachinedisksvVHS9.0-assignAssigningDisktoVM"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinedisksvVHS9.0-assign"></span>Assigning Disk to VM</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>You can temporarily assign a disk to another virtual machine that has the same data store in use. The disk will be attached to the target VM, but it is necessary to reboot the target VM and mount the disk manually to make it available. Later you can re-assign the disk back to the primary VM at any appropriate moment.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul><li>Ensure that the <em>Assign any disk to VS/Assign own disk to VS </em>permissions are on before assigning disk to another VM. For more information, refer to the <a href=".Permissions-vVHS9.0_195791917.html">Permissions</a> section of this guide.</li><li>Assigning disk functionality is not applicable for swap disks.</li><li style="list-style-type: disc;"><p>The target VM owner should be the same as for the source VM.</p></li><li style="list-style-type: disc;"><p><span style="color: rgb(0,0,0);">Both target and source VMs cannot be deleted as soon as the disk is assigned to a new VM. To delete target and source VMs, as well as the disk, it is required to re-assign a disk to a  source VM.</span></p></li></ul></div></div><p><br/>To assign a disk to another VM:</p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt;<strong> Virtual Servers </strong>menu.</li><li>Click the label of a virtual machine to open its details screen.</li><li>Click the <strong>Storage </strong>tab &gt;<strong> Disks</strong>.</li><li>Click the<strong> Actions</strong> button next to the disk you want to assign to another VM, then click the <strong>Assign to VS</strong> button.</li><li><p>On the screen that appears, select a target VM from a drop-down box.</p></li><li><p>Click<strong> Assign</strong>.<span style="color: rgb(134,19,0);"> </span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Be aware, that the source VM will be automatically powered off after assigning a disk to another VM.</p></div></div></li></ol><p>To re-assign the disk back to the primary VM:</p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt;<strong> Virtual Servers </strong>menu.</li><li>Click the label of a virtual machine to open its details screen.</li><li>Click the <strong>Storage </strong>tab &gt;<strong> Disks</strong>.</li><li><p>Click the<strong> Actions</strong> button next to the disk you want to reassign to source VM, then click the <strong>Assign back</strong> button. Confirm the action.</p></li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingvirtualmachinedisksvVHS9.0-deleteDeletingVirtualMachineDisks"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinedisksvVHS9.0-delete"></span>Deleting Virtual Machine Disks</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Virtual Servers</strong> menu.</li><li>Ensure your virtual machine is powered off, then click its label to open its details screen.</li><li>Click the <strong>Storage</strong> &gt; <strong>Disks</strong> tab.</li><li><p><span>Click the </span><strong>Actions </strong><span>button next to the disk you want to delete, then click </span><span><strong>Delete</strong>.</span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Steps 5 and 6 apply to disks of VMs that are on.</p></div></div></li><li><span>In the pop-up window, move the <strong>Force Reboot</strong> slider to the right, then select the VM shutdown type.</span></li><li><p>Move the <strong>Required Startup </strong>slider to the right to start up the VM automatically after the network is rebuilt.</p></li><li><p>Click the<strong> Destroy Disk </strong>button.</p></li></ol><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>This will schedule the <em>Destroy disk</em> transaction. If the <em>Destroy disk</em> transaction is scheduled, all backups for the disk will be removed as well.</p></div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Redundancy by replication vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Storage-Administration_195792531.html">Virtuozzo Storage Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Concepts-and-Features_195793067.html">Concepts and Features</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Data-Redundancy_195793070.html">Data Redundancy</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Redundancy-by-Replication_195793077.html">Redundancy by Replication</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Redundancy by replication vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span>With replication, Virtuozzo Hybrid Storage breaks the incoming data stream into 256 MB chunks. Each chunk </span><span>is replicated</span><span>, </span><span>and</span><span> replicas are stored on different failure domains, so each failure domain has only one replica of a given chunk.</span></p><p>The following diagram illustrates the 2 replicas' redundancy mode with the host failure domain.</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p style="text-align: center;"><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image confluence-external-resource" draggable="false" src="https://docs.virtuozzo.com/virtuozzo_hybrid_infrastructure_6_1_admins_guide/resources/images/replication.png" data-image-src="https://docs.virtuozzo.com/virtuozzo_hybrid_infrastructure_6_1_admins_guide/resources/images/replication.png"></span></p><p>Replication in<span> </span><span>Virtuozzo Storage</span><span> </span>is similar to the RAID rebuild process, but has two key differences:</p><ul><li>Replication in<span> </span><span>Virtuozzo Storage</span><span> </span>is much faster than that with a typical online RAID 1/5/10 rebuild. The reason is that<span> </span><span>Virtuozzo Storage</span><span> </span>replicates chunks parallel to multiple failure domains.</li><li>The more storage nodes are in a cluster, the faster the cluster will recover from a disk or node failure.</li></ul><p>High replication performance minimizes the periods of reduced redundancy for the cluster. Replication performance is affected by:</p><ul><li>The number of available storage nodes. As the replication runs in parallel, the more available replication sources and destinations there are, the faster it is.</li><li>Performance of storage node disks.</li><li>Network performance. All replicas are transferred between failure domains over the network. For example, 1 Gbps throughput can be a bottleneck.</li><li>Distribution of data in the cluster. Some storage nodes may have much more data to replicate than others and become overloaded during replication.</li><li>I/O activity in the cluster during replication.</li></ul></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

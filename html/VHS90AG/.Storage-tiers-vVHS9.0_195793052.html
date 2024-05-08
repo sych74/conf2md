@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Storage tiers vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Storage-Administration_195792531.html">Virtuozzo Storage Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Concepts-and-Features_195793067.html">Concepts and Features</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Storage-Tiers_195793053.html">Storage Tiers</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Storage tiers vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(0,0,0);">In<span> </span></span><span style="color: rgb(0,0,0);">Virtuozzo Storage</span><span style="color: rgb(0,0,0);"><span> </span>terminology, tiers are disk groups that allow you to organize storage workloads based on your criteria. For example, you can use tiers to separate workloads produced by different tenants. Or you can have a tier of fast SSDs for service or virtual environment workloads and a tier of high-capacity HDDs for backup storage.</span></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.StoragetiersvVHS9.0-Migratedatamanuallybetweentiers(default)">Migrate data manually between tiers (default)</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(0,0,0);">When required, you can manually migrate data from one tier to another. To start data migration, ensure that the target tier has enough free space, and then select the desired tier in the settings of the current storage policy.</span></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.StoragetiersvVHS9.0-Migratedataautomaticallybetweentiers">Migrate data automatically between tiers</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Automatic data migration between tiers works in the inter-tier data allocation mode and is disabled by default. In this mode, data is automatically migrated to a lower tier if the current tier is full. To enable the inter-tier data allocation mode, use<span> </span><code>vstorage -c &lt;cluster_name&gt; set-config mds.alloc.strict_tier=0</code><span> </span>command.</p><p>When assigning disks to tiers (which you can do at any time), <span>remember to assign faster storage drives to higher tiers</span>. For example, you can use tier 0 for backups and other cold data (CS without SSD cache); tier 1 for virtual environments—a lot of cold data but fast random writes (CS with SSD cache); and tier 2 for hot data (CS on SSD), caches, specific disks, and such.</p><p>This recommendation is related to how<span> </span><span>Virtuozzo Storage</span><span> </span>works with storage space in the inter-tier data allocation mode. If a storage tier runs out of free space,<span> </span><span>Virtuozzo Storage</span><span> </span>will attempt to temporarily use the space of the lower tiers down to the lowest. If the lowest tier also becomes full,<span> </span><span>Virtuozzo Storage</span><span> </span>will attempt to use a higher one. If you add more storage to the original tier later, the data, temporarily stored elsewhere, will be moved to the tier where it should have been stored originally. For example, if you try to write data to tier 2 and it is full,<span> </span><span>Virtuozzo Storage</span><span> </span>will attempt to write that data to tier 1, and then to tier 0. If you add more storage to tier 2 later, the aforementioned data, now stored on tier 1 or 0, will be moved back to tier 2, where it was meant to be stored originally.</p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

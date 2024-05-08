@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Configuring cluster discovery vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Storage-Administration_195792531.html">Virtuozzo Storage Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Setting-Up-a-Virtuozzo-Storage-Cluster_195792536.html">Setting Up a Virtuozzo Storage Cluster</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Configuring-Cluster-Discovery_195792542.html">Configuring Cluster Discovery</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Configuring cluster discovery vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Virtuozzo Storage discovery is the process of:</p><ol class="arabic simple"><li><p>Detecting all available cluster names on the network. Each Virtuozzo Storage cluster is identified by a unique name. All cluster tools use this name when performing specific operations on the cluster or monitoring its health and status.</p></li><li><p>Resolving the detected cluster names into the network addresses of MDS servers. MDS servers are the central components of any cluster, so all cluster tools must be able to discover their IP addresses.</p></li></ol><p>To set up cluster discovery in your network, you can use one of the following techniques:</p><ul class="simple"><li><p>(Recommended) DNS records (see<span> </span><a href="#id-.ConfiguringclusterdiscoveryvVHS9.0-use_dns_records"><span class="std std-ref">Using DNS records</span></a>),</p></li><li><p>Zeroconf (see<span> </span><a href="#id-.ConfiguringclusterdiscoveryvVHS9.0-set_up_zeroconf"><span class="std std-ref">Setting up Zeroconf</span></a>).</p></li></ul><p>You can also manually specify the information about metadata servers when setting up or configuring the cluster (see<span> </span><a href="#id-.ConfiguringclusterdiscoveryvVHS9.0-specify_mds_servers_manually"><span class="std std-ref">Specify MDS servers manually</span></a>).</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">To verify that the Hardware Node can discover the cluster, use the<span> </span></span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">discover</span></code><span style="color: rgb(0,0,0);"><span> </span>command.</span></p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ConfiguringclusterdiscoveryvVHS9.0-use_dns_recordsUseDNSrecords"><span class="confluence-anchor-link" id="id-.ConfiguringclusterdiscoveryvVHS9.0-use_dns_records"></span>Use DNS records</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>The recommended way of configuring cluster discovery is to use special DNS records. The process of setting up this type of cluster discovery includes two steps:</p><ol class="arabic simple"><li><p>Announcing the information about running MDS servers in the cluster so that chunk servers, clients, and new MDS servers can automatically obtain this information when necessary. You do this using DNS SRV records.</p></li><li><p>Defining DNS TXT records or enabling DNS zone transfers so that you can discover the unique names of available clusters when necessary.</p></li></ol><h3 id="id-.ConfiguringclusterdiscoveryvVHS9.0-AnnouncetheinformationaboutMDSservers">Announce the information about MDS servers</h3><p>You can use SRV records to announce the information about running MDS servers in the cluster. The service field of an SRV record pointing to an MDS server must have the following format:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">_pstorage._tcp.CLUSTER_NAME</pre>
+</div></div><p>Where:</p><ul class="simple"><li><p><code class="docutils literal notranslate"><span class="pre">_pstorage</span></code><span> </span>is the symbolic name reserved for Virtuozzo Storage.</p></li><li><p><code class="docutils literal notranslate"><span class="pre">_tcp</span></code><span> </span>denotes that Virtuozzo Storage uses the TCP protocol for communication in the cluster.</p></li><li><p><code class="docutils literal notranslate"><span class="pre">CLUSTER_NAME</span></code><span> </span>is the name of the Virtuozzo Storage cluster described by the record.</p></li></ul><p>The following example shows a DNS zone file that contains records for three MDS servers listening on the default port 2510 and configured for the<span> </span><code class="docutils literal notranslate"><span class="pre">stor1</span></code><span> </span>cluster:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">$ORIGIN stor.test.
+$TTL    1H
+@       IN SOA ns rname.invalid. (1995032001 5H 10M 1D 3H)
+        NS @
+        A       192.168.100.1
+s1      A       192.168.100.1
+s2      A       192.168.100.2
+s3      A       192.168.100.3
+; SERVICE SECTION
+; MDS for the &#39;stor1&#39; cluster runs on s1.stor.test and listens on port 2510
+_pstorage._tcp.stor1 SRV 0 1 2510     s1
+; MDS for the &#39;stor1&#39; cluster runs on s2.stor.test and listens on port 2510
+_pstorage._tcp.stor1 SRV 0 1 2510     s2
+; MDS for the &#39;stor1&#39; cluster runs on s3.stor.test and listens on port 2510
+_pstorage._tcp.stor1 SRV 0 1 2510     s3
+; eof</pre>
+</div></div><p><br/></p><p>Once you configure DNS SRV records for the<span> </span><code class="docutils literal notranslate"><span class="pre">stor1</span></code><span> </span>cluster, you can list them by issuing the following SRV query:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># host -t SRV _pstorage._tcp.stor1
+_pstorage._tcp.stor1.stor.test has SRV record 0 1 2510 s1.stor.test.
+_pstorage._tcp.stor1.stor.test has SRV record 0 1 2510 s2.stor.test.
+_pstorage._tcp.stor1.stor.test has SRV record 0 1 2510 s3.stor.test.</pre>
+</div></div><h3 id="id-.ConfiguringclusterdiscoveryvVHS9.0-Discoverclusternames">Discover cluster names</h3><p><span style="color: rgb(0,0,0);">The easiest and most efficient way of discovering the names of clusters in your network is to specify all cluster names in<span> </span></span><code class="docutils literal notranslate"><span class="pre">pstorage_clusters</span></code><span style="color: rgb(0,0,0);"><span> </span>TXT records of DNS zone files. The following example provides a sample of valid TXT record formats for Virtuozzo Storage clusters:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">pstorage_clusters    300    IN     TXT    &quot;cluster1,cluster2&quot; &quot;cluster3,cluster4&quot;
+pstorage_clusters    300    IN     TXT    &quot;cluster5&quot;
+pstorage_clusters    300    IN     TXT    &quot;cluster6&quot; &quot;cluster7&quot;</pre>
+</div></div><p><span style="letter-spacing: 0.0px;">Another way to discover cluster names in your network is to use DNS zone transfers. Once DNS zone transfers are enabled, cluster tools will be able to retrieve all DNS SRV records from DNS zone files and extract cluster names from these records.</span></p><p>After you set up cluster discovery via DNS TXT records or DNS zone transfers, you can run the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">discover</span></code><span> </span>command on any of the cluster servers to discover the names of all clusters in your network:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage discover
+02-10-12 13:16:46.233 Discovering using DNS TXT records: OK
+02-10-12 13:16:46.308 Discovering using DNS zone transfer: FAIL
+stor1
+stor2
+stor3</pre>
+</div></div><p>The example<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span></code><span> </span>output shows that:</p><ul class="simple"><li><p>Cluster names are discovered via the DNS TXT records.</p></li><li><p>Three clusters with the names, such as<span> </span><code class="docutils literal notranslate"><span class="pre">stor1</span></code>,<span> </span><code class="docutils literal notranslate"><span class="pre">stor2</span></code>, and<span> </span><code class="docutils literal notranslate"><span class="pre">stor3</span></code><span> </span>are currently set up on the network.</p></li></ul><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ConfiguringclusterdiscoveryvVHS9.0-set_up_zeroconfSetupZeroconf"><span class="confluence-anchor-link" id="id-.ConfiguringclusterdiscoveryvVHS9.0-set_up_zeroconf"></span>Set up Zeroconf</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="confluence-information-macro confluence-information-macro-warning"><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">Zeroconf discovery does not work if services are running in containers or virtual machines.</span></p></div></div><span style="color: rgb(0,0,0);">Zeroconf is another method of discovering cluster names and resolving the discovered names into the IP addresses of running MDS servers. This method does not require any special configuration efforts on your part, except ensuring that multicasts are supported and enabled on your network.</span><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">To verify that the Hardware Node can discover the cluster, use the<span> </span></span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">discover</span></code><span style="color: rgb(0,0,0);"><span> </span>command.</span></p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ConfiguringclusterdiscoveryvVHS9.0-specify_mds_servers_manuallySpecifyMDSserversmanually"><span class="confluence-anchor-link" id="id-.ConfiguringclusterdiscoveryvVHS9.0-specify_mds_servers_manually"></span>Specify MDS servers manually</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>If you cannot configure the DNS records in your network, you need to manually specify the IP addresses of all running MDS servers in the cluster each time you do any of the following:</p><ul class="simple"><li><p>Set up a new MDS server in a cluster (except for the first MDS server). For details, see<span> </span><a href=".Configuring-MDS-servers-vVHS9.0_195792601.html"><span class="std std-ref">Adding MDS Servers</span></a>.</p></li><li><p>Set up a new chunk server to a cluster. For details, see<span> </span><a href=".Setting-up-chunk-servers-vVHS9.0_195792577.html"><span class="std std-ref">Setting Up Chunk Servers</span></a>.</p></li><li><p>Set up a new client for a cluster. For details, see<span> </span><a href=".Setting-up-clients-vVHS9.0_195792585.html"><span class="std std-ref">Setting Up Clients</span></a>.</p></li></ul><p>To specify the IP address of an MDS server manually, create the<span> </span><code class="docutils literal notranslate"><span class="pre">bs.list</span></code><span> </span>file in the<span> </span><code class="docutils literal notranslate"><span class="pre">/etc/vstorage/clusters/Cluster_Name</span></code><span> </span>directory (make this directory if it does not exist) on the server you are configuring for the cluster and specify in it the IP address and port to use for connecting to the MDS server. For example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># echo &quot;10.30.100.101:2510&quot; &gt;&gt; /etc/vstorage/clusters/stor1/bs.list
+# echo &quot;10.30.100.102:2510&quot; &gt;&gt; /etc/vstorage/clusters/stor1/bs.list</pre>
+</div></div><p>This command:</p><ol class="arabic simple"><li><p>Assumes that you are configuring discovery for the<span> </span><code class="docutils literal notranslate"><span class="pre">stor1</span></code><span> </span>cluster (thus, the directory name of<span> </span><code class="docutils literal notranslate"><span class="pre">/etc/vstorage/clusters/stor1</span></code>).</p></li><li><p>Creates the<span> </span><code class="docutils literal notranslate"><span class="pre">/etc/vstorage/clusters/stor1/bs.list</span></code><span> </span>file on the server, if it did not exist before.</p></li><li><p>Adds the information on two MDS servers with IP addresses 10.30.100.101 and 10.30.100.102 to the<span> </span><code class="docutils literal notranslate"><span class="pre">bs.list</span></code><span> </span>file.</p></li></ol><p><br/></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

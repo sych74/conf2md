@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Logs vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Identity-Management_195791864.html">Identity Management</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tools_195791988.html">Tools</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Logs_195791994.html">Logs</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Logs vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>OnApp logs all cloud management actions that take place on cloud resources, including virtual machines, disks, data stores, compute resources, templates, networks. </p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ignore the options specified in your Control Panel but not mentioned in the documents.</p></div></div><hr/><h2 id="id-.LogsvVHS9.0-ViewandManageLogs">View and Manage Logs</h2><p><span>To access and manage logs, go to your Control Panel &gt;<strong> Admin</strong> &gt; <strong>Logs</strong> menu, where you can view the log of all transactions in the cloud. The<em> Activity Log</em> table provides the following details:</span></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ul><li><em>Icon</em> - indicates the status of an action.</li><li><p><em>Ref</em> - the number that you can click to view details of a specific transaction.</p></li><li><em>Date</em> - time when the action was performed.</li><li><em>Action</em> - the name of the transaction.</li><li><p><em>Target</em> - cloud resource with an identification number that you can click to view its details.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>You can view details on target cloud resources that <span>are displayed</span> in bold, indicating that they are available in the cloud. You cannot view details on resources that are unavailable, for example, resources that failed to be created.</p></div></div></li><li><em>Dependent</em> - the reference number of the previous transaction on which the current transaction depends.</li></ul><p><span style="color: rgb(51,51,51);"><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" draggable="false" width="700" src="attachments/195791993/195792260.png" data-image-src="attachments/195791993/195792260.png" data-unresolved-comment-count="0" data-linked-resource-id="195792260" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2024-4-19_14-45-41.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195791993" data-linked-resource-container-version="8" alt=""></span><br/></span></p><p><span style="color: rgb(51,51,51);">On the <strong>Logs</strong> page, you can click: </span></p><ul><li><span style="color: rgb(51,51,51);"><strong>Hide Successful Market Notifications</strong> to remove from the list actions that were performed successfully. Click this button again to show the full list.</span> </li><li><strong>Complete</strong>,<strong> Running</strong>, <strong>Failed</strong>,<strong> </strong>or<strong> Cancelled </strong>to filter logs by their status.</li><li><strong>Failover Processes</strong> to view the list of failover logs. See the <a href=".Failover-configuration-vVHS9.0_195791856.html">Failover Processes</a> section for details.</li><li><strong>Clean Logs</strong> to clear the logs completely.</li><li><strong>Cancel All Pending Tasks</strong> to cancel all tasks scheduled for completion.</li><li><strong>Cancel All Pending Backups</strong> to remove all pending backups.</li></ul><p>To search for a specific transaction, you can use the search box at the top.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(255,0,0);"><span style="color: rgb(0,0,0);">You can cancel a <em>TakeBackup</em> transaction, which is running longer and exceeding the time set for a zombie transaction and for</span> <a href=".Virtual-machine-transactions-and-logs-vVHS9.0_195791580.html">virtual machines</a><span style="color: rgb(0,0,0);">.</span></span></p></div></div><p><span>You can also relegate &quot;pending&quot; transactions to the failed status. To do so, hover over the pending status icon of a transaction, click <span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" draggable="false" width="18" src="attachments/195791993/195791996.png" data-image-src="attachments/195791993/195791996.png" data-unresolved-comment-count="0" data-linked-resource-id="195791996" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="cross.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195791993" data-linked-resource-container-version="8" alt=""></span></span><span> that appears. This option becomes available if the transaction has been pending for the period of time specified in the </span><strong>Settings </strong><span>&gt;</span><strong> Admin</strong><span> &gt;</span><strong> Configuration</strong><span> &gt; </span><strong>Zombie</strong><span> transaction time parameter.</span></p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>You can see transaction logs updated in real time. This is achieved by means of the <code>tail -f</code> Unix command, which causes the <code>tail</code> command to not stop when the end of the file is reached but rather to wait for additional data to be appended to the output.</p><p><span>To enhance readability, the following log items are pointed out with color and font size:</span></p><ul><li>Remote Server</li><li>Fatal</li><li>Executing Rollback</li></ul></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.LogsvVHS9.0-ChangeTracking">Change Tracking</h2><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>To view changes that have been made during a transaction, ensure you have the appropriate <a href=".Sysadmin-vVHS9.0_195792001.html">Resource Diff permissions</a> enabled.</p></div></div><p>If the size of certain resources is changed, the logs will contain information about both the current and previous size of the resource. Change tracking is available for the following transactions:</p><ul><li><em>Resize Disk</em> - changes of the disk size.</li><li><em>ResizeVirtualServer</em> - changes to a VM's number of CPU cores, priority value, and RAM size.</li><li><em>ResizeApplicationServer</em> - changes to an application server's number of CPU cores, priority value, and RAM size.</li><li><em>ResizeVirtualServerwithoutreboot</em> - changes to a VM's number of CPU cores, priority value, and RAM size performed without a reboot.</li><li><em>ResizeApplicationServerwithoutreboot</em> - changes to an application server's number of CPU cores, priority value, and RAM size performed without a reboot.</li><li><em>UpdateResourcePool</em> - changes to the resource pool's resources.</li><li><em>EditFirewallRule</em> - changes to the firewalls.</li><li><em>EditNATRule</em> - changes to the NAT rules.</li><li><em>EditIPSECVPNRule</em> - changes to the IPSECVPN rules.</li><li><em>HotMigrate</em> - changes to the ID, label, and IP address of the source/destination compute resource when the VM is online.</li><li><em>ColdMigrate - </em>changes to the ID, label, and IP address of the source/destination compute resource when the VM is offline.</li></ul><p>To view resource changes in these transactions:</p><ul><li>For all resources in the cloud: go to the <em>Activity Log</em> section of the <strong>Control Panel</strong> page or your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Logs</strong> &gt; <em>Ref number.</em></li><li>For a virtual machine's resources: go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Virtual Servers</strong> &gt; <em>Label</em> &gt; <strong>Activity Log</strong> &gt; <em>Ref number.</em></li></ul><p>At the beginning of the page that loads, you will see a table with the list of resources with their values before and after the transaction.</p><hr/><h2 id="id-.LogsvVHS9.0-FailoverProcesses">Failover Processes</h2><p><span style="color: rgb(51,51,51);">Failover processes show the list of failover logs that take place on the compute zones. </span></p><p><span style="color: rgb(51,51,51);">To view the list of failover processes:</span></p><ol><li><span style="color: rgb(51,51,51);">Go to your Control Panel &gt;<span> </span><strong>Admin</strong><span> </span>&gt;<strong> Logs </strong>menu.</span></li><li><span style="color: rgb(51,51,51);">Click the<span> </span><strong>Failover Processes</strong><span> </span>button. On the page that appears, you can see the following information for each failover log:</span><br/><ul><li><span style="color: rgb(51,51,51);">Failover number</span></li><li><span style="color: rgb(51,51,51);">Indication of the time when it started </span></li><li><span style="color: rgb(51,51,51);">Compute zone on which the failover happened</span></li><li><span style="color: rgb(51,51,51);">Time of the last iteration</span></li><li><span style="color: rgb(51,51,51);">Failover action status: active or completed</span></li></ul></li></ol><p><span style="color: rgb(51,51,51);"><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" draggable="false" width="700" src="attachments/195791993/195792263.png" data-image-src="attachments/195791993/195792263.png" data-unresolved-comment-count="0" data-linked-resource-id="195792263" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Capture.PNG" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195791993" data-linked-resource-container-version="8" alt=""></span><br/></span></p><p>To view the failover transaction details, click its reference number. <span>For more information on failover, refer to the </span><a href=".Failover-configuration-vVHS9.0_195791856.html">Failover configuration</a><span> section of this guide.</span></p><hr/><p><br/></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791993/195791995.png">logs.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791993/195791996.png">cross.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791993/195791998.png">failover.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791993/195792260.png">image2024-4-19_14-45-41.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791993/195792263.png">Capture.PNG</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

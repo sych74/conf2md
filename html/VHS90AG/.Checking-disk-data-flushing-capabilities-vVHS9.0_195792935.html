@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Checking disk data flushing capabilities vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Storage-Administration_195792531.html">Virtuozzo Storage Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="System-Requirements_195792839.html">System Requirements</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Disk-Requirements_195792896.html">Disk Requirements</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Checking-Disk-Data-Flushing-Capabilities_195792936.html">Checking Disk Data Flushing Capabilities</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Checking disk data flushing capabilities vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>It is highly recommended to ensure that all storage devices you plan to include in your cluster can flush data from the cache to the disk if the power goes out unexpectedly. Thus you will find devices that may lose data in a power failure.</p><p><span>Virtuozzo Hybrid Server</span><span> </span>ships with the<span> </span><code>vstorage-hwflush-check</code><span> </span>tool that checks how a storage device flushes data to disk in emergencies. The tool is implemented as a client/server utility:</p><ul><li>The client continuously writes blocks of data to the storage device. When a data block is written, the client increases a special counter and sends it to the server that keeps it.</li><li>The server keeps track of counters incoming from the client and always knows the next counter number. If the server receives a counter smaller than the one it has (for example, because the power has failed and the storage device has not flushed the cached data to disk), the server reports an error.</li></ul><p><span style="color: rgb(0,0,0);">To check that a storage device can successfully flush data to disk when power fails, follow the procedure below:</span></p><ol><li><p>On one node, run the server:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage-hwflush-check -l</pre>
+</div></div></li><li><p><span style="color: rgb(0,0,0);"><span style="color: rgb(0,0,0);"><span style="color: rgb(0,0,0);">On a different node that hosts the storage device you want to test, run the client. For example:<br/></span></span></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage-hwflush-check -s vstorage1.example.com -d /vstorage/stor1-ssd/test -t 50</pre>
+</div></div><p style="text-align: left;">where</p><ul style="text-align: left;"><li><code><a href="http://vstorage1.example.com" class="external-link" rel="nofollow">vstorage1.example.com</a></code><span> </span>is the hostname of the server.</li><li><code>/vstorage/stor1-ssd/test</code><span> </span>is the directory to use for data flushing tests. During execution, the client creates a file in this directory and writes data blocks to it.</li><li>50 is the number of threads for the client to write data to disk. Each thread has its file and counter. You can increase the number of threads (max. 200) to test your system in more stressful conditions. You can also specify other options when running the client. For more information on available options, refer to the<span> </span><code>vstorage-hwflush-check</code><span> </span>manual page.</li></ul></li><li><p>Wait for at least 10-15 seconds, cut power from the client node (either press the Power button or pull the power cord out), and then power it on again.</p></li><li><p>Restart the client:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage-hwflush-check -s vstorage1.example.com -d /vstorlage/stor1-ssd/test -t 50</pre>
+</div></div></li></ol><p><span style="color: rgb(0,0,0);">Once launched, the client will read all previously written data, determine the version of data on the disk, and restart the test from the last valid counter. It then will send this valid counter to the server and the server will compare it to the latest counter it has. You may see output like:</span></p><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">id&lt;N&gt;:&lt;counter_on_disk&gt; -&gt; &lt;counter_on_server&gt;</pre>
+</div></div><p>which means one of the following:</p><ul><li>If the counter on the disk is lower than the counter on the server, the storage device has failed to flush the data to the disk. Avoid using this storage device in production, especially for CS or journals, as you risk losing data.</li><li>If the counter on the disk is higher than the counter on the server, the storage device has flushed the data to the disk but the client has failed to report it to the server. The network may be too slow or the storage device may be too fast for the set number of load threads, so consider increasing it. This storage device can be used in production.</li><li>If both counters are equal, the storage device has flushed the data to the disk and the client has reported it to the server. This storage device can be used in production.</li></ul><p>To be on the safe side, repeat the procedure several times. Once you have checked your first storage device, continue with all of the remaining devices you plan to use in the cluster. You need to test all devices you plan to use in the cluster—SSD disks used for CS journaling and disks used for MDS journals and chunk servers.</p>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Improving high-capacity HDD performance vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Storage-Administration_195792531.html">Virtuozzo Storage Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Maximizing-Cluster-Performance_195792745.html">Maximizing Cluster Performance</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Improving-High-Capacity-HDD-Performance_195792806.html">Improving High-Capacity HDD Performance</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Improving high-capacity HDD performance vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Unlike older hard disks with 512-byte sectors, many modern HDDs (3TB and more in capacity) use 4 KB physical sectors. In certain cases, it can greatly reduce system performance (by 3-4 times) due to extra Read-Modify-Write (RMW) cycles required to align the source write request. Why does this happen? When an operating system issues an unaligned write request, the HDD has to align the beginning and end of that request to 4 KB boundaries. To do this, the HDD reads the request’s head and tail ranges to determine an even number of sectors to modify. For example, on a request to write a 4 KB block at a 2 KB offset, HDD will read the 0-2KB and 6-8 KB ranges to modify the entire 0-8 KB data range.</p><p>The typical reasons for poor performance with 4 KB sector HDDs are:</p><ol class="arabic simple"><li><p>Host OS file system unaligned on the 4 KB boundary. The<span> </span><code class="docutils literal notranslate"><span class="pre">make-cs</span></code><span> </span>command of Virtuozzo Storage tries to detect and report such issues to the administrator in advance, but be aware that the<span> </span><code class="docutils literal notranslate"><span class="pre">fdisk</span></code><span> </span>utility is not recommended for partitioning HDDs. Use<span> </span><code class="docutils literal notranslate"><span class="pre">parted</span></code><span> </span>instead.</p></li><li><p>Unaligned writes (for example, 1 KB) performed by guest OS. Many legacy operating systems, like Microsoft Windows XP and Windows Server 2003 or Red Hat Enterprise Linux 5.x, have unaligned partitions by default and generate unaligned I/O patterns which are quite slow on both Virtuozzo Storage and actual HDDs with 4 KB sectors. If you plan to run such legacy operating systems, consider the following:</p><ul class="simple"><li><p>Using smaller HDDs with 512-byte sectors, or use SSD journaling for CS services which mitigates the issue to some extent.</p></li><li><p>Aligning OS partitions properly as described in<span> </span><a class="external-link" href="https://docs.virtuozzo.com/virtuozzo_hybrid_server_7_users_guide/advanced-tasks/aligning-disks-and-partitions-in-virtual-machines.html#aligning-disks-and-partitions-in-virtual-machines" style="text-decoration: none;" rel="nofollow"><span class="xref std std-ref">Aligning Disks and Partitions in Virtual Machines</span></a>.</p></li></ul></li></ol><p><span style="color: rgb(0,0,0);">You can check for unaligned write operations in the cluster as follows:</span></p><ol><li><p><span style="color: rgb(0,0,0);">Run the<span> </span></span><code class="docutils literal notranslate" style="text-align: left;"><span class="pre">vstorage</span><span> </span><span class="pre">top</span></code><span style="color: rgb(0,0,0);"><span> </span>or<span> </span></span><code class="docutils literal notranslate" style="text-align: left;"><span class="pre">stat</span></code><span style="color: rgb(0,0,0);"><span> </span>command. For example:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 top</pre>
+</div></div></li><li><p>Press<span> </span><strong>i</strong><span> </span>to display the<span> </span><strong>RMW</strong><span> </span>and<span> </span><strong>JRMW</strong><span> </span>columns in the CS part of the<span> </span><code class="docutils literal notranslate"><span class="pre">top</span></code><span> </span>output.</p></li><li><p>Check the<span> </span><strong>RMW</strong><span> </span>or<span> </span><strong>JRMW</strong><span> </span>counters, which are explained below.</p><ul class="simple"><li><p>When SSD journaling is used, the<span> </span><strong>RMW</strong><span> </span>counter shows the number of requests that lead to Read-Modify-Write cycles, while the<span> </span><strong>JRMW</strong><span> </span>counter shows the number of Read-Modify-Write cycles mitigated by the use of SSD journals.</p></li><li><p>When SSD journaling is not used, the<span> </span><strong>JRMW</strong><span> </span>counter shows the number of unaligned requests that potentially generate Read-Modify-Write cycles on the HDD in question.</p></li></ul></li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ImprovinghighcapacityHDDperformancevVHS9.0-ImprovingVirtualDiskPerformance">Improving Virtual Disk Performance</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>This section lists ways of improving the performance of virtual disks.</p><h3 id="id-.ImprovinghighcapacityHDDperformancevVHS9.0-PreventingPartitionMisalignmentinLegacyOperatingSystems">Preventing Partition Misalignment in Legacy Operating Systems</h3><p>Virtual disks in virtual machines running legacy guest operating systems such as Windows Server 2003, Windows XP, Windows 2000, CentOS 5, or RHEL 5 may work slower because of partition misalignment. For solutions to this issue, see<span> </span><a class="external-link" style="text-decoration: none;" href="https://docs.virtuozzo.com/virtuozzo_hybrid_server_7_users_guide/advanced-tasks/aligning-disks-and-partitions-in-virtual-machines.html#aligning-disks-and-partitions-in-virtual-machines" rel="nofollow"><span class="xref std std-ref">Aligning Disks and Partitions in Virtual Machines</span></a>.</p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Monitoring chunk servers vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Storage-Administration_195792531.html">Virtuozzo Storage Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Monitoring-Virtuozzo-Storage-Clusters_195792690.html">Monitoring Virtuozzo Storage Clusters</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Monitoring-Chunk-Servers_195792701.html">Monitoring Chunk Servers</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Monitoring chunk servers vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(0,0,0);">By monitoring chunk servers, you can keep track of the disk space available in a Virtuozzo Storage cluster. To monitor chunk servers, use the<span> </span></span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">-c</span><span> </span><span class="pre">&lt;cluster_name&gt;</span><span> </span><span class="pre">top</span></code><span style="color: rgb(0,0,0);"><span> </span>command, for example:</span></p><p><span style="color: rgb(0,0,0);"><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image align-center confluence-external-resource image-center" draggable="false" src="https://docs.virtuozzo.com/virtuozzo_storage_administrators_command_line_guide/_images/image023.png" data-image-src="https://docs.virtuozzo.com/virtuozzo_storage_administrators_command_line_guide/_images/image023.png"></span></span></p><p><span style="color: rgb(0,0,0);">The command above shows detailed information about the<span> </span><code class="docutils literal notranslate"><span class="pre">stor1</span></code><span> </span>cluster. The monitoring parameters for chunk servers (highlighted in red) are explained in the table below:</span></p><div class="table-wrap"><table class="wrapped confluenceTable"><thead><tr><th style="text-align: left;" class="confluenceTh"><p>Parameter</p></th><th style="text-align: left;" class="confluenceTh"><p>Description</p></th></tr></thead><tbody><tr><td class="confluenceTd"><p>CSID</p></td><td class="confluenceTd"><p>Chunk server identifier (ID).</p></td></tr><tr><td class="confluenceTd"><p>STATUS</p></td><td class="confluenceTd"><p>Chunk server status:</p><ul class="simple"><li><p>active. The chunk server is up and running.</p></li><li><p>Inactive. The chunk server is temporarily unavailable. A chunk server is marked as inactive during its first 5 minutes of inactivity.</p></li><li><p>offline. The chunk server is inactive for more than 5 minutes. After the chunk server goes offline, the cluster starts replicating data to restore the chunks that were stored on the affected chunk server.</p></li><li><p>dropped. The chunk serve was removed by the administrator.</p></li></ul></td></tr><tr><td class="confluenceTd"><p>SPACE</p></td><td class="confluenceTd"><p>Total amount of disk space on the chunk server.</p></td></tr><tr><td class="confluenceTd"><p>FREE</p></td><td class="confluenceTd"><p>Free disk space on the chunk server.</p></td></tr><tr><td class="confluenceTd"><p>REPLICAS</p></td><td class="confluenceTd"><p>Number of replicas stored on the chunk server.</p></td></tr><tr><td class="confluenceTd"><p>IOWAIT</p></td><td class="confluenceTd"><p>Percentage of time spent waiting for I/O operations being served.</p></td></tr><tr><td class="confluenceTd"><p>IOLAT</p></td><td class="confluenceTd"><p>Average/maximum time, in milliseconds, the client needed to complete a single IO operation during the last 20 seconds.</p></td></tr><tr><td class="confluenceTd"><p>QDEPTH</p></td><td class="confluenceTd"><p>Average chunk server I/O queue depth.</p></td></tr><tr><td class="confluenceTd"><p>HOST</p></td><td class="confluenceTd"><p>Chunk server hostname or IP address.</p></td></tr><tr><td class="confluenceTd"><p>FLAGS</p></td><td class="confluenceTd"><div class="content-wrapper"><p>The following flags may be shown for active chunk servers:</p><ul class="simple"><li><p>J: The CS uses a write journal.</p></li><li><p>C: Checksumming is enabled for the CS. Checksumming lets you know when a third party changes the data on the disk.</p></li><li><p>D: Direct I/O, the normal state for a CS without a write journal.</p></li><li><p>c: The chunk server’s write journal is clean; there is nothing to commit from the write journaling SSD to the HDD where the CS is located.</p></li></ul><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Flags that may be shown for failed chunk servers are described in<span> </span><a href=".Troubleshooting-vVHS9.0_195792813.html"><span class="std std-ref">Failed Chunk Servers</span></a>.</p></div></div></div></td></tr></tbody></table></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.MonitoringchunkserversvVHS9.0-UnderstandingDiskSpaceUsage">Understanding Disk Space Usage</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(0,0,0);">Usually, you get the information on how disk space is used in your cluster with the<span> </span></span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">top</span></code><span style="color: rgb(0,0,0);"><span> </span>command. This command displays the following disk-related information: total space, free space, and allocatable space. For example:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 top
+connected to MDS#1
+Cluster &#39;stor1&#39;: healthy
+Space: [OK] allocatable 180GB of 200GB, free 1.6TB of 1.7TB
+&lt;...&gt;</pre>
+</div></div><p>In this command output:</p><ul><li><p>1.7 TB is the total disk space in the<span> </span><code class="docutils literal notranslate"><span class="pre">stor1</span></code><span> </span>cluster. The total disk space is calculated based on used and free disk space on all partitions in the cluster. Used disk space includes the space occupied by all data chunks and their replicas plus the space occupied by any other files stored on the cluster partitions.</p><p>Let us assume that you have a 100 GB partition, and 20 GB on this partition is occupied by some files. Now if you set up a chunk server on this partition, this will add 100 GB to the total disk space of the cluster, though only 80 GB of this disk space will be free and available for storing data chunks.</p></li><li><p>1.6 TB is the free disk space in the<span> </span><code class="docutils literal notranslate"><span class="pre">stor1</span></code><span> </span>cluster. Free disk space is calculated by subtracting the disk space occupied by data chunks and any other files on the cluster partitions from the total disk space.</p><p>For example, if the amount of free disk space is 1.6 TB and the total disk space is 1.7 TB, this means that about 100 GB on the cluster partitions are already occupied by some files.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image align-center confluence-external-resource image-center" draggable="false" src="https://docs.virtuozzo.com/virtuozzo_storage_administrators_command_line_guide/_images/image024.png" data-image-src="https://docs.virtuozzo.com/virtuozzo_storage_administrators_command_line_guide/_images/image024.png"></span></li><li><p><code class="docutils literal notranslate"><span class="pre">allocatable</span><span> </span><span class="pre">180GB</span><span> </span><span class="pre">of</span><span> </span><span class="pre">200GB</span></code><span> </span>is the amount of free disk space that can used for storing data chunks. See<span> </span><strong>Understanding allocatable disk space</strong><span> </span>below for details.</p></li></ul><h3 id="id-.MonitoringchunkserversvVHS9.0-UnderstandingAllocatableDiskSpace">Understanding Allocatable Disk Space</h3><p>When monitoring disk space information in the cluster, you also need to pay attention to the space reported by the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">top</span></code><span> </span>utility as<span> </span><em>allocatable</em>. Allocatable space is the amount of disk space that is free and can be used for storing user data. Once this space runs out, no data can be written to the cluster.</p><p>To better understand how allocatable disk space is calculated, let us consider the following example:</p><ul class="simple"><li><p>The cluster has three chunk servers. The first chunk server has 200 GB of disk space, the second one — 500 GB, and the third one — 1 TB.</p></li><li><p>The default replication factor of 3 is used in the cluster, meaning that each data chunk must have three replicas stored on three different chunk servers.</p></li></ul><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image align-center confluence-external-resource image-center" draggable="false" src="https://docs.virtuozzo.com/virtuozzo_storage_administrators_command_line_guide/_images/image025.png" data-image-src="https://docs.virtuozzo.com/virtuozzo_storage_administrators_command_line_guide/_images/image025.png"></span></p><p>In this example, the available disk space will equal 200 GB, that is, set to the amount of disk space on the smallest chunk server:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 top
+connected to MDS#1
+Cluster &#39;stor1&#39;: healthy
+Space: [OK] allocatable 180GB of 200GB, free 1.6TB of 1.7TB
+&lt;...&gt;</pre>
+</div></div><p>It is explained by the fact that in this cluster configuration, each server is set to store one replica for each data chunk. So once the disk space on the smallest chunk server (200 GB) runs out, no more chunks in the cluster can be created until a new chunk server is added or the replication factor is decreased.</p><p>If you now change the replication factor to 2, the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">top</span></code><span> </span>command will report the available disk space as 700 GB:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage set-attr -R /vstorage/stor1 replicas=2:1
+# vstorage -c stor1 top
+connected to MDS#1
+Cluster &#39;stor1&#39;: healthy
+Space: [OK] allocatable 680GB of 700GB, free 1.6TB of 1.7TB
+&lt;...&gt;</pre>
+</div></div><span style="color: rgb(0,0,0);">The available disk space has increased because now only two replicas are created for each data chunk, and new chunks can be made even if the smallest chunk server runs out of space (in this case, replicas will be stored on a bigger chunk server).</span><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">Allocatable disk space may also be limited by license.</span></p></div></div><h3 id="id-.MonitoringchunkserversvVHS9.0-ViewingSpaceOccupiedbyDataChunks">Viewing Space Occupied by Data Chunks</h3><p><span style="color: rgb(0,0,0);">To view the total amount of disk space occupied by all user data in the cluster, run the<span> </span></span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">top</span></code><span style="color: rgb(0,0,0);"><span> </span>command and press the V key on your keyboard. Once you do this, your command output should look like the following:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 top
+Cluster &#39;stor1&#39;: healthy
+Space: [OK] allocatable 180GB of 200GB, free 1.6TB of 1.7TB
+MDS nodes: 1 of 1, epoch uptime: 2d  4h
+CS nodes:  3 of 3 (3 avail, 0 inactive, 0 offline)
+Replication:  2 norm,  1 limit,  4 max
+Chunks: [OK] 38 (100%) healthy,  0 (0%) degraded,  0 (0%) urgent,
+             0 (0%) blocked,  0 (0%) offline,  0 (0%) replicating,
+             0 (0%) overcommitted,  0 (0%) deleting,  0 (0%) void
+FS:  1GB in 51 files, 51 inodes,  23 file maps,  38 chunks,  76 chunk replicas
+&lt;...&gt;</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">The<span> </span></span><strong>FS</strong><span style="color: rgb(0,0,0);"><span> </span>field shows the size of all user data in the cluster without consideration for replicas.</span></p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.MonitoringchunkserversvVHS9.0-ExploringChunkStates">Exploring Chunk States</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(0,0,0);">The table below lists all possible states a chunk can have.</span></p><div class="table-wrap"><table class="wrapped confluenceTable"><thead><tr><th style="text-align: left;" class="confluenceTh"><p>Status</p></th><th style="text-align: left;" class="confluenceTh"><p>Description</p></th></tr></thead><tbody><tr><td class="confluenceTd"><p>healthy</p></td><td class="confluenceTd"><p>Percentage of chunks that have enough active replicas. The normal state of chunks.</p></td></tr><tr><td class="confluenceTd"><p>replicating</p></td><td class="confluenceTd"><p>Percentage of chunks that are being replicated. Write operations on such chunks are frozen until replication ends.</p></td></tr><tr><td class="confluenceTd"><p>offline</p></td><td class="confluenceTd"><p><span>Percentage of chunks with all offline replicas. </span>Such chunks are completely inaccessible for the cluster and cannot be replicated, read from or written to. All requests to an offline chunk are frozen until a CS that stores that chunk’s replica goes online.</p><p>Get offline chunk servers back online as fast as possible to avoid losing data.</p></td></tr><tr><td class="confluenceTd"><p>void</p></td><td class="confluenceTd"><p>Percentage of chunks that have been allocated but never used yet. Such chunks contain no data. It is normal to have some void chunks in the cluster.</p></td></tr><tr><td class="confluenceTd"><p>pending</p></td><td class="confluenceTd"><p>Percentage of chunks that must be replicated immediately. For a write request from the client to a chunk to complete, the chunk must have at least the set minimum amount of replicas. If it does not, the chunk is blocked, and the write request cannot be completed. As blocked chunks must be replicated as soon as possible, the cluster places them in a special high-priority replication queue and reports them as pending.</p></td></tr><tr><td class="confluenceTd"><p>blocked</p></td><td class="confluenceTd"><p>Percentage of chunks that have fewer active replicas than the set minimum amount. Write requests to a blocked chunk are frozen until it has at least the set minimum amount of replicas. Read requests to blocked chunks are allowed, however, as they still have some active replicas left. Blocked chunks have higher replication priority than degraded chunks.</p><p>Having blocked chunks in the cluster increases the risk of losing data, so postpone any maintenance on working cluster nodes and get offline chunk servers back online as fast as possible.</p></td></tr><tr><td class="confluenceTd"><p>degraded</p></td><td class="confluenceTd"><p>Percentage of chunks with the number of active replicas lower than normal but equal to or higher than the set minimum. Such chunks can be read from and written to. However, in the latter case. a degraded chunk becomes urgent.</p></td></tr><tr><td class="confluenceTd"><p>urgent</p></td><td class="confluenceTd"><p>Percentage of chunks that are degraded and have non-identical replicas. Replicas of a degraded chunk may become non-identical if some of them are not accessible during a write operation. As a result, some replicas happen to have the new data while some still have the old data. The latter are dropped by the cluster as fast as possible. Urgent chunks do not affect information integrity as the actual data is stored in at least the set minimum amount of replicas.</p></td></tr><tr><td class="confluenceTd"><p>standby</p></td><td class="confluenceTd"><p>Percentage of chunks that have one or more replicas in the standby state. A replica is marked standby if it has been inactive for no more than 5 minutes.</p></td></tr><tr><td class="confluenceTd"><p>overcommitted</p></td><td class="confluenceTd"><p>Percentage of chunks that have more replicas than normal. Usually, these chunks appear after the normal number of replicas has been lowered or a lot of data has been deleted. Extra replicas are eventually dropped; however, this process may slow down during replication.</p></td></tr></tbody></table></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

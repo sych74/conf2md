@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Backup servers settings vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Storage-and-Backups_195792106.html">Storage and Backups</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Backup-Settings_195792110.html">Backup Settings</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Backup-Servers-Settings_195792117.html">Backup Servers Settings</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Backup servers settings vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="letter-spacing: 0.0px;">Backup servers are servers responsible for storing backups and templates of virtual machines running in the cloud to prevent data loss in the event of failure. Backup servers enable the recovery of files, applications, and databases and guarantee the security of an IT environment. Besides, backup servers are used for scheduling backup jobs and committing associated backup details to the database. In OnApp, you can create, edit, enable, disable, and delete backup servers.</span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ignore the options specified in your Control Panel but not mentioned in the documents.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="letter-spacing: 0.0px;">This option does not use compute resources to take backups. Instead, you deploy one or more dedicated backup servers, which handle transactions and store all backups &amp; templates.</span></p><ul><li>If you have added one or more backup servers, all backups will be stored on these servers.</li><li>If there is more than one backup server, backups are performed on the server with the most available disk space.</li><li>A network is used to connect a compute resource with the backup server. (An IP address is assigned to a compute resource and a backup server to build an iSCSI connection. If no IP is assigned to the Compute resource, an IP from the management network will be used.</li><li>Using this method, templates are also stored on the dedicated backup server(s). When converting a backup to a template, the new template will be stored on the same server as the backup.</li></ul><p>Dedicated backup servers handle the following activities:</p><p><strong>Backup and template-related actions</strong></p><ul><li>Take a backup</li><li>Restore a backup</li><li>Convert backup to template</li><li>Destroy backup</li><li>Destroy template</li></ul><p>If there are no dedicated backup servers in the cloud, all these actions will be performed by compute resources, and backups/templates stored according to the settings defined in <strong>Admin</strong> &gt; <strong>Settings </strong>&gt;<strong> Configuration</strong> &gt;<strong> Backups/templates</strong>.</p><p style="text-align: left;"><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.BackupserverssettingsvVHS9.0-BackupServerBackups">Backup Server Backups</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>The choice of a specific backup server on which a backup will be performed is called backup server balancing.</p><p>Previously when you sent a command to take a backup, the system would schedule a corresponding transaction at a specific backup server. This transaction would be pending until its queue came up. However, if the backup server was very loaded, offline, or somehow not available, this transaction would take very long or even should be restarted manually.</p><p>Now, with Backup Server Balancing, when the transaction is launched, the system will reassign it to the most appropriate backup server. </p><p>OnApp supports the <a href="#id-.BackupserverssettingsvVHS9.0-incr_backup">incremental</a> backup type.</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.BackupserverssettingsvVHS9.0-incr_backupIncrementalBackups"><span class="confluence-anchor-link" id="id-.BackupserverssettingsvVHS9.0-incr_backup"></span>Incremental Backups</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(23,43,77);">The system will follow the sequence below to take a backup</span>:</p><ol><li>Which of them are available to the user?</li><li>Which of those does have enough space?</li><li>From those remaining, the most appropriate backup server will be the one with the smallest count of the &quot;take backup&quot; transactions at the moment of the check.</li><li>If for several backup servers, this quantity is equal (0, 1, 2, ...n), the backup server with the lowest load (highest <code>cpu_idle</code> parameter) will be selected as the most appropriate.</li></ol><p>All consequent backups will be performed at the same backup server as long as it is available and has enough storage space. If not - the alternative backup server will be selected following the principle described above.  </p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.BackupserverssettingsvVHS9.0-manage_backupManageBackupsforBackupServer"><span class="confluence-anchor-link" id="id-.BackupserverssettingsvVHS9.0-manage_backup"></span>Manage Backups for Backup Server</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>To manage backups for a backup server:</p><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt;<strong> Settings</strong> menu and click the <strong>Backup Servers</strong> icon. </li><li>On the screen that appears, you'll see the list of all backup servers currently set up in the cloud. Click the label of the specific backup server. You will get the list of backups on this backup server together with their details:</li><ul><li><em>Date </em>- the date of the backup creation.</li><li><em>Target </em>- the backup target.</li><li><em>Status</em> - the status of the backup.</li><li><em>Backup Size</em> - the backup size.</li><li><em>Initiated</em> - the way how the backup was created.</li><li><em>Backup Server</em> - the label of the backup server, where the backup is created.</li><li><em>Note </em>- the text of the additional note.</li><li><em>VS</em> - the label of VM, where backup is created.</li><li><em>Customer</em> - the owner of the VM, where backup is created.</li><li><em>Actions</em> button - the actions you can perform with the backup (<a href=".Managing-virtual-machine-backups-vVHS9.0_195791543.html">Convert to template</a>, <a href=".Managing-virtual-machine-backups-vVHS9.0_195791543.html">Delete</a>, <a href=".Managing-virtual-machine-backups-vVHS9.0_195791543.html">Edit Note</a>).</li></ul></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.BackupserverssettingsvVHS9.0-createCreateBackupServer"><span class="confluence-anchor-link" id="id-.BackupserverssettingsvVHS9.0-create"></span>Create Backup Server</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt;<em> </em><strong>Settings</strong> menu, then click the <strong>Backup Servers</strong> icon.</li><li>Click the <strong>Create Backup Server</strong> button.</li><li>Fill in the form that appears:</li></ol><ul><li style="list-style-type: none;background-image: none;"><ul><li><em>Label</em> - give your backup server a label.</li><li><em>IP address</em> - enter the backup server IP address (IPv4).</li><li><em>Backup IP address</em> - add a provisioning network IP address.</li><li><em>Capacity</em> - set the backup server capacity (in GB).</li><li><em>Backup server zone</em> - select the backup server zone to which this backup server will be assigned.</li></ul></li></ul><p style="margin-left: 30.0px;">4. Move the <strong>Enabled</strong> slider to the right to enable the backup server.<span style="color: rgb(23,43,77);"><br/>5.</span><span> Click the </span><strong>Add Backup server</strong><span> button.</span></p><p style="margin-left: 30.0px;"><br/></p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul><li>To use the backup server, you have to add it to a <a href=".Backup-server-zones-settings-vVHS9.0_195792133.html">backup server zone</a> and assign it either to a <a href=".Managing-compute-resources-vVHS9.0_195791819.html">compute resource</a> or a <a href=".Managing-compute-zones-vVHS9.0_195791771.html">compute zone</a>.</li><li>Once you've added a backup server to your cloud and wish to limit the backup resources, make sure to set the limits in bucket for <a href=".Managing-compute-zone-backup-servers-vVHS9.0_195791793.html">backup server zone</a> resources.</li><li>When you add a backup server to a backup server zone, the backup server inherits the zone's type. It will be possible to move such a backup server only to a backup server zone of the same type. For more information, refer to <a href=".Zone-types-vVHS9.0_195791589.html">Zone types</a>.</li></ul></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.BackupserverssettingsvVHS9.0-editEditBackupServer"><span class="confluence-anchor-link" id="id-.BackupserverssettingsvVHS9.0-edit"></span>Edit Backup Server</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ol><li>Go to your Control Panel &gt;<strong> Admin</strong> &gt; <strong>Settings</strong> menu and click the <strong>Backup Servers</strong> icon. </li><li>On the screen that appears, you'll see the list of all backup servers currently set up in the cloud. Click the <strong>Actions</strong> button next to the backup server you want to edit, then click <strong>Edit</strong> to change the backup server's properties:</li><ul><li><em>Label</em> - the name of the backup server.</li><li><em>IP address</em> - the backup server IP address (IPv4).</li><li><em>Backup IP address</em> - provisioning network IP address.</li><li><p><em>Capacity (in GB)</em> - the backup server capacity.</p></li><li><p><em>Backup server zone</em> - the backup server zone to which this backup server is assigned.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>It is possible to move backup servers only between backup server zones of the same type. For more information, refer to <a href=".Zone-types-vVHS9.0_195791589.html">Zone types</a>.</p></div></div></li><li><p><em>Enabled</em> – move this slider to the right to enable the backup server or to the left to disable the backup server.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span>Note that disabling a backup server affects backups and </span>virtual <span>machine</span> provisioning <span>as follows:</span></p><p><span><strong>Backups</strong></span></p><ul><li><span>You cannot create new backups on this backup server when it is disabled.</span></li><li><span>Backups that were created before disabling the backup server remain on this BS.</span></li><li><span>You can restore virtual machines from backups available on this backup server.</span></li><li><span>You can convert virtual machine backups to templates.</span></li></ul><p><span><strong>Provisioning<br/></strong></span></p><ul><li><span>The virtual machine provisioning is not available on this backup server except for the following case. </span></li><li><span>If a template is located only on this backup server, provisioning of virtual machines based on this template is still performed on this backup server.</span></li></ul></div></div></li></ul><li>Click the <strong>Save Backup server</strong> button to save changes.<br/><br/></li></ol><h3 id="id-.BackupserverssettingsvVHS9.0-BackupServerMaintenance">Backup Server Maintenance</h3><p>If you want to take your backup server offline for maintenance and prevent backups and other transactions from failing during the maintenance window, you may use the Daemon tool.<br/>To use Daemon for background tasks:</p><ol><li>Go to <strong>Admin</strong> &gt; <strong>Sysadmin</strong> menu.</li><li>Click the <strong>Stop Daemon</strong> button. It will allow any currently running backups and tasks to complete, but no new ones will start. At that stage, you can proceed with your maintenance.</li><li>Once completed, go back to <strong>Admin</strong> &gt; <strong>Sysadmin</strong> menu and click the <strong>Start Daemon</strong> button.</li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.BackupserverssettingsvVHS9.0-viewViewBackupServerHardwareInfo"><span><span class="confluence-anchor-link" id="id-.BackupserverssettingsvVHS9.0-view"></span>View </span>Backup Server Hardware Info</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>OnApp provides an overview of the hardware used by backup servers available in your cloud. On the <strong>Hardware Info </strong>page, you can view information on CPU, RAM, hard disk drives, networks, and other hardware components.</p><p>To view the hardware information:<span class="confluence-embedded-file-wrapper image-right-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail image-right" draggable="false" width="280" src="attachments/195792116/195793408.png" data-image-src="attachments/195792116/195793408.png" data-unresolved-comment-count="0" data-linked-resource-id="195793408" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2021-9-1_16-35-46.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195792116" data-linked-resource-container-version="6" alt=""></span></p><ol><li>Go to the Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings </strong>menu and click the <span><strong>Backup Servers</strong> </span>icon. </li><li>On the page that appears, you will see the list of backup servers available in your cloud. Click the <strong>Actions</strong> button next to the label of a backup server and select the <strong>Hardware Info</strong> option.</li><li><span style="color: rgb(51,51,51);">You will get the following details:</span><br/><br/><ul><li><strong>Summary Info<br/></strong>This section contains the basic information about the backup server:<strong><br/></strong><ul><li><em>Current Uptime </em>- the time the backup server has been working and available, the number of its users, and the average load. </li><li><em>Total CPU</em> - the total amount of CPU (number of cores/frequency in MHz) allocated to the backup server.</li><li><em>Memory </em>- the total amount of memory (GB) allocated to the backup server.</li><li><em>Type -</em> the type of a resource (<em>Backup server</em>).</li><li><em>OS</em> - the operating system of the backup server.</li><li><em>Manufacturer/Model -</em> the manufacturer and model of the motherboard.</li><li><em>BIOS/Serial Number </em>- the system BIOS, its serial number, and release date.<br/><br/></li></ul></li><li><strong>CPU</strong><br/>This section shows the CPU manufacturer logo and information about CPU slots. Click the <strong>CPU Details </strong>button to get detailed information about CPU from the Intel ARK database if available.<br/><br/></li><li><strong>RAM</strong><br/>This section includes information about memory slots (double data rate, memory clock in MHz, size).<br/><br/></li><li><strong>HD</strong><br/>This section shows information about the manufacturer and model of a hard disk drive and the hard disk drive capacity in GB.<br/><br/></li><li><strong>Network</strong><br/>This section contains information about network cards. Click the<strong> Info</strong> button next to the specific network to get detailed information from the Intel ARK Database if available.<br/><br/></li></ul></li><li>If hardware information is empty or incomplete, click the<strong> Update Hardware Info </strong>button in the upper-right corner.</li></ol><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.BackupserverssettingsvVHS9.0-ReplaceaDedicatedBackupServerReplaceDedicatedBackupServer"><span class="confluence-anchor-link" id="id-.BackupserverssettingsvVHS9.0-ReplaceaDedicatedBackupServer"></span>Replace Dedicated Backup Server</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span>There are two ways of switching to a new backup server and keeping existing backups and templates.</span></p><p><strong>Method 1</strong></p><ol><li><a href="#id-.BackupserverssettingsvVHS9.0-create">Create a new backup server</a>.</li><li><a href="#id-.BackupserverssettingsvVHS9.0-edit">Disable the old backup server</a>, so that new backups are not created on it.</li><li>Quick manual backup data migration should be performed by using the rsync utility, which offers the ability to preserve hard links by enabling the -H option. This option should be enabled if you are copying incremental backups.</li><li>Before starting the data transfer, go to your Control Panel &gt;  <strong>Admin</strong> &gt; <strong>Settings</strong><span> &gt; </span><strong>Configuration</strong><span> &gt; </span><strong>Backups/Templates</strong><span> and set the </span><em>Total number allowed</em><span> parameter to 0  to prevent the processing of a new backup task during the data transfer.</span></li><li>Wait for all the running backup tasks to finish. Otherwise, cancel them.</li><li>Check if the direct SSH logging from the old backup server to the new one is possible. SSH Key-Based authentication is recommended. Depending on the link speed, the transfer can take up to 40 hours for 1 TB of data. Therefore, it is recommended to start the copying procedure in the screen session.</li><li><p>Log in to the old backup server as root and start the backup data transfer by issuing the following command:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">rsync -a -z -H -v --numeric-ids  /backupstorage/*    NewBackupServerIP:/backupstorage</pre>
+</div></div></li><li><p>As soon as all the data have been copied, update the backup server ID for the templates and backups using MySQL:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">mysql onapp
+select id, label from backup_servers;</pre>
+</div></div><p><span>The command above displays the IDs of the existing backup servers.</span></p></li><li><p><span>Change all backup and template assignments to the new backup server by issuing the following command:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">update templates set backup_server_id=2 where backup_server_id=1;
+update backups set backup_server_id=2 where backup_server_id=1;</pre>
+</div></div><p>The IDs above are only the examples. Enter the correct <code>backup_server_id</code> in your command line.</p></li><li>To start the processing of new backup tasks, go to your Control Panel &gt;  <strong>Admin</strong><span> &gt; </span><strong>Settings</strong><span> &gt; </span><strong>Configuration</strong><span> &gt; </span><strong>Backups/Templates</strong><span> and </span><span>set the </span><em>Total number allowed</em><span> parameter to a value greater than 0. Check whether the new backup tasks have started on the new backup server.</span></li></ol><p><br/></p><p><strong>Method 2</strong></p><p>You can try an automatic backup migration. When using this method, there is no need to stop backup task processing and remove/update backup entries in OnApp DB.</p><ol><li><p>Copy template files to the new backup server by issuing the following command:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">rsync -a -v   /backupstorage/templates    NewBackupServerIP:/backupstorage
+rsync -z -a -v   /backupstorage/backups/templates    NewBackupServerIP:/backupstorage/backups</pre>
+</div></div></li><li>To avoid using the old backup server, <a href="#id-.BackupserverssettingsvVHS9.0-edit">disable it and set the capacity</a> to 1 GB for the old Backup Server to emulate the <em>No space left on device</em> error for new backups. All newly created  backups should migrate to the new backup server. The old backups will be removed automatically after the new ones are created. After the period of backup rotation, the old backup server can be removed from the cloud.</li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 class="with-breadcrumbs" id="id-.BackupserverssettingsvVHS9.0-deleteDeleteBackupServer"><span class="confluence-anchor-link" id="id-.BackupserverssettingsvVHS9.0-delete"></span>Delete Backup Server</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ol><li>Go to your Control Panel<em> &gt;</em><strong> Admin</strong><em> &gt; </em><strong>Settings</strong> menu and click the <strong>Backup Servers</strong> icon.</li><li>Click the backup server's label.</li><li>On the screen that appears, you'll see the list of all backup servers currently set up in the cloud.</li><li><p>Click the <strong>Actions</strong> button next to the backup server you want to remove from the cloud, then click<em> </em><strong>Delete</strong><em>.</em> You'll be asked to confirm deletion.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>All the backups stored on that backup server will be deleted.</p></div></div></li></ol></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195792116/195793408.png">image2021-9-1_16-35-46.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

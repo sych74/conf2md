@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Setting up clients vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Storage-Administration_195792531.html">Virtuozzo Storage Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Setting-Up-a-Virtuozzo-Storage-Cluster_195792536.html">Setting Up a Virtuozzo Storage Cluster</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Setting-Up-Clients_195792586.html">Setting Up Clients</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Setting up clients vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>The process of setting up a client includes three stages:</p><ol class="arabic simple"><li><p>Preparing to mount the Virtuozzo Storage cluster to the client.</p></li><li><p>Mounting the cluster.</p></li><li><p>Configuring virtual machines and containers to be stored in the cluster.</p></li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.SettingupclientsvVHS9.0-Topreparetomountthecluster(Stage1)">To prepare to mount the cluster (Stage 1)</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ol class="arabic"><li><p>Log in to the server you want to act as a client as root or as a user with root privileges.</p></li><li><p>Download and install the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage-libs-shared</span></code><span> </span>and<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage-client</span></code><span> </span>RPM packages. These packages are available in the Virtuozzo remote repository (this repository is automatically configured for your system when you install Virtuozzo) and can be installed with this command:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># yum install vstorage-client</pre>
+</div></div></li><li><p><span style="color: rgb(0,0,0);">Create the directory to mount the Virtuozzo Storage cluster to, for example:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># mkdir -p /vstorage/stor1</pre>
+</div></div><p><span style="color: rgb(0,0,0);"><br/></span></p></li><li><span style="color: rgb(0,0,0);">Ensure that cluster discovery is configured in your network. For details, see<span> </span><a href=".Configuring-cluster-discovery-vVHS9.0_195792541.html"><span class="std std-ref">Configuring Cluster Discovery</span></a>.</span></li><li><p><span style="color: rgb(0,0,0);">Authenticate the server in the cluster. This step is required only if the server where you are setting up the client has never been authenticated in the cluster before. For example, you can skip this step if this is the same server where you set up the first MDS server or some chunk servers. Otherwise, run the following command to authenticate the server in the cluster:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 auth-node
+Please enter password for cluster:</pre>
+</div></div><p><span style="color: rgb(0,0,0);"><br/>During its execution, the command asks you for the password to validate the server. Type the password specified when setting up the first MDS server and press Enter.<span> </span><code class="docutils literal notranslate" style="text-align: left;"><span class="pre">vstorage</span></code><span> </span>then compares the provided password with the one stored on the MDS server, and if the passwords match, successfully authenticates the server.<br/></span></p></li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.SettingupclientsvVHS9.0-Tomountthecluster(Stage2)">To mount the cluster (Stage 2)</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(0,0,0);">Use the<span> </span></span><code class="docutils literal notranslate"><span class="pre">vstorage-mount</span></code><span style="color: rgb(0,0,0);"><span> </span>command. For example, if your Virtuozzo Storage cluster has the<span> </span></span><code>stor1</code> name<span style="color: rgb(0,0,0);">, you can run this command to mount it to the<span> </span></span><code class="docutils literal notranslate"><span class="pre">/vstorage/stor1</span></code><span style="color: rgb(0,0,0);"><span> </span>directory on the client:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage-mount -c stor1 /vstorage/stor1</pre>
+</div></div><p><span style="color: rgb(0,0,0);">You can also configure the client to automatically mount the cluster to the<span> </span><code class="docutils literal notranslate"><span class="pre">/vstorage/stor1</span></code><span> </span>directory when the client boots. To do this, add a line like the following to the<span> </span><code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code><span> </span>file:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">vstorage://stor1 /vstorage/stor1 fuse.vstorage rw,nosuid,nodev,_netdev 0 0</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">If the cluster is not used for virtualization, you can mount it with the<span> </span></span><code class="docutils literal notranslate"><span class="pre">--fail-on-nospace</span></code><span style="color: rgb(0,0,0);"><span> </span>option. In this case, an<span> </span></span><code class="docutils literal notranslate"><span class="pre">ERR_NO_SPACE</span></code><span style="color: rgb(0,0,0);"><span> </span>error will be returned if the cluster runs out of free space.</span></p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.SettingupclientsvVHS9.0-Toconfigurevirtualmachinesandcontainers(Stage3)">To configure virtual machines and containers (Stage 3)</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ol class="arabic"><li><p>Log in to the server as<span> </span><code class="docutils literal notranslate"><span class="pre">root</span></code>.</p></li><li><p>Configure containers for use in the cluster:</p><ol class="arabic"><li><p><span style="color: rgb(0,0,0);">Check the path to the container private area in the<span> </span></span><code class="docutils literal notranslate" style="text-align: left;"><span class="pre">/etc/vz/vz.conf</span></code><span style="color: rgb(0,0,0);"><span> </span>file. By default, the path is set to the following:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">VE_PRIVATE=/vz/private/$VEID</pre>
+</div></div><p><span style="color: rgb(0,0,0);"><br/></span></p></li><li><p><span style="color: rgb(0,0,0);">Make a symbolic link from the container private area to the directory in the Virtuozzo Storage cluster that will store containers. Assuming that this directory is<span> </span><code class="docutils literal notranslate" style="text-align: left;"><span class="pre">/vstorage/stor1/private</span></code>, create this directory and run the following command:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># ln -s /vstorage/stor1/private/ /vz/private</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">If the<span> </span></span><code class="docutils literal notranslate" style="text-align: left;"><span class="pre">/vz/private</span></code><span style="color: rgb(0,0,0);"><span> </span>directory already exists on your server, remove it before running the<span> </span></span><code class="docutils literal notranslate" style="text-align: left;"><span class="pre">ln</span><span> </span><span class="pre">-s</span></code><span style="color: rgb(0,0,0);"><span> </span>command.</span></p></div></div><p><span style="color: rgb(0,0,0);"><br/></span></p></li></ol></li><li><span style="color: rgb(0,0,0);">Configure virtual machines for use in the cluster:</span><ol class="arabic"><li><p><span style="color: rgb(0,0,0);">Check the default location of virtual machine files:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># prlsrvctl info | grep &quot;VM home&quot;
+VM home: /vz/vmprivate</pre>
+</div></div><p><span style="color: rgb(0,0,0);"><br/></span></p></li><li><p><span style="color: rgb(0,0,0);">Make a symbolic link from the default location to the directory in the Virtuozzo Storage cluster that will store virtual machines. For example, to make a link to the<span> </span><code class="docutils literal notranslate" style="text-align: left;"><span class="pre">/vstorage/stor1/vmprivate</span></code><span> </span>directory, create this directory and execute the following command:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># ln -s /vstorage/stor1/vmprivate/ /vz/vmprivate</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">If the<span> </span></span><code class="docutils literal notranslate" style="text-align: left;"><span class="pre">/vz/vmprivate</span></code><span style="color: rgb(0,0,0);"><span> </span>directory already exists on your server, remove it before running the<span> </span></span><code class="docutils literal notranslate" style="text-align: left;"><span class="pre">ln</span><span> </span><span class="pre">-s</span></code><span style="color: rgb(0,0,0);"><span> </span>command.</span></p></div></div><p><span style="color: rgb(0,0,0);"><br/></span></p></li></ol></li></ol></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

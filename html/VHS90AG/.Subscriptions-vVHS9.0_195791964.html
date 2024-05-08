@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Subscriptions vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Identity-Management_195791864.html">Identity Management</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Notifications_195791943.html">Notifications</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Subscriptions_195791965.html">Subscriptions</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Subscriptions vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Using the <strong>Subscriptions</strong> section you determine who of your users are notified about which events. A subscription is the final step of a notifications configuration which ties together a recipients list, a gateway and a notification template.</p><p>To view the list of subscriptions go to your Control Panel &gt;<strong> Admin </strong>&gt; <strong>Subscriptions </strong>menu. The page that loads shows your subscriptions with the following details:</p><ul><li><em>Name</em> - the label of the subscription. </li><li><em>Event Type - </em>the event type with which the subscription is associated.</li><li><em>Template - </em>the subscription's notification template. Click the template to view its details.</li><li><em>Gateways</em> - the name of the gateway and the means by which the notifications will be sent. Click the gateway to view its details.</li><li><em>Recipients Lists</em> - the subscription's recipients list. Click the label of the recipients list to view the list of users in it and their emails.</li></ul><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ignore the options specified in your Control Panel but not mentioned in the documents.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.SubscriptionsvVHS9.0-subscriptionsSetupSubscriptions"><span class="confluence-anchor-link" id="id-.SubscriptionsvVHS9.0-subscriptions"></span>Set up Subscriptions</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h3 id="id-.SubscriptionsvVHS9.0-CreateNewSubscription">Create New Subscription</h3><p><span>To add a new subscription:</span></p><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Subscriptions </strong>menu.</li><li>Click the <strong>New Subscription</strong> button or<span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" draggable="false" width="26" src="attachments/195791964/195791967.png" data-image-src="attachments/195791964/195791967.png" data-unresolved-comment-count="0" data-linked-resource-id="195791967" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2022-1-21_15-34-19.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195791964" data-linked-resource-container-version="9" alt=""></span>.</li><li>On the page that loads, fill in the following details:<br/><ul><li><em>Name</em> - the label for the subscription.</li><li><em>Recipients list</em> - select from the drop-down menu the list of recipients to whom the notifications will be sent. You can use one recipients list for several subscriptions.</li><li><em>Gateways</em> - select from the drop-down list the gateway for the subscription. The gateway determines whether notifications will be send via email or internal notifications in CP. You can use one gateway for several subscriptions.</li></ul></li><li>Click <span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" draggable="false" width="26" src="attachments/195791964/195791967.png" data-image-src="attachments/195791964/195791967.png" data-unresolved-comment-count="0" data-linked-resource-id="195791967" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2022-1-21_15-34-19.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195791964" data-linked-resource-container-version="9" alt=""></span>to add an event.</li><li>In the new popup windows that appears fill in the following details:<br/><ul><li><em>Event</em> - select from the drop-down list the event about which the notifications will be sent. Every time the event takes place a notification will be sent to users from the recipients list you select.</li><li><em>Notification template</em> - select from the drop-down list the event and the notifications template for the subscription. You can use one notification template for several subscription.</li></ul><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>You can create multiple events for the custom events which are non-deletable but open to editing. These custom events include<em> reset password instructions, unlock instructions, set password instructions, and confirmation instructions</em>.  </p></div></div></li><li>Click the <strong>Add</strong> button.</li><li>Click <strong>Submit</strong> to add the subscription.</li></ol><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" draggable="false" width="700" src="attachments/195791964/195791968.gif" data-image-src="attachments/195791964/195791968.gif" data-unresolved-comment-count="0" data-linked-resource-id="195791968" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="OnApp › (5).gif" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/gif" data-linked-resource-container-id="195791964" data-linked-resource-container-version="9" alt=""></span></p><p>You can set up notifications for the following events:</p><ul><li><em>All compute resources status</em> - all compute resources in a compute zone have changed their statuses to to Online/Offline/Inactive.</li><li><em>Auto healing failed diagnostics</em> - the disk automatic repair failed due to some errors detected.</li><li><em>Auto healing processing disk repair</em> - the disk automatic repair has been initiated.</li><li><em>Can't schedule transaction</em> - a transaction could not be scheduled in the cloud.</li><li><em>Autobackup failed</em> - the backup creation limit has been reached.</li><li><em>Daemon notification</em> - the status of the OnApp engine has changed to Active/Up/Inactive.</li><li><em>Daily storage health report</em> - the daily storage health report will be sent in the notification.</li><li><em>Failed task</em> - a task failed in the cloud.</li><li><em>Failover compute resource</em> - deprecated option, it will be removed in the next version.</li><li><em>Failover process</em> - failover process has been initiated.</li><li><em>Generate hourly stats failed</em> - hourly statistics failed to be generated.</li><li><em>Hourly storage health report</em> - the hourly storage health report will be sent in the notification.</li><li><em>Compute resource missing CPU flags</em> - a compute resource without CPU flags has been detected in the cloud.</li><li><em>Compute resource status</em> - one of the compute resources in the cloud has changed its status to Online/Offline/Inactive.</li><li><em>Compute resource group responsive</em> - an unresponsive compute zone has been detected in the cloud.</li><li><em>Maintenance mode</em> - the Control Panel has been switched to maintenance mode.</li><li><em>System resources</em> - a hardware resource of the CP server is exhausted.</li><li><em>Processes status</em> - deprecated option, it will be removed in the next version.</li><li><em>Wrong activated logical volumes</em> - the system has detected VMs' disks that are either activated on the wrong compute resource or on two compute resources simultaneously.</li><li><em>Custom event</em> - this is your custom event configured at your Control Panel &gt; <strong>Event</strong> <strong>Types</strong> &gt; <strong>Custom Event types</strong> tab.</li><li><em>Internal server error</em> - an internal server error occurred in the system.</li></ul></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.SubscriptionsvVHS9.0-subscribeManageSubscriptions"><span class="confluence-anchor-link" id="id-.SubscriptionsvVHS9.0-subscribe"></span>Manage Subscriptions</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Using the <strong>Subscriptions</strong> section you determine who of your users are notified about which events. A subscription is the final step of a notifications configuration which ties together a recipients list, a gateway and a notification template. To view the list of subscriptions go to your Control Panel &gt;<strong> Admin </strong>&gt; <strong>Subscriptions </strong>menu. </p><p>Click the name of the subscription to view the gateways, recipients lists, events and templates associated with it.</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h3 id="id-.SubscriptionsvVHS9.0-EditSubscriptions">Edit Subscriptions</h3><p>To edit a subscription:</p><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Subscriptions </strong>menu.</li><li>Click the name of the subscription you want to edit.<strong><br/></strong></li><li>Click the <strong>Edit Subscription</strong> button.</li><li>On the page that loads, you can change the name of the subscription and add new recipients lists, events and gateways. You can add events by clicking<span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" draggable="false" width="26" src="attachments/195791964/195791967.png" data-image-src="attachments/195791964/195791967.png" data-unresolved-comment-count="0" data-linked-resource-id="195791967" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2022-1-21_15-34-19.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195791964" data-linked-resource-container-version="9" alt=""></span> and delete events from the list by clicking <span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" draggable="false" width="18" src="attachments/195791964/195791972.png" data-image-src="attachments/195791964/195791972.png" data-unresolved-comment-count="0" data-linked-resource-id="195791972" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="-.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195791964" data-linked-resource-container-version="9" alt=""></span><span style="letter-spacing: 0.0px;"> next to the required event.</span></li><li>Click <strong>Update</strong> to save changes.</li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h3 id="id-.SubscriptionsvVHS9.0-DeleteSubscriptions">Delete Subscriptions</h3><p>Subscriptions determine who of your users are notified about which events and the type of the notification: email or internal notification in CP.</p><p>To delete a subscription:</p><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Subscriptions </strong>menu.</li><li>Click the <strong>Actions</strong> button next to the required subscription and select <strong>Delete</strong>.</li></ol><hr/><p><br/></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791964/195791967.png">image2022-1-21_15-34-19.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791964/195791968.gif">OnApp › (5).gif</a> (image/gif)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791964/195791972.png">-.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

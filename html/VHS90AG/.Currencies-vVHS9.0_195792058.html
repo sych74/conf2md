@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Currencies vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Billing_195792025.html">Billing</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Currencies_195792059.html">Currencies</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Currencies vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on Apr 18, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>By default, the system includes three currencies: USD, EUR, and GBP. You can add more currencies at any time. In this document, you can find information on how to add, edit, and delete currencies.</p><hr/><h2 id="id-.CurrenciesvVHS9.0-AddCurrency"><span style="color: rgb(51,51,51);">Add Currency</span></h2><ol><li>Go to your Control Panel<strong> </strong>&gt;<strong> Admin</strong> &gt;<strong> Settings </strong>menu.</li><li>Click the<strong> Currencies </strong>icon.</li><li>On the page that follows, click the <strong>Create New</strong> button.</li><li>Fill in the form that appears:<br/><ul><li><em>Name</em> - give the label to your currency.</li><li><em>Unit</em> - insert a currency symbol.</li><li><em>Code</em> - fill in a three-character currency code that is generally used to represent the currency you wish to add (for example, USD, EUR).</li><li><em>Separator</em> - specify a character used to format decimal numbers. For example, 100.99.</li><li><p><em>Delimiter</em> - set a grouping character used to separate thousands. For example, 100,000,000.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Be aware that it is prohibited to set the delimiter and separator which are identical.</p></div></div></li><li><em>Precision</em> - specify the number of digits after the separator. The <em>Precision</em> parameter is used to display the costs total for a certain period, for example, Outstanding amount, Total Cost, and Payments.</li><li><p><em>Precision for unit</em> - the number of digits after the separator. The <em>Precision for unit</em> parameter is used to display the prices for the resources, such as CPU, Disk size, RAM, IP, Data stores, Disks, Backups, Templates, etc.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The precision cannot exceed eight symbols.</p></div></div></li><li><em>Format<strong> </strong></em>- set how the currency will be displayed in the Control Panel. Use the following parameters:<br/><ul><li><em>%n</em> - for the digits.</li><li><em>%u</em> - for the currency symbol.</li></ul></li></ul></li><li>Click <strong>Save</strong>. <strong><br/></strong></li></ol><p>Now you have the currency configured in the system. To use it further, associate it with a <a href="https://docs.onapp.com/display/VHS9AG/Create+and+Manage+Buckets">bucket</a>: create a new bucket or edit the existing one. </p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" draggable="false" width="700" src="attachments/195792058/195792060.png" data-image-src="attachments/195792058/195792060.png" data-unresolved-comment-count="0" data-linked-resource-id="195792060" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="currency.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195792058" data-linked-resource-container-version="3" alt=""></span></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span>For example, the currency form for US Dollars might look as follows…</span></p><ul><li><span><strong>Name</strong>: US Dollar</span></li><li><span><strong>Unit</strong>: $</span></li><li><span><strong>Code:</strong> USD</span></li><li><span><strong>Separator:</strong> .</span></li><li><span><strong>Delimiter</strong>: ,</span></li><li><span><strong>Precision:</strong> 5</span></li><li><span><strong>Precision for unit :</strong>8</span></li><li><span><strong>Format:</strong> %u%n</span></li></ul><p><span>…and the prices will be displayed in the following way: $7,000.00000</span></p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.CurrenciesvVHS9.0-EditCurrency"><span style="color: rgb(51,51,51);">Edit Currency</span></h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> menu.</li><li>Click the <strong>Currencies </strong>icon.</li><li>Сlick the <strong>Actions</strong> button next to the necessary currency on the list and select <strong>Edit</strong>. On the screen that appears, you may edit the following currency details:<br/><ul><li><em>Name</em> - the label of your currency.</li><li><em>Unit</em> - a currency symbol.</li><li><em>Code</em> - a three-character currency code that is generally used to represent the currency you wish to add.</li><li><em>Separator</em> - a character used to format decimal numbers. For example, 100.99.</li><li><p><em>Delimiter</em> - a grouping character used to separate thousands. For example, 100,000,000.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Be aware that it is prohibited to set the delimiter and separator which are identical.</p></div></div></li><li><em>Precision</em> - the number of digits after the separator. The <em>Precision</em> parameter is used to display the costs total for a certain period, for example, Outstanding amount, Total Cost, and Payments.</li><li><p><em>Precision for unit</em> - the number of digits after the separator. The <em>Precision for unit</em> parameter is used to display the prices for the resources, such as CPU, Disk size, RAM, IP, Data stores, Disks, Backups, Templates, etc.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The precision cannot exceed eight symbols.</p></div></div></li><li><em>Format<strong> </strong></em>- how the currency will be displayed in the Control Panel. Use the following parameters:<br/><ul><li><em>%n</em> - for the digits.</li><li><em>%u</em> - for the currency symbol.</li></ul></li></ul></li><li>Click <strong>Save</strong>.</li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.CurrenciesvVHS9.0-DeleteCurrency"><span style="color: rgb(51,51,51);">Delete Currency</span></h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> menu.</li><li>Click the <strong>Currencies </strong>icon.</li><li>Сlick the<strong> Actions</strong> button next to the currency you want to remove and select <strong>Delete</strong>. You will be asked for confirmation before the currency is deleted.</li></ol><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><span>You cannot delete a currency that is associated with a bucket. </span></div></div><p><br/></p><p><br/></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195792058/195792060.png">currency.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

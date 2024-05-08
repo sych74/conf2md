@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Disk requirements vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Storage-Administration_195792531.html">Virtuozzo Storage Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="System-Requirements_195792839.html">System Requirements</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Disk-Requirements_195792896.html">Disk Requirements</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Disk requirements vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.DiskrequirementsvVHS9.0-Disktypesandroles">Disk types and roles</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ul><li>Using SATA HDDs with one SSD for caching is more cost-effective than using only SAS HDDs without such an SSD.</li><li>Using NVMe or SAS SSDs for write caching improves random I/O performance and is highly recommended for all workloads with heavy random access. SATA disks are best suited for SSD-only configurations but not write caching.</li><li>Running metadata services on SSDs improves cluster performance. To minimize CAPEX, the same SSDs can be used for write caching.</li><li>Using shingled magnetic recording (SMR) HDDs is available only for storage purposes and only if the node has an SSD disk for cache.</li><li>If capacity is the main goal and you need to store infrequently accessed data, select SATA disks over SAS ones. If performance is the main goal, select NVMe or SAS disks over SATA ones.</li><li>Disk block size (for example, 512b or 4K) is not important and does not affect performance.</li><li>The maximum supported physical partition size is 254 TiB.</li></ul></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.DiskrequirementsvVHS9.0-Diskcapacity">Disk capacity</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ul><li>The system disk must have at least 100 GB of space.</li><li>It is possible to use disks of different sizes in the same cluster. However, keep in mind that, given the same IOPS, smaller disks will offer higher performance per terabyte of data compared to bigger disks. It is recommended to group disks with the same IOPS per terabyte in the same tier.</li><li>The capacity of HDD and SSD is measured and specified with decimal, not binary prefixes, so “TB” in disk specifications usually means “terabyte.” The operating system, however, displays a drive capacity using binary prefixes meaning that “TB” is “tebibyte” which is a noticeably larger number. As a result, disks may show a capacity smaller than the one marketed by the vendor. For example, a disk with 6 TB in specifications may be shown to have 5.45 TB of actual disk space in<span> </span><span>Virtuozzo Hybrid Infrastructure</span>. 5 percent of disk space is reserved for emergency needs. Therefore, if you add a 6 TB disk to a cluster, the available physical space should increase by about 5.2 TB.</li><li>The performance of SSD disks may depend on their size. Lower-capacity drives (100 to 400 GB) may perform much slower (sometimes up to ten times slower) than higher-capacity ones (1.9 to 3.8 TB). Check the drive performance and endurance specifications before purchasing hardware.</li><li>Thin provisioning is always enabled for all data and cannot be configured otherwise.</li></ul></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.DiskrequirementsvVHS9.0-Consumer-gradeSSDdrives">Consumer-grade SSD drives</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ul><li>Consumer-grade SSD drives can withstand a very low number of rewrites. SSD drives intended for storage clusters must offer at least 1 DWPD endurance (10 DWPD is recommended). The higher the endurance, the less often SSDs will need to be replaced, and it will improve TCO.</li><li>Consumer-grade SSD drives usually have unstable performance and are not suited to withstand sustainable enterprise workloads. For this reason, pay attention to sustainable load tests when choosing SSDs.</li><li>Many consumer-grade SSD drives can ignore disk flushes and falsely report to operating systems that data was written while it was not. Examples of such drives include OCZ Vertex 3, Intel 520, Intel X25-E, and Intel X-25-M G2. These drives are known to be unsafe in terms of data commits, they should not be used with databases, and they may easily corrupt the file system in case of a power failure. We recommend using enterprise-grade SSD drives with power loss protection, <span style="color: rgb(0,0,0);">as described in<span> </span></span><a href=".Protecting-data-during-a-power-outage-vVHS9.0_195792932.html">Protecting data during a power outage</a>.</li></ul></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.DiskrequirementsvVHS9.0-RAIDandHBAcontrollers">RAID and HBA controllers</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ul><li>Create hardware or software RAID1 volumes for system disks by using RAID or HBA controllers, respectively, to ensure its high performance and availability.</li><li>Use HBA controllers, as they are less expensive and easier to manage than RAID controllers.</li><li>Disable all RAID controller caches for SSD drives. Modern SSDs have good performance that can be reduced by a RAID controller’s write and read cache. It is recommended to disable caching for SSD drives and leave it enabled only for HDD drives.</li><li>If you use RAID controllers, do not create RAID volumes from HDDs intended for storage. Each storage HDD needs to be recognized by<span> </span><span>Virtuozzo Hybrid Infrastructure</span><span> </span>as a separate device.</li><li>If you use RAID controllers with caching, equip them with backup battery units (BBUs) to protect against cache loss during power outages.</li></ul></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

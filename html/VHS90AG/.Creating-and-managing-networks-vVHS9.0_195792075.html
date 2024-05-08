@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Creating and managing networks vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Networking_195792073.html">Networking</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Create-and-Manage-Networks_195792076.html">Create and Manage Networks</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Creating and managing networks vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>A network can contain several IP nets which include IP ranges with a default gateway. The network details page shows the list of IP nets in a network with their IP ranges which include the IPs assigned to virtual machines and/or users. IPs that are not assigned to a user or a VM are not displayed on the network details page but they are available for selection during virtual machine creation or when assigning IPs to users.</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><br/></p><hr/><h2 id="id-.CreatingandmanagingnetworksvVHS9.0-CreateNetworkcreate"><span>Create Network</span><span class="confluence-anchor-link" id="id-.CreatingandmanagingnetworksvVHS9.0-create"></span></h2><p>To add a new network:</p><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings </strong>menu.</li><li>Click the<strong> Networks</strong> icon. The page that loads shows the shared networks in your cloud.</li><li>Click <span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" draggable="false" width="26" src="attachments/195792075/195792077.png" data-image-src="attachments/195792075/195792077.png" data-unresolved-comment-count="0" data-linked-resource-id="195792077" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2022-4-21_8-1-5.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195792075" data-linked-resource-container-version="4" alt=""></span> upper right or the <strong>Add New Network</strong><span> button lower right.</span></li><li>On the screen that follows, specify the following network details:<ul><li><em>Label</em><span> - choose a name for the network</span></li><li><em>Vlan</em><span> - fill in a VLAN number. The VLAN field only needs to be given a value if you are tagging the IP addresses you will add to this network with a VLAN ID (IEEE 802.1Q). If you plan to tag IP addresses in this way, you need to make sure the link to the public interface on the compute resources is a trunk network port. If you are not VLAN tagging addresses, this field can be left blank and the public port on the compute resource can be an access port. You can also </span><span style="color: rgb(51,51,51);">enter a VXLAN segment ID which will in turn create the VXLAN wire across the compute resources.</span></li><li><em>Network group</em><span> - assign the network to a network zone. When you add a network to a network zone, the network inherits the zone's type. It will be possible to move such a network only to a network zone of the same type. For more information, refer to </span><a href=".Zone-types-vVHS9.0_195791589.html">Zone types</a><span>.</span></li><li><em>Type</em> - the type of the network, select <em>Shared Network</em><span> - the default type of network in OnApp where users receive an IP address on the network they have access to.</span></li></ul></li><li><span>Click the </span><strong>Submit</strong><span> button to finish.</span></li></ol><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul><li><span class="confluence-anchor-link" id="id-.CreatingandmanagingnetworksvVHS9.0-_Toc303173379"></span> <span class="confluence-anchor-link" id="id-.CreatingandmanagingnetworksvVHS9.0-_Toc303173655"></span>To use the network, you have to add it to a <a href=".Network-zones-vVHS9.0_195792093.html">network zone</a> and assign it either to a <a href=".Managing-compute-resource-networks-vVHS9.0_195791837.html">compute resource</a> or a <a href=".Managing-compute-zone-networks-vVHS9.0_195791788.html">compute zone</a>.</li><li>Once you have added a network to OnApp you need to add the <a href=".IP-nets-vVHS9.0_195792083.html">IP Net</a> and <a href=".IP-ranges-vVHS9.0_195792088.html">IP ranges</a> to the new network.</li></ul></div></div><hr/><h2 id="id-.CreatingandmanagingnetworksvVHS9.0-EditNetworkedit">Edit Network<span class="confluence-anchor-link" id="id-.CreatingandmanagingnetworksvVHS9.0-edit"></span></h2><p><span>To change the name, VLAN, or network zone of an existing network:</span></p><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> menu.</li><li>Click the <strong>Networks</strong> icon. The page that loads shows the shared networks in your cloud.</li><li>Click the <strong>Actions </strong>button next to the network you want to change, then click<strong> Edit.</strong></li><li>On the screen that follows, change the details of the network:<br/><ul><li><em>Label</em> - the name of the network.</li><li><em>VLAN - </em>a VLAN number. <span class="Emphasis-red">The VLAN field only needs to be given a value if you are tagging the IP addresses you will add to this network with a VLAN ID (IEEE 802.1Q). If you plan to tag IP addresses this way, ensure the link to the public interface on the compute resource</span>s is a trunked network port. If you are not VLAN tagging addresses, this field can be left blank and the public port on the c<span class="Emphasis-red">ompute resource</span> can be an access port. </li><li><em>Network group</em> - you can reassign the network to another network zone. It is possible to move networks only between network zones of the same type. For more information, refer to <a href=".Zone-types-vVHS9.0_195791589.html">Zone types</a>. </li></ul></li><li>Click the <strong>Update </strong>button to save the changes.</li></ol><hr/><h2 id="id-.CreatingandmanagingnetworksvVHS9.0-DeleteNetworkdelete">Delete Network<span class="confluence-anchor-link" id="id-.CreatingandmanagingnetworksvVHS9.0-delete"></span></h2><p><span>Before deleting a network, ensure it is detached from the compute zone and compute resources.</span></p><p>To delete an existing network so it is no longer available as a cloud resource:</p><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> menu.</li><li>Click the <strong>Networks </strong>icon. The page that loads shows the shared networks in your cloud.</li><li>Click the <strong>Actions</strong> button next to the network you want to remove, then click<strong> Delete. </strong></li><li>Confirm the deletion.</li></ol><hr/><h2 id="id-.CreatingandmanagingnetworksvVHS9.0-AddAdditionalNetworkAdditionalNetwork">Add Additional Network<span class="confluence-anchor-link" id="id-.CreatingandmanagingnetworksvVHS9.0-AdditionalNetwork"></span></h2><p>To set up an additional network:</p><ol><li>Ensure you are using a trunk port from the switch to your compute resource for VM networking. It is required to add more than one network to a single compute resource network interface.</li><li><a href=".Creating-and-managing-networks-vVHS9.0_195792075.html">Create a new network</a> with a label for the new network and the VLAN number.</li><li>Add an <a href=".IP-ranges-vVHS9.0_195792088.html">IP range</a><span> to the new network </span>(public or private IPs).</li><li>Assign this network either to a <a href=".Managing-compute-resource-networks-vVHS9.0_195791837.html">compute resource</a><span> or a </span><a href=".Managing-compute-zone-networks-vVHS9.0_195791788.html">compute zone</a>. Specify the same network interface as you currently use for your primary network.</li></ol><p><br/></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195792075/195792077.png">image2022-4-21_8-1-5.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

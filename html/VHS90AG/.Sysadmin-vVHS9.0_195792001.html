@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Sysadmin vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Identity-Management_195791864.html">Identity Management</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tools_195791988.html">Tools</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Sysadmin_195792002.html">Sysadmin</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Sysadmin vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>The Sysadmin page provides statistics and tools for a number of system administration tasks. These tools are divided into the following tabs:</p><ul><li><a href="#id-.SysadminvVHS9.0-tab1">Sysadmin Tools</a></li><li><a href="#id-.SysadminvVHS9.0-tab2">Services</a></li><li><a href="#id-.SysadminvVHS9.0-tab3">Application Errors</a></li><li><a href="#id-.SysadminvVHS9.0-tab4">Activity Logs</a></li><li><a href="#id-.SysadminvVHS9.0-tab6">Control Panel Maintenance</a></li><li><a href="#id-.SysadminvVHS9.0-tab7">IP Usage Report</a></li><li><a href="#id-.SysadminvVHS9.0-tab8">Resource Diffs</a></li></ul><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ignore the options specified in your Control Panel but not mentioned in the documents.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.SysadminvVHS9.0-tab1SysadminTools"><span class="confluence-anchor-link" id="id-.SysadminvVHS9.0-tab1"></span>Sysadmin Tools</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><strong>Background Task Daemon</strong></p><p>Daemon is responsible for executing all background tasks such as:</p><ul><li>Transactions</li><li>Backup takers</li><li>Billing stats updater</li><li>Cluster monitor</li><li>Compute resource monitor</li><li>Schedule runner</li></ul><p>To operate the daemon, use the following buttons:</p><ul><li><strong>Reload daemon</strong> – restarts the tasks, and completes all running tasks if their PIDs still exist.</li><li><strong>Stop daemon</strong> - completes any backups in progress, but prevents any more backups from starting; stops all tasks in progress.</li><li><strong>Start daemon</strong> - starts up all the tasks.</li><li><strong>Check status</strong> – shows the PID of the task and its status.</li></ul><p><strong><br/>Availability Check</strong></p><p>Availability check enables one to see the status of <span style="color: rgb(51,51,51);"><a href="https://docs.onapp.com/display/MISC/OnApp+Services+Monitoring+Tool">OnApp Services Monitoring Tool</a></span> and perform the following functions:</p><ul><li><p>Reload the OnApp Services Monitoring Tool.</p></li><li><p>Disable the OnApp Services Monitoring Tool.</p></li><li><p>Enable the OnApp Services Monitoring Tool.</p></li><li><p>Check status of the OnApp Services Monitoring Tool.</p></li></ul><p><br/></p><p><strong>Running Processes</strong></p><p>This section<strong> </strong>displays the list of the running system processes:</p><ul><li><em>Generate hourly stats - </em>last time hourly statistics were aggregated.<em><br class="_mce_tagged_br"/></em></li><li><em>Clean Redundant Instant Stat -</em> last time redundant statistics were deleted.</li><li><em>SNMP stats runner- </em>last time SNMP statistics were gathered from the compute resources and virtual machines running in the cloud.<br/><span>There are three levels of SNMP statistics gathering:</span><ol><li><p>Level 1 - every 10 seconds. CP gets info about compute resources uptime/virtual machines' statuses.</p></li><li><p>Level 2 - every 60 seconds. CP gets info about disk usage, network usage, CPU usage statistics, and the list of virtual machines.</p></li><li><p>Level 3 every 120 seconds. CP gets a list of volume groups and logical volumes.</p></li></ol><p>The level values can be changed in the <code>onapp.yml</code> file. </p></li><li><em>Delete old stats</em> - last time when the old SNMP was deleted.<br/><ul><li><em>Last time started</em> - the last time when the transaction started.</li><li><em>Last time finished</em> - the last time when the transaction finished successfully. When the transaction has failed, the last time finished field will display the time of the last successful transaction, thus indicating the failure.</li></ul><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Running processes time is always displayed in UTC format.</p></div></div></li></ul></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.SysadminvVHS9.0-tab2Services"><span class="confluence-anchor-link" id="id-.SysadminvVHS9.0-tab2"></span>Services</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span>Click the </span><strong>Services Status</strong><span> button to load the page with the list of services, their PID number, and the online/offline status.</span></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.SysadminvVHS9.0-tab3ApplicationErrors"><span class="confluence-anchor-link" id="id-.SysadminvVHS9.0-tab3"></span>Application Errors</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>This tab provides a list of errors registered in your Control Panel. The OnApp error collector records the errors within a CP and aggregates an error list. After that, your Control Panel may send crash reports to OnApp in the form of an encrypted API call. You can enable sending the error list using your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> &gt; <strong>Configuration</strong> &gt; <strong>System</strong> tab.</p><p>Errors are displayed with the following details:</p><ul><li><em>id</em> - the ID of the error.</li><li><em>Class</em> - the class of the error.</li><li><span style="color: rgb(51,51,51);"><em>Last detected</em> - the last time the error was detected.</span></li><li><em>Quantity</em> - how many times the error has occurred.</li><li><em>Reported</em> - whether the error has been reported or not.</li></ul><p>Click the class of the error to view its details. This information will be sent to OnApp if you allow your CP to send crash reports:</p><ul><li><em>Class</em> - the class of the error.</li><li><em>Last detected</em> - the last time the error was detected.</li><li><em>Quantity</em> - how many times the error has occurred.</li><li><em>Message</em> - the message that will be sent with this error.</li><li><em>Backtrace</em> - the backtrace of the error.</li></ul></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.SysadminvVHS9.0-tab4ActivityLog"><span class="confluence-anchor-link" id="id-.SysadminvVHS9.0-tab4"></span>Activity Log</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>OnApp provides a possibility to trace back any user’s behavior in the cloud to prevent possible misconduct or damage from staying unrevealed.</p><p>This Activity Log covers the following actions:</p><ul><li><p>DestroyVM</p></li><li><p>DestroyUser</p></li><li><p>DestroyBackup</p></li><li><p>DestroyDisk</p></li><li><p>Change Password</p></li><li><p>LoginAs</p></li><li><p>StopVirtualServer</p></li><li><p>BuildVM</p></li><li><p>Delete DNS Zone </p></li></ul><p>Activity Log registers actions with the following information:</p><ul><li><p><em>ID</em> - the ID of the user in the DB.</p></li><li><p><em>Username</em> - the name of the user.</p></li><li><p><em>Created at</em> - when the user was created.</p></li><li><p><em>Action</em> - what action was performed.</p></li><li><p><em>Dependent</em> - the ID of the action on which the current one was depending.</p></li><li><p><em>Dependent Type</em> - type of the dependent.</p></li><li><p><em>IP Address</em> - the IP address from which the action was launched.</p></li><li><p><em>User Agent</em> - description of the agent through which the cloud was accessed.</p></li></ul><p><span style="color: rgb(38,38,38);">To download a CSV file with the Activity Log, click the </span><span style="color: rgb(38,38,38);"><strong>Download Activity Log as CSV</strong> button</span><span style="color: rgb(38,38,38);">. The download will start automatically after you click the button. </span></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.SysadminvVHS9.0-tab6ControlPanelMaintenance"><span class="confluence-anchor-link" id="id-.SysadminvVHS9.0-tab6"></span>Control Panel Maintenance</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span>From this tab you can click </span><strong>Enable</strong><span> to switch on the maintenance for the CP. Control Panel maintenance is a tool which enables administrators to block the CP. Administrators having </span><a href=".Permissions-vVHS9.0_195791917.html">permissions on managing Sysadmin Tools</a><span> will have access to the Control Panel as usual. However, the CP will be blocked for all other users. Servers and services will remain running. </span></p><p>The screenshot illustrates what users who do not have the necessary permissions will see when they try to access the CP.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" draggable="false" width="500" src="attachments/195792001/195792007.png" data-image-src="attachments/195792001/195792007.png" data-unresolved-comment-count="0" data-linked-resource-id="195792007" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="maintenence.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195792001" data-linked-resource-container-version="7" alt=""></span></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.SysadminvVHS9.0-tab7IPUsageReport"><span class="confluence-anchor-link" id="id-.SysadminvVHS9.0-tab7"></span>IP Usage Report</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span>This tab contains the history of the IP address usage and provides information about:</span></p><ul><li>The IP address assigned/unassigned to the VM.</li><li>The IP address assigned/unassigned to the User.</li></ul><p>To view the IP usage report:</p><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt;<strong> Sysadmin </strong>menu.</li><li>Click the<strong> IP Usage Report</strong> tab.</li><li>On the page that appears, fill in the following fields:<br/><strong>•</strong> <em>IP Address</em> - specify the IP address.<br/><strong>•</strong> <em>Filter</em> - filter the statistics by selecting the time period from the dialog box.</li><li>Click<strong> Apply</strong><span>.</span></li><li>You will get the statistics divided into several sections:<ul><li><em>From</em> - time and date from which IP address was assigned.</li><li><em>To</em> - time and date from to which IP address was assigned.</li><li><em>Full name</em> - user's first and last name.</li><li><em>Username</em> - the user to whom the IP address is assigned.</li><li><em>Email</em> - user email.</li><li><em>VS hostname</em> - the name of your host.</li><li><em>VS identifier</em> - the VM identifier.</li><li><em>NIC identifier</em> - the identifier of the network interface.</li><li><em>NIC MAC</em> - MAC address of the network interface.</li></ul></li></ol><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" draggable="false" height="197" width="700" src="attachments/195792001/195792009.png" data-image-src="attachments/195792001/195792009.png" data-unresolved-comment-count="0" data-linked-resource-id="195792009" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="ip_report.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195792001" data-linked-resource-container-version="7" alt=""></span></p><p>By default, the statistics are stored for no less than six months and are kept on file for easy access by law enforcement and/or other authorities who request this information.</p><p><span style="color: rgb(23,43,77);">To export the statistics in </span><em>CSV</em><span style="color: rgb(23,43,77);"> format, click the <strong>Download</strong></span><strong> CSV</strong><span style="color: rgb(23,43,77);"> button.</span></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.SysadminvVHS9.0-tab8ResourceDiffs"><span class="confluence-anchor-link" id="id-.SysadminvVHS9.0-tab8"></span>Resource Diffs</h2><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span>To view changes that have been made during a transaction, you need to have the appropriate </span><a href=".Permissions-vVHS9.0_195791917.html"><em>Resource Diff</em> permissions</a><span> enabled.</span></p></div></div><p>This tab contains the transactions that caused a change in the distribution of resources. The list contains the transactions that change the amount of resources allocated to an existing entity, e.g. disk resize, as well as the transactions that add or delete entities, for example, virtual machine destruction. Below is an example of some transactions that you may find on the page. </p><ul><li><em>Resize Disk</em> - changes of the disk size.</li><li><em>ResizeVirtualServer</em> - changes to a VM's number of CPU cores, priority value, and RAM size.</li><li><em>ResizeApplicationServer</em> - changes to an application server's number of CPU cores, priority value, and RAM size.</li><li><em>ResizeVirtualServerwithoutreboot</em> - changes to a VM's number of CPU cores, priority value and RAM size performed without a reboot.</li><li><em>ResizeApplicationServerwithoutreboot</em> - changes to an application server's number of CPU cores, priority value, and RAM size performed without a reboot.</li><li><em>HotMigrate</em> - changes to a source/destination compute resource ID, label, and IP address.</li><li><em>ColdMigrate - </em>changes to a source/destination compute resource ID, label, and IP address.</li><li><em>UpdateResourcePool</em> - changes to the resource pool's resources.</li><li><em>EditFirewallRule</em> - changes to the firewalls.</li><li><em>EditNATRule</em> - changes to the NAT rules.</li><li><em>EditIPSECVPNRule</em> - changes to the IPSECVPN rules.</li><li>Any other transactions that create or delete entities.</li></ul><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" draggable="false" width="700" src="attachments/195792001/195792010.png" data-image-src="attachments/195792001/195792010.png" data-unresolved-comment-count="0" data-linked-resource-id="195792010" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="resource diffs.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195792001" data-linked-resource-container-version="7" alt=""></span></p><p>Click the transaction to view its details. You will see the <em>Before</em> and <em>After</em> columns with the changed resources highlighted in red and green. The <em>Before</em> column will be empty if a transaction creates a new entity. Correspondingly, the <em>After</em> column will be empty if the transaction removes an entity.</p><p>You can also view resource differences in the <a href=".Logs-vVHS9.0_195791993.html">Control Panel's logs</a>.</p><hr/><p><br/></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195792001/195792007.png">maintenence.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195792001/195792009.png">ip_report.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195792001/195792010.png">resource diffs.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

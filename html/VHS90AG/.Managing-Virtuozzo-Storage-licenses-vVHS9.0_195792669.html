@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing Virtuozzo Storage licenses vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Storage-Administration_195792531.html">Virtuozzo Storage Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="195792599.html">Configuring Virtuozzo Storage Clusters¶</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Managing-Virtuozzo-Storage-Licenses_195792670.html">Managing Virtuozzo Storage Licenses</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing Virtuozzo Storage licenses vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>This section describes the process of managing Virtuozzo Storage licenses. You will learn to do the following:</p><ul class="simple"><li><p>Install a new license for a Virtuozzo Storage cluster.</p></li><li><p>Update the installed license.</p></li><li><p>View the installed license contents.</p></li><li><p>Check the current license status.</p></li></ul></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ManagingVirtuozzoStoragelicensesvVHS9.0-ObtainingtheHardwareNodeID">Obtaining the Hardware Node ID</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(0,0,0);">The Hardware Node ID (HWID) is required to purchase a Virtuozzo Storage license. You can obtain the HWID with the<span> </span></span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">stat</span><span> </span><span class="pre">--license-hwid</span></code><span style="color: rgb(0,0,0);"><span> </span>command. For example:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 stat --license-hwid
+...
+3F96.DFF2.EAF6.CE86.DD49.786C.DC01.3D53</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">A Virtuozzo Storage Hardware Node ID is not the same as a Virtuozzo Hardware Node ID shown by the<span> </span></span><code class="docutils literal notranslate"><span class="pre">vzlicview</span></code><span style="color: rgb(0,0,0);"><span> </span>command.</span></p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ManagingVirtuozzoStoragelicensesvVHS9.0-InstallingtheLicense">Installing the License</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Along with installing Virtuozzo licenses on all clients in a cluster, you need to install a separate license to start using the Virtuozzo Storage functionality. One license is required per cluster. You can install the license from any server participating in the cluster: an MDS server, a chunk server, or a client.</p><p>To install the license, use the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">load-license</span></code><span> </span>command:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 load-license -p XXXXXX-XXXXXX-XXXXXX-XXXXXX-XXXXXX</pre>
+</div></div><span style="color: rgb(0,0,0);">If you have obtained the license in the form of a file, you can install it by using the<span> </span></span><code class="docutils literal notranslate"><span class="pre">-f</span></code><span style="color: rgb(0,0,0);"><span> </span>option instead of<span> </span></span><code class="docutils literal notranslate"><span class="pre">-p</span></code><span style="color: rgb(0,0,0);"><span> </span>and specifying the full path to the license file:</span><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 load-license -f /etc/storlicense</pre>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ManagingVirtuozzoStoragelicensesvVHS9.0-UpdatingtheLicense">Updating the License</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>In Virtuozzo, you can use the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">update-license</span></code><span> </span>command to update the license currently installed on your server. When executed, the utility connects to the Key Authentication (KA) server, retrieves a new license, downloads it to the server, and installs it there.</p><p>To update a license, do the following:</p><ol class="arabic simple"><li><p>Ensure that the server where you want to update the license is connected to the Internet.</p></li><li><p>Run the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">update-license</span></code><span> </span>command to update the license.</p></li></ol><p>For example, to update a license installed in the<span> </span><code class="docutils literal notranslate"><span class="pre">pcs1</span></code><span> </span>cluster, execute this command:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c pcs1 update-license</pre>
+</div></div><span style="color: rgb(0,0,0);">By default,<span> </span></span><code class="docutils literal notranslate"><span class="pre">vstorage</span></code><span style="color: rgb(0,0,0);"><span> </span>obtains a new license from the default KA server. However, you can explicitly specify what KA server to use by passing the<span> </span></span><code class="docutils literal notranslate"><span class="pre">--server</span></code><span style="color: rgb(0,0,0);"><span> </span>option to the command:</span><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c pcs1 update-license --server ka.server.com</pre>
+</div></div><span style="color: rgb(0,0,0);">Once you run the command,<span> </span></span><code class="docutils literal notranslate"><span class="pre">vstorage</span></code><span style="color: rgb(0,0,0);"><span> </span>will connect to the KA server with the hostname of<span> </span></span><code class="docutils literal notranslate"><span class="pre"><a href="http://ka.server.com" class="external-link" rel="nofollow">ka.server.com</a></span></code><span style="color: rgb(0,0,0);">, download a new license, and install it on your server.</span><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ManagingVirtuozzoStoragelicensesvVHS9.0-ViewingtheLicenseContents">Viewing the License Contents</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(0,0,0);">You can use the<span> </span></span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">view-license</span></code><span style="color: rgb(0,0,0);"><span> </span>command to view the information on the license currently installed in your cluster. When executed, the utility processes the license and shows its contents on the screen. A sample output of<span> </span></span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">view-license</span></code><span style="color: rgb(0,0,0);"><span> </span>is given below:</span></p><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 view-license
+HWID: XXXX.XXXX.XXXX.XXXX.XXXX.XXXX.XXXX.XXXX
+PCSSTOR
+    status=&quot;ACTIVE&quot;
+    version=1.0
+    expiration=&quot;08/24/2012 19:59:59&quot;
+    graceperiod=3600
+    key_number=&quot;PCSS.XXXXXXXX.XXXX&quot;
+    platform=&quot;Linux&quot;
+    product=&quot;PCSS&quot;
+    gracecapacity=5
+    autorecovery=0
+    autorebalance=0
+    snapshots=1
+    capacity=500
+    replicas=5</pre>
+</div></div><p><span style="color: rgb(0,0,0);">The main license parameters are explained in the table below.</span></p><div class="table-wrap"><table class="wrapped confluenceTable"><thead><tr><th style="text-align: left;" class="confluenceTh"><p>Name</p></th><th style="text-align: left;" class="confluenceTh"><p>Description</p></th></tr></thead><tbody><tr><td class="confluenceTd"><p>HWID</p></td><td class="confluenceTd"><p>Cluster ID.</p></td></tr><tr><td class="confluenceTd"><p>status</p></td><td class="confluenceTd"><p>License status. For details, see Checking the License Status (p. 46).</p></td></tr><tr><td class="confluenceTd"><p>version</p></td><td class="confluenceTd"><p>Version of Virtuozzo Storage for which the license was issued.</p></td></tr><tr><td class="confluenceTd"><p>expiration</p></td><td class="confluenceTd"><p>License expiration date and time.</p></td></tr><tr><td class="confluenceTd"><p>graceperiod</p></td><td class="confluenceTd"><p>Period, in seconds, during which Virtuozzo Storage continues functioning after the license has expired.</p></td></tr><tr><td class="confluenceTd"><p>key_number</p></td><td class="confluenceTd"><p>Key number under which the license is registered on the Key Authentication server.</p></td></tr><tr><td class="confluenceTd"><p>platform</p></td><td class="confluenceTd"><p>Operating system with which the license is compatible.</p></td></tr><tr><td class="confluenceTd"><p>product</p></td><td class="confluenceTd"><p>Product for which the license has been issued.</p></td></tr><tr><td class="confluenceTd"><p>gracecapacity</p></td><td class="confluenceTd"><p>Amount of disk space that data chunks may occupy in the cluster, in per cent to the capacity limit value.</p><p>For example, if the capacity limit is set to 1 TB, and the grace capacity is 5%, data chunks may use 50 GB above the capacity limit.</p></td></tr><tr><td class="confluenceTd"><p>capacity</p></td><td class="confluenceTd"><p>Total amount of disk space, in GB, data chunks may occupy in the cluster.</p><p>To view the disk space currently used by chunks, run the vstorage top command, press the V key on your keyboard, and check the FS field. For details, see<span> </span><a href=".Monitoring-chunk-servers-vVHS9.0_195792700.html"><span class="std std-ref">Understanding Disk Space Usage</span></a>.</p></td></tr><tr><td class="confluenceTd"><p>replicas</p></td><td class="confluenceTd"><p>Maximum number of replicas a data chunk may have.</p></td></tr><tr><td class="confluenceTd"><p>autorecovery</p></td><td class="confluenceTd"><p>Denotes whether the auto-recovery feature is enabled (1) or disabled (0).</p></td></tr><tr><td class="confluenceTd"><p>autorebalance</p></td><td class="confluenceTd"><p>Denotes whether the auto-rebalance feature is enabled (1) or disabled (0).</p></td></tr><tr><td class="confluenceTd"><p>snapshots</p></td><td class="confluenceTd"><p>Denotes whether the snapshots feature is enabled (1) or disabled (0).</p></td></tr></tbody></table></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ManagingVirtuozzoStoragelicensesvVHS9.0-CheckingtheLicenseStatus">Checking the License Status</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(0,0,0);">You can check the status of your license in one of the following ways:</span></p><ul><li><p><span style="color: rgb(0,0,0);">Using the<span> </span><code class="docutils literal notranslate" style="text-align: left;"><span class="pre">vstorage</span><span> </span><span class="pre">view-license</span></code>, for example:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 view-license | grep status
+status=&quot;ACTIVE&quot;</pre>
+</div></div><p><span style="color: rgb(0,0,0);"><br/></span></p></li><li><p><span style="color: rgb(0,0,0);">Using the<span> </span><code class="docutils literal notranslate" style="text-align: left;"><span class="pre">vstorage</span><span> </span><span class="pre">stat</span></code><span> </span>or<span> </span><code class="docutils literal notranslate" style="text-align: left;"><span class="pre">vstorage</span><span> </span><span class="pre">top</span></code><span> </span>command, for example:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 stat | grep License
+connected to MDS#1
+License: PCSS.XXXXXXXX.XXXX is ACTIVE</pre>
+</div></div><p><span style="color: rgb(0,0,0);"><br/></span></p></li></ul><p><span style="color: rgb(0,0,0);">The table below lists all statuses a license can have.</span></p><div class="table-wrap"><table class="wrapped confluenceTable"><thead><tr><th style="text-align: left;" class="confluenceTh"><p>Status</p></th><th style="text-align: left;" class="confluenceTh"><p>Description</p></th></tr></thead><tbody><tr><td class="confluenceTd"><p>ACTIVE</p></td><td class="confluenceTd"><p>License is valid and active.</p></td></tr><tr><td class="confluenceTd"><p>VALID</p></td><td class="confluenceTd"><p>License is valid and can be installed in the cluster.</p></td></tr><tr><td class="confluenceTd"><p>EXPIRED</p></td><td class="confluenceTd"><p>License has expired.</p></td></tr><tr><td class="confluenceTd"><p>GRACED</p></td><td class="confluenceTd"><p>License is currently on the grace period or data chunks in the cluster use disk space from the grace capacity.</p></td></tr><tr><td class="confluenceTd"><p>INVALID</p></td><td class="confluenceTd"><p>License is invalid (for example, because its start date is in the future).</p></td></tr></tbody></table></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Compute zone extended CPU configuration vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Compute-Zones_195791762.html">Compute Zones</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Compute-Zone-Extended-CPU-Configuration_195791804.html">Compute Zone Extended CPU Configuration</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Compute zone extended CPU configuration vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(51,51,51);">OnApp provides a possibility to use the extended CPU configuration to group compute resources with similar CPU performance characteristics into compute zones. The extended CPU configuration allows to ensure consistent CPU performance within similar compute resources in the compute zone. The hot migration inside compute zones with the extended CPU configuration is more reliable. Moreover, you can set different prices <span>in </span><a href=".Configuring-resource-allocation-and-prices-vVHS9.0_195792043.html">buckets</a> for compute zones according to their CPU performance</span>.</p><p><span style="color: rgb(51,51,51);">The extended CPU configuration is implemented on a per-compute-zone basis. The compute zone with the extended CPU configuration is automatically assigned to a CPU model with a set of default and additional CPU flags. The CPU model is selected based on the CPU characteristics common for all compute resources assigned to one compute zone. The default CPU flags are assigned to the zone automatically and you cannot edit them; the additional flags are optional and you can enable or disable them. In this document, you can find information on how to enable and manage the extended CPU configuration.</span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The extended CPU configuration is applicable only to KVM compute resources. For better performance, i<span>t is not recommended to create mixed KVM compute zones</span>.</p></div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Use only the<em> Extended CPU Configuration</em> option for the CPU model configuration in the Beta version.</p></div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ignore the options specified in your Control Panel but not mentioned in the documents.</p></div></div><hr/><h2 id="id-.ComputezoneextendedCPUconfigurationvVHS9.0-enableEnableExtendedCPUConfiguration"><span class="confluence-anchor-link" id="id-.ComputezoneextendedCPUconfigurationvVHS9.0-enable"></span>Enable Extended CPU Configuration</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>You can enable the extended CPU configuration functionality while <a href=".Creating-compute-zones-vVHS9.0_195791766.html">creating</a> or <a href=".Managing-compute-zones-vVHS9.0_195791771.html">editing</a> a compute zone. After this functionality is enabled for the compute zone, all compute resources in this zone are automatically attached to a CPU model with a default set of CPU flags that are common for all compute resources within this zone and that cannot be disabled. You can also select some additional CPU flags that are applicable to all compute resources in the compute zone.</p><p>To view and manage the list of the CPU flags available for a compute zone, proceed to the following section. </p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ComputezoneextendedCPUconfigurationvVHS9.0-manageManageExtendedCPUConfiguration"><span class="confluence-anchor-link" id="id-.ComputezoneextendedCPUconfigurationvVHS9.0-manage"></span>Manage Extended CPU Configuration</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>After the extended CPU configuration is enabled for a compute zone, you can view and manage CPU configuration of this zone as follows:<span class="confluence-embedded-file-wrapper image-right-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-content-image-border image-right" draggable="false" height="136" width="300" src="attachments/195791803/195791806.png" data-image-src="attachments/195791803/195791806.png" data-unresolved-comment-count="0" data-linked-resource-id="195791806" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2021-9-6_15-53-6.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195791803" data-linked-resource-container-version="8" alt=""></span></p><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> menu.</li><li>Click the <strong>Compute Zones</strong> icon.</li><li>Click the label of the required compute zone.</li><li>Click the <strong>Tools</strong> button and select <strong>Manage CPU Configuration</strong>.</li><li><p style="text-align: justify;">On the page that appears, you will see <span>the following information on CPU configuration: </span></p><ul><li><p><em>CPU Model Configuration</em> - provides a label of a CPU model set for this compute zone, as well as the list of default CPU flags that are enabled for each compute resource in this zone. You cannot edit the list of default CPU flags.</p></li><li><p><span style="color: rgb(0,0,0);"><em>CPU Blacklisted Flags</em> - lists CPU flags which a virtual machine should skip when starting. You can add a CPU flag to the <em>CPU Blacklisted Flags </em>table using the <code>info_hub.yml</code> file. CPU blacklisted flags are set up at the cloud level.</span></p></li><li><p style="text-align: justify;"><span><em>Additional CPU Flags</em> - includes the list of additional CPU flags available for each compute resource in this zone. Click a CPU flag to enable or disable it. The enabled CPU flags are displayed in green boxes and the disabled CPU flags are dimmed. You can also click the <strong>Select All</strong> and <strong>Deselect All</strong> buttons to manage additional flags. </span>Any changes you make with additional flags are applied immediately.</p></li></ul></li></ol><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul><li><span>If a compute zone is attached to a CPU model and then one of the compute resources of this zone goes to maintenance mode, the set of CPU flags can be different when it goes back online. For more information, refer to the <a href=".Maintenance-mode-for-KVM-compute-resources-vVHS9.0_195791841.html">Maintenance mode for KVM compute resources</a> section.</span></li><li><span>Be careful when adding new compute resources to a compute zone with extended CPU configuration. </span></li></ul></div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(23,43,77);">To keep your blacklisted CPU flag list after your Control Panel is updated, you need to create an <code>info_hub.local.yml</code> file and add the <code>cpu_blacklisted_flags</code> section to this file.</span></p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ComputezoneextendedCPUconfigurationvVHS9.0-addAddingNewComputeResourcestoComputeZonewithExtendedCPUСonfiguration"><span class="confluence-anchor-link" id="id-.ComputezoneextendedCPUconfigurationvVHS9.0-add"></span>Adding New Compute Resources to Compute Zone with Extended CPU Сonfiguration </h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(51,51,51);">There are several scenarios that can take effect when a new compute resource is added to a compute zone with <span>extended CPU configuration</span>:</span></p><ul><li><span style="color: rgb(51,51,51);">If the new compute resource has the same CPU configurations as those resources that are already in a compute zone, the new compute resource inherits the CPU model and CPU flags set in this compute zone.</span><br/><span style="color: rgb(51,51,51);"><br/></span></li><li>If the new compute resource has CPU with better performance characteristics than those resources that are already in a compute zone, the new compute resource inherits the CPU model and CPU flags set in this compute zone. The other flags will be disabled and listed in the <strong>Unmatching CPU Flags</strong> box at the <strong>Admin</strong> &gt; <strong>Settings</strong> &gt; <strong>Compute Resources</strong> &gt; c<em>ompute resource label</em> &gt; <strong>Tools</strong> &gt; <strong>Extended CPU Configuration</strong> page. <br/><br/></li><li><p>If the new compute resource has CPU with worse performance characteristics than those resources that are already in a compute zone, the CPU model of the entire compute zone and all compute resources in this zone is automatically downgraded. The list of default and additional CPU flags will be updated in order to include only those flags that are common for each compute resource in the compute zone. </p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul><li><span>If a compute resource </span><span>with worse performance characteristics than other resources is removed from a compute zone, the CPU model of the entire compute zone and all compute resources in this zone is automatically upgraded. The list of default and additional CPU flags will be updated in order to include only those flags that are common for each compute resource in the compute zone. </span></li><li>To achieve <span>CPU </span>consistency between compute resources in a compute zone, assign the compute resource with worse or better CPU performance characteristics to the compute zone, where a CPU model would correspond to the actual CPU performance.</li><li>When you add a new compute resource to a compute zone with extended CPU configuration, wait for CPU flags to be updated after all the related transactions are finished.</li></ul></div></div></li></ul></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ComputezoneextendedCPUconfigurationvVHS9.0-vsAdditionalConsiderationsforVirtualMachines"><span class="confluence-anchor-link" id="id-.ComputezoneextendedCPUconfigurationvVHS9.0-vs"></span>Additional Considerations for Virtual Machines</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>There are some additional considerations that you should take into account while <a href=".Creating-virtual-machines-vVHS9.0_195792484.html">creating VMs</a> on compute resources with the extended CPU configuration: </p><ul><li>When a new compute resource with worse CPU performance characteristics is added to a compute zone, as a result, the CPU model is downgraded and unmatching CPU flags are disabled for this zone and all the compute resources with better CPU, virtual machines that were earlier built in this zone on compute resources with a bigger set of flags will preserve all their flags. However, since such a VM has more flags than the compute zone and all the compute resources in this zone, it will not be possible to <a href=".Managing-virtual-machines-vVHS9.0_195792186.html">migrate</a> this VM. </li><li><p>The migration of virtual machines with a set of flags different from those available on the compute zone level will become available only after the reboot of VM or its shutdown and <span><span style="color: rgb(51,51,51);">subsequent</span> </span>startup. After the boot, the VM configuration is updated to include the relevant set of CPU flags. Consequently, the migration of the rebooted virtual machine will become available again.</p><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>For more information on how to reboot a VM, refer to the <a href=".Managing-virtual-machine-power-options-vVHS9.0_195791526.html">Virtual machine&nbsp;power options</a> section.</p></div></div></li></ul></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791803/195791806.png">image2021-9-6_15-53-6.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Storage cluster architecture vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Storage-Administration_195792531.html">Virtuozzo Storage Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Setting-Up-a-Virtuozzo-Storage-Cluster_195792536.html">Setting Up a Virtuozzo Storage Cluster</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Storage-Cluster-Architecture_195793133.html">Storage Cluster Architecture</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Storage cluster architecture vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><span style="color: rgb(23,43,77);">The </span><strong>optional </strong><span style="color: rgb(23,43,77);">Virtuozzo Hybrid Server is a storage cluster, a group of physical servers interconnected by the network. The core storage comprises server disks, which are assigned one or more roles. Typically, each server in the cluster runs core storage services that correspond to the following disk roles:</span></p><ul><li><div id="expander-16097439" class="expand-container"><div id="expander-control-16097439" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">Metadata</span></div><div id="expander-content-16097439" class="expand-content"><p style="text-align: left;">Metadata nodes run metadata services (MDS), store cluster metadata, and control how user files are split into chunks and where these chunks are located. Metadata nodes also ensure that chunks have the required amount of replicas. Finally, they log all important events that happen in the cluster. To provide system reliability,<span> </span><span>Virtuozzo Storage</span><span> </span>uses the Paxos consensus algorithm. It guarantees fault tolerance if most nodes running metadata services are healthy.</p><p style="text-align: left;">To ensure the high availability of metadata in a production environment, metadata services must be run on at least three cluster nodes. In this case, if one metadata service fails, the remaining two will still be controlling the cluster. However, it is recommended to have a maximum of five metadata services in a cluster, to ensure that the cluster can survive the simultaneous failure of two nodes without data loss.</p><p style="text-align: left;">The primary metadata node is the master node in the metadata quorum. If the master MDS fails, another available MDS is selected as the master.</p></div></div></li><li><div id="expander-647270511" class="expand-container"><div id="expander-control-647270511" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">Storage</span></div><div id="expander-content-647270511" class="expand-content">Storage nodes run chunk services (CS), store all data in fixed-size chunks, and provide access to these chunks. All data chunks are replicated and the replicas are kept on different storage nodes to achieve data high-availability. If one of the storage nodes fails, the remaining healthy storage nodes continue providing the data chunks stored on the failed node. The storage role can only be assigned to a server with disks of a certain capacity.<p style="text-align: left;">Storage nodes can also benefit from data caching and checksumming:</p><ul style="text-align: left;"><li>Data caching improves cluster performance by placing frequently accessed data on an SSD.</li><li><p>Data checksumming generates checksums each time some data in the cluster is modified. When this data is read, a new checksum is computed and compared with the old checksum. If the two are not identical, a read operation is performed again, thus providing better data reliability and integrity.</p><p>If a node has an SSD, it will be automatically configured to keep checksums when you add a node to a cluster. This is the recommended setup. However, if a node does not have an SSD drive, checksums will be stored on a rotational disk by default. It means this disk will have to handle double the I/O because for each data read/write operation there will be a corresponding checksum read/write operation. For this reason, you may want to disable checksumming on nodes without SSDs to gain performance at the expense of checksums. This can be especially useful for hot data storage.</p></li></ul></div></div></li><li>Supplementary roles:<ul><li><div id="expander-140967447" class="expand-container"><div id="expander-control-140967447" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">Cache</span></div><div id="expander-content-140967447" class="expand-content"><p><span style="color: rgb(0,0,0);">Boosts chunk read/write performance by creating write caches on selected solid-state drives (SSDs). It is also recommended to use such SSDs for metadata. The use of write journals may more than double the write speed in the cluster.</span></p></div></div></li><li><div id="expander-770477640" class="expand-container"><div id="expander-control-770477640" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">System</span></div><div id="expander-content-770477640" class="expand-content"><p style="text-align: left;">One disk per node reserved for the operating system and unavailable for data storage.</p><p style="text-align: left;">Note the following:</p><ul style="text-align: left;"><li>The System role cannot be unassigned from a disk.</li></ul><ul style="text-align: left;"><li>If a physical server has a system disk with a capacity greater than 100 GB, that disk can be additionally assigned the Metadata or Storage role.</li><li>It is recommended to assign the System+Metadata role to an SSD. Assigning both roles to an HDD will result in mediocre performance suitable only for cold data (for example, archiving).</li><li>The System role cannot be combined with the Cache and Metadata+Cache roles. The reason is that the I/O generated by the operating system and applications would contend with the I/O generated by journaling, thus negating its performance benefits.</li></ul></div></div><p><span> </span></p></li></ul></li></ul><p>Along with the core storage services, servers run storage access points that allow top-level virtualization and storage services to access the storage cluster.</p><p style="text-align: center;"><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image confluence-external-resource" draggable="false" src="https://docs.virtuozzo.com/virtuozzo_hybrid_infrastructure_6_1_admins_guide/resources/images/storage_architecture.png" data-image-src="https://docs.virtuozzo.com/virtuozzo_hybrid_infrastructure_6_1_admins_guide/resources/images/storage_architecture.png"></span></p><p>In addition, a server joined to the storage cluster can run neither metadata nor chunk services. In this case, the node will run only storage access points and serve as a storage cluster client.</p>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

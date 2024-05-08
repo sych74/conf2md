@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing compute zones vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Compute-Zones_195791762.html">Compute Zones</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Manage-Compute-Zones_195791772.html">Manage Compute Zones</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing compute zones vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Compute zones can be used to create different tiers of service and have data stores and networks attached to them. The combination of compute resource, data store and network groups can be used to create private clouds for customers. Compute zones have types which are inherited by the compute resources in the zone. </p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ignore the options specified in your Control Panel but not mentioned in the documents.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingcomputezonesvVHS9.0-ViewComputeZoneDetailsview_details">View Compute Zone Details<span class="confluence-anchor-link" id="id-.ManagingcomputezonesvVHS9.0-view_details"></span></h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> menu.</li><li>Click the <strong>Compute Zones</strong> icon.</li><li>Click the label of the zone you're interested in. The screen that follows shows details of that zone:<br/><br/><ul><li><em>Label</em> - the compute zone’s name.</li><li><span style="color: rgb(124,124,124);"><em><span style="color: rgb(51,51,51);">Max VS to start at once</span></em> </span>- the maximum number of VMs that can run simultaneously in this zone.</li><li><span style="color: rgb(124,124,124);"><em><span style="color: rgb(51,51,51);">Placement type</span></em> - </span>the compute resource selection algorithm, which will be used on virtual machine provisioning and recovery.</li><li><span style="color: rgb(124,124,124);"><em><span style="color: rgb(51,51,51);">Failover timeout</span></em> - <span style="color: rgb(51,51,51);">the </span></span><span style="color: rgb(51,51,51);">time</span> period for which the iterations will run during the failover if the compute resource does not respond.</li><li><span style="color: rgb(124,124,124);"><em><span style="color: rgb(51,51,51);">Release resource type</span></em> - </span>shows which option is set for over-committing RAM, CPU, and CPU shares. </li><li><em>Extended CPU Configuration - </em>shows whether the <a href=".Compute-zone-extended-CPU-configuration-vVHS9.0_195791803.html">Extended CPU Configuration</a> is enabled for this zone.</li><li><span style="color: rgb(0,0,0);"><em>Simultaneous Hot Migrations - </em>shows the maximum number of simultaneous hot migrations enabled for this zone.</span></li><li><span style="color: rgb(0,0,0);"><em>Auto-converge -</em> shows the type of auto-converge functionality for this zone (Minor, Moderate, or Aggressive).</span></li><li><em>Assigned Compute resources</em> - the list of compute resources assigned to the zone.</li><li><em>Unassigned Compute resources </em>- the list of compute resources in the cloud that are not assigned to the zone. This list depends on the compute zone type. Only compute resources that can be assigned to a compute zone of this type, will be shown here. For the details, see the <a href=".Zone-types-vVHS9.0_195791589.html">Zone types</a> section.</li></ul></li></ol><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" draggable="false" width="700" src="attachments/195791771/195792223.png" data-image-src="attachments/195791771/195792223.png" data-unresolved-comment-count="0" data-linked-resource-id="195792223" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2024-4-19_9-33-18.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195791771" data-linked-resource-container-version="11" alt=""></span></p><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 class="with-breadcrumbs" id="id-.ManagingcomputezonesvVHS9.0-AddComputeResourcetoComputeZoneadd">Add Compute Resource to Compute Zone<span class="confluence-anchor-link" id="id-.ManagingcomputezonesvVHS9.0-add"></span></h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>When adding several compute resources to a zone, you can arrange the machines running on particular compute resources into a paid service.  Besides, adding several compute resources into one zone provides the failover capabilities to your services.</p><p>Only compute resources of relevant type can be added to a zone. For more information, refer to <a href=".Zone-types-vVHS9.0_195791589.html">Zone types</a>. When you add a compute resource to a compute zone, the compute resource inherits the zone's type.</p><p>To add a compute resource to a zone:</p><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings </strong>menu.</li><li>Click the <strong>Compute Zones </strong>icon.</li><li>Click the label of the zone you want to add a compute resource to. The screen that appears will show you the list of compute resources in the cloud, organized into two lists – those assigned to the zone already, and those that are unassigned.</li><li>In the unassigned list, find the compute resource you want to add to the zone and click the <strong>Actions </strong>button next to it, then click<em> </em><strong>Add.</strong></li></ol><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Be careful when adding new compute resources to a compute zone with Extended CPU Configuration enabled. For more information, refer to the<a href=".Compute-zone-extended-CPU-configuration-vVHS9.0_195791803.html"> Manage Extended CPU Flags for Compute Zone </a>section.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingcomputezonesvVHS9.0-RemoveComputeResourcefromComputeZoneremove">Remove Compute Resource from Compute Zone<span class="confluence-anchor-link" id="id-.ManagingcomputezonesvVHS9.0-remove"></span></h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> menu.</li><li>Click the <strong>Compute Zones</strong> icon.</li><li>Click the label of the zone you want to remove a compute resource from. The screen that appears will show you all compute resources in the cloud, organized into two lists—those assigned to the zone already and those that are unassigned.</li><li>In the assigned list, find the compute resource you want to remove and click <span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" draggable="false" width="25" src="attachments/195791771/195791778.png" data-image-src="attachments/195791771/195791778.png" data-unresolved-comment-count="0" data-linked-resource-id="195791778" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2021-6-4_8-39-17.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195791771" data-linked-resource-container-version="11" alt=""></span> in the the <strong>Actions</strong><span> section next to it</span><strong>.</strong></li></ol><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul><li><span>You can only remove a compute resource from a compute zone if it currently hosts no virtual machines.</span></li><li><span>It is possible to re-assign compute resources only between compute zones of the same type. For more information, refer to <a href=".Zone-types-vVHS9.0_195791589.html">Zone types</a>.</span></li></ul></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingcomputezonesvVHS9.0-EditComputeZone">Edit Compute Zone</h2><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> menu.</li><li>Click the <strong>Compute Zones</strong> icon.</li><li>The screen that appears will show all zones currently set up in the cloud.</li><li>Click the <strong>Actions </strong>button next to the required compute zone, then click<em> </em><strong>Edit</strong>. You can edit the following compute zone details:</li></ol><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Use only the<em> Extended CPU Configuration</em> option for the CPU model configuration in the Beta version.</p></div></div><p><strong>Properties</strong></p><ul><li><em>Label</em> -  the compute zone's name.</li><li><p><em>Release resource type</em> -<span style="color: rgb(51,51,51);"><span style="text-decoration: none;"> the compute zone's resource type. This</span></span><span style="color: rgb(51,51,51);"><span style="text-decoration: none;"> option allows you to free up the compute resource resources and over-commit RAM, CPU, and CPU shares by means of the virtual machines that are shut down.</span><span style="text-decoration: none;"> By default, the compute zone is created with the <em>Memory Guarantee </em>option enabled. In this case, the over-committing cannot be used. <br/><br/></span></span></p><ul><li><p><span style="color: rgb(51,51,51);"><em><span style="text-decoration: none;">Memory guarantee </span></em><span style="text-decoration: none;">- the actual free compute resource memory is calculated. All virtual machines residing on the compute resource will be able to start.</span></span><span style="color: rgb(51,51,51);"><span style="text-decoration: none;"> </span></span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(51,51,51);">Select only the<span> </span></span><em style="text-align: left;">Memory guarantee</em><span style="color: rgb(51,51,51);"><span> </span>option for<span> </span></span><em style="text-align: left;">Release resource type</em><span style="color: rgb(51,51,51);"><span> </span>in the Beta version.</span></p></div></div></li></ul></li><li><p><em>Max VS to start at once</em> - the maximum number of virtual machines that can be started simultaneously on this compute resource (5 recommended). This option ensures that virtual machines with VIP status will be booted prior to other machines.</p></li><li><p><em>Placement type</em> - specify the compute resource selection algorithm, that will be used on virtual machine provisioning and recovery, per compute zone: <br/><br/></p><ul><li><p><em>Take HV with maximum free RAM (Sparse)</em> - set this type to select the compute resource with maximum free RAM during the VM recovery. This option allows performing faster migration of virtual machines with a lesser (sparse) number of iterations during the failover.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(51,51,51);">Select only the<span> </span></span><em style="text-align: left;">Take HV with maximum free RAM (Sparse)</em><span style="color: rgb(51,51,51);"><span> </span>option for<span> </span></span><em style="text-align: left;">Placement type</em><span style="color: rgb(51,51,51);">.</span></p></div></div><p>This option behaves in different ways, depending on the event:</p><ul><li>On provisioning, the round-robin algorithm will be used on compute resource selection.</li><li><p>On recovery, the compute resource with maximum free RAM will be selected.</p></li></ul></li></ul></li><li><em>Failover timeout</em> - the <span style="color: rgb(51,51,51);text-decoration: none;">time period in minutes for which the iterations will run during the failover</span> if the compute resource does not respond. To manage failover, refer to the <a href="https://docs.onapp.com/display/VHS9AG/Manage+Failover"> Manage Failover </a>section of this guide.</li><li><em>CPU Units</em> - edit a number of CPU units assigned to each compute resource in this zone by default.</li><li><em>CPU guarantee</em> - move the slider to the right to ensure there is enough CPU on the compute zone to create a new VM. </li><li><em>Update Compute resource CPU units</em> - move the slider to apply the edited number of CPU units to all the compute resources in this zone.</li></ul><ul><li style="list-style-type: none;"><ul><li><p><em>Run Sysprep</em> -  enable or disable Windows virtual machine deployment without running sysprep.</p></li><li><p><em> Extended CPU Flags </em>  - move the slider to the right to enable <a href=".Compute-zone-extended-CPU-configuration-vVHS9.0_195791803.html">CPU flags functionality</a> for all compute resources added to this compute zone.</p></li><li><p><em>Custom Config</em> - add or edit any custom commands you want to run when a compute zone is booted.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span>The custom configs are only applicable to virtual compute zones.</span></p></div></div></li></ul></li></ul><p><span style="color: rgb(255,0,0);"><strong>                      <span style="color: rgb(0,0,0);">Hot Migration Options</span></strong></span></p><ul><li style="list-style-type: none;"><ul><li><span style="color: rgb(0,0,0);"><em>Auto-converge - </em>select the preferable type of auto-converge functionality:<em> </em></span><ul><li><span style="color: rgb(0,0,0);"><em>Minor - </em>auto-converge with default CPU throttling during migration.</span></li><li><span style="color: rgb(0,0,0);"><em>Moderate - </em>auto-converge with moderate CPU throttling.</span></li><li><span style="color: rgb(0,0,0);"><em>Aggressive - </em>auto-converge with aggressive CPU throttling.</span></li></ul></li></ul></li></ul><ul><li style="list-style-type: none;"><ul><li><span style="color: rgb(0,0,0);"><em>Override global configuration - </em>move the slider to allow setting the limits for simultaneous hot migrations.</span><ul><li><span style="color: rgb(0,0,0);"><em>Simultaneous Hot Migrations per Compute Resource - </em>the maximum amount of transactions that can be run simultaneously on the target compute resource when migrating a VM. The default value is 5. </span></li><li><span style="color: rgb(0,0,0);">S<em>imultaneous Hot Migrations per Compute Zone - </em>the maximum amount of transactions that can be run simultaneously within the same compute zone when migrating a VM. The default value is 2. </span></li></ul></li></ul></li></ul><p style="margin-left: 30.0px;">4.  Click the <strong>Save </strong>button to save your changes.</p><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingcomputezonesvVHS9.0-DeleteComputeZonedelete">Delete Compute Zone<span class="confluence-anchor-link" id="id-.ManagingcomputezonesvVHS9.0-delete"></span></h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> menu.</li><li>Click the <strong>Compute Zones</strong><em> </em>icon.</li><li>The screen that appears will show all zones currently set up in the cloud.</li><li>Click the <strong>Actions</strong> button next to the zone you want to remove, then choose <strong>Delete</strong> to remove it from the cloud. You will be asked to confirm the deletion.</li></ol><p><br/></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791771/195791774.png">view-compute-zone-details.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791771/195791778.png">image2021-6-4_8-39-17.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791771/195792221.png">image2024-4-19_9-32-19.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791771/195792223.png">image2024-4-19_9-33-18.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

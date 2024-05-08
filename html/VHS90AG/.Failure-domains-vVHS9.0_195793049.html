@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Failure domains vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Storage-Administration_195792531.html">Virtuozzo Storage Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Concepts-and-Features_195793067.html">Concepts and Features</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Failure-Domains_195793050.html">Failure Domains</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Failure domains vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>The idea behind failure domains is to define a scope (for example, a rack) that can fail, while its data is still available. If we choose the rack failure domain, the cluster data will tolerate a failure of one rack—the other racks will provide for the data availability. If we choose the host failure domain, the loss of an entire server would not result in the loss of data availability.</p><p><span>Virtuozzo Storage</span><span> </span>spreads data replicas evenly across failure domains according to a replica placement policy to provide high availability. The following policies are available:</p><ul><li>Disk, the smallest possible failure domain. Under this policy,<span> </span><span>Virtuozzo Storage</span><span> </span>never places more than one data replica per disk. While protecting against disk failure, this option may still result in data loss if data replicas happen to be on different disks of the same host and it fails. This policy should be used with one-node clusters.</li><li>Host as a failure domain. Under this policy,<span> </span><span>Virtuozzo Storage</span><span> </span>never places more than one data replica per host. So if a storage node fails (an operating system crash) and all its disks become unavailable, the data is still accessible from the healthy nodes.</li><li>Rack as a failure domain. Under this policy,<span> </span><span>Virtuozzo Storage</span><span> </span>never places more than one data replica per rack. So if a single rack fails (a failure of the top-of-rack switch) and all the nodes therein become unavailable, the data is still accessible from the other racks.</li><li>Row as a failure domain. Under this policy,<span> </span><span>Virtuozzo Storage</span><span> </span>never places more than one data replica per row. So if a single row fails (a failure of a single power source) and all the racks in it become unavailable, the data is still accessible from the other rows.</li><li>Room as a failure domain. Under this policy,<span> </span><span>Virtuozzo Storage</span><span> </span>never places more than one data replica per room. So if a single room fails (a power outage) and all the rows therein become unavailable, the data is still accessible from the other rooms.</li></ul><p>When selecting a failure domain, consider the following recommendations:</p><ul><li>Ensure the metadata services are distributed among the locations. For example, if you choose a room as the failure domain, and distribute the data across several rooms evenly, you must distribute metadata services too. If you put all the metadata services in one room and it fails due to a power outage, the cluster will not function properly.</li><li>To select a location as the failure domain, you need to have several locations of the kind so that the service or the data can move from one failure domain to another, such as from one rack to another. For example, if you want to choose the rack failure domain with the redundancy<span> </span><strong>2 replicas</strong><span> </span>or<span> </span><strong>Encoding 1+1</strong>, ensure you have at least two racks with healthy nodes assigned to the cluster.</li><li>The disk space should be distributed evenly between the failure domains. For example, if you select the rack failure domain, equal disk space should be available on each rack. The allocatable disk space in each rack is set to the disk space on the smallest rack. The reason is that each rack should store one replica for a data chunk. So once the disk space on the smallest rack runs out, no more chunks in the cluster can be created until a new rack is added or the replication factor is decreased. Huge failure domains are more sensitive to total disk space imbalance. For example, if a domain has 5 racks, with 10 TB, 20 TB, 30 TB, 100 TB, and 100 TB total disk space, it will not be possible to allocate (10+20+30+100+100)/3 = 86 TB of data in 3 replicas. Instead, only 60 TB will be allocatable, as the low-capacity racks will be exhausted sooner. At that, the largest racks (the 100 TB ones) will still have free unallocatable space.</li></ul>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing virtual machine administrative options vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtual-Servers_195791495.html">Virtual Servers</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Manage-Virtual-Server-Administrative-Options_195792350.html">Manage Virtual Server Administrative Options</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing virtual machine administrative options vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Virtual machine administrative options include the list of actions that you can run as a VM administrator. </p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ignore the options specified in your Control Panel but not mentioned in the documents.</p></div></div><p>To manage a virtual machine administrative options:</p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Virtual Servers</strong> menu. </li><li>Click the label of the required virtual machine.</li><li>Click the <strong>Actions </strong>button on the VM's Details page and point to <strong>Administration.</strong></li></ol><p><span>The </span><strong>Administration </strong><span>menu enables you to perform the following administrative actions on VMs:</span></p><hr/><h2 id="id-.ManagingvirtualmachineadministrativeoptionsvVHS9.0-reset-passwordResettingRootPassword"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachineadministrativeoptionsvVHS9.0-reset-password"></span>Resetting Root Password </h2><ol><li>Click the <strong>Reset Root Password</strong> button.</li><li>Move the <strong>Set password</strong> slider to the right and type your new password twice into the corresponding boxes.</li><li>To enable the password encryption, move the <strong style="letter-spacing: 0.0px;">Encrypt password</strong><span style="letter-spacing: 0.0px;"> slider to the right and type an encryption passphrase twice into the corresponding boxes.</span></li><li>Click the <strong style="letter-spacing: 0.0px;">Set Password</strong><span style="letter-spacing: 0.0px;"> button to save your new password. </span></li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>    </p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul><li>The virtual machine will be rebooted after resetting the password.</li><li><span>Particular characters are not allowed for Windows-based virtual machines:</span></li></ul><ul><li style="list-style-type: none;background-image: none;"><ul><li><span>Percent sign [%]</span></li><li><span>Double quotation marks [“]</span></li><li><span>Brackets [&lt;,&gt;]</span></li><li><span>Vertical bar [|]</span></li><li><span>Caret [^]</span></li><li><span>Ampersand [&amp;]</span></li><li><span>Parentheses [(,)]</span></li></ul></li></ul></div></div><div id="expander-1543959603" class="expand-container"><div id="expander-control-1543959603" class="expand-control" aria-expanded="true"><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">Click here to find more details about resetting the administrator password for a Windows-based virtual server via SSH</span></div><div id="expander-content-1543959603" class="expand-content"><p>If you cannot reset the administrator password for a Windows-based virtual machine via the UI:</p><ol><li><p>Connect to Control Panel via SSH:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">ssh root@CP_IP_ADDRESS
+su onapp</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Please note that port 22 should be open to proceed with the following steps.</p></div></div></li><li><p>Connect to the Windows-based virtual machine:</p><p>• For <span class="wysiwyg-color-blue">4.x</span> templates:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">ssh -o StrictHostKeyChecking=no Administrator@VM_IP_ADDRESS</pre>
+</div></div><p>Make sure that <em>A </em>in <code>Administrator</code> is a capital letter.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>If a virtual machine has a private IP address, make sure that CP has access to the virtual machine network.</p></div></div></li><li><p>In the command prompt, run:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">cmd</pre>
+</div></div></li><li><p>Change the administrator password (recommended to set the password in the UI):</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">net user administrator newpassword</pre>
+</div></div><p>In case this is a Windows-based virtual machine with ADDS (Active Directory Domain Services) installed, run:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">net user administrator newpassword /domain</pre>
+</div></div></li><li>Close the SSH connection.</li></ol><p>Reboot is not required. Now you can log in normally with the password from the UI.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>OnApp Cloud supports active directory domain controllers. The only limitation is that from the UI. OnApp cannot change or reset the password if the Windows virtual machine is used as a domain controller.</p></div></div></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingvirtualmachineadministrativeoptionsvVHS9.0-max-memorySettingMaxMemory"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachineadministrativeoptionsvVHS9.0-max-memory"></span>Setting Max Memory </h2><p>You can set a limit on RAM that can be allocated to virtual machines built on KVM compute resources. Setting the custom max memory limit is available for u<span>sers who have the </span><em>Set Max Memory </em><span>permission enabled in the </span><a href=".Permissions-vVHS9.0_195791917.html">Virtual Machines</a><span> permissions set</span></p><p><span style="color: rgb(51,51,51);">To set a max memory limit for a virtual machine: </span></p><ol><li><span style="color: rgb(51,51,51);">Click the <strong>Set Max Memory</strong> button. </span></li><li><span style="color: rgb(51,51,51);">Move the <strong>Max Memory </strong><strong>override </strong>slider to the right. </span></li><li><span style="color: rgb(51,51,51);">Enter the <em>Max Memory</em> limit in MB. </span></li><li><span style="color: rgb(51,51,51);">Click the <strong>Save</strong> button. </span></li></ol><div class="confluence-information-macro confluence-information-macro-warning"><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>After you save a max memory limit, reboot a virtual machine to apply changes.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingvirtualmachineadministrativeoptionsvVHS9.0-set_quotaSettingCustomCPUQuota"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachineadministrativeoptionsvVHS9.0-set_quota"></span>Setting Custom CPU Quota</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul><li>To edit the CPU Quota for a virtual machine, you need to enable the default value for the compute resource first.</li><li>This feature is available only for KVM compute resources.</li></ul></div></div><p>The default value of CPU quota can be customized according to your needs. You can overwrite the default value set for the compute resource for any particular virtual machine you need. For example, if the default CPU quota for the compute resource is set to 50%, you can increase it to 90% depending on the priority of your virtual machine.</p><p>To set a custom value for the particular virtual machine:</p><ol><li>Click the <strong>Set custom CPU Quota</strong> button.</li><li>Move the <strong>CPU Quota enabled </strong>slider to the right to enable CPU quota to override the default value.</li><li>Set CPU quota. The maximum value is 99%. Also, you can select the <strong>∞</strong> checkbox to set an unlimited amount of CPU quota.  </li><li>Click the <strong>Save</strong> button.<br/><br/></li></ol><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Custom CPU quota change can be done live without a virtual machine restart.</p></div></div><p>CPU Quota value can be changed automatically during migrating the virtual machine to another compute resource.</p><ul><li><span style="color: rgb(51,51,51);">If migrating to the compute resource that does not have the CPU Quota enabled, then CPU Quota value will be set to unlimited.</span></li><li><span style="color: rgb(51,51,51);">If migrating to the compute resource that has the CPU Quota enabled, check the custom value for the virtual machine. The custom CPU quota will remain unchanged after the migration, while the unspecified custom value will change into the default value. <br/></span></li></ul></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingvirtualmachineadministrativeoptionsvVHS9.0-change-ownerChangingOwner"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachineadministrativeoptionsvVHS9.0-change-owner"></span>Changing Owner </h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p style="text-align: left;">To change the owner of a virtual machine:</p><ol><li>Click the <strong>Change Owner</strong><span> button.</span></li><li><p><span>In the dialog box, select a target user from the drop-down list that shows all users in the system.</span></p></li><li><p><span>If you have any backups for this VM, you need to confirm if the backup should be moved to another user. Select </span><strong>Yes</strong><span> if you want to make the backups of the virtual machine available to the new owner. Otherwise, select </span><strong>No</strong><span>. <br/></span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>If you select <em>No</em>, all the backups for this virtual machine are deleted.</p></div></div></li><li><span>Click the <strong>Change Owner</strong> button to grant ownership to the selected user. </span></li></ol><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingvirtualmachineadministrativeoptionsvVHS9.0-set-ssh-keysSettingSSHKeys"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachineadministrativeoptionsvVHS9.0-set-ssh-keys"></span>Setting SSH Keys</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>To set SSH keys for a virtual machine: </p><ol><li><p>Click the <strong>Set SSH keys</strong> button to assign SSH keys of the <a href=".Editing-defaults-configuration-vVHS9.0_195791640.html">admin</a> and a VM owner to the VM. </p></li><li>In the dialog box, click the <strong>Set SSH keys</strong> button to confirm the action. </li></ol><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul><li>The virtual machine will be rebooted after setting SSH keys.</li><li><span>If a VM owner does not have any SSH keys, the system will only assign admin keys.</span></li></ul></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingvirtualmachineadministrativeoptionsvVHS9.0-edit_fqdnEditingFQDN"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachineadministrativeoptionsvVHS9.0-edit_fqdn"></span>Editing FQDN</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>To edit FQDN (fully qualified domain name):</p><ol><li>Click the <strong>Edit FQDN</strong> button.</li><li>In the dialog box, edit the hostname and the domain name. </li><li><p>Move the <strong>Force</strong> reboot slider to the right to enable FQDN update in case the transaction fails with a running virtual machine.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul><li><span>If the Force reboot is disabled, the FQDN will be changed on the fly if possible. If it is not possible, the transaction will fail and the FQDN won't be changed.</span></li><li><span><span style="color: rgb(23,43,77);">If the Force option is enabled, you will see two more options, Shutdown type and Required startup.</span></span></li></ul></div></div></li><li><p>Select the shutdown type from the dropdown list (Gracefully shutdown or power off).</p><ul><li><em>Gracefully shutdown</em> - to run a graceful shutdown of VMs.</li><li><em>Power Off</em> - to run a forceful shutdown of VMs.</li></ul></li><li>Tick the <em>Required startup</em> checkbox to start up the virtual machine automatically after the FQDN is updated.  </li><li>Click the <strong>Submit</strong> button.</li></ol></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

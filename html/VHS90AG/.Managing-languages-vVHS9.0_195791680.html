@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing languages vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Configuration_195791594.html">Control Panel Configuration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Manage-Languages_195791681.html">Manage Languages</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing languages vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>OnApp uses a standard Rails i18n internationalization system. You can add any language to your Control Panel and translate all the interface labels, error messages, and other texts from the default language into one or more custom languages.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ignore the options specified in your Control Panel but not mentioned in the documents.</p></div></div><h2 id="id-.ManaginglanguagesvVHS9.0-addAddCustomLanguage"><span class="confluence-anchor-link" id="id-.ManaginglanguagesvVHS9.0-add"></span>Add Custom Language</h2><p>You can add custom languages by translating the UI phrases from English into a custom language, using the <em>i18n Customization</em> menu on your CP. To add a custom language and provide translations:</p><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings </strong>menu.</li><li>Click the<strong> i18n Customization</strong> icon.</li><li>Click<span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" draggable="false" width="26" src="attachments/195791680/195791682.png" data-image-src="attachments/195791680/195791682.png" data-unresolved-comment-count="0" data-linked-resource-id="195791682" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2022-9-19_8-31-12.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195791680" data-linked-resource-container-version="10" alt=""></span> upper right, select the required language in the drop-down list, and click <strong>Submit</strong><span>.</span></li><li>Click the label of the required language. On the page that loads, you will see the following tabs with types of translations:</li><ul><li><em>Missing translations </em>- lists phrases that are not translated from English into a custom language.</li><li><em>Completed translations</em> - lists phrases that are translated from English into a custom language. This tab is available if there are some phrases translated into a custom language. </li></ul></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ol><li style="list-style-type: none;background-image: none;"><ul><li><em>Updated translations</em> - lists phrases that exist in English and are translated into a custom language but which were updated in English since the last translation into a custom language. This tab is available if there are some phrases updated in English. </li><li><p><em>Static pages</em> - lists phrases that appear on static pages.</p></li></ul></li></ol><p>      4. In all of the above-listed tabs, you can provide translations in the corresponding boxes next to the texts in English.</p><div class="confluence-information-macro confluence-information-macro-warning"><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul><li><span>For extended texts that include HTML tags, variables, and other special symbols, click </span><span>the </span><strong>—&gt;</strong><span> button to </span><span>copy the English variant into a target custom language to preserve the default structure.</span></li><li><span style="color: rgb(29,28,29);">Do not translate the words </span><em style="text-align: left;">true </em><span style="color: rgb(29,28,29);">and </span><em style="text-align: left;">false </em><span style="color: rgb(29,28,29);">in a label, preceding a boolean variable. For example: </span><em style="text-align: left;">true (Do not translate -- Enter true or false)</em><span style="color: rgb(29,28,29);"> - you can translate the label into your custom locale but the words </span><em style="text-align: left;">true</em><span style="color: rgb(29,28,29);"> and<span> </span></span><em style="text-align: left;">false</em><span style="color: rgb(29,28,29);"><span> </span>must be in English.</span></li></ul></div></div><p>      5. Click <strong>Apply</strong> to save the provided translations.</p><p>      6. When you are finished with translations, return to the <strong>Locales </strong>menu and click the <strong>Save Changes</strong> button. </p><div class="confluence-information-macro has-no-icon confluence-information-macro-note"><div class="confluence-information-macro-body"><ul><li>If you don't click <strong>Save Changes</strong>, the translations you provided will not be applied to your custom language.</li><li>You should apply and save at least one translation to be able to make your custom language available on CP.</li></ul></div></div><p>      7. Go to <strong>Admin</strong> &gt; <strong>Settings</strong> &gt;<strong> Configuration</strong> &gt;<strong> Interface </strong>tab, add your custom language into the <em>Locales</em> box, and click the <strong>Save Configuration</strong> button. If a custom language is not added to the interface configuration, users will not be able to use it in your cloud.</p><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ManaginglanguagesvVHS9.0-exportExportEnglishLanguage"><span class="confluence-anchor-link" id="id-.ManaginglanguagesvVHS9.0-export"></span>Export English Language</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>You can export the English language from your Control Panel to a YAML file. The exported file will contain all the user interface labels, messages, and other texts in English. You can then translate them to your custom language and <a href="#id-.ManaginglanguagesvVHS9.0-import">import the file</a> back to Control Panel. </p><p>To export the English locale to a YAML file, run the following rake task: </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">rake onapp:language:default_dump[tmp\]</pre>
+</div></div><p>Where <code>default_dump</code> is the name of the file and <code>tmp\</code> is an example of a directory to save the file to.</p><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ManaginglanguagesvVHS9.0-importImportCustomLanguage"><span class="confluence-anchor-link" id="id-.ManaginglanguagesvVHS9.0-import"></span>Import Custom Language</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(51,51,51);">You can also add a custom language to CP by uploading a YAML file with your translations to the <code>config/locales</code> directory. When the file is uploaded to <em>config/locales</em>, your custom language will become available in your cloud. However, in order to be able to edit translations for this language via the <em>i18n Customization</em> menu, you should run the following rake task: </span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">rake onapp:language:import</pre>
+</div></div><p>After the rake task is executed, a dump file with you custom translations is automatically created in the <code>locales_dump</code> directory. The <code>onapp:language:import</code><em> </em>rake task also ensures that after a subsequent upgrade to a newer OnApp version, all new UI labels, texts, and messages in the default language will be available for translation into the custom language at Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> &gt; <strong>i18n Customization</strong> &gt; <em>language</em> &gt; <strong>Missing translations</strong> tab.</p><div class="confluence-information-macro has-no-icon confluence-information-macro-information"><div class="confluence-information-macro-body"><p>If you make any changes in the default English translations, you should run the following rake task for these changes to be applied on CP:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">rake onapp:language:sync</pre>
+</div></div></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ManaginglanguagesvVHS9.0-enableEnableCustomLanguageforSpecificUser"><span class="confluence-anchor-link" id="id-.ManaginglanguagesvVHS9.0-enable"></span>Enable Custom Language for Specific User</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Now that you have added one or more custom languages, you can specify which language a particular user will see in their view of the Control Panel. </p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span>Ensure the required locales </span><span>are added</span><span> to your Control Panel. For this, go to your</span> Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> &gt;<strong> Configuration</strong> &gt;<strong> Interface </strong>&gt;<strong> </strong><em>Locales</em> box. </p></div></div><p>To enable a custom language for a particular user:</p><ol><li>Go to your Control Panel<strong> </strong>&gt;<strong> Admin</strong><span> &gt; </span><strong>Users</strong><span> menu.</span></li><li>Click the desired user's name.</li><li>On the following page, click the<strong> Edit Profile</strong> tab.</li><li>Choose your custom language from the<strong> Locales</strong> drop-down list.</li><li>Click<strong> Save</strong>.</li></ol></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791680/195791682.png">image2022-9-19_8-31-12.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Templates vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Templates_195791696.html">Templates</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Templates vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>This chapter provides an overview on what templates in OnApp are, the management tips, the information on creating your own templates and providing them as a paid resource for your customers.</p><hr/><h2 id="id-.TemplatesvVHS9.0-WhatAreTemplates?what_templates">What Are Templates?<span class="confluence-anchor-link" id="id-.TemplatesvVHS9.0-what_templates"></span> </h2><p><span>A template is a fully preconfigured operating system environment – a tar + gzip archive that contains the root directory of an operating system. A basic template includes the data needed for a minimum OS installation, but templates may also include applications and additional OS components.</span></p><p>OnApp templates are used to deploy virtual machines in your cloud. The OnApp template library includes over 100 VM templates based on various 32-bit and 64-bit versions of Windows and Linux operating systems.</p><p><iframe width="960" height="540" class="iframe-widget"
+        allowTransparency="true"
+        frameborder="0"
+        style="border:none; margin:1em 0em;"
+        src="//player.vimeo.com/video/530823756?color=ffffff&amp;byline=0&amp;portrait=0&amp;badge=0"
+        allow="encrypted-media"
+        webkitallowfullscreen mozallowfullscreen allowfullscreen>
+</iframe>
+
+</p><hr/><h2 id="id-.TemplatesvVHS9.0-WindowsTemplateswindows_templates"><span>Windows Templates</span><strong><span class="confluence-anchor-link" id="id-.TemplatesvVHS9.0-windows_templates"></span></strong></h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span>To create a virtual machine from a template based on paid software, such as MS Windows, you must have a valid license. The system verifies if you have a license before allowing the VM to be created, so before creating a VM you must first upload the license keys you've bought to OnApp, or connect to a licensing server.</span></p><p>OnApp supports three license types:</p><ul><li><em>MAK licensing:</em> the default licensing type applied to all Windows-based VMs.</li><li><em>KMS licensing:</em> this is applicable to Windows 2008 and up.</li><li><em>User licenses:</em> allow end users to input a license key when creating a VM.</li></ul><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>For more information, refer to the <a href=".Managing-template-software-licenses-vVHS9.0_195791730.html">Template Software Licenses</a> page.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.TemplatesvVHS9.0-TypesofTemplatestypes">Types of Templates<span class="confluence-anchor-link" id="id-.TemplatesvVHS9.0-types"></span></h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span>There are two different kinds of templates:</span></p><ul><li><strong>System templates.</strong> These are provided by OnApp and downloaded from an online library. They comprise an operating system with the latest set of packages installed. Most Linux templates require 2–10 GB. Some Windows Templates with additional software may require a minimum disk size of 30 GB - for example, <em>win12_x64_std-sqlweb-ver3.2-kvm_virtio.</em> The minimum disk size for new 4.0 Windows templates is 30 GB (40 GB for templates with MS SQL).</li></ul><ul><li><strong>Custom/user templates.</strong> These are templates you create by backing up an existing virtual machine and converting that backup to a template. This allows you to pre-configure virtual machines (for example with specific OS settings, or pre-installed applications) and use the same configuration again and again.</li></ul><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>For more details on how to create custom templates from a backup, refer to the <a href=".Managing-virtual-machine-backups-vVHS9.0_195791543.html">Converting virtual machine&nbsp;backup to template</a> and <a href=".Creating-and-installing-templates-vVHS9.0_195791704.html">Creating custom templates</a> sections.</p></div></div><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The templates with embedded Microsoft SQL have been removed from the OnApp repository. You can use a new template with Microsoft SQL Express in it, which is free to use. If you require a full SQL version, you should build a new template from a base Windows platform.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.TemplatesvVHS9.0-WhereTemplatesAreStoredstored_templates">Where Templates Are Stored<span class="confluence-anchor-link" id="id-.TemplatesvVHS9.0-stored_templates"></span></h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Depending on the configuration of your cloud, new templates are stored at different locations:</p><div class="table-wrap"><table class="relative-table wrapped confluenceTable" style="width: 100.0%;"><colgroup><col style="width: 21.113%;"/><col style="width: 78.887%;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Configuration of your cloud</strong></p></th><th class="confluenceTh"><p><strong>Storage locations for templates</strong></p></th></tr><tr><td class="confluenceTd"><p>No backup servers</p></td><td class="confluenceTd"><p>In this configuration, the templates will be uploaded to all compute resources. If this template already exists somewhere, the action is skipped. In such a case, NFS or any other sharing service should be enabled between compute resources.</p></td></tr><tr><td class="confluenceTd"><p>Backup servers are available</p></td><td class="confluenceTd"><p>The templates are uploaded to all backup servers. The action is skipped if such a template already exists. In this configuration ensure that some sharing service is between backup servers. Provisioning is performed at backup servers only. If there is more than one backup server in the cloud, the user is prompted to choose to which BS a template will be stored.</p></td></tr></tbody></table></div><p><span><br/>The following scheme demonstrates the possible template storage locations depending on your system's configuration:</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" draggable="false" src="attachments/195791695/195791694.png" data-image-src="attachments/195791695/195791694.png" data-unresolved-comment-count="0" data-linked-resource-id="195791694" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="templates_storage2.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195791695" data-linked-resource-container-version="7" alt=""></span></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.TemplatesvVHS9.0-TemplateStorestore">Template Store<span class="confluence-anchor-link" id="id-.TemplatesvVHS9.0-store"></span></h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Template store enables you to organize individual templates into groups that can be used as a paid resource for buckets. This allows you to easily create groups of templates which can be added to the bucket. Only those groups which are added to a bucket will be available to a user. </p><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>For detailed instructions, refer to the <a href=".Template-store-vVHS9.0_195791750.html">Template store</a> section.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.TemplatesvVHS9.0-MyTemplateGroupgroup">My Template Group<span class="confluence-anchor-link" id="id-.TemplatesvVHS9.0-group"></span></h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>My Template Groups allow you to create own license groups for your personal/custom templates. The groups cannot be shared amongst the users. Also, for Windows-based templates, My Template Groups provide the possibility to use your licensing type regardless of your bucket. </p><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>For detailed instructions, refer to the <a href=".My-template-groups-vVHS9.0_195791737.html">My template groups</a> section.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.TemplatesvVHS9.0-ConfigurationOptionsconfiguration">Configuration Options <span class="confluence-anchor-link" id="id-.TemplatesvVHS9.0-configuration"></span></h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span>To set template configurations, go to your</span><strong> </strong>Control Panel<strong> </strong><span>&gt;</span><strong> Admin </strong><span>&gt;</span><strong> Settings</strong><span> &gt; </span><strong>Configuration</strong><span> &gt;</span><strong> Backups/Templates</strong><span> tab. This menu lets you set the following template-related parameters:</span></p><ul><li>The URL of the required template server</li><li>Whether you want to delete the downloaded templates after they were distributed</li><li>The system path to templates and recovery templates</li></ul><p>During the Control Panel install/upgrade process, the following values are set by default:</p><ul><li><em>Template server URL</em> - <code><a href="http://templates-manager.onapp.com/" class="external-link" rel="nofollow">http://templates-manager.onapp.com</a></code></li><li>Path to<em> Templates -</em> <code>/onapp/templates</code></li><li>Path to<em> Recovery templates</em> - <code>/onapp/tools/recovery</code></li></ul><p>Templates and backups can be stored on a remote server or a mounted disk. If you wish to store templates and backups remotely, you should also configure the following settings:</p><ul><li>Template/backup server IP</li><li>User login</li><li>SSH options</li></ul><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>For more information, refer to <a href="195791620.html">Editing backups/templates configuration</a>.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.TemplatesvVHS9.0-InstallationandUpdateinstallation">Installation and Update<span class="confluence-anchor-link" id="id-.TemplatesvVHS9.0-installation"></span></h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>The OnApp template library includes over 100 VM templates based on various 32-bit and 64-bit flavours of Windows and Linux operating systems. The templates library is constantly updated. You can manage new templates with the OnApp template manager that connects to the template server and allows you to:</p><ul><li>Update the system templates which are already installed. </li><li>Download and install new templates available on a template server.</li></ul><p>Set the Template server URL via Control Panel<strong> </strong>&gt;<strong> Admin </strong>&gt;<strong> Settings</strong> &gt;<strong> Configuration </strong>&gt;<strong> </strong><strong>Backups/templates</strong> tab as a prerequisite for installing/upgrading templates.</p><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>For detailed instructions, refer to the <a href=".Creating-and-installing-templates-vVHS9.0_195791704.html">Install/Update Templates</a> section.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.TemplatesvVHS9.0-Billingbilling"><span>Billing<span class="confluence-anchor-link" id="id-.TemplatesvVHS9.0-billing"></span></span></h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>You can set up templates as a paid resource in several ways.</p><p>To set the pricing for the individual templates, go to the buckets Rate Card at<strong> </strong>Control Panel<strong> </strong>&gt;<strong> Admin </strong>&gt;<strong> Buckets </strong>&gt;<strong> Label </strong>&gt;<strong> Rate Card</strong> &gt;<strong> Other</strong> and add the required template stores. Here you can set a price for each individual template per hour. As a single template can be included in multiple template stores, the same template will have the same price in all the template stores added to the rate card of a single bucket. If you add/edit the price of a template in one template store, the price of the same template will change to the new value in all the template stores in the rate card.<br/>Once you add a template to the Rate Card, all the template stores that contain that template will be added to that Rate Card with a price set only for that template.</p><p>You can also configure the pricing for the template storage space and the amount of templates allowed per account.</p><p><span>If the templates are stored on compute resources or an SSH file transfer server, you can apply the <em>Templates, ISOs &amp; Backups Storage</em> and <em>Template</em> limits in the <em>Miscellaneous</em> section of the bucket.</span></p><p>If the templates are stored on backup servers, apply the limits and pricing for <em>Backup Server Zone limits.</em></p><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul><li>For more info, refer to <a href=".Template-store-vVHS9.0_195791750.html">Template store</a> and <a href=".Configuring-resource-allocation-and-prices-vVHS9.0_195792043.html">Configuring resource allocation and prices</a>.</li><li>If you add template related resources only to the bucket's Rate Card, users under the bucket will not have access to the templates. You need to configure the bucket's Access Control to make resources available to the users under the bucket.</li></ul></div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791695/195791694.png">templates_storage2.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

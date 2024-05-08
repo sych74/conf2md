@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing virtual machine power options vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtual-Servers_195791495.html">Virtual Servers</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Manage-Virtual-Server-Power-Options_195791527.html">Manage Virtual Server Power Options</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing virtual machine power options vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Virtual machine power options include the list of actions that you can run to change a VM power status. You can manage power options for a specific virtual machine or power on/off multiple VMs that reside on the same compute resource. </p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ignore the options specified in your Control Panel but not mentioned in the documents.</p></div></div><p>To manage power options for a specific virtual machine:</p><ol><li>Go to your Control Panel &gt; <strong>Cloud</strong> &gt; <strong>Virtual Servers</strong> menu.</li><li>Click the label of the required virtual machine. </li><li>Click the <strong>Actions </strong>button on the VM's screen and point to <strong>Power</strong> to see the following power actions on VM's (the exact list shown depends on the VM status): </li></ol><hr/><h2 id="id-.ManagingvirtualmachinepoweroptionsvVHS9.0-rebootRebootingVirtualMachine"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinepoweroptionsvVHS9.0-reboot"></span>Rebooting Virtual Machine</h2><ol><li>Click the<strong> Reboot Virtual Server</strong> button.</li><li>Click the <strong>OK</strong> button in the pop-up box to confirm the reboot. </li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingvirtualmachinepoweroptionsvVHS9.0-reboot-in-recoveryRebootinginRecovery"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinepoweroptionsvVHS9.0-reboot-in-recovery"></span>Rebooting in Recovery</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ol><li>Click the <strong>Reboot in Recovery</strong> button.</li><li>Click the <strong>Yes </strong>button in the pop-up box to confirm the reboot in the recovery mode. </li></ol><p>For VMs with password encryption <em>enabled</em>, the temporary login is &quot;<em>root</em>&quot; and the password is &quot;<em>recovery</em>&quot;.</p><p>For VMs with password encryption <em>disabled</em>, the<em> &quot;root&quot; </em>password will be used to reboot the VM in recovery.</p><p>Windows virtual machines boot from the Linux-based recovery template in the recovery mode. You need to log in as admin via SSH or VNC console and mount a Windows system disk manually.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>You cannot work with the &quot;whole&quot; disk (like <code>mount -t ntfs-3g /dev/sdb1</code>) while mounting and checking block devices inside the recovery image as the Windows disk is split into partitions.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingvirtualmachinepoweroptionsvVHS9.0-suspendSuspending/UnsuspendingVirtualMachine"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinepoweroptionsvVHS9.0-suspend"></span>Suspending/Unsuspending Virtual Machine</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ol><li><p>Click the <strong>Suspend</strong> button to stop a VM, change its status to suspended, and disable all the major actions on VM, unless unsuspended.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The virtual machine is suspended immediately after clicking the <strong>Suspend</strong> button without an additional confirmation.</p></div></div></li><li>Click the <strong>Unsuspend </strong>button to activate the suspended VM and enable all the major actions. </li></ol><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>For more information on actions available on a suspended VM, refer to the <a href=".Managing-suspended-virtual-machines-vVHS9.0_195791539.html">Managing Suspended Virtual M</a>achine section.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingvirtualmachinepoweroptionsvVHS9.0-shutdownShuttingDownVirtualMachine"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinepoweroptionsvVHS9.0-shutdown"></span>Shutting Down Virtual Machine </h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>You can shut down a specific virtual machine or multiple VMs that reside on the same compute resource. For information on shutting down multiple VMs, refer to the <a href="#id-.ManagingvirtualmachinepoweroptionsvVHS9.0-power-on-off-vs">Power On/Off Multiple Virtual Machines</a> section below. </p><p>To shut down a particular virtual machine:</p><ol><li>Click the <strong>Shut Down Virtual Server</strong> button.</li><li><p>In the pop-up box, select either the<strong> Gracefully shutdown </strong>option to terminate the VM gracefully or the <strong>Power OFF </strong>option to terminate the VM forcefully.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>If you select the <strong>Gracefully shutdown</strong> option and the system fails to shut down the VM gracefully in the time period indicated in the <em>Timeout Before Shutting Down VMs (30-600 sec) </em>parameter at <strong>Admin</strong> &gt; <strong>Settings</strong> &gt; <strong>Configuration </strong>&gt;<strong> <a href=".Editing-system-configuration-vVHS9.0_195791608.html">System</a></strong>, the VM will be shut down forcefully.</p></div></div></li><li>Click the <strong>Apply</strong> button to shut down the VM. </li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingvirtualmachinepoweroptionsvVHS9.0-startupStartingupVirtualServer"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinepoweroptionsvVHS9.0-startup"></span>Starting up Virtual Server</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>You can start up a specific virtual machine or multiple VMs that reside on the same compute resource. For information on starting multiple VMs, refer to the <a href="#id-.ManagingvirtualmachinepoweroptionsvVHS9.0-power-on-off-vs">Power On/Off Multiple Virtual Machines</a> section below. </p><p>To queue a start-up action for a VM that is currently powered off, click the <strong>Startup Virtual Server</strong> button.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>When you start up a VM, it might be implicitly-migrated if the current compute resource does not have sufficient resources.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingvirtualmachinepoweroptionsvVHS9.0-startup-on-recoveryStartinguponRecovery"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinepoweroptionsvVHS9.0-startup-on-recovery"></span>Starting up on Recovery</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>To start a VM in the recovery mode:</p><ol><li>Click the <strong>Startup on Recovery</strong> button to start up a VM in the recovery mode. </li><li>In the pop-up box, click the <strong>Yes</strong> button to confirm the startup. </li></ol><p><span style="color: rgb(14,16,26);">For VMs with password encryption </span><em><span style="color: rgb(14,16,26);">enabled</span></em><span style="color: rgb(14,16,26);">, the temporary login is &quot;</span><em><span style="color: rgb(14,16,26);">root</span></em><span style="color: rgb(14,16,26);">&quot; and the password is &quot;</span><em><span style="color: rgb(14,16,26);">recovery</span></em><span style="color: rgb(14,16,26);">&quot;.</span></p><p><span style="color: rgb(14,16,26);">For VMs with password encryption </span><em><span style="color: rgb(14,16,26);">disabled</span></em><span style="color: rgb(14,16,26);">, the</span><em><span style="color: rgb(14,16,26);"> &quot;root&quot; </span></em><span style="color: rgb(14,16,26);">password will be used to start up the VM.</span></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingvirtualmachinepoweroptionsvVHS9.0-boot-from-isoBootingfromISO"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinepoweroptionsvVHS9.0-boot-from-iso"></span>Booting from ISO</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>You can boot virtual machines from your own ISOs or the ISOs that are uploaded and made publicly available by other users. If you boot a VM from an ISO with a RAM requirement larger than the VM's RAM, the transaction will fail. Make sure that you have enabled the <em>Any power action on own virtual servers </em>and<em> Allow own virtual servers to boot from ISO </em>permissions for the user to have access to this feature.</p><p>To boot a VM from an ISO: </p><ol><li>Click the <strong>Boot from ISO</strong> button. </li><li>Select the ISO image from which the VM will be booted. </li><li>Click the <strong>Boot</strong> button. </li></ol><div class="confluence-information-macro confluence-information-macro-warning"><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>As soon as you boot a VM from the installation ISO, OnApp may lose control of any components (backups, networks, disks). The <a href=".Managing-virtual-machines-vVHS9.0_195792186.html">migration</a> option is not available for VMs booted from ISO. The only available actions will be to start and stop a VM. Be aware that all the contents of the disk may be also deleted.</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="id-.ManagingvirtualmachinepoweroptionsvVHS9.0-power-on-off-vsPoweringOn/OffMultipleVirtualMachines"><span class="confluence-anchor-link" id="id-.ManagingvirtualmachinepoweroptionsvVHS9.0-power-on-off-vs"></span>Powering On/Off Multiple Virtual Machines</h2></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>To power on and power off virtual machines that are run on the same compute resource, follow the next steps: </p><ol><li>In the <em>Settings </em>section, expand the <strong>Compute Resources </strong>menu and click a label of a compute zone where a target compute resource runs.</li><li>Click a label of a compute resource. On the screen that appears, you will see a list of all virtual machines hosted on the compute resource.</li><li><p>Choose virtual machines that you want to power on or power off by selecting the required checkboxes in the first column of the table. </p><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><ul><li><p>To select all virtual machines residing on the compute resource, click the first checkbox. To cancel the selection of all virtual machines, click this checkbox again.</p></li><li><p>If you select all virtual machines, only the powered-off VMs will be powered on, while the already powered-on VMs will be skipped and vice versa.</p></li></ul></div></div></li></ol><p style="margin-left: 30.0px;">Depending on the current power status of the selected VMs, one of the following options will become available. <br/><strong><br/>Power On</strong></p><p style="margin-left: 30.0px;">To power on the selected VMs: </p><ul><li style="list-style-type: none;background-image: none;"><ul><li>Click the <strong>Power On </strong>button.</li><li>In the pop-up box, click the <strong>YES </strong>button to confirm your action.</li><li><span style="color: rgb(51,51,51);">As a result, multiple transactions will be scheduled to start up all the selected virtual machines one by one.</span></li></ul></li></ul><p><br/></p><p style="margin-left: 30.0px;"><strong>Power Off </strong></p><p style="margin-left: 30.0px;">To power off the selected VMs: </p><ul><li style="list-style-type: none;background-image: none;"><ul><li>Click the <strong>Power Off </strong>button.</li><li>In the pop-up box, select one of the following methods: <ul><li><em>Gracefully shutdown</em> - to run a graceful shutdown of VMs.</li><li><em>Power Off</em> - to run a forceful shutdown of VMs.</li></ul></li><li>Click the <strong>Submit </strong>button to confirm your action.</li><li>As a result, the multiple transactions will be scheduled to power off all the selected virtual machines one by one.</li></ul></li></ul><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The bulk power on/off actions are available only to virtual machines that are run on KVM compute resources.</p></div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

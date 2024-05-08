@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Identity management vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Identity-Management_195791864.html">Identity Management</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Identity management vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(23,43,77);">OnApp provides very fine control over cloud users and what they're allowed to do. You can set up as many different types of user as you need, and customize their access to cloud resources and Control Panel functions as required.</span></p><p><span style="color: rgb(23,43,77);">For example, standard, VIP, and reseller users can have different capabilities and resource limits. You might provide basic cloud management functionality to L1 support staff (for example, reboot virtual machines but not destroy them) while your L3 admins have full rights. Your development teams will probably need to deploy test VMs in the cloud just as a customer would, only without being charged for them. Meanwhile, your billing staff needs a &quot;billing only&quot; view with no access to customer resources.</span><br/><span style="color: rgb(23,43,77);">This fine control is enabled by a combination of<span> </span></span><a href=".User-accounts-vVHS9.0_195791896.html">user accounts</a><span style="color: rgb(23,43,77);">,<span> </span></span><a href=".Roles-vVHS9.0_195791904.html">roles</a><span style="color: rgb(23,43,77);">,<span> </span></span><a href=".Permissions-vVHS9.0_195791917.html">permissions</a><span style="color: rgb(23,43,77);">, and<span> </span></span><a href=".Buckets-vVHS9.0_195792028.html">buckets</a><span style="color: rgb(23,43,77);">.</span></p><p><span style="color: rgb(23,43,77);">You can also monitor the resource usage of your users. Refer to the sections below for more details. </span></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="columnMacro" style="width:50%;min-width:50%;max-width:50%;"><h2 style="text-align: left;" id="id-.IdentitymanagementvVHS9.0-Resources">Resources</h2><p>                    
+    
+
+
+<a  href="https://docs.onapp.com/vhs90ag/latest/identity-management/dashboard"  class="rwui_button rwui_block  rwui_size_large  rwui_id_1a1d7cd8-7743-42de-ad48-5c62e5f30856 " style=" color: #FFFFFF !important; background-color: rgb(113,176,224); "title="The dashboard provides resource usage statistics, activity log, and your cloud summary. "><style>.rwui_id_1a1d7cd8-7743-42de-ad48-5c62e5f30856 {color: #FFFFFF !important; background: rgb(113,176,224);}.rwui_id_1a1d7cd8-7743-42de-ad48-5c62e5f30856:hover {background: rgb(105,163,207);}.rwui_id_1a1d7cd8-7743-42de-ad48-5c62e5f30856 .rwui_icon {color: #FFFFFF !important;}</style><span class="rwui_content" >Dashboard</span></a>
+</p><p>                    
+    
+
+
+<a  href="https://docs.onapp.com/vhs90ag/latest/identity-management/metrics"  class="rwui_button rwui_block  rwui_size_large  rwui_id_a4c36a5e-62de-402b-81fd-e020e171bb78 " style=" color: #FFFFFF !important; background-color: rgb(113,176,224); "title="Metrics"><style>.rwui_id_a4c36a5e-62de-402b-81fd-e020e171bb78 {color: #FFFFFF !important; background: rgb(113,176,224);}.rwui_id_a4c36a5e-62de-402b-81fd-e020e171bb78:hover {background: rgb(105,163,207);}.rwui_id_a4c36a5e-62de-402b-81fd-e020e171bb78 .rwui_icon {color: #FFFFFF !important;}</style><span class="rwui_content" >Metrics</span></a>
+</p><p>                    
+    
+
+
+<a  href="https://docs.onapp.com/vhs90ag/latest/identity-management/tools/logs"  class="rwui_button rwui_block  rwui_size_large  rwui_id_fce2b7cb-11bf-4b56-9dcd-765d90f2d3b1 " style=" color: #FFFFFF !important; background-color: rgb(113,176,224); "title="Logs"><style>.rwui_id_fce2b7cb-11bf-4b56-9dcd-765d90f2d3b1 {color: #FFFFFF !important; background: rgb(113,176,224);}.rwui_id_fce2b7cb-11bf-4b56-9dcd-765d90f2d3b1:hover {background: rgb(105,163,207);}.rwui_id_fce2b7cb-11bf-4b56-9dcd-765d90f2d3b1 .rwui_icon {color: #FFFFFF !important;}</style><span class="rwui_content" >Logs</span></a>
+</p><p>                    
+    
+
+
+<a  href="https://docs.onapp.com/vhs90ag/latest/identity-management/tools/alerts"  class="rwui_button rwui_block  rwui_size_large  rwui_id_8348f13d-95b2-456e-a63f-78976ddac687 " style=" color: #FFFFFF !important; background-color: rgb(113,176,224); "title="Alerts"><style>.rwui_id_8348f13d-95b2-456e-a63f-78976ddac687 {color: #FFFFFF !important; background: rgb(113,176,224);}.rwui_id_8348f13d-95b2-456e-a63f-78976ddac687:hover {background: rgb(105,163,207);}.rwui_id_8348f13d-95b2-456e-a63f-78976ddac687 .rwui_icon {color: #FFFFFF !important;}</style><span class="rwui_content" >Alerts</span></a>
+</p><p>                    
+    
+
+
+<a  href="https://docs.onapp.com/vhs90ag/latest/identity-management/tools/sysadmin"  class="rwui_button rwui_block  rwui_size_large  rwui_id_a725e285-bcee-4028-82a1-da1dc1809bba " style=" color: #FFFFFF !important; background-color: rgb(113,176,224); "title="Sysadmin"><style>.rwui_id_a725e285-bcee-4028-82a1-da1dc1809bba {color: #FFFFFF !important; background: rgb(113,176,224);}.rwui_id_a725e285-bcee-4028-82a1-da1dc1809bba:hover {background: rgb(105,163,207);}.rwui_id_a725e285-bcee-4028-82a1-da1dc1809bba .rwui_icon {color: #FFFFFF !important;}</style><span class="rwui_content" >Sysadmin</span></a>
+</p><p>                    
+    
+
+
+<a  href="https://docs.onapp.com/vhs90ag/latest/identity-management/notifications"  class="rwui_button rwui_block  rwui_size_large  rwui_id_790b6c34-b9b9-41a4-b070-2af8a72a1cc9 " style=" color: #FFFFFF !important; background-color: rgb(113,176,224); "title="Notifications"><style>.rwui_id_790b6c34-b9b9-41a4-b070-2af8a72a1cc9 {color: #FFFFFF !important; background: rgb(113,176,224);}.rwui_id_790b6c34-b9b9-41a4-b070-2af8a72a1cc9:hover {background: rgb(105,163,207);}.rwui_id_790b6c34-b9b9-41a4-b070-2af8a72a1cc9 .rwui_icon {color: #FFFFFF !important;}</style><span class="rwui_content" >Notifications</span></a>
+</p></div><div class="columnMacro" style="width:15px;min-width:15px;max-width:15px;"><p><br/></p></div><div class="columnMacro" style="width:50%;min-width:50%;max-width:50%;"><h2 style="text-align: left;" id="id-.IdentitymanagementvVHS9.0-Users">Users</h2><p>                    
+    
+
+
+<a  href="https://docs.onapp.com/vhs90ag/latest/identity-management/user-accounts"  class="rwui_button rwui_block  rwui_size_large  rwui_id_a3efaa2a-a5dc-4292-8acb-3f70733fab20 " style=" color: #FFFFFF !important; background-color: rgb(113,176,224); "title="User accounts are created by administrators, and only have access to those actions which are specified by an administrator."><style>.rwui_id_a3efaa2a-a5dc-4292-8acb-3f70733fab20 {color: #FFFFFF !important; background: rgb(113,176,224);}.rwui_id_a3efaa2a-a5dc-4292-8acb-3f70733fab20:hover {background: rgb(105,163,207);}.rwui_id_a3efaa2a-a5dc-4292-8acb-3f70733fab20 .rwui_icon {color: #FFFFFF !important;}</style><span class="rwui_content" >User Accounts</span></a>
+</p><p>                    
+    
+
+
+<a  href="https://docs.onapp.com/vhs90ag/latest/identity-management/user-groups"  class="rwui_button rwui_block  rwui_size_large  rwui_id_21a100f1-55cc-46b4-a5e5-b9273114f1af " style=" color: #FFFFFF !important; background-color: rgb(113,176,224); "title="You should assign users to different user groups, so you can tie some users together and offer similar cloud experiences. "><style>.rwui_id_21a100f1-55cc-46b4-a5e5-b9273114f1af {color: #FFFFFF !important; background: rgb(113,176,224);}.rwui_id_21a100f1-55cc-46b4-a5e5-b9273114f1af:hover {background: rgb(105,163,207);}.rwui_id_21a100f1-55cc-46b4-a5e5-b9273114f1af .rwui_icon {color: #FFFFFF !important;}</style><span class="rwui_content" >User Groups</span></a>
+</p><p>                    
+    
+
+
+<a  href="https://docs.onapp.com/vhs90ag/latest/identity-management/roles"  class="rwui_button rwui_block  rwui_size_large  rwui_id_72b841b5-db7c-4f0a-b70f-ebc217634ee1 " style=" color: #FFFFFF !important; background-color: rgb(113,176,224); "title="Each role has a set of permissions associated with it. By assigning users to different roles you can control what those users are allowed to do."><style>.rwui_id_72b841b5-db7c-4f0a-b70f-ebc217634ee1 {color: #FFFFFF !important; background: rgb(113,176,224);}.rwui_id_72b841b5-db7c-4f0a-b70f-ebc217634ee1:hover {background: rgb(105,163,207);}.rwui_id_72b841b5-db7c-4f0a-b70f-ebc217634ee1 .rwui_icon {color: #FFFFFF !important;}</style><span class="rwui_content" >Roles</span></a>
+</p><p>                    
+    
+
+
+<a  href="https://docs.onapp.com/vhs90ag/latest/identity-management/onapp-permissions"  class="rwui_button rwui_block  rwui_size_large  rwui_id_3f70a132-619a-4b2e-8ce3-930ee105f35e " style=" color: #FFFFFF !important; background-color: rgb(113,176,224); "title="The permissions are used to determine what the OnApp users are authorized to do within the cloud. "><style>.rwui_id_3f70a132-619a-4b2e-8ce3-930ee105f35e {color: #FFFFFF !important; background: rgb(113,176,224);}.rwui_id_3f70a132-619a-4b2e-8ce3-930ee105f35e:hover {background: rgb(105,163,207);}.rwui_id_3f70a132-619a-4b2e-8ce3-930ee105f35e .rwui_icon {color: #FFFFFF !important;}</style><span class="rwui_content" >Permissions</span></a>
+</p><p>                    
+    
+
+
+<a  href="https://docs.onapp.com/vhs90ag/latest/identity-management/drop-sessions"  class="rwui_button rwui_block  rwui_size_large  rwui_id_f57423f9-fbc7-4394-bc0e-943ecb7d118c " style=" color: #FFFFFF !important; background-color: rgb(113,176,224); "title="You can use this functionality if you need to terminate a session because you can&#39;t get to a PC or you have a bad connection."><style>.rwui_id_f57423f9-fbc7-4394-bc0e-943ecb7d118c {color: #FFFFFF !important; background: rgb(113,176,224);}.rwui_id_f57423f9-fbc7-4394-bc0e-943ecb7d118c:hover {background: rgb(105,163,207);}.rwui_id_f57423f9-fbc7-4394-bc0e-943ecb7d118c .rwui_icon {color: #FFFFFF !important;}</style><span class="rwui_content" >Sessions</span></a>
+</p></div><p><br/></p><p><br/></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

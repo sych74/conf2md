@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing compute resource backup servers vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Compute-Resources_195791812.html">Compute Resources</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Manage-Compute-Resource-Backup-Servers_195791831.html">Manage Compute Resource Backup Servers</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing compute resource backup servers vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><span style="color: rgb(23,43,77);">The association between a compute resource and a backup server is called a backup server join. It enables the use of a</span><span style="color: rgb(23,43,77);"> backup server for storing the backups of virtual machines hosted on the compute resource.<br/></span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>If a compute resource lacks such a backup server join, the backups will be created on the compute resource hosting the virtual machine. To prevent creating both manual and auto-backups on compute resources, <a href=".Configuring-resource-allocation-and-prices-vVHS9.0_195792043.html">set the <em>Max limit</em> in the <em>Miscellaneous</em> section to 0</a>.</p></div></div><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(51,51,51);">Ensure that the </span><em>Update any compute resource </em><span style="color: rgb(51,51,51);">permission is on before managing compute resource backup servers. For more information about permissions, refer to the <a href=".Permissions-vVHS9.0_195791917.html">Permissions</a></span><span style="color: rgb(51,51,51);"> section of this guide.</span></p></div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ignore the options specified in your Control Panel but not mentioned in the documents.</p></div></div><p><span style="color: rgb(23,43,77);"><br/></span></p><hr/><p><span><br/>View Compute Resource Backup Servers</span></p><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> menu.</li><li>Click the <strong>Compute Resources</strong> icon.</li><li>Click the label of a compute resource.</li><li>On the page that appears, click the <strong>Actions</strong> button, point to <strong>Management Options</strong>, and select <strong>Manage Backup Servers</strong>.</li><li>On the following page, you'll see a list of all backup servers associated with this compute resource and their details:<br/><strong>• </strong><em>Label</em><span> </span><span>- the name of the backup server.<br/></span><strong>•</strong><em> IP Address</em><span> </span><span>-  the IP Address of the backup server.<br/></span><strong>•</strong><em> Enabled</em><span> </span><span>-  whether the backup server is enabled or not.<br/><br/></span></li></ol><hr/><h2 id="id-.ManagingcomputeresourcebackupserversvVHS9.0-AddBackupServerJoin">Add Backup Server Join</h2><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(51,51,51);">You can add backup servers to a compute resource only if they are assigned to zones of the same type. For more information, refer to</span><span style="color: rgb(51,51,51);"> <a href=".Zone-types-vVHS9.0_195791589.html">Zone types</a></span><span style="color: rgb(51,51,51);">.</span></p></div></div><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> menu.</li><li>Click the <strong>Compute Resources</strong> icon.</li><li>Click the label of the compute resource you want to manage backup servers for.</li><li>On the page that appears, click the <strong>Actions</strong> button, point to <strong>Management Options</strong>, and select <strong>Manage Backup Servers</strong>.</li><li>On the following page, in the <em>Add Backup Servers</em> section, fill in the following field:<br/><strong>• </strong><em>Backup Server </em>– select the required backup server from the drop-down list.</li><li>Click <strong>Add </strong><strong>Backup Server</strong>.<br/><br/></li></ol><hr/><h2 id="id-.ManagingcomputeresourcebackupserversvVHS9.0-RemoveBackupServerJoin">Remove Backup Server Join</h2><ol><li>Go to your Control Panel &gt; <strong>Admin</strong> &gt; <strong>Settings</strong> menu.</li><li>Click the <strong>Compute Resources</strong> icon.</li><li>Click the label of the compute resource you want to manage backup servers for.</li><li>On the page that appears, click the <strong>Actions </strong>button, point to <strong>Management Options</strong>, and select <strong>Manage Backup Servers</strong>.</li><li>On the following page, click <span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" draggable="false" height="24" src="attachments/195791830/195791832.png" data-image-src="attachments/195791830/195791832.png" data-unresolved-comment-count="0" data-linked-resource-id="195791832" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2021-9-9_11-26-40.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195791830" data-linked-resource-container-version="4" alt=""></span>next to the backup server join you want to remove.</li><li><span>You will be asked for confirmation before the backup server is removed.</span></li></ol>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195791830/195791832.png">image2021-9-9_11-26-40.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

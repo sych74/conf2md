@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Buckets vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Control-Panel-Administration_195792528.html">Control Panel Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Billing_195792025.html">Billing</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Buckets_195792029.html">Buckets</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Buckets vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><iframe width="960" height="540" class="iframe-widget"
+        allowTransparency="true"
+        frameborder="0"
+        style="border:none; margin:1em 0em;"
+        src="//player.vimeo.com/video/530821650?color=ffffff&amp;byline=0&amp;portrait=0&amp;badge=0"
+        allow="encrypted-media"
+        webkitallowfullscreen mozallowfullscreen allowfullscreen>
+</iframe>
+
+</p><p><span style="color: rgb(51,51,51);">Before users can create virtual machines in your cloud, it is important to give access to the resources and set prices for the resources they use. This is a three-step process:</span></p>                    
+    
+
+
+<div class="rwui_steps ">
+                        
+    
+
+<div class="rwui_step">
+    <div class="rwui_item_number"></div>
+    <div class="rwui_item_content">
+        <p><span style="color: rgb(51,51,51);"><a href=".Creating-and-managing-buckets-vVHS9.0_195792047.html">Сreate a bucket.</a></span></p>
+    </div>
+</div>
+                    
+    
+
+<div class="rwui_step">
+    <div class="rwui_item_number"></div>
+    <div class="rwui_item_content">
+        <p><span style="color: rgb(51,51,51);"><a href=".Configuring-resource-allocation-and-prices-vVHS9.0_195792043.html">Set prices and resources limits for the bucket.</a></span></p>
+    </div>
+</div>
+                    
+    
+
+<div class="rwui_step">
+    <div class="rwui_item_number"></div>
+    <div class="rwui_item_content">
+        <p><span style="color: rgb(51,51,51);"><a href=".Creating-and-managing-buckets-vVHS9.0_195792047.html">Assign users to the bucket.</a></span></p>
+    </div>
+</div>
+
+</div>
+
+<p><br/></p><p>Buckets enable you to set up resource allocation and pricing separately. If you only want to configure the resources to which a user has access, you can easily do that using <a href=".Configuring-resource-allocation-and-prices-vVHS9.0_195792043.html">Access Control</a>, and the pricing parameters will not appear in the process. If you want to set up both access to the resources and pricing, you only need to proceed from Access Control to <a href=".Configuring-resource-allocation-and-prices-vVHS9.0_195792043.html">Rate Card</a>, where the prices and the number of free resources are set.</p><p>The bucket representation depends on the resources available in the cloud: </p><ul><li>If there are no resources of a certain server type in the system, the section corresponding to this server type will not appear in the bucket. </li><li>If there are no resources of a certain type that do not have a server type (for example, service add-on groups), the selection of that resource will not be available in the <em>Other</em> section of the Access Control/Rate Card.</li></ul><p>Buckets are arranged into two tabs:</p><ul><li><em>Access Control</em> - in this section, you configure the resource allocation for the users under this bucket. If you assign a bucket to a user, that user will have access only to the resources that you have added to the bucket. If no resources are added to a section of the Access Control, for example, compute zones, the user under the bucket will not have access to any of the compute zones in the cloud.</li><li><em>Rate Card</em> - in this section you set up prices for the resources and the amount of resources users can request for free. Users under the bucket will be billed according to the prices you configure in the Rate Card.</li></ul><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" draggable="false" width="700" src="attachments/195792028/195792268.png" data-image-src="attachments/195792028/195792268.png" data-unresolved-comment-count="0" data-linked-resource-id="195792268" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2024-4-19_15-8-37.png" data-base-url="https://docs.onapp.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="195792028" data-linked-resource-container-version="5" alt=""></span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>In case you remove from Access Control a resource on which users under the bucket have running servers, the users' existing servers will remain as they are, but users will not be able to use these resources to create new servers. If you leave such a resource in the Rate Card, the users' existing servers will continue to be billed according to the prices you have configured.</p></div></div><p>The Access Control and Rate Card tabs are further subdivided into sections that depend on the server types of resources you have in the cloud: </p><ul><li><em>Virtual</em> - the server type under which KVM compute, data store, network, and backup server zones of the virtual machine type can be added</li><li><em>Other</em> - the resources that relate to the system and do not have a server type. <span style="color: rgb(51,51,51);">This section includes backup resource zones, template stores, edge groups, recipe groups, and service add-on groups.</span></li></ul><div class="confluence-information-macro has-no-icon confluence-information-macro-note"><div class="confluence-information-macro-body"><p>Note that the user under the bucket has access only to the resources added to the Access Control. If you add a resource to the Rate Card but do not add it to the Access Control, the user under this bucket will not have access to that resource.</p></div></div><p>For convenience, you can duplicate resources from the Access Control to the Rate Card and vice versa. When adding a resource to the Access Control, select the <strong>Duplicate to rate card </strong>checkbox, and the resource will be added to the Rate Card with no prices and free resource limits. Similarly, when adding a resource to the Rate Card, select the <strong>Duplicate to access control</strong> checkbox, and the resource will be added to the Access Control with no limits by default.</p><p><br/></p><p><br/></p><p><br/></p><p><br/></p><p><br/></p><p><br/></p><p><br/></p>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195792028/195792030.png">bucket tabs.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/195792028/195792268.png">image2024-4-19_15-8-37.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

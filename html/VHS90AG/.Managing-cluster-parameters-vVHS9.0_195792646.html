@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing cluster parameters vVHS9.0</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Hybrid-Server-9.0-Admin-Guide_195791490.html">Virtuozzo Hybrid Server 9.0 Admin Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Virtuozzo-Storage-Administration_195792531.html">Virtuozzo Storage Administration</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="195792599.html">Configuring Virtuozzo Storage Clusters¶</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Managing-Cluster-Parameters_195792647.html">Managing Cluster Parameters</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Virtuozzo Hybrid Server 9.0 Admin Guide : .Managing cluster parameters vVHS9.0
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Roksoliana Ben</span>, last modified on May 07, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>This section explains what cluster parameters are and how you can configure them with the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span></code><span> </span>utility.</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ManagingclusterparametersvVHS9.0-ClusterParametersOverview">Cluster Parameters Overview</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>The cluster parameters control creating, locating, and managing replicas for data chunks in a Virtuozzo Storage cluster. All parameters can be divided into three main parameter groups: replication, encoding, and location.</p><p>The table below briefly describes some of the cluster parameters. See the following sections for more information on the parameters and their configuration.</p><div class="table-wrap"><table class="wrapped confluenceTable"><thead><tr><th style="text-align: left;" class="confluenceTh"><p>Parameter</p></th><th style="text-align: left;" class="confluenceTh"><p>Description</p></th></tr></thead><tbody><tr><td colspan="2" class="confluenceTd"><p><strong>Replication Parameters</strong></p></td></tr><tr><td class="confluenceTd"><p>Normal Replicas</p></td><td class="confluenceTd"><p>The number of replicas to create for a data chunk can be from 1 to 15. Recommended: 3.</p></td></tr><tr><td class="confluenceTd"><p>Minimum Replicas</p></td><td class="confluenceTd"><p>The minimum number of replicas for a data chunk can be from 1 to 15. Recommended: 2.</p></td></tr><tr><td colspan="2" class="confluenceTd"><p><strong>Location Parameters</strong></p></td></tr><tr><td class="confluenceTd"><p>Failure Domain</p></td><td class="confluenceTd"><p>A placement policy for replicas can be either a host (default) or a disk (CS).</p></td></tr><tr><td class="confluenceTd"><p>Tier</p></td><td class="confluenceTd"><p>Storage tiers can vary from 0 to 3 (0 by default).</p></td></tr></tbody></table></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ManagingclusterparametersvVHS9.0-ConfiguringReplicationParameters">Configuring Replication Parameters</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>The cluster replication parameters define the following:</p><ul class="simple"><li><p>The normal number of replicas of a data chunk. When a new data chunk is created, Virtuozzo Storage automatically replicates it until the normal number of replicas is reached.</p></li><li><p>The minimum number of replicas of a data chunk (optional). During the life cycle of a data chunk, the number of its replicas may vary. If a lot of chunk servers go down, it may fall below the defined minimum. In such a case, all write operations to the affected replicas are suspended until their number reaches the minimum value.</p></li></ul><p>To check the current replication parameters applied to a cluster, you can use the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">get-attr</span></code><span> </span>command. For example, if your cluster is mounted to the<span> </span><code class="docutils literal notranslate"><span class="pre">/vstorage/stor1</span></code><span> </span>directory, you can run the following command:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage get-attr /vstorage/stor1
+connected to MDS#1
+File: &#39;/vstorage/stor1&#39;
+Attributes:
+  &lt;...&gt;
+  replicas=1:1
+  &lt;...&gt;</pre>
+</div></div><p>As you can see, the normal and minimum numbers of chunk replicas are set to 1.</p><p>Initially, any cluster is configured to have only one replica per data chunk, which is sufficient to evaluate the Virtuozzo Storage functionality using one server only. In production, however, to provide high availability for your data, you are recommended to</p><ul class="simple"><li><p>Configure each data chunk to have at least three replicas.</p></li><li><p>Set the minimum number of replicas to 2.</p></li></ul><p>Such a configuration requires at least three chunk servers to be set up in the cluster.</p><p>To configure the current replication parameters to apply them to all virtual machines and containers in your cluster, you can run the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">set-attr</span></code><span> </span>command on the directory to which the cluster is mounted. For example, to set the recommended replication values to the<span> </span><code class="docutils literal notranslate"><span class="pre">stor1</span></code><span> </span>cluster mounted to<span> </span><code class="docutils literal notranslate"><span class="pre">/vstorage/stor1</span></code>, set the normal number of replicas for the cluster to 3:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage set-attr -R /vstorage/stor1 replicas=3</pre>
+</div></div><span style="color: rgb(0,0,0);">The minimum number of replicas will be automatically set to 2 by default.</span><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">For more information on calculating the minimum number of replicas, see the<span> </span></span><code class="docutils literal notranslate"><span class="pre">vstorage-set-attr</span></code><span style="color: rgb(0,0,0);"><span> </span>man page.</span></p></div></div><span style="color: rgb(0,0,0);">Along with applying replication parameters to the entire contents of your cluster, you can also configure them for specific directories and files. For example:</span><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage set-attr -R /vstorage/stor1/private/MyCT replicas=3</pre>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ManagingclusterparametersvVHS9.0-ConfiguringEncodingParameters">Configuring Encoding Parameters</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>As a better alternative to replication, Virtuozzo Storage can provide data redundancy by means of erasure coding. With it, Virtuozzo Storage breaks the incoming data stream into fragments of a certain size, then splits each fragment into a certain number (M) of 1-megabyte pieces and creates a certain number (N) of parity pieces for redundancy. All pieces are distributed among M+N storage nodes, i.e., piece per node. On storage nodes, pieces are stored in regular chunks, but such chunks are not replicated as redundancy is already achieved. The cluster can survive the failure of any N storage nodes without data loss.</p><p>The values of M and N are indicated in the names of erasure coding redundancy modes. For example, in the 5+2 mode, the incoming data is broken into 5 MB fragments, each fragment is split into five 1 MB pieces, and two more 1 MB parity pieces are added for redundancy. In addition, if N is 2, the data is encoded using the RAID6 scheme, and if N is greater than 2, Reed-Solomon erasure codes are used.</p><p>It is recommended to use the following erasure coding redundancy modes (M+N):</p><ul class="simple"><li><p>1+0</p></li><li><p>3+2</p></li><li><p>5+2</p></li><li><p>7+2</p></li><li><p>17+3</p></li></ul><p>Encoding is configured for directories. For example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage set-attr -R /vstorage/stor1 encoding=5+2</pre>
+</div></div><p>After encoding is enabled, the redundancy mode cannot be changed back to replication. However, you can switch between different encoding modes for the same directory.</p><p>The general recommendation is to always have at least one more node in a cluster than required by the chosen redundancy scheme. For example, a cluster using replication with three replicas should have four nodes, and a cluster that works in the 7+2 erasure coding mode should have ten nodes. Such a cluster configuration has the following advantages:</p><ul class="simple"><li><p>The cluster will not be exposed to additional failures when in the degraded state. With one node down, the cluster may not survive another even single-disk failure without data loss.</p></li><li><p>You will be able to perform maintenance on cluster nodes that may be needed to recover a failed node (for example, for installing software updates).</p></li><li><p>In most cases, the cluster will have enough nodes to rebuild itself. In a cluster without a spare node, each replica of user data is distributed to each cluster node for redundancy. If one or two nodes go down, the user data will not be lost, but the cluster will become degraded and will only start self-healing after the failed nodes are back online. During its rebuilding process, the cluster may be exposed to additional failures until all its nodes are healthy again.</p></li><li><p>You can replace and upgrade a cluster node without adding a new node to the cluster. A graceful release of a storage node is only possible if the remaining nodes in the cluster can comply with the configured redundancy scheme. You can, however, release a node forcibly without data migration, but it will make the cluster degraded and trigger the cluster self-healing.</p></li></ul><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">After upgrading a node in a mixed cluster, you cannot migrate VEs (virtual machines and containers) created in datastores with encoding EC 3+2, 5+2, 7+2, or 17+3 from VHS 7.5 Update 4 to VHS 7.5 Update 3. However, the migration of VEs created in local datastores and datastores with a three-replica and two-replica data redundancy mode is available. A mixed cluster is not supported and exists during the upgrade only.</span></p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ManagingclusterparametersvVHS9.0-ConfiguringFailureDomains">Configuring Failure Domains</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>A failure domain is a set of services that can fail in a correlated manner. Due to correlated failures, it is critical to scatter data replicas across different failure domains for data availability. Failure domain examples include:</p><ul class="simple"><li><p>A single disk (the smallest possible failure domain). For this reason, Virtuozzo Storage never places more than one data replica per disk or chunk server (CS).</p></li><li><p>A single host running multiple CS services. When such a host fails (for example, due to a power outage or network disconnect), all CS services on it become unavailable at once. For this reason, Virtuozzo Storage is configured by default to ensure that a single host never stores more than one chunk replica (see<span> </span><a href=".Managing-cluster-parameters-vVHS9.0_195792646.html"><span class="std std-ref">Defining Failure Domains</span></a><span> </span>below).</p></li></ul><h3 id="id-.ManagingclusterparametersvVHS9.0-FailureDomainTopology">Failure Domain Topology</h3><p>Every Virtuozzo Storage service component has topology information assigned to it. Topology paths define a logical tree of components’ physical locations consisting of identifiers<span> </span><code class="docutils literal notranslate"><span class="pre">host_ID.cs_ID</span></code><span> </span>that are generated automatically:</p><ul class="simple"><li><p><code class="docutils literal notranslate"><span class="pre">host_ID</span></code><span> </span>is a unique, randomly generated host identifier created during installation and located at<span> </span><code class="docutils literal notranslate"><span class="pre">/etc/vstorage/host_id</span></code>.</p></li><li><p><code class="docutils literal notranslate"><span class="pre">cs_ID</span></code><span> </span>is a unique service identifier generated at CS creation.</p></li></ul><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">To view the current services topology and disk space available per location, run the<span> </span></span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">top</span></code><span style="color: rgb(0,0,0);"><span> </span>command and press<span> </span></span><strong>w</strong><span style="color: rgb(0,0,0);">.</span></p></div></div><h3 id="id-.ManagingclusterparametersvVHS9.0-DefiningFailureDomains">Defining Failure Domains</h3><p>Based on the levels of hierarchy described above, you can use the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">set-attr</span></code><span> </span>command to define failure domains for proper file replica allocation:</p><pre># vstorage -c &lt;cluster_name&gt; set-attr -R -p /failure-domain=&lt;disk|host&gt;
+</pre><p>Where:</p><ul class="simple"><li><p><code class="docutils literal notranslate"><span class="pre">disk</span></code><span> </span>means that only one replica is allowed per disk or chunk server.</p></li><li><p><code class="docutils literal notranslate"><span class="pre">host</span></code><span> </span>means that only one replica is allowed per host (default).</p></li></ul><p>Use the same configuration for all cluster files, as it simplifies the analysis and is less error-prone.</p><h3 id="id-.ManagingclusterparametersvVHS9.0-RecommendationsonFailureDomains">Recommendations on Failure Domains</h3><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">Do not use failure domain<span> </span></span><code class="docutils literal notranslate"><span class="pre">disk</span></code><span style="color: rgb(0,0,0);"><span> </span>simultaneously with journaling SSDs. In this case, multiple replicas may happen to be located on disks serviced by the same journaling SSD. If that SSD fails, all replicas that depend on journals located on it will be lost. As a result, your data may be lost.</span></p></div></div><ul class="simple"><li><p>For the flexibility of the Virtuozzo Storage allocator and rebalancing mechanisms, it is always recommended to have at least five failure domains configured in a production setup. <span>Reserve enough disk space on each failure domain so it can be recovered to healthy ones if a domain fails.</span></p></li><li><p>At least three replicas are recommended.</p></li><li><p>If a huge failure domain fails and goes offline, Virtuozzo Storage will not perform data recovery by default, because replicating a huge amount of data may take longer than domain repairs. This behavior is managed by the global parameter<span> </span><code class="docutils literal notranslate"><span class="pre">mds.wd.max_offline_cs_hosts</span></code><span> </span>(configured with<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage-config</span></code>) which controls the number of failed hosts to be considered as a normal disaster worth recovering in the automatic mode.</p></li><li><p>Depending on the global parameter<span> </span><code class="docutils literal notranslate"><span class="pre">mds.alloc.strict_failure_domain</span></code><span> </span>(configured with<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage-config</span></code>), the domain policy can be strict (default) or advisory. Tuning this parameter is highly not recommended unless you are sure of what you are doing.</p></li></ul><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ManagingclusterparametersvVHS9.0-UsingStorageTiers">Using Storage Tiers</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span style="color: rgb(0,0,0);">This section describes storage tiers used in Virtuozzo Storage clusters and provides information on configuring and monitoring them.</span></p><h3 id="id-.ManagingclusterparametersvVHS9.0-WhatAreStorageTiers"><span class="section-number"><span> </span></span>What Are Storage Tiers</h3><p><span style="color: rgb(0,0,0);">Storage tiers represent a way to organize storage space. You can use them to keep different categories of data on different chunk servers. <span>For example, use high-speed and solid-state drives to store performance-critical data instead of caching cluster operations.</span></span></p><h3 id="id-.ManagingclusterparametersvVHS9.0-ConfiguringStorageTiers">Configuring Storage Tiers</h3><p><span style="color: rgb(0,0,0);">To assign disk space to a storage tier, do the following:</span></p><ol><li><p><span style="color: rgb(0,0,0);">Assign all chunk servers with SSD drives to the same tier. You can do this when setting up a chunk server (see<span> </span><a href=".Setting-up-chunk-servers-vVHS9.0_195792577.html"><span class="std std-ref">Stage 2: Creating a Chunk Server</span></a><span> </span>for details).<br/></span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">For information on recommended SSD drives, see<span> </span></span><a href=".Using-SSD-drives-vVHS9.0_195792778.html"><span class="std std-ref">Using SSD Drives</span></a><span style="color: rgb(0,0,0);">.</span></p></div></div><p><span style="color: rgb(0,0,0);"><br/></span></p></li><li><p><span style="color: rgb(0,0,0);">Assign the frequently accessed directories and files to tier 1 with the<span> </span><code class="docutils literal notranslate" style="text-align: left;"><span class="pre">vstorage</span><span> </span><span class="pre">set-attr</span></code><span> </span>command. For example:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage set-attr -R /vstorage/stor1/private/MyCT tier=1</pre>
+</div></div><p><span style="color: rgb(0,0,0);">This command recursively assigns the directory<span> </span><code class="docutils literal notranslate" style="text-align: left;"><span class="pre">/vstorage/stor1/private/MyCT</span></code><span> </span>and its contents to tier 1.</span></p></li></ol><p>When assigning storage to tiers, keep in mind that faster storage drives should be assigned to higher tiers. For example, you can use tier 0 for backups and other cold data (CS without SSD journals), tier 1 for virtual environments—a lot of cold data but fast random writes (CS with SSD journals), tier 2 for hot data (CS on SSD), journals, caches, specific virtual machine disks, and such.</p><p>This recommendation is related to how Virtuozzo Storage works with storage space. If a storage tier runs out of free space, Virtuozzo Storage will attempt to temporarily use a lower tier. If you add more storage to the original tier later, the data, temporarily stored elsewhere, will be moved to the tier where it should have been stored originally.</p><p>For example, if you try to write data to tier 2 and it is full, Virtuozzo Storage will attempt to write that data to tier 1, and then to tier 0. If you add more storage to tier 2 later, the aforementioned data, now stored on tier 1 or 0,  will be moved back to tier 2 where it was meant to be stored originally.</p><h4 id="id-.ManagingclusterparametersvVHS9.0-AutomaticDataBalancing"><strong>Automatic Data Balancing</strong></h4><p>To maximize the I/O performance of chunk servers in a cluster, Virtuozzo Storage automatically balances CS load by moving hot data chunks from hot chunk servers to colder ones.</p><p>A chunk server is considered hot if its request queue depth exceeds the cluster-average value by 40% or more (see example below). With data chunks, “hot” means “most requested.”</p><p>The hotness (for example, request queue depth) of chunk servers is indicated by the<span> </span><code class="docutils literal notranslate"><span class="pre">QDEPTH</span></code><span> </span>parameter shown in the output of<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">top</span></code><span> </span>and<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">stat</span></code><span> </span>commands. For example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+ IO QDEPTH: 0.1 aver, 1.0 max; 1 out of 1 hot CS balanced     46 sec ago
+...
+ CSID STATUS     SPACE  AVAIL  REPLICAS   UNIQUE IOWAIT IOLAT(ms) QDEPTH HOST      BUILD_VERSION
+ 1025 active     1007.3 156.8G     7142        0    10%     1/117    0.3 10.31.240.167 6.0.11-10
+ 1026 active     1007.3 156.8G     7267        0    11%     0/225    0.1 10.31.240.167 6.0.11-10
+ 1027 active     1007.3 156.8G     7151        0     2%      0/10    0.1 10.31.240.167 6.0.11-10
+ 1028 active     1007.3 156.8G     7285        0    13%     1/141    1.0 10.31.240.167 6.0.11-10
+...</pre>
+</div></div><p>In the output, the<span> </span><code class="docutils literal notranslate"><span class="pre">IO</span><span> </span><span class="pre">QDEPTH</span></code><span> </span>line shows the average and maximum request queue depth values in the entire cluster for the last 60 seconds. The<span> </span><code class="docutils literal notranslate"><span class="pre">QDEPTH</span></code><span> </span>column shows average request queue depth values for each CS for the last 5 seconds.</p><p>Every 60 seconds, the hottest data chunk is moved from a hot CS to one with a shorter request queue.</p><h3 id="id-.ManagingclusterparametersvVHS9.0-MonitoringStorageTiers">Monitoring Storage Tiers</h3><p><span style="color: rgb(0,0,0);">You can monitor disk space assigned to each storage tier with the<span> </span></span><code class="docutils literal notranslate"><span class="pre">top</span></code><span style="color: rgb(0,0,0);"><span> </span>utility in the verbose mode (enabled by pressing<span> </span></span><strong>v</strong><span style="color: rgb(0,0,0);">). Typical output may look like this:</span></p><p><span style="color: rgb(0,0,0);"><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image align-center confluence-external-resource image-center" draggable="false" src="https://docs.virtuozzo.com/virtuozzo_storage_administrators_command_line_guide/_images/image005.png" data-image-src="https://docs.virtuozzo.com/virtuozzo_storage_administrators_command_line_guide/_images/image005.png"></span></span></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ManagingclusterparametersvVHS9.0-ChangingVirtuozzoStorageClusterNetwork">Changing Virtuozzo Storage Cluster Network</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Before moving your cluster to a new network, consider the following:</p><ul class="simple"><li><p>Changing the cluster network results in a brief downtime for the period when more than half of the MDS servers are unavailable.</p></li><li><p>It is highly recommended to back up all MDS repositories before changing the cluster network.</p></li></ul><p>To change the Virtuozzo Storage cluster network, do the following on each node in the cluster where an MDS service is running:</p><ol><li><p><span style="color: rgb(0,0,0);">Stop the MDS service:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># systemctl stop vstorage-mdsd.target</pre>
+</div></div><p><span style="color: rgb(0,0,0);"><br/></span></p></li><li><p style="text-align: left;">Specify new IP addresses for all metadata servers in the cluster with the command<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">configure-mds</span><span> </span><span class="pre">-r</span><span> </span><span class="pre">&lt;MDS_repo&gt;</span><span> </span><span class="pre">-n</span><span> </span><span class="pre">&lt;MDS_ID@new_IP_address&gt;[:port]</span><span> </span><span class="pre">[-n</span><span> </span><span class="pre">...]</span></code>, where:</p><ul style="text-align: left;"><li><p><code class="docutils literal notranslate"><span class="pre">&lt;MDS_repo&gt;</span></code><span> </span>is the repository path of the MDS on the current node.</p></li><li><p>Each<span> </span><code class="docutils literal notranslate"><span class="pre">&lt;MDS_ID@new_IP_address&gt;</span></code><span> </span>pair is an MDS identifier and a corresponding new IP address. For example, for a cluster with 5 metadata servers:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage -c stor1 configure-mds -r /vstorage/stor1-cs1/mds/data -n 1@10.10.20.1 \
+-n 2@10.10.20.2 -n 3@10.10.20.3 -n 4@10.10.20.4 -n 5@10.10.20.5</pre>
+</div></div></li></ul><p style="text-align: left;"><span style="color: rgb(0,0,0);">Note the following:<br/></span></p><ul class="simple" style="text-align: left;"><li><p>You can obtain the identifier and repository path for the current MDS with the<span> </span><code class="docutils literal notranslate"><span class="pre">vstorage</span><span> </span><span class="pre">list-services</span><span> </span><span class="pre">-M</span></code><span> </span>command.</p></li><li><p>If you omit the port, the default port 2510 will be used.</p></li></ul><p style="text-align: left;"><span style="color: rgb(0,0,0);"><br/></span></p></li><li><p><span style="color: rgb(0,0,0);">Start the MDS service:<br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># systemctl start vstorage-mdsd.target</pre>
+</div></div></li></ol></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="id-.ManagingclusterparametersvVHS9.0-EnablingOnlineCompactingofVirtualMachineDisks">Enabling Online Compacting of Virtual Machine Disks</h2><hr/></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Online compacting virtual machine disks allows for reclaiming disk space no longer occupied by data. It is based on triggering the TRIM command inside the VM once a week.</p><p>Online compacting is enabled by default for disks of Windows VMs. For disks of Linux VMs, it is enabled when the guest tools are installed.</p><p>Virtual machine disks for which online compacting is enabled have the<span> </span><code class="docutils literal notranslate"><span class="pre">discard='unmap'</span></code><span> </span>flag set. Removing the flag from the virtual disk configuration disables online compacting for it.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">Online compacting may not work for virtio-blk devices even if the<span> </span></span><code class="docutils literal notranslate"><span class="pre">discard='unmap'</span></code><span style="color: rgb(0,0,0);"><span> </span>flag is set.</span></p></div></div><span style="color: rgb(0,0,0);">For online compacting to work for VM disks located on Virtuozzo Storage (in the replication mode), punch-hole support also needs to be enabled for the Virtuozzo Storage cluster file system. Do the following:</span><ol class="arabic"><li><p>Ensure that all cluster nodes are updated to Virtuozzo Hybrid Server 7 Update 5 or newer. See<span> </span><a href="https://docs.virtuozzo.com/virtuozzo_hybrid_server_7_users_guide/keeping-your-system-up-to-date/updating-nodes-in-storage-clusters.html#updating-nodes-in-vstorage-clusters" style="text-decoration: none;" class="external-link" rel="nofollow"><span class="xref std std-ref">Updating Nodes in Storage Clusters</span></a>.</p></li><li><p>Set the<span> </span><code class="docutils literal notranslate"><span class="pre">FALLOC_FL_PUNCH_HOLE</span></code><span> </span>flag by running the following command on any cluster node:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># vstorage set-config &quot;gen.do_punch_hole=1&quot;</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-warning"><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><span style="color: rgb(0,0,0);">Running the command before updating all of the chunk servers will result in data corruption!</span></p></div></div></li></ol><p><span style="color: rgb(0,0,0);">To reclaim unused space accumulated before online compacting was enabled, for example, from VMs created on Virtuozzo Hybrid Server 7 Update 4 and older, create a file inside the VM with the size comparable to that of the unused space, then remove it. The space will be reclaimed as soon as the TRIM command is triggered.</span></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on May 07, 2024 09:23</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>
