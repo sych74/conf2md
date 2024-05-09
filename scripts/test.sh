@@ -105,9 +105,6 @@ while [ $count -lt 5 ]; do
 
 indexFiles=$(find ${OUTPUT_DIR} -type f -name "index.md")
 IFS=$'\n'
-
-
-  echo "11111111111111111111111111111111"
   
   for index in $indexFiles; do
     if [ -f "$index" ]; then
@@ -119,5 +116,3 @@ IFS=$'\n'
 ((count++))
 
 done
-
-
