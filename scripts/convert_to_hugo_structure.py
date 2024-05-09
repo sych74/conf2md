@@ -1,13 +1,14 @@
 import os
+import re
 import bs4
 import json
 import requests
-from markdownify import MarkdownConverter
 from atlassian import Confluence
+from markdownify import markdownify as md
 
-url = 'https://test.com'
-username = 'test'
-password = 'test'
+url = ''
+username = ''
+password = ''
 
 confluence = Confluence(
     url=url,
@@ -30,7 +31,6 @@ def convert_atlassian_html(soup):
                 break
 
             if url is None:
-                # no url found for ac:image
                 continue
 
             # construct new, actually valid HTML tag
@@ -42,12 +42,16 @@ def convert_atlassian_html(soup):
             image.replace_with(imgtag)
         return soup
 
+def remove_empty_lines(md_text):
+    return re.sub(r'\n{2,}', '\n', md_text)
+
 
 def convert_to_md(html):
     soup_raw = bs4.BeautifulSoup(html, 'html.parser')
     soup = convert_atlassian_html(soup_raw)
-    md = MarkdownConverter().convert_soup(soup)
-    return md
+    md_text = md(str(soup), heading_style="ATX", code_style="fenced", bullet_style="dash")
+    md_text = remove_empty_lines(md_text)
+    return md_text
 
 
 def download_attachments_from_page(page_id, path):
@@ -89,7 +93,7 @@ menu:
         title: "{item['title']}"
         url: "/{os.path.basename(item['link'])}/"
         weight: 10
-        parent: "{os.path.basename(os.path.dirname(item['link'])) if item['parentId'] else 'vhsinstallationguide'}"
+        parent: "{os.path.basename(os.path.dirname(item['link'])) if item['parentId'] else 'vhs9ag'}"
         identifier: "{os.path.basename(item['link'])}"
 ---
 
@@ -98,6 +102,7 @@ menu:
 {md}
 
 ''')
+
         if 'children' in item:
             generate_md_file(item['children'], output_dir)
 
@@ -111,3 +116,4 @@ if __name__ == "__main__":
         json_data = json.load(f)
 
     main(json_data)
+
