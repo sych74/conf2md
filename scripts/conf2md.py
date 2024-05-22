@@ -70,7 +70,6 @@ def fetch_menu_structure(base_url, viewport_id, root, parent, parentId=None, cur
 
     print(f"Fetching URL: {url}")
     response = requests.get(url)
-    print(response)
     response_data = response.json()
 
     for page in response_data:
@@ -135,10 +134,112 @@ def convert_atlassian_html(soup):
 def remove_empty_lines(md_text):
     return re.sub(r'\n{2,}', '\n', md_text)
 
+
+def convert_macro_note(soup):
+    note_macros = soup.find_all('ac:structured-macro', {'ac:name': 'note'})
+    if note_macros:
+        for note_macro in note_macros:
+            rich_text_body = note_macro.find('ac:rich-text-body')
+            if rich_text_body:
+                note_html = rich_text_body.decode_contents()
+                hugo_shortcode = "{{{{%note%}}}}{}{{{{%/note%}}}}".format(note_html)
+                note_macro.replace_with(BeautifulSoup(hugo_shortcode, 'html.parser'))
+    return soup
+
+def convert_macro_info(soup):
+    info_macros = soup.find_all('ac:structured-macro', {'ac:name': 'info'})
+    if info_macros:
+        for info_macro in info_macros:
+            rich_text_body = info_macro.find('ac:rich-text-body')
+            if rich_text_body:
+                info_html = rich_text_body.decode_contents()
+                hugo_shortcode = "{{{{%tip%}}}}{}{{{{%/tip%}}}}".format(info_html)
+                info_macro.replace_with(BeautifulSoup(hugo_shortcode, 'html.parser'))
+    return soup
+
+def convert_macro_code(soup):
+    code_macros = soup.find_all('ac:structured-macro', {'ac:name': 'code'})
+    if code_macros:
+        for code_macro in code_macros:
+            plain_text_body = code_macro.find('ac:plain-text-body')
+            if plain_text_body:
+                code_html = plain_text_body.decode_contents()
+                hugo_shortcode = "<code>{}</code>".format(code_html)
+                code_macro.replace_with(BeautifulSoup(hugo_shortcode, 'html.parser'))
+    return soup
+
+def remove_span_from_code(soup):
+    code_elements = soup.find_all('code')
+    for code in code_elements:
+        spans = code.find_all('span')
+        for span in spans:
+            span.unwrap()
+    return soup
+
+
+def remove_macro_anchor(soup):
+    anchor_macros = soup.find_all('ac:structured-macro', {'ac:name': 'anchor'})
+    if anchor_macros:
+        for anchor_macro in anchor_macros:
+            anchor_macro.extract()
+    return soup
+
+
+def fix_strong_tag(soup):
+    strong_tags = soup.find_all('strong')
+    for tag in strong_tags:
+        if tag.string:  # Проверяем, существует ли строка внутри тега
+            tag.string.replace_with(tag.string.strip())  # Удаляем пробелы внутри строки
+        if tag.previous_sibling is None or (tag.previous_sibling.string and tag.previous_sibling.string[-1] != ' '):
+            tag.insert_before(' ')
+        if tag.next_sibling is None or (tag.next_sibling.string and tag.next_sibling.string[0] != ' '):
+            tag.insert_after(' ')
+    return soup
+
+
+def fix_em_tag(soup):
+    em_tags = soup.find_all('em')
+    for tag in em_tags:
+        if tag.string:  # Проверяем, существует ли строка внутри тега
+            tag.string.replace_with(tag.string.strip())  # Удаляем пробелы внутри строки
+        if tag.previous_sibling is None or (tag.previous_sibling.string and tag.previous_sibling.string[-1] != ' '):
+            tag.insert_before(' ')
+        if tag.next_sibling is None or (tag.next_sibling.string and tag.next_sibling.string[0] != ' '):
+            tag.insert_after(' ')
+    return soup
+
+
+def convert_macro_ui_steps(soup):
+    code_macros = soup.find_all('ac:structured-macro', {'ac:name': 'ui-steps'})
+    if code_macros:
+        for code_macro in code_macros:
+            plain_text_body = code_macro.find('ac:plain-text-body')
+            if plain_text_body:
+                code_html = plain_text_body.decode_contents()
+                hugo_shortcode = "<code>{}</code>".format(code_html)
+                code_macro.replace_with(BeautifulSoup(hugo_shortcode, 'html.parser'))
+    return soup
+
+def fix_ol_tag(soup):
+    ol_tags = soup.find_all('ol')
+    for tag in ol_tags:
+        print("------", tag)
+    return soup
+
 def convert_to_md(html):
-    soup_raw = bs4.BeautifulSoup(html, 'html.parser')
-    soup = convert_atlassian_html(soup_raw)
-    md_text = pypandoc.convert_text(soup, format='html', to='gfm', extra_args=['--markdown-headings=atx'])
+    soup = bs4.BeautifulSoup(html, 'html.parser')
+    #soup = fix_ol_tag(soup)
+    soup = fix_em_tag(soup)
+    soup = fix_strong_tag(soup)
+    soup = remove_span_from_code(soup)
+    soup = remove_macro_anchor(soup)
+    soup = convert_macro_ui_steps(soup)
+    soup = convert_macro_note(soup)
+    soup = convert_macro_code(soup)
+    soup = convert_macro_info(soup)
+    soup = convert_atlassian_html(soup)
+#    md_text = pypandoc.convert_text(soup, format='html', to='gfm', extra_args=['--markdown-headings=atx'])
+    md_text = pypandoc.convert_text(soup, format='html', to='gfm', extra_args=['--markdown-headings=atx', '--wrap=none'])
     return md_text
 
 def download_attachments_from_page(page_id, path, confluence):
@@ -165,7 +266,6 @@ def generate_md_file(data, output_dir, confluence):
         md = convert_to_md(body)
         with open(md_filename, 'w') as f:
             f.write(f'''---
-
 draft: false
 title: "{item['title']}"
 aliases: "/{os.path.basename(item['link'])}/"
@@ -178,7 +278,7 @@ menu:
         title: "{item['title']}"
         url: "/{os.path.basename(item['link'])}/"
         weight: "{item['weight']}"
-        parent: "{os.path.basename(os.path.dirname(item['link'])) if item['parentId'] else ''}"
+        parent: "{os.path.basename(os.path.dirname(item['link'])) if item['parentId'] else 'supported-guest-os-guide'}"
         identifier: "{os.path.basename(item['link'])}"
 ---
 
@@ -233,6 +333,7 @@ def main():
 
     output_dir = 'OUTPUT'
     os.makedirs(output_dir, exist_ok=True)
+
     generate_md_file(conf_menu_structure, output_dir, confluence)
 
 
