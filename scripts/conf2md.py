@@ -278,7 +278,7 @@ menu:
         title: "{item['title']}"
         url: "/{os.path.basename(item['link'])}/"
         weight: "{item['weight']}"
-        parent: "{os.path.basename(os.path.dirname(item['link'])) if item['parentId'] else 'supported-guest-os-guide'}"
+        parent: "{os.path.basename(os.path.dirname(item['link'])) if item['parentId'] else 'installation-guide'}"
         identifier: "{os.path.basename(item['link'])}"
 ---
 
@@ -310,8 +310,8 @@ def main():
         parent = attr["data-current"]
 
     parsed_url = urlparse(url)
-    base_url = f"{parsed_url.scheme}://{parsed_url.netloc}/"
-    viewport_path = "rest/scroll-viewport/1.0/tree/children"
+    base_url = f"{parsed_url.scheme}://{parsed_url.netloc}"
+    viewport_path = "/rest/scroll-viewport/1.0/tree/children"
     viewport_url = urljoin(base_url, viewport_path)
 
     confluence = Confluence(
@@ -339,3 +339,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
