@@ -297,11 +297,13 @@ def download_attachments_from_page(page_id, path, confluence):
                 for bits in r.iter_content():
                     f.write(bits)
 
-def generate_md_file(data, output_dir, confluence):
+def generate_md_file(data, output_dir, confluence, root_doc_name):
     for item in data:
         path = os.path.join(output_dir, item['link'][1:])
+        if 'children' in item:
+            path = os.path.join(path, os.path.basename(item['link']))
         os.makedirs(path, exist_ok=True)
-        md_filename = os.path.join(path, os.path.basename(item['link']) + '.md')
+        md_filename = os.path.join(path, 'index.md')
         download_attachments_from_page(item['id'], path, confluence)
         body = get_page_body(item['id'], confluence)
         md = convert_to_md(body)
@@ -319,8 +321,8 @@ menu:
         title: "{item['title']}"
         url: "/{os.path.basename(item['link'])}/"
         weight: "{item['weight']}"
-        parent: "{os.path.basename(os.path.dirname(item['link'])) if item['parentId'] else 'supported-guest-os-guide'}"
-        identifier: "{os.path.basename(item['link'])}"
+        parent: "{root_doc_name}-{os.path.basename(os.path.dirname(item['link'])) if item['parentId'] else root_doc_name}"
+        identifier: "{root_doc_name}-{os.path.basename(item['link'])}"
 ---
 
 # {item['title']}
@@ -330,18 +332,20 @@ menu:
 ''')
 
         if 'children' in item:
-            generate_md_file(item['children'], output_dir, confluence)
+            generate_md_file(item['children'], output_dir, confluence, root_doc_name)
 
 def main():
     parser = argparse.ArgumentParser(description='Extract attributes from a webpage.')
     parser.add_argument('--url', required=True, help='URL of the confluence webpage')
     parser.add_argument('--conf_user', required=True, help='Confluence username')
     parser.add_argument('--conf_pswd', required=True, help='Confluence password')
+    parser.add_argument('--root_doc_name', required=True, help='Hugo root doc name')
     args = parser.parse_args()
 
     url = args.url
     username = args.conf_user
     password = args.conf_pswd
+    root_doc_name = args.root_doc_name
 
     attributes = get_data_attributes(url)
 
@@ -375,7 +379,7 @@ def main():
     output_dir = 'OUTPUT'
     os.makedirs(output_dir, exist_ok=True)
 
-    generate_md_file(conf_menu_structure, output_dir, confluence)
+    generate_md_file(conf_menu_structure, output_dir, confluence, root_doc_name)
 
 
 if __name__ == "__main__":
