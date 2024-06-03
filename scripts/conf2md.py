@@ -297,21 +297,35 @@ def download_attachments_from_page(page_id, path, confluence):
                 for bits in r.iter_content():
                     f.write(bits)
 
+def add_prefix_to_directories(path, prefix):
+    parts = path.strip(os.sep).split(os.sep)
+    new_parts = [f"{prefix}-{part}" for part in parts]
+    new_path = os.sep.join(new_parts)
+    return new_path
+
+
 def generate_md_file(data, output_dir, confluence, root_doc_name):
     for item in data:
-        path = os.path.join(output_dir, item['link'][1:])
+        path_with_prefix = add_prefix_to_directories(item['link'][1:], root_doc_name)
+        path = os.path.join(output_dir, path_with_prefix)
+
         if 'children' in item:
-            path = os.path.join(path, os.path.basename(item['link']))
+            path_with_prefix = add_prefix_to_directories(os.path.basename(item['link']), root_doc_name)
+            path = os.path.join(path, path_with_prefix)
         os.makedirs(path, exist_ok=True)
         md_filename = os.path.join(path, 'index.md')
         download_attachments_from_page(item['id'], path, confluence)
         body = get_page_body(item['id'], confluence)
         md = convert_to_md(body)
+
+        identifier = root_doc_name if root_doc_name == os.path.basename(item['link']) else f"{root_doc_name}-{os.path.basename(item['link'])}"
+        parent = root_doc_name if root_doc_name == os.path.basename(os.path.dirname(item['link'])) else f"{root_doc_name}-{os.path.basename(os.path.dirname(item['link']))}"
+
         with open(md_filename, 'w') as f:
             f.write(f'''---
 draft: false
 title: "{item['title']}"
-aliases: "/{os.path.basename(item['link'])}/"
+aliases: "/{identifier}/"
 seoindex: "index, follow"
 seotitle: "{item['title']}"
 seokeywords: ""
@@ -319,10 +333,10 @@ seodesc: ""
 menu:
     docs:
         title: "{item['title']}"
-        url: "/{os.path.basename(item['link'])}/"
+        url: "/{identifier}/"
         weight: "{item['weight']}"
-        parent: "{root_doc_name}-{os.path.basename(os.path.dirname(item['link'])) if item['parentId'] else root_doc_name}"
-        identifier: "{root_doc_name}-{os.path.basename(item['link'])}"
+        parent: "{parent if item['parentId'] else root_doc_name}"
+        identifier: "{identifier}"
 ---
 
 # {item['title']}
