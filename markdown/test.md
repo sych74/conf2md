@@ -1,159 +1,235 @@
-<table class="content-wrapper">
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<tbody>
-<tr class="odd content">
-<td><div class="nocontent">
-<div class="MCBreadcrumbsBox_0 breadcrumbs" aria-label="Breadcrumbs" data-mc-breadcrumbs-count="3" data-mc-breadcrumbs-divider=" &gt; " data-mc-toc="True" role="navigation">
-<span class="MCBreadcrumbsPrefix">You are here: </span>
-</div>
-</div>
 <div id="mc-main-content" role="main">
-<h1 id="welcome-to-virtuozzo-hybrid-infrastructure">Welcome to <span class="mc-variable Cover.ProductName variable">Virtuozzo Hybrid Infrastructure</span></h1>
-<p><span class="mc-variable Cover.ProductName variable">Virtuozzo Hybrid Infrastructure</span>, previously known as Virtuozzo Infrastructure Platform, is a hyperconverged solution providing storage, compute, and network resources for businesses and service providers to:</p>
-<ul>
-<li>Deliver file storage for any corporate data, S3 object storage for applications and cloud services, and block storage for running virtual machines or databases with iSCSI targets</li>
-<li>Build and manage private or public clouds with the Disaster Recovery solution</li>
-<li>Store backups from <span class="mc-variable Variables.Protect variable">Acronis Cyber Protect</span> solutions on premises, in public clouds, or on NAS by using the Backup Gateway</li>
-<li>Create and manage virtual machines and software-defined networks</li>
-<li>Run cloud-native applications in production environments, including Kubernetes as a Service, Load Balancer as a Service, Backup and Restore as a Service, and Persistent Storage for Kubernetes</li>
-<li>Ensure high availability for business-critical applications</li>
-</ul>
-<p>The scheme below shows the <span class="mc-variable Cover.ProductName variable">Virtuozzo Hybrid Infrastructure</span> components and the order, in which you deploy them. You start with deploying the infrastructure, then configure networks and storage, and finally, provision services to end users. Hover over any component to see the list of related links.</p>
-<table class="desktop" style="border-left-width: 0;border-right-width: 0;border-top-width: 0;border-bottom-width: 0;margin-left: 0;margin-right: auto;width: 100%;padding-left: 10px;padding-right: 10px;padding-top: 7px;padding-bottom: 7px;">
+<h1>General requirements</h1>
+<p>Verify that all servers to be joined to the cluster meet the following general requirements.</p>
+<h2>Storage requirements</h2>
+<p>The following table lists the minimum and recommended storage requirements according to the disk roles (refer to <a class="MCXref xref" href="about-the-storage-cluster.html">About the storage cluster</a>):</p>
+<table border="1" cellspacing="0" class="TableStyle-bordered-table" id="id15" style="mc-table-style: url('../../resources/tablestyles/borderedtable.css');">
 <colgroup>
-<col style="width: 20%" />
-<col style="width: 5%" />
-<col style="width: 20%" />
-<col style="width: 5%" />
-<col style="width: 20%" />
-<col style="width: 5%" />
-<col style="width: 5%" />
-<col style="width: 20%" />
+<col/>
+<col/>
+<col/>
+<col/>
 </colgroup>
-<tbody>
-<tr class="odd">
-<td rowspan="5" style="text-align: center; vertical-align: middle;"><div id="infraMenu" class="modal" style="width: 23%;">
-<p><a href="about-the-infrastructure.html" class="MCXref xref">About the infrastructure</a></p>
-<p><a href="requirements.html" class="MCXref xref">System requirements</a></p>
-<p><a href="installation.html" class="MCXref xref">Installation</a></p>
-<p><a href="managing-the-infrastructure.html" class="MCXref xref">Managing the infrastructure</a></p>
-<p><a href="viewing-alerts.html" class="MCXref xref">Viewing alerts</a></p>
-<p><a href="viewing-audit-log.html" class="MCXref xref">Viewing audit log</a></p>
-</div>
-<div class="button" data-modal="infraMenu">
-<p><img src="resources/images/infrastructure_vz.png" data-mc-conditions="Brand.Virtuozzo" /></p>
-<span>Infrastructure</span>
-</div></td>
-<td rowspan="5" style="text-align: center; vertical-align: middle;"><img src="resources/images/arrow_vz.png" data-mc-conditions="Brand.Virtuozzo" /></td>
-<td rowspan="5" style="text-align: center; vertical-align: middle;"><div id="networkMenu" class="modal" style="width: 23%;">
-<p><a href="setting-up-networks.html" class="MCXref xref">Setting up networks</a></p>
-<p><a href="configuring-node-network-interfaces.html" class="MCXref xref">Configuring node network interfaces</a></p>
-<p><a href="enabling-rdma.html" class="MCXref xref">Enabling RDMA</a></p>
-<p><a href="adding-external-dns-servers.html" class="MCXref xref">Adding external DNS servers</a></p>
-<p><a href="managing-infrastructure-networks.html" class="MCXref xref">Managing infrastructure networks</a></p>
-</div>
-<div class="button" data-modal="networkMenu">
-<p><img src="resources/images/networking_vz.png" data-mc-conditions="Brand.Virtuozzo" /></p>
-<span>Networks</span>
-</div></td>
-<td rowspan="5" style="text-align: center; vertical-align: middle;"><img src="resources/images/arrow_vz.png" data-mc-conditions="Brand.Virtuozzo" /></td>
-<td rowspan="5" style="text-align: center; vertical-align: middle;"><div id="storageMenu" class="modal" style="width: 23%;">
-<p><a href="about-the-storage-cluster.html" class="MCXref xref">About the storage cluster</a></p>
-<p><a href="deploying-the-storage-cluster.html" class="MCXref xref">Deploying the storage cluster</a></p>
-<p><a href="monitoring-the-storage-cluster.html" class="MCXref xref">Monitoring the storage cluster</a></p>
-<p><a href="shutting-down-and-starting-up-the-cluster.html" class="MCXref xref">Shutting down and starting up the cluster</a></p>
-<p><a href="releasing-storage-nodes.html" class="MCXref xref">Releasing nodes from the storage cluster</a></p>
-</div>
-<div class="button" data-modal="storageMenu">
-<p><img src="resources/images/storage_vz.png" data-mc-conditions="Brand.Virtuozzo" /></p>
-<span>Storage</span>
-</div></td>
-<td style="text-align: center; vertical-align: middle;"><img src="resources/images/arrow_vz.png" data-mc-conditions="Brand.Virtuozzo" /></td>
-<td style="text-align: center; vertical-align: middle; padding: 0;"><div id="computeMenu" class="modal">
-<p><a href="about-the-compute-cluster.html" class="MCXref xref">About the compute cluster</a></p>
-<p><a href="compute-requirements.html" class="MCXref xref">Compute cluster requirements</a></p>
-<p><a href="provisioning-compute-resources.html" class="MCXref xref">Provisioning compute resources</a></p>
-<p><a href="managing-the-compute-cluster.html" class="MCXref xref">Managing the compute cluster</a></p>
-<p><a href="monitoring-the-compute-cluster.html" class="MCXref xref">Monitoring the compute cluster</a></p>
-</div>
-<div class="button" data-modal="computeMenu">
-<p><img src="resources/images/compute_vz.png" data-mc-conditions="Brand.Virtuozzo" /></p>
-</div></td>
-<td style="text-align: center; vertical-align: middle;"><div class="button" data-modal="computeMenu">
-<p><span>Compute cluster</span></p>
-</div></td>
+<thead valign="bottom">
+<tr class="TableStyle-bordered-table-Head-Header1">
+<th class="TableStyle-bordered-table-HeadE-Column1-Header1">Disk role</th>
+<th class="TableStyle-bordered-table-HeadE-Column1-Header1">Quantity</th>
+<th class="TableStyle-bordered-table-HeadE-Column1-Header1">Disk size</th>
+<th class="TableStyle-bordered-table-HeadE-Column1-Header1">Type</th>
+<th class="TableStyle-bordered-table-HeadD-Column1-Header1">Endurance</th>
 </tr>
-<tr class="even">
-<td style="text-align: center; vertical-align: middle;"><img src="resources/images/arrow_vz.png" data-mc-conditions="Brand.Virtuozzo" /></td>
-<td style="text-align: center; vertical-align: middle; padding: 0;"><div id="backupMenu" class="modal">
-<p><a href="about-backup-storage.html" class="MCXref xref">About backup storage</a></p>
-<p><a href="backup-storage-requirements.html" class="MCXref xref">Backup storage requirements</a></p>
-<p><a href="provisioning-backup-storage.html" class="MCXref xref">Provisioning backup storage space</a></p>
-<p><a href="managing-backup-storage.html" class="MCXref xref">Managing backup storage</a></p>
-<p><a href="monitoring-backup-storage.html" class="MCXref xref">Monitoring backup storage</a></p>
-</div>
-<div class="button" data-modal="backupMenu">
-<p><img src="resources/images/backup_storage_vz.png" data-mc-conditions="Brand.Virtuozzo" /></p>
-</div></td>
-<td style="text-align: center; vertical-align: middle;"><div class="button" data-modal="backupMenu">
-<p><span>Backup storage</span></p>
-</div></td>
+</thead>
+<tbody valign="top">
+<tr class="TableStyle-bordered-table-Body-Body1">
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">System</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">One disk per node</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">
+<p>100 GB minimum</p>
+<p>250 GB recommended</p>
+</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">
+<p>SATA/SAS HDD minimum</p>
+<p>SATA/SAS SSD recommended</p>
+</td>
+<td class="TableStyle-bordered-table-BodyD-Column1-Body1">â</td>
 </tr>
-<tr class="odd">
-<td style="text-align: center; vertical-align: middle;"><img src="resources/images/arrow_vz.png" data-mc-conditions="Brand.Virtuozzo" /></td>
-<td style="text-align: center; vertical-align: middle; padding: 0;"><div id="blockMenu" class="modal">
-<p><a href="about-block-storage.html" class="MCXref xref">About block storage</a></p>
-<p><a href="provisioning-block-storage.html" class="MCXref xref">Provisioning block storage space</a></p>
-<p><a href="managing-block-storage.html" class="MCXref xref">Managing block storage</a></p>
-<p><a href="monitoring-block-storage.html" class="MCXref xref">Monitoring block storage</a></p>
-</div>
-<div id="objectMenu" class="modal">
-<p><a href="about-object-storage.html" class="MCXref xref">About object storage</a></p>
-<p><a href="provisioning-object-storage.html" class="MCXref xref">Provisioning object storage space</a></p>
-<p><a href="managing-object-storage.html" class="MCXref xref">Managing object storage</a></p>
-<p><a href="monitoring-object-storage.html" class="MCXref xref">Monitoring object storage</a></p>
-</div>
-<div id="fileMenu" class="modal">
-<p><a href="about-file-storage.html" class="MCXref xref">About file storage</a></p>
-<p><a href="provisioning-file-storage.html" class="MCXref xref">Provisioning file storage space</a></p>
-<p><a href="managing-file-storage.html" class="MCXref xref">Managing file storage</a></p>
-<p><a href="monitoring-file-storage.html" class="MCXref xref">Monitoring file storage</a></p>
-</div>
-<div class="button" data-modal="blockMenu">
-<p><img src="resources/images/iscsi_storage_vz.png" data-mc-conditions="Brand.Virtuozzo" /></p>
-</div></td>
-<td style="text-align: center; vertical-align: middle;"><div class="button" data-modal="blockMenu">
-<p><span>Block storage</span></p>
-</div></td>
+<tr class="TableStyle-bordered-table-Body-Body1">
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">Metadata</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">
+<p>One disk per node</p>
+<p>Five disks recommended for one cluster</p>
+</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">100 GB</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">Enterprise-grade SSD with power loss protection</td>
+<td class="TableStyle-bordered-table-BodyD-Column1-Body1">1 DWPD minimum</td>
 </tr>
-<tr class="even">
-<td style="text-align: center; vertical-align: middle;"><img src="resources/images/arrow_vz.png" data-mc-conditions="Brand.Virtuozzo" /></td>
-<td style="text-align: center; vertical-align: middle; padding: 0;"><div class="button" data-modal="objectMenu">
-<p><img src="resources/images/object_storage_vz.png" data-mc-conditions="Brand.Virtuozzo" /></p>
-</div></td>
-<td style="text-align: center; vertical-align: middle;"><div class="button" data-modal="objectMenu">
-<p><span>Object storage</span></p>
-</div></td>
+<tr class="TableStyle-bordered-table-Body-Body1">
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">Cache</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">
+<p>Optional</p>
+<p>One SSD disk per 4-12 HDDs</p>
+</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">100+ GB</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">Enterprise-grade SSD with power loss
+protection and 75 MB/s sequential write performance per serviced HDD</td>
+<td class="TableStyle-bordered-table-BodyD-Column1-Body1">
+<p>1 DWPD minimum</p>
+<p>10 DWPD recommended</p>
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: center; vertical-align: middle;"><img src="resources/images/arrow_vz.png" data-mc-conditions="Brand.Virtuozzo" /></td>
-<td style="text-align: center; vertical-align: middle; padding: 0;"><div class="button" data-modal="fileMenu">
-<p><img src="resources/images/nfs_storage_vz.png" data-mc-conditions="Brand.Virtuozzo" /></p>
-</div></td>
-<td style="text-align: center; vertical-align: middle;"><div class="button" data-modal="fileMenu">
-<p><span>File storage</span></p>
-</div></td>
+<tr class="TableStyle-bordered-table-Body-Body1">
+<td class="TableStyle-bordered-table-BodyB-Column1-Body1">Storage</td>
+<td class="TableStyle-bordered-table-BodyB-Column1-Body1">At least one per cluster</td>
+<td class="TableStyle-bordered-table-BodyB-Column1-Body1">
+<p>100 GB minimum</p>
+<p>Unlimited size on a physical server; 10 TB maximum recommended inside a virtual machine</p>
+</td>
+<td class="TableStyle-bordered-table-BodyB-Column1-Body1"> SATA/SAS HDD or enterprise-grade SATA/SAS/NVMe SSD with power loss protection</td>
+<td class="TableStyle-bordered-table-BodyA-Column1-Body1">1 DWPD minimum</td>
 </tr>
 </tbody>
 </table>
-</div>
-<a href="#mc-main-content" id="back-to-top" style="display: none;"><em></em> Back to Top</a></td>
+<h2>CPU and RAM reservations</h2>
+<p>The following table lists the amount of RAM and CPU cores that will be reserved on one node, according to the services you will use:</p>
+<table border="1" cellspacing="0" class="TableStyle-bordered-table" id="id16" style="mc-table-style: url('../../resources/tablestyles/borderedtable.css');">
+<col class="TableStyle-bordered-table-Column-Column1"/>
+<col class="TableStyle-bordered-table-Column-Column1"/>
+<col class="TableStyle-bordered-table-Column-Column1"/>
+<col class="TableStyle-bordered-table-Column-Column1"/>
+<col class="TableStyle-bordered-table-Column-Column1"/>
+<col class="TableStyle-bordered-table-Column-Column1"/>
+<thead valign="bottom">
+<tr class="TableStyle-bordered-table-Head-Header1" data-mc-pattern="2">
+<th class="TableStyle-bordered-table-HeadE-Column1-Header1" colspan="2" rowspan="2">Service</th>
+<th class="TableStyle-bordered-table-HeadE-Column1-Header1" colspan="2">Management node </th>
+<th class="TableStyle-bordered-table-HeadD-Column1-Header1" colspan="2">Secondary node</th>
 </tr>
-<tr class="even footer">
-<td><p>Last build date: <span class="mc-variable System.LongDate variable">Tuesday, May 21, 2024</span></p>
-<p>Administrator Guide for <span class="mc-variable Cover.ProductName variable">Virtuozzo Hybrid Infrastructure</span><span class="mc-variable Cover.ProductMilestone variable">6.1</span>. <span class="mc-variable Cover.Copyright variable">Copyright Â© 2016-2024 Virtuozzo International GmbH</span></p></td>
+<tr class="TableStyle-bordered-table-Head-Header1" data-mc-pattern="2">
+<th class="TableStyle-bordered-table-HeadE-Column1-Header1" style="text-align: left;font-weight: normal;border-left-width: 0;border-right-width: 1px;border-top-width: 0;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #010101;padding-left: 10px;padding-right: 10px;padding-top: 7px;padding-bottom: 7px;">RAM<a class="MCTextPopup popup popupHead" href="javascript:void(0)" style="font-size: 0.9em; vertical-align: super">1<span aria-hidden="true" class="MCTextPopupBody MCTextPopupBody_Closed needs-pie popupBody"><span class="MCTextPopupArrow"> </span>Use only Error correction code (ECC) memory, to avoid data corruption.</span></a></th>
+<th class="TableStyle-bordered-table-HeadE-Column1-Header1" style="text-align: left;font-weight: normal;border-left-width: 0;border-right-width: 1px;border-top-width: 0;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #010101;padding-left: 10px;padding-right: 10px;padding-top: 7px;padding-bottom: 7px;">CPU cores<a class="MCTextPopup popup popupHead" href="javascript:void(0)" style="font-size: 0.9em; vertical-align: super">2<span aria-hidden="true" class="MCTextPopupBody MCTextPopupBody_Closed needs-pie popupBody"><span class="MCTextPopupArrow"> </span>A CPU core here is a physical core in a multicore processor (hyperthreading is not taken into account).</span></a></th>
+<th class="TableStyle-bordered-table-HeadE-Column1-Header1" style="text-align: left;font-weight: normal;border-left-width: 0;border-right-width: 1px;border-top-width: 0;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #010101;padding-left: 10px;padding-right: 10px;padding-top: 7px;padding-bottom: 7px;">RAM<a class="MCTextPopup popup popupHead" href="javascript:void(0)" style="font-size: 0.9em; vertical-align: super">3<span aria-hidden="true" class="MCTextPopupBody MCTextPopupBody_Closed needs-pie popupBody"><span class="MCTextPopupArrow"> </span>Use only Error correction code (ECC) memory, to avoid data corruption.</span></a></th>
+<th class="TableStyle-bordered-table-HeadD-Column1-Header1" style="text-align: left;font-weight: normal;border-left-width: 0;border-right-width: 1px;border-top-width: 0;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #010101;padding-left: 10px;padding-right: 10px;padding-top: 7px;padding-bottom: 7px;">CPU cores<a class="MCTextPopup popup popupHead" href="javascript:void(0)" style="font-size: 0.9em; vertical-align: super">4<span aria-hidden="true" class="MCTextPopupBody MCTextPopupBody_Closed needs-pie popupBody"><span class="MCTextPopupArrow"> </span>A CPU core here is a physical core in a multicore processor (hyperthreading is not taken into account).</span></a></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="TableStyle-bordered-table-Body-Body1">
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1" colspan="2">System</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">4.5 GB</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">3.3 cores</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">1.5 GB</td>
+<td class="TableStyle-bordered-table-BodyD-Column1-Body1">1.1 cores</td>
+</tr>
+<tr class="TableStyle-bordered-table-Body-Body1">
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1" colspan="2">Storage services: each disk with Metadata, Storage, or Cache role (any size)<a class="MCTextPopup popup popupHead" href="javascript:void(0)" style="font-size: 0.9em; vertical-align: super">5<span aria-hidden="true" class="MCTextPopupBody MCTextPopupBody_Closed needs-pie popupBody"><span class="MCTextPopupArrow"> </span>For clusters larger than 1 PB of physical space, add 0.5 GB of RAM per Metadata service.</span></a></td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">0.5 GB</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">0.2 cores</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">0.5 GB</td>
+<td class="TableStyle-bordered-table-BodyD-Column1-Body1">0.2 cores</td>
+</tr>
+<tr class="TableStyle-bordered-table-Body-Body1">
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1" colspan="2">Compute service<a class="MCTextPopup popup popupHead" href="javascript:void(0)" style="font-size: 0.9em; vertical-align: super">6<span aria-hidden="true" class="MCTextPopupBody MCTextPopupBody_Closed needs-pie popupBody"><span class="MCTextPopupArrow"> </span>The recommended configuration for a compute cluster node starts with 64+ GB and 16+ cores.</span></a></td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">10 GB</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">4 cores</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1"> </td>
+<td class="TableStyle-bordered-table-BodyD-Column1-Body1"> </td>
+</tr>
+<tr class="TableStyle-bordered-table-Body-Body1">
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1" colspan="2">Load balancer</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">1.5 GB</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">0.5 cores</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1"> </td>
+<td class="TableStyle-bordered-table-BodyD-Column1-Body1"> </td>
+</tr>
+<tr class="TableStyle-bordered-table-Body-Body1">
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1" colspan="2">Kubernetes</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">1 GB</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">0.5 cores</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1"> </td>
+<td class="TableStyle-bordered-table-BodyD-Column1-Body1"> </td>
+</tr>
+<tr class="TableStyle-bordered-table-Body-Body1">
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1" colspan="2">Backup Gateway<a class="MCTextPopup popup popupHead" href="javascript:void(0)" style="font-size: 0.9em; vertical-align: super">7<span aria-hidden="true" class="MCTextPopupBody MCTextPopupBody_Closed needs-pie popupBody"><span class="MCTextPopupArrow"> </span>When working with public clouds and NFS, Backup Gateway consumes as much RAM and CPU as with a local storage.</span></a></td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">1 GB</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">0.5 cores</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">1 GB</td>
+<td class="TableStyle-bordered-table-BodyD-Column1-Body1">0.5 cores</td>
+</tr>
+<tr class="TableStyle-bordered-table-Body-Body1">
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1" rowspan="3">S3<a class="MCTextPopup popup popupHead" href="javascript:void(0)" style="font-size: 0.9em; vertical-align: super">8<span aria-hidden="true" class="MCTextPopupBody MCTextPopupBody_Closed needs-pie popupBody"><span class="MCTextPopupArrow"> </span>By default, each S3 node runs 4 S3 gateways and can run up to 10 NS and 10 OS instances, but the entire S3 cluster cannot host more than 24 OS and 16 NS instances. The number of OS and NS services is defined during the initial S3 cluster setup. Adding more nodes to the S3 cluster does not affect it. The CPU and RAM reservations depend on the number of S3 nodes. Generally, the larger the S3 cluster, the less resources are reserved on each node.</span></a></td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">Each S3 gateway</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">256 MB</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">1 core</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">256 MB</td>
+<td class="TableStyle-bordered-table-BodyD-Column1-Body1">1 core</td>
+</tr>
+<tr class="TableStyle-bordered-table-Body-Body1">
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">Each OS service</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">256 MB</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">0.1 cores</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">256 MB</td>
+<td class="TableStyle-bordered-table-BodyD-Column1-Body1">0.1 cores</td>
+</tr>
+<tr class="TableStyle-bordered-table-Body-Body1">
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">Each NS service</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">512 MB</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">0.2 cores</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">512 MB</td>
+<td class="TableStyle-bordered-table-BodyD-Column1-Body1">0.2 cores</td>
+</tr>
+<tr class="TableStyle-bordered-table-Body-Body1">
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1" rowspan="2">NFS</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">Service</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">4 GB</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">1 core</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">4 GB</td>
+<td class="TableStyle-bordered-table-BodyD-Column1-Body1">1 core</td>
+</tr>
+<tr class="TableStyle-bordered-table-Body-Body1">
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">Each share<a class="MCTextPopup popup popupHead" href="javascript:void(0)" style="font-size: 0.9em; vertical-align: super">9<span aria-hidden="true" class="MCTextPopupBody MCTextPopupBody_Closed needs-pie popupBody"><span class="MCTextPopupArrow"> </span>The RAM reservation for an NFS share depends on the number of cluster nodes. The larger the NFS cluster, the less RAM is reserved on each node.</span></a></td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">up to 9 GB</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">up to 8 cores</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">up to 9 GB</td>
+<td class="TableStyle-bordered-table-BodyD-Column1-Body1">up to 8 cores</td>
+</tr>
+<tr class="TableStyle-bordered-table-Body-Body1">
+<td class="TableStyle-bordered-table-BodyB-Column1-Body1" colspan="2">iSCSI</td>
+<td class="TableStyle-bordered-table-BodyB-Column1-Body1">1 GB</td>
+<td class="TableStyle-bordered-table-BodyB-Column1-Body1">1 core</td>
+<td class="TableStyle-bordered-table-BodyB-Column1-Body1">1 GB</td>
+<td class="TableStyle-bordered-table-BodyA-Column1-Body1">1 core</td>
 </tr>
 </tbody>
 </table>
+<p>These reserved values correspond to absolute minimum requirements. In general, the more resources you provide for your cluster, the better it works. All extra RAM is used to cache disk reads, while extra CPU cores increase the performance and reduce latency. </p>
+<h2>CPU and RAM limits</h2>
+<p>The following table lists the current RAM and CPU limits for <span class="mc-variable Cover.ProductName variable">Virtuozzo Hybrid Infrastructure</span> servers:</p>
+<table border="1" cellspacing="0" class="TableStyle-bordered-table" id="id14" style="mc-table-style: url('../../resources/tablestyles/borderedtable.css');">
+<colgroup>
+<col/>
+<col/>
+<col/>
+</colgroup>
+<thead valign="bottom">
+<tr class="TableStyle-bordered-table-Head-Header1">
+<th class="TableStyle-bordered-table-HeadE-Column1-Header1">Hardware</th>
+<th class="TableStyle-bordered-table-HeadE-Column1-Header1">Theoretical</th>
+<th class="TableStyle-bordered-table-HeadD-Column1-Header1">Certified</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="TableStyle-bordered-table-Body-Body1">
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">RAM</td>
+<td class="TableStyle-bordered-table-BodyE-Column1-Body1">64 TB</td>
+<td class="TableStyle-bordered-table-BodyD-Column1-Body1">1 TB</td>
+</tr>
+<tr class="TableStyle-bordered-table-Body-Body1">
+<td class="TableStyle-bordered-table-BodyB-Column1-Body1">CPU</td>
+<td class="TableStyle-bordered-table-BodyB-Column1-Body1">5120 logical CPUs<a class="MCTextPopup popup popupHead" href="javascript:void(0)" style="font-size: 0.9em; vertical-align: super">10<span aria-hidden="true" class="MCTextPopupBody MCTextPopupBody_Closed needs-pie popupBody"><span class="MCTextPopupArrow"> </span>A logical CPU is a core (thread) in a multicore (multithreading) processor.</span></a></td>
+<td class="TableStyle-bordered-table-BodyA-Column1-Body1">384 logical CPUs<a class="MCTextPopup popup popupHead" href="javascript:void(0)" style="font-size: 0.9em; vertical-align: super">11<span aria-hidden="true" class="MCTextPopupBody MCTextPopupBody_Closed needs-pie popupBody"><span class="MCTextPopupArrow"> </span>A logical CPU is a core (thread) in a multicore (multithreading) processor.</span></a></td>
+</tr>
+</tbody>
+</table>
+<h2>CPU recommendations</h2>
+<ul>
+<li>The minimum CPU frequency for <span class="mc-variable Cover.ProductName variable">Virtuozzo Hybrid Infrastructure</span> servers is 2.0 GHz. The recommended CPU frequency is at least 2.4 GHz.</li>
+<li>CPU frequency affects the cluster performance. Higher CPU frequency reduces latency almost linearly, thus increasing the performance. If other CPU parameters are the same, higher CPU frequency is preferable to a larger number of CPU cores.</li>
+<li>Nodes running the metadata service should have high CPU frequency, because this service is CPU intensive.</li>
+<li>To improve erasure coding performance, it is recommended to use CPUs that support the AVX-512 instruction set, such as Intel Xeon Silver 4110, Intel Xeon Gold 5115, Intel Xeon Platinum 8171, or newer.</li>
+</ul>
+<h2>Network interface requirements</h2>
+<p>At least 2 x 10 GbE interfaces are recommended, for internal and external traffic; 25 GbE, 40 GbE, and 100 GbE are even better. Bonding is recommended. However, for external traffic, you can start with 1 GbE links, but they can limit cluster throughput on modern loads.</p>
+<div class="MCHelpControl MCHelpControl-Related relatedTopics relatedTopicssee-also"><span class="MCHelpControl-RelatedHotSpot_ MCHelpControl-RelatedHotSpot_see-also"><img alt="Related Topics Link Icon" class="MCHelpControl_Image_Icon" height="16" src="resources/images/transparent.gif" width="16"/>See also</span>
+<ul class="MCHelpControlList MCRelatedTopicsControlList">
+<li class="MCHelpControlListItem MCRelatedTopicsControlListItem"><a class="MCHelpControlListItemLink MCRelatedTopicsControlListItemLink" href="quantity-of-servers.html">Quantity of servers</a>
+</li>
+<li class="MCHelpControlListItem MCRelatedTopicsControlListItem"><a class="MCHelpControlListItemLink MCRelatedTopicsControlListItemLink" href="considerations-for-using-blade-servers.html">Considerations for using blade servers</a>
+</li>
+<li class="MCHelpControlListItem MCRelatedTopicsControlListItem"><a class="MCHelpControlListItemLink MCRelatedTopicsControlListItemLink" href="backup-storage-requirements.html">Backup storage requirements</a>
+</li>
+<li class="MCHelpControlListItem MCRelatedTopicsControlListItem"><a class="MCHelpControlListItemLink MCRelatedTopicsControlListItemLink" href="compute-requirements.html">Compute cluster requirements</a>
+</li>
+<li class="MCHelpControlListItem MCRelatedTopicsControlListItem"><a class="MCHelpControlListItemLink MCRelatedTopicsControlListItemLink" href="object-storage-requirements.html">Object storage requirements</a>
+</li>
+</ul>
+</div>
+</div>
