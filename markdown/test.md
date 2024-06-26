@@ -1,11 +1,5 @@
 <table border="1" cellspacing="0" id="id15">
-<colgroup>
-<col/>
-<col/>
-<col/>
-<col/>
-</colgroup>
-<thead valign="bottom">
+<thead>
 <tr>
 <th>Disk role</th>
 <th>Quantity</th>
@@ -14,7 +8,7 @@
 <th>Endurance</th>
 </tr>
 </thead>
-<tbody valign="top">
+<tbody>
 <tr>
 <td>System</td>
 <td>One disk per node</td>
@@ -26,7 +20,7 @@
 <p>SATA/SAS HDD minimum</p>
 <p>SATA/SAS SSD recommended</p>
 </td>
-<td>â</td>
+<td>-</td>
 </tr>
 <tr>
 <td>Metadata</td>
