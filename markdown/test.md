@@ -1,5 +1,5 @@
 <div id="mc-main-content" role="main">
-<h1>General requirements</h1>
+<h1>General requirements [hover text](## "your hover text")</h1>
 <p>Verify that all servers to be joined to the cluster meet the following general requirements.</p>
 <h2>Storage requirements</h2>
 <p>The following table lists the minimum and recommended storage requirements according to the disk roles (refer to <a class="MCXref xref" href="about-the-storage-cluster.html">About the storage cluster</a>):</p>
