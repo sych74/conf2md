@@ -1,6 +1,3 @@
-## CPU and RAM reservations
-The following table lists the amount of RAM and CPU cores that will be reserved on one node, according to the services you will use:
-
 <table border="1" cellspacing="0" class="TableStyle-bordered-table" id="id16" style="mc-table-style: url('../../resources/tablestyles/borderedtable.css');">
 <col class="TableStyle-bordered-table-Column-Column1"/>
 <col class="TableStyle-bordered-table-Column-Column1"/>
