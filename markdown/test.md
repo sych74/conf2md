@@ -1,4 +1,3 @@
-<div id="mc-main-content" role="main">
 <h1>General requirements [hover text](## "your hover text")</h1>
 <p>Verify that all servers to be joined to the cluster meet the following general requirements.</p>
 <h2>Storage requirements</h2>
@@ -218,7 +217,9 @@ protection and 75 MB/s sequential write performance per serviced HDD</td>
 </ul>
 <h2>Network interface requirements</h2>
 <p>At least 2 x 10 GbE interfaces are recommended, for internal and external traffic; 25 GbE, 40 GbE, and 100 GbE are even better. Bonding is recommended. However, for external traffic, you can start with 1 GbE links, but they can limit cluster throughput on modern loads.</p>
-<div class="MCHelpControl MCHelpControl-Related relatedTopics relatedTopicssee-also"><span class="MCHelpControl-RelatedHotSpot_ MCHelpControl-RelatedHotSpot_see-also"><img alt="Related Topics Link Icon" class="MCHelpControl_Image_Icon" height="16" src="resources/images/transparent.gif" width="16"/>See also</span>
+
+See also
+
 <ul class="MCHelpControlList MCRelatedTopicsControlList">
 <li class="MCHelpControlListItem MCRelatedTopicsControlListItem"><a class="MCHelpControlListItemLink MCRelatedTopicsControlListItemLink" href="quantity-of-servers.html">Quantity of servers</a>
 </li>
@@ -231,5 +232,3 @@ protection and 75 MB/s sequential write performance per serviced HDD</td>
 <li class="MCHelpControlListItem MCRelatedTopicsControlListItem"><a class="MCHelpControlListItemLink MCRelatedTopicsControlListItemLink" href="object-storage-requirements.html">Object storage requirements</a>
 </li>
 </ul>
-</div>
-</div>
