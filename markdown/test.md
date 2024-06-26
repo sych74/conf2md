@@ -1,10 +1,4 @@
 <table border="1" cellspacing="0" class="TableStyle-bordered-table" id="id16" style="mc-table-style: url('../../resources/tablestyles/borderedtable.css');">
-<col class="TableStyle-bordered-table-Column-Column1"/>
-<col class="TableStyle-bordered-table-Column-Column1"/>
-<col class="TableStyle-bordered-table-Column-Column1"/>
-<col class="TableStyle-bordered-table-Column-Column1"/>
-<col class="TableStyle-bordered-table-Column-Column1"/>
-<col class="TableStyle-bordered-table-Column-Column1"/>
 <thead valign="bottom">
 <tr class="TableStyle-bordered-table-Head-Header1" data-mc-pattern="2">
 <th class="TableStyle-bordered-table-HeadE-Column1-Header1" colspan="2" rowspan="2">Service</th>
