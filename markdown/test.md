@@ -1,4 +1,4 @@
-<table border="1" cellspacing="0" id="id15">
+<table>
 <thead>
 <tr>
 <th>Disk role</th>
