@@ -1,4 +1,4 @@
-<table border="1" cellspacing="0" class="TableStyle-bordered-table" id="id16" style="mc-table-style: url('../../resources/tablestyles/borderedtable.css');">
+<table>
 <col class="TableStyle-bordered-table-Column-Column1"/>
 <col class="TableStyle-bordered-table-Column-Column1"/>
 <col class="TableStyle-bordered-table-Column-Column1"/>
