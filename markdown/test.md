@@ -13,9 +13,21 @@ For supported guest operating systems and other information, refer to "Managing 
 3.  Select the VM boot media:
 
     - If you have an ISO image or a template
-      In the **Images** window, select the ISO image or template, and then click **Done**.
+      1.  Select **Image** in the **Deploy from** section, and then click **Specify** in the **Image** section.
+
+      2.  In the **Images** window, select the ISO image or template, and then click **Done**.
+
+          <a href="resources/images/compute_vms2_vz.png" class="MCPopupThumbnailLink MCPopupThumbnailPopup"><img src="resources/images/compute_vms2_vz_thumb_0_100.png" class="MCPopupThumbnail img" style="mc-thumbnail: popup;mc-thumbnail-max-height: 100px;mc-thumbnail-max-width: auto;" data-mc-height="277" data-mc-width="984" tabindex="" /></a>
     - If you have a compute boot volume
-      In the **Attach volume** window, find and select the volume, and then click **Attach**.
+      1.  Select **Volume** in the **Deploy from** section, and then click **Specify** in the **Volumes** section.
+
+      2.  In the **Volumes** window, click **Attach**.
+
+      3.  In the **Attach volume** window, find and select the volume, and then click **Attach**.
+
+          <a href="resources/images/compute_vms3_vz.png" class="MCPopupThumbnailLink MCPopupThumbnailPopup"><img src="resources/images/compute_vms3_vz_thumb_0_100.png" class="MCPopupThumbnail img" style="mc-thumbnail: popup;mc-thumbnail-max-height: 100px;mc-thumbnail-max-width: auto;" data-mc-height="212" data-mc-width="488" tabindex="" /></a>
+
+          If you attach more than one volume, the first attached volume becomes the boot volume, by default. To select another volume as bootable, place it first in the list by clicking the up arrow button next to it.
 
     {{%tip%}}
 
@@ -62,9 +74,16 @@ For supported guest operating systems and other information, refer to "Managing 
         {{%/tip%}}
 
         - If you selected a virtual network with enabled IP address management
+
           In this case, spoofing protection is enabled and the **default** security group is selected by default. This security group allows all incoming and outgoing traffic on all the VM ports. If required, you can select another security group or multiple security groups.
+
+          To disable spoofing protection, clear all of the check boxes and turn off the toggle switch. Security groups cannot be configured with disabled spoofing protection.
+
         - If you selected a virtual network with disabled IP address management
+          In this case, spoofing protection is disabled by default and cannot be enabled. Security groups cannot be configured for such a network.
+
         - If you selected a shared physical network
+
           In this case, spoofing protection cannot be configured by a self-service user. If you want to enable or disable spoofing protection, contact your system administrator.
 
         <a href="resources/images/compute_vms6_vz.png" class="MCPopupThumbnailLink MCPopupThumbnailPopup"><img src="resources/images/compute_vms6_vz_thumb_0_100.png" class="MCPopupThumbnail img" style="mc-thumbnail: popup;mc-thumbnail-max-height: 100px;mc-thumbnail-max-width: auto;" data-mc-height="862" data-mc-width="751" tabindex="" /></a>
@@ -84,9 +103,21 @@ For supported guest operating systems and other information, refer to "Managing 
     {{%/note%}}
 
     - Add an SSH key to the VM, to be able to access it via SSH without a password.
+
       In the **Select an SSH key** window, select an SSH key and then click **Done**.
+
+      <a href="resources/images/compute_vms9_vz.png" class="MCPopupThumbnailLink MCPopupThumbnailPopup"><img src="resources/images/compute_vms9_vz_thumb_0_100.png" class="MCPopupThumbnail img" style="mc-thumbnail: popup;mc-thumbnail-max-height: 100px;mc-thumbnail-max-width: auto;" data-mc-height="600" data-mc-width="793" tabindex="" /></a>
+
     - Add user data to customize the VM after launch, for example, change a user password.
+
       Write a cloud-config or shell script in the **Customization script** field or browse a file on your local server to load the script from.
+
+      <a href="resources/images/compute_vms10_vz.png" class="MCPopupThumbnailLink MCPopupThumbnailPopup"><img src="resources/images/compute_vms10_vz_thumb_0_100.png" class="MCPopupThumbnail img" style="mc-thumbnail: popup;mc-thumbnail-max-height: 100px;mc-thumbnail-max-width: auto;" data-mc-height="472" data-mc-width="487" tabindex="" /></a>
+
+      To inject a script in a Windows VM, refer to the <a href="https://cloudbase-init.readthedocs.io/en/latest/userdata.html" target="_blank">Cloudbase-Init documentation</a>. For example, you can set a new password for the account using the following script:
+
+          #ps1
+          net user <username> <new_password>
 
 8.  Enable CPU and RAM hot plug for the VM in **Advanced options**, to be able to change its flavor when the VM is running. You can also enable hot plug after the VM is created.
 
