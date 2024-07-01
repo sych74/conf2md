@@ -8,7 +8,7 @@ In the audit log, you can view all of the management operations performed by use
 
 <div class="tab">
 
-Admin panel
+### Admin panel
 
 1.  Go to the **Monitoring** \> **Audit log** screen to view the list of audit log entries.
 2.  Click the required log entry on the list to open its details.
@@ -19,7 +19,7 @@ Admin panel
 
 <div class="tab">
 
-Command-line interface
+### Command-line interface
 
 Use the following command:
 
