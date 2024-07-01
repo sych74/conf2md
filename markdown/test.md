@@ -2,7 +2,7 @@
 
 In the audit log, you can view all of the management operations performed by users and their activity events.
 
-To view a log entry
+## To view a log entry
 
 <div class="tabs-container">
 
