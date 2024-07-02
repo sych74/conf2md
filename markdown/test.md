@@ -39,11 +39,11 @@ Set custom weight multipliers to any of the enabled weighers. Valid values are f
 
 `ram_weight_multiplier`
 
-If set to a positive value, the scheduler will place VMs on nodes with more available RAM, and thus, spread them evenly across all compute nodes. In this case, however, you may end up unable to launch large VMs on particular nodes while having plenty of free RAM in the entire cluster.
+>If set to a positive value, the scheduler will place VMs on nodes with more available RAM, and thus, spread them evenly across all compute nodes. In this case, however, you may end up unable to launch large VMs on particular nodes while having plenty of free RAM in the entire cluster.
 
-If set to a negative value, the scheduler will place VMs on nodes with less available RAM, which will optimize VMs distribution and fill up nodes as much as possible.
+>If set to a negative value, the scheduler will place VMs on nodes with less available RAM, which will optimize VMs distribution and fill up nodes as much as possible.
 
-The default value is 1.0.
+>The default value is 1.0.
 
 `cpu_weight_multiplier`
 
