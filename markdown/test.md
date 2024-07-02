@@ -1,83 +1,160 @@
-# Viewing audit log
+# Configuring scheduling of virtual machines
 
-In the audit log, you can view all of the management operations performed by users and their activity events.
+In the compute cluster, the `nova-scheduler` service manages scheduling of virtual machines, that is, determines on which compute node to launch a VM. Each scheduling request goes through the following steps:
 
-## To view a log entry
+1.  Prefilters. The scheduler uses the Placement service to filter compute nodes and excludes those that do not satisfy the request parameters.
 
-<div class="tabs-container">
+2.  Filters. The scheduler applies filters to the list of candidate nodes, to determine which nodes are suitable for launching a VM. A node is either passed through by the filters or excluded from the list. These filters include:
 
-<div class="tab">
+    - `AvailabilityZoneFilter`: Passes all nodes that match the availability zone specified in the VM properties.
+    - `ComputeFilter`: Passes all compute nodes that are operational and enabled.
+    - `ComputeCapabilitiesFilter`: Passes all nodes that satisfy the flavor extra specs.
+    - `ImagePropertiesFilter`: Passes all nodes that satisfy the requested image properties.
+    - `PciPassthroughFilter`: Passes all nodes that have requested PCI devices.
+    - `ServerGroupAntiAffinityFilter`: Passes all nodes that are not hosting virtual machines in a specified group.
+    - `ServerGroupAffinityFilter`: Passes all nodes that are already hosting virtual machines in a specified group.
+    - `SameHostFilter`: Passes the node that is hosting all other VMs in a set of VMs.
 
-### Admin panel
+3.  Weights. The scheduler weighs the filtered compute nodes by using the enabled weighers and their multipliers, to decide which node has the highest priority for launching a VM. The following weighers are available:
 
-1.  Go to the **Monitoring** \> **Audit log** screen to view the list of audit log entries.
-2.  Click the required log entry on the list to open its details.
+    - `RAMWeigher`: Weighs nodes based on the available RAM. It accounts for the physical RAM on a node with the overcommitment ratio, excluding the RAM reserved for system and storage services, and provisioned for VMs.
+    - `CPUWeigher`: Weighs nodes based on the available virtual CPUs. It accounts for the physical CPU cores on a node with the overcommitment ratio, excluding the vCPUs reserved for system and storage services, and provisioned for VMs
+    - `ServerGroupSoftAntiAffinityWeigher`: Weighs nodes based on the number of VMs running on them from the same VM group in increasing order.
+    - `PCIWeigher`: Weighs nodes based on the number of available PCI devices and the number of PCI devices requested by a VM.
+    - `MetricsWeigher`: Weighs nodes based on their real-time metrics.
 
-[![](logs_and_alerts4_vz_thumb_0_100.png)](logs_and_alerts4_vz.png)
+    First, each weight is normalized to a value between 0.0 and 1.0, depending on the availability of a resource. Then, a multiplier is applied to each weight. The weight multiplier defines the weigher priority compared to other weighers. The final weight for a node is calculated by using this formula:
 
-</div>
+        node_weight = weight1_multiplier * norm(weight1) + weight2_multiplier * norm(weight2) + ...
 
-<div class="tab">
+    The node with the highest weight is considered by the scheduler the most suitable for launching a VM.
 
-### Command-line interface
+<img src="resources/images/vm_scheduling.png" style="max-width: 75%;max-height: auto;" />
 
-Use the following command:
+To change the default VM scheduling behavior in the compute cluster, you need to create a configuration file in the YAML format, and then use it to reconfigure the compute cluster.
 
-```
-vinfra cluster auditlog show <auditlog>
-```
+## To create the scheduler configuration file
 
-`<auditlog>`
-Audit log ID
+Set custom weight multipliers to any of the enabled weighers. Valid values are float. The following weight multipliers can be defined in the configuration file:
 
-For example, to the details of the audit log entry about the storage cluster creation, run:
+`ram_weight_multiplier`
 
-```
-# vinfra cluster auditlog list
-+----+-----------+------------------------+--------------------------+---------------------+
-| id | username  | type                   | activity                 | timestamp           |
-+----+-----------+------------------------+--------------------------+---------------------+
-| 8  | admin     | CreateCluster          | Create cluster           | 2021-09-07T17:39:16 |
-| 7  | anonymous | RegisterNewNode        | Register new node        | 2021-09-07T17:39:14 |
-| 6  | anonymous | RegisterNewNode        | Register new node        | 2021-09-07T17:39:10 |
-| 5  | admin     | GetRegistrationToken   | Get registration token   | 2021-09-07T17:39:08 |
-| 4  | admin     | GetRegistrationToken   | Get registration token   | 2021-09-07T17:39:04 |
-| 3  | admin     | LoginUser              | User login               | 2021-09-07T17:39:04 |
-| 2  | anonymous | UpdateNodeRegistration | Update node registration | 2021-09-07T17:39:02 |
-| 1  | anonymous | RegisterNewNode        | Register new node        | 2021-09-07T17:38:54 |
-+----+-----------+------------------------+--------------------------+---------------------+
-# vinfra cluster auditlog show 8
-+--------------+--------------------------------------+
-| Field        | Value                                |
-+--------------+--------------------------------------+
-| activity     | Create cluster                       |
-| cluster_id   |                                      |
-| cluster_name |                                      |
-| component    | Cluster                              |
-| details      | - id: node                           |
-|              |   name: Node                         |
-|              |   value: node001.vstoragedomain      |
-| id           | 8                                    |
-| message      | Create cluster "cluster1"            |
-| node_id      | c3b2321a-7c12-8456-42ce-8005ff937e12 |
-| result       | success                              |
-| task_id      | r-38c61bb2c7144cef                   |
-| timestamp    | 2021-09-07T17:39:16                  |
-| type         | CreateCluster                        |
-| user_id      | c727a901a6444ee1a8ad31e3d5b53b3a     |
-| username     | admin                                |
-+--------------+--------------------------------------+
-```
+If set to a positive value, the scheduler will place VMs on nodes with more available RAM, and thus, spread them evenly across all compute nodes. In this case, however, you may end up unable to launch large VMs on particular nodes while having plenty of free RAM in the entire cluster.
 
-</div>
+If set to a negative value, the scheduler will place VMs on nodes with less available RAM, which will optimize VMs distribution and fill up nodes as much as possible.
 
-</div>
+The default value is 1.0.
+
+`cpu_weight_multiplier`
+
+If set to a positive value, the scheduler will place VMs on nodes with more available vCPUs, and thus, spread them evenly across all compute nodes. In this case, however, you may end up unable to launch large VMs on particular nodes while having plenty of free vCPUs in the entire cluster.
+
+If set to a negative value, the scheduler will place VMs on nodes with less available vCPUs, which will optimize VMs distribution and fill up nodes as much as possible.
+
+The default value is 1.0.
+
+`soft_anti_affinity_weight_multiplier`
+
+The multiplier only accepts positive values. The default value is 5.0.
+
+`pci_weight_multiplier`
+
+The multiplier only accepts positive values. The default value is 1.0.
+
+`metrics_weight_multiplier`
+
+If set to a value greater than 1.0, the weight of the metrics specified by the `metrics_weight_setting` parameter will be increased.
+
+If set to a value between 0.0 and 1.0, the weight of the metrics specified by the `metrics_weight_setting` parameter will be reduced.
+
+If set to a negative value, the node with lower metrics specified by the `metrics_weight_setting` parameter will have a higher weight.
+
+The default value is 1.0.
+
+`metrics_weight_setting`
+
+Specifies the node metrics and their multipliers to use for weighing.
+
+Valid metric names are the following:
+
+- `cpu_percent`
+- `cpu_frequency`
+- `cpu_kernel_time`
+- `cpu_kernel_percent`
+- `cpu_user_time`
+- `cpu_user_percent`
+- `cpu_idle_time`
+- `cpu_idle_percent`
+- `cpu_iowait_time`
+- `cpu_iowait_percent`
+- `mem.free.mb`
+- `mem.free.percent`
+- `mem.cached.mb`
+- `mem.cached.percent`
+- `mem.buffers.mb`
+- `mem.buffers.percent`
+
+The default metric multiplier is 1.0.
+
+The scheduler configuration file may look like this:
+
+- cpu_weight_multiplier: -1.0
+
+  The scheduler will consolidate virtual machines on nodes with less available vCPUs.
+
+- ram_weight_multiplier: 2.0
+      metrics_weight_multiplier: 2.5
+      metrics_weight_setting:
+         cpu_user_time: 3.0
+         cpu_kernel_time: 1.5
+
+  The final node weight will be calculated as follows:
+
+      node_weight = 2.0 * norm(free_ram_mb) + 2.5 * (3.0 * norm(cpu_user_time) + 1.5 * norm(cpu_kernel_time))
+
+  When placing virtual machines, the scheduler will prefer nodes with more available RAM and real-time CPU usage.
+
+## To apply new VM scheduling parameters
+
+Pass the scheduler configuration file to the `vinfra service compute set` command. For example:
+
+    # cat scheduler.yaml
+    ram_weight_multiplier: 2.0
+    metrics_weight_multiplier: 2.5
+    metrics_weight_setting:
+       cpu_user_time: 3.0
+       cpu_kernel_time: 1.5
+    # vinfra service compute set --scheduler-config scheduler.yaml
+
+To check that the scheduler parameters are successfully modified, run:
+
+    # vinfra service compute show
+    +--------------+---------------------------------------------+
+    | Field        | Value                                       |
+    +--------------+---------------------------------------------+
+    | <...>        | <...>                                       |
+    |              | scheduler:                                  |
+    |              |   cpu_weight_multiplier: 1.0                |
+    |              |   metrics_weight_multiplier: 2.5            |
+    |              |   metrics_weight_setting:                   |
+    |              |     cpu_kernel_time: 1.5                    |
+    |              |     cpu_user_time: 3.0                      |
+    |              |   pci_weight_multiplier: 1.0                |
+    |              |   ram_weight_multiplier: 2.0                |
+    |              |   soft_anti_affinity_weight_multiplier: 5.0 |
+    | status       | active                                      |
+    | storages     | - vstorage                                  |
+    +--------------+---------------------------------------------+
+
+The applied changes are consistent on all compute nodes and not overwritten after product updates and upgrades.
 
 <div class="MCHelpControl MCHelpControl-Related relatedTopics relatedTopicssee-also">
 
 <span class="MCHelpControl-RelatedHotSpot_ MCHelpControl-RelatedHotSpot_see-also"><img src="resources/images/transparent.gif" class="MCHelpControl_Image_Icon" width="16" height="16" alt="Related Topics Link Icon" />See also</span>
 
-- <a href="viewing-alerts.html" class="MCHelpControlListItemLink MCRelatedTopicsControlListItemLink">Viewing alerts</a>
-- <a href="viewing-cluster-logs.html" class="MCHelpControlListItemLink MCRelatedTopicsControlListItemLink">Viewing cluster logs</a>
+- <a href="configuring-compute-parameters.html" class="MCHelpControlListItemLink MCRelatedTopicsControlListItemLink">Configuring compute parameters</a>
+- <a href="configuring-memory-for-virtual-machines.html" class="MCHelpControlListItemLink MCRelatedTopicsControlListItemLink">Configuring memory for virtual machines</a>
+- <a href="changing-vcpu-overcommitment.html" class="MCHelpControlListItemLink MCRelatedTopicsControlListItemLink">Changing virtual CPU overcommitment</a>
+- <a href="configuring-vm-cpu-features.html" class="MCHelpControlListItemLink MCRelatedTopicsControlListItemLink">Configuring CPU features for virtual machines</a>
 
 </div>
