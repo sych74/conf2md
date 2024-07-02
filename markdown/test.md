@@ -53,16 +53,13 @@ If set to a negative value, the scheduler will place VMs on nodes with less avai
 
 The default value is 1.0.
 
-`soft_anti_affinity_weight_multiplier`
-
+#### `soft_anti_affinity_weight_multiplier`
 The multiplier only accepts positive values. The default value is 5.0.
 
-`pci_weight_multiplier`
-
+#### `pci_weight_multiplier`
 The multiplier only accepts positive values. The default value is 1.0.
 
-`metrics_weight_multiplier`
-
+#### `metrics_weight_multiplier`
 If set to a value greater than 1.0, the weight of the metrics specified by the `metrics_weight_setting` parameter will be increased.
 
 If set to a value between 0.0 and 1.0, the weight of the metrics specified by the `metrics_weight_setting` parameter will be reduced.
