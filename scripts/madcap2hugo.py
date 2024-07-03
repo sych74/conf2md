@@ -6,13 +6,12 @@ import requests
 import argparse
 import pypandoc
 from urllib.parse import urljoin
+from urllib.parse import urlparse
 from xml.etree import ElementTree as ET
 from bs4 import BeautifulSoup
 
-
 def combine_urls(base_url, relative_url):
     return urljoin(base_url, relative_url)
-
 
 def get_content(url):
     response = requests.get(url)
@@ -46,7 +45,6 @@ def get_xml_attr(xml_content, attr_name):
             attr_value = root.attrib.get(attr_name)
             return attr_value
     return None
-
 
 def get_desc_menu_by_id(desc_menu, id):
     for url, data in desc_menu.items():
@@ -92,7 +90,6 @@ def add_prefix_to_directories(path, prefix):
     new_path = os.sep.join(new_parts)
     return new_path
 
-
 def get_page_html(page_url):
     response = requests.get(page_url)
     if response.status_code == 200:
@@ -100,7 +97,6 @@ def get_page_html(page_url):
     else:
         print(f"The page isnt avaiable. Status code: {response.status_code}")
     return page_html
-
 
 def get_page_main_content(soup):
     body = soup.find("div", {"id": "mc-main-content"})
@@ -110,7 +106,6 @@ def get_page_main_content(soup):
         return page_main_content
     else:
         return None
-
 
 def convert_mctextpopup(soup):
     popup_elements = soup.find_all('a', class_='MCTextPopup')
@@ -122,7 +117,6 @@ def convert_mctextpopup(soup):
         element.string = element.contents[0].strip()
     return soup
 
-
 def remove_attributes(soup):
     attributes_to_remove = ['class', 'style', 'colspan', 'rowspan', 'valign', 'data_mc_pattern']
     for attribute in attributes_to_remove:
@@ -130,7 +124,6 @@ def remove_attributes(soup):
         for element in elements_with_attribute:
             del element[attribute]
     return soup
-
 
 def convert_info(soup):
     infos = soup.find_all('div', class_='note')
@@ -150,7 +143,6 @@ def convert_important(soup):
             important.replace_with(BeautifulSoup(hugo_shortcode, 'html.parser'))
     return soup
 
-
 def convert_dropdown(soup):
     dropdowns = soup.find_all('div', class_='MCDropDown')
     for dropdown in dropdowns:
@@ -163,7 +155,6 @@ def convert_dropdown(soup):
         combined_text = BeautifulSoup(f"{header}<br>{body_text}", 'html.parser')
         dropdown.replace_with(combined_text)
     return soup
-
 
 def convert_uicontrol(soup):
     for span in soup.find_all('span', class_='uicontrol'):
@@ -188,18 +179,110 @@ def convert_mcpopup_img(soup, url, output_dir):
                 src_filename = src.split('/')[-1]
                 download_attachment(src_url, src_filename, output_dir)
 
-                new_a_tag = BeautifulSoup(f'<a href="{href_filename}"><img src="{src_filename}"></a>', 'html.parser')
+                new_a_tag = BeautifulSoup(f'<img src="{href_filename}" alt="{href_filename}" />', 'html.parser')
                 madcap_tag.replace_with(new_a_tag)
     return soup
 
-
 def download_attachment(url, name, path):
     full_name = os.path.join(path, name)
-    r = requests.get(url)
-    if r.status_code == 200:
-        with open(full_name, "wb") as f:
-            for bits in r.iter_content():
-                f.write(bits)
+    print(url)
+    print(full_name)
+
+    try:
+        r = requests.get(url, stream=True)
+        if r.status_code == 200:
+            with open(full_name, "wb") as f:
+                for bits in r.iter_content(chunk_size=8192):
+                    if bits:
+                        f.write(bits)
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
+
+
+
+# ----------- 02.07.2024 --------------------
+
+
+def convert_procedure_heading(soup):
+    headings = soup.find_all('p', class_='procedure-heading')
+    if headings:
+        for heading in headings:
+            heading.wrap(soup.new_tag('h2'))
+            heading.unwrap()
+    return soup
+
+def convert_tab_title(soup):
+    titles = soup.find_all('p', class_='tab-title')
+    if titles:
+        for title in titles:
+            title.wrap(soup.new_tag('h3'))
+            title.unwrap()
+    return soup
+
+
+def convert_command_line_interface(soup):
+    tabs = soup.find_all('div', class_='tab')
+    if tabs:
+        for tab in tabs:
+            tab_title = tab.find('p', class_='tab-title')
+            if tab_title and tab_title.text == 'Command-line interface':
+                tab_title.wrap(soup.new_tag('h3'))
+                tab_title.unwrap()
+                dl_elements = tab.find_all('dl')
+                if dl_elements:
+                    for dl_element in dl_elements:
+                        dt_elements = dl_element.find_all('dt')
+                        dd_elements = dl_element.find_all('dd')
+                        ul_element = soup.new_tag('ul')
+                        for dt, dd in zip(dt_elements, dd_elements):
+                            li = soup.new_tag('li')
+                            b_tag = soup.new_tag('b')
+                            i_tag = soup.new_tag('i')
+                            i_tag.string = dt.get_text()
+                            b_tag.append(i_tag)
+                            li.append(b_tag)
+                            li.append(f' - {dd.get_text()}')
+                            ul_element.append(li)
+                        dl_element.replace_with(ul_element)
+
+    return soup
+
+
+def convert_admin_panel_interface(soup):
+    tabs = soup.find_all('div', class_='tab')
+    if tabs:
+        for tab in tabs:
+            tab_title = tab.find('p', class_='tab-title')
+            if tab_title and tab_title.text == 'Admin panel':
+                tab_title.wrap(soup.new_tag('h3'))
+                tab_title.unwrap()
+    return soup
+
+def is_relative(url):
+    parsed = urlparse(url)
+    return not parsed.scheme and not parsed.netloc
+
+
+def convert_images(soup, url, output_dir):
+    imgs = soup.find_all('img')
+    if imgs:
+        for img in imgs:
+            src = img.get('src')
+            if is_relative(src):
+                src_url = combine_urls(url, src)
+                src_filename = src.split('/')[-1]
+                download_attachment(src_url, src_filename, output_dir)
+                new_img = BeautifulSoup(f'<img src="{src_filename}" alt="{src_filename}" />', 'html.parser')
+            else:
+                new_img = BeautifulSoup(f'<img src="{src}" alt="{src}" />', 'html.parser')
+            img.replace_with(new_img)
+    return soup
+
+# -------------------------------------------
 
 
 def convert_madcap_html_to_md(url, page, output_dir):
@@ -215,6 +298,16 @@ def convert_madcap_html_to_md(url, page, output_dir):
     soup = convert_mcpopup_img(soup, url, output_dir)
     soup = convert_mctextpopup(soup)
 
+# ----------- 02.07.2024 --------------------
+
+    soup = convert_procedure_heading(soup)
+    soup = convert_command_line_interface(soup)
+    soup = convert_admin_panel_interface(soup)
+    soup = convert_images(soup, url, output_dir)
+
+# -------------------------------------------
+
+
     md_content = pypandoc.convert_text(
         soup,
         format='html',
@@ -223,8 +316,8 @@ def convert_madcap_html_to_md(url, page, output_dir):
     )
     return md_content
 
-
 def generate_hugo_structure(data, url, output_dir, root_doc_name):
+
     for item in data:
         path_with_prefix = add_prefix_to_directories(item['link'][1:], root_doc_name)
         path = os.path.join(output_dir, path_with_prefix)
@@ -233,39 +326,77 @@ def generate_hugo_structure(data, url, output_dir, root_doc_name):
             path_with_prefix = add_prefix_to_directories(os.path.basename(item['link']), root_doc_name)
             path = os.path.join(path, path_with_prefix)
         os.makedirs(path, exist_ok=True)
-        md_filename = os.path.join(path, 'index.md')
 
         md_content = convert_madcap_html_to_md(url, item['page_url'], path)
-
         identifier = root_doc_name if root_doc_name == os.path.basename(item['link']) else f"{root_doc_name}-{os.path.basename(item['link'])}"
         parent = root_doc_name if root_doc_name == os.path.basename(os.path.dirname(item['link'])) else f"{root_doc_name}-{os.path.basename(os.path.dirname(item['link']))}"
+        parent_id = parent if item['parentId'] else root_doc_name
+        title = item['title']
+        weight = item['weight']
 
-        with open(md_filename, 'w') as f:
-            f.write(f'''---
+        generate_index_md(path, title, identifier, parent_id, md_content, weight)
+
+        if 'children' in item:
+            generate_hugo_structure(item['children'], url, output_dir, root_doc_name)
+
+
+def generate_index_md(path, title, identifier, parent_id, md_content, weight, pdf=None):
+    md_filename = os.path.join(path, 'index.md')
+    os.makedirs(path, exist_ok=True)
+
+    md_content_header = f'''---
 draft: false
-title: "{item['title']}"
+title: "{title}"
 aliases: "/{identifier}/"
 seoindex: "index, follow"
-seotitle: "{item['title']}"
+seotitle: "{title}"
 seokeywords: ""
 seodesc: ""
 menu:
     docs:
-        title: "{item['title']}"
+        title: "{title}"
         url: "/{identifier}/"
-        weight: "{item['weight']}"
-        parent: "{parent if item['parentId'] else root_doc_name}"
+        weight: "{weight}"
+        parent: "{parent_id}"
         identifier: "{identifier}"
----
+'''
 
-# {item['title']}
+    if pdf:
+        md_content_header += f'''        params:
+            pdf: "{pdf}"
+'''
+
+    md_content_header += f'''---
 
 {md_content}
 
-''')
+'''
 
-        if 'children' in item:
-            generate_hugo_structure(item['children'], output_dir, root_doc_name)
+    with open(md_filename, 'w') as f:
+        f.write(md_content_header)
+
+def generate_main_index_md(url, output_dir, root_doc_name):
+    path = os.path.join(output_dir, root_doc_name)
+    os.makedirs(path, exist_ok=True)
+    title = root_doc_name
+    identifier = root_doc_name
+    parent_id = ""
+    md_content = ""
+    weight = 1
+    pdf = get_pdf_from_url(url)
+    if download_attachment(pdf['pdf_url'], pdf['pdf_filename'], path):
+        generate_index_md(path, title, identifier, parent_id, md_content, weight, pdf['pdf_filename'])
+    else:
+        generate_index_md(path, title, identifier, parent_id, md_content, weight)
+
+
+def get_pdf_from_url(url):
+    parts = url.rstrip('/').rsplit('/', 1)
+    base_url = parts[0]
+    segment = parts[1]
+    pdf_url = f"{base_url}/pdf/{segment}.pdf"
+    pdf_filename = f"{segment}.pdf"
+    return {'pdf_url': pdf_url, 'pdf_filename': pdf_filename}
 
 
 def main():
@@ -298,6 +429,8 @@ def main():
     menu_structure = [fetch_menu_structure(menu, desc_menu_list, None) for menu in tree_menu_list]
 
     menu_structure = add_weights(menu_structure)
+
+    generate_main_index_md(base_url, output_dir, root_doc_name)
 
     generate_hugo_structure(menu_structure, base_url, output_dir, root_doc_name)
 
