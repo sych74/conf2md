@@ -121,8 +121,9 @@ def remove_attributes(soup):
     attributes_to_remove = ['class', 'style', 'colspan', 'rowspan', 'valign', 'data_mc_pattern']
     for attribute in attributes_to_remove:
         elements_with_attribute = soup.find_all(attrs={attribute: True})
-        for element in elements_with_attribute:
-            del element[attribute]
+        if elements_with_attribute:
+            for element in elements_with_attribute:
+                del element[attribute]
     return soup
 
 def convert_info(soup):
@@ -163,6 +164,27 @@ def convert_uicontrol(soup):
     return soup
 
 def convert_mcpopup_img(soup, url, output_dir):
+    a_tags = soup.find_all('a', class_='MCPopupThumbnailLink')
+    if a_tags:
+        for a_tag in a_tags:
+            img_tag = a_tag.find('img', class_='MCPopupThumbnail img')
+            if a_tag and img_tag:
+                href = a_tag.get('href')
+                href_url = combine_urls(url, href)
+                href_filename = href.split('/')[-1]
+                download_attachment(href_url, href_filename, output_dir)
+
+                src = img_tag.get('src')
+                src_url = combine_urls(url, src)
+                src_filename = src.split('/')[-1]
+                download_attachment(src_url, src_filename, output_dir)
+
+                new_a_tag = BeautifulSoup(f'<img src="{href_filename}" alt="{href_filename}" />', 'html.parser')
+                a_tag.replace_with(new_a_tag)
+
+    return soup
+
+def convert_mcpopup_img_old(soup, url, output_dir):
     madcap_tags = soup.find_all('madcap:conditionaltext')
     if madcap_tags:
         for madcap_tag in madcap_tags:
@@ -181,7 +203,10 @@ def convert_mcpopup_img(soup, url, output_dir):
 
                 new_a_tag = BeautifulSoup(f'<img src="{href_filename}" alt="{href_filename}" />', 'html.parser')
                 madcap_tag.replace_with(new_a_tag)
+
     return soup
+
+
 
 def download_attachment(url, name, path):
     full_name = os.path.join(path, name)
@@ -284,11 +309,65 @@ def convert_images(soup, url, output_dir):
 
 # -------------------------------------------
 
+def extract_and_replace_pre_tags(soup):
+    pre_contents = []
+    pre_counter = 0
+
+    for i, pre_tag in enumerate(soup.find_all('pre')):
+        pre_content = pre_tag.string
+        if pre_content is not None:
+            pre_contents.append(pre_content)
+            pre_tag.replace_with(f'UNIQUE_PRE_TAG_{pre_counter}')
+            pre_counter += 1
+
+    return soup, pre_contents
+
+def restore_pre_tags(md_text, pre_contents):
+    if pre_contents:
+        for i, pre_content in enumerate(pre_contents):
+            pre_content = pre_content.strip()
+            pre_block = f'```\n{pre_content}\n```'
+            pre_placeholder = f'UNIQUE_PRE_TAG_{i}'
+            placeholder_index = md_text.find(pre_placeholder)
+
+            if placeholder_index != -1:
+                before = '\n' if placeholder_index > 0 and md_text[placeholder_index-1] != '\n' else ''
+                after = '\n' if placeholder_index + len(pre_placeholder) < len(md_text) and md_text[placeholder_index+len(pre_placeholder)] != '\n' else ''
+                md_text = md_text.replace(pre_placeholder, f'\n{before}{pre_block}{after}')
+
+    return md_text
+
+def extract_and_replace_table_tags(soup):
+    table_contents = []
+
+    for i, table_tag in enumerate(soup.find_all('table')):
+        table_contents.append(str(table_tag))
+        table_tag.replace_with(f'UNIQUE_TABLE_TAG_{i}')
+
+    return soup, table_contents
+
+
+def restore_table_tags(md_text, table_contents):
+    for i, table_content in enumerate(table_contents):
+        md_text = md_text.replace(f'UNIQUE_TABLE_TAG_{i}', f'{table_content}')
+
+    return md_text
+
+def replace_br_tags(html):
+    html = re.sub(r'<br\s*/?>', '\n', html)
+    return html
+
+def remove_div_tags(text):
+    pattern = r'^(\s*</?div(?:\s+[^>]*>|>))'
+    cleaned_text = re.sub(pattern, '', text, flags=re.IGNORECASE | re.MULTILINE)
+    return cleaned_text
+
 
 def convert_madcap_html_to_md(url, page, output_dir):
     page = page.lstrip('/')
     page_url = combine_urls(url, page)
     page_html = get_page_html(page_url)
+    page_html = replace_br_tags(page_html)
     soup = BeautifulSoup(page_html, 'html.parser')
     soup = get_page_main_content(soup)
     soup = convert_info(soup)
@@ -298,15 +377,13 @@ def convert_madcap_html_to_md(url, page, output_dir):
     soup = convert_mcpopup_img(soup, url, output_dir)
     soup = convert_mctextpopup(soup)
 
-# ----------- 02.07.2024 --------------------
-
     soup = convert_procedure_heading(soup)
     soup = convert_command_line_interface(soup)
     soup = convert_admin_panel_interface(soup)
     soup = convert_images(soup, url, output_dir)
 
-# -------------------------------------------
-
+    soup, pre_contents = extract_and_replace_pre_tags(soup)
+    soup, table_contents = extract_and_replace_table_tags(soup)
 
     md_content = pypandoc.convert_text(
         soup,
@@ -314,6 +391,11 @@ def convert_madcap_html_to_md(url, page, output_dir):
         to='gfm',
         extra_args=['--markdown-headings=atx', '--wrap=none']
     )
+
+    md_content = restore_table_tags(md_content, table_contents)
+    md_content = restore_pre_tags(md_content, pre_contents)
+    md_content = remove_div_tags(md_content)
+
     return md_content
 
 def generate_hugo_structure(data, url, output_dir, root_doc_name):
