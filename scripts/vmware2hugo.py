@@ -157,6 +157,17 @@ def convert_macro_info(soup):
                 info_macro.replace_with(BeautifulSoup(hugo_shortcode, 'html.parser'))
     return soup
 
+def convert_macro_tip(soup):
+    info_macros = soup.find_all('ac:structured-macro', {'ac:name': 'tip'})
+    if info_macros:
+        for info_macro in info_macros:
+            rich_text_body = info_macro.find('ac:rich-text-body')
+            if rich_text_body:
+                info_html = rich_text_body.decode_contents()
+                hugo_shortcode = "{{{{%tip%}}}}{}{{{{%/tip%}}}}".format(info_html)
+                info_macro.replace_with(BeautifulSoup(hugo_shortcode, 'html.parser'))
+    return soup
+
 def convert_macro_warning(soup):
     info_macros = soup.find_all('ac:structured-macro', {'ac:name': 'warning'})
     if info_macros:
@@ -179,23 +190,18 @@ def convert_macro_code(soup):
                 code_macro.replace_with(BeautifulSoup(hugo_shortcode, 'html.parser'))
     return soup
 
-def post_convert_macro_code(md):
-    md = re.sub(r'\s*{{structured-macro-code-start}}', '{{structured-macro-code-start}}', md)
-    md = md.replace("{{structured-macro-code-start}}", "\n```\n")
-    md = md.replace("{{structured-macro-code-end}}", "\n```\n")
-    return md
 
 def post_convert_shortcode(md):
-    md = re.sub(r'(?<!\n){{%note%}}', '\n{{%note%}}\n', md)
-    md = re.sub(r'{{%/note%}}(?!\n)', '\n{{%/note%}}\n', md)
-    md = re.sub(r'(?<!\n){{%tip%}}', '\n{{%tip%}}\n', md)
-    md = re.sub(r'{{%/tip%}}(?!\n)', '\n{{%/tip%}}\n', md)
+    md = re.sub(r'\n*{{%note%}}', '\n\n{{%note%}}', md)
+    md = re.sub(r'{{%/note%}}\n*', '{{%/note%}}\n\n', md)
+    md = re.sub(r'{{%note%}}\s*\n', '{{%note%}}\n', md)
+    md = re.sub(r'\n\s*{{%/note%}}', '\n{{%/note%}}', md)
 
-#    md = md.replace("{{%note%}}", "\n{{%note%}}\n")
-#    md = md.replace("{{%/note%}}", "\n{{%/note%}}\n")
-#    md = md.replace("{{%tip%}}", "\n{{%tip%}}\n")
-#    md = md.replace("{{%/tip%}}", "\n{{%/tip%}}\n")
-    md = md.replace("{{pre}}", "\n")
+    md = re.sub(r'\n*{{%tip%}}', '\n\n{{%tip%}}', md)
+    md = re.sub(r'{{%/tip%}}\n*', '{{%/tip%}}\n\n', md)
+    md = re.sub(r'{{%tip%}}\s*\n', '{{%tip%}}\n', md)
+    md = re.sub(r'\n\s*{{%/tip%}}', '\n{{%/tip%}}', md)
+
     md = md.replace("\>", ">")
     md = md.replace("\<", "<")
     md = md.replace("\$", "$")
@@ -269,15 +275,28 @@ def convert_macro_ui_steps(soup):
                 code_macro.replace_with(BeautifulSoup(hugo_shortcode, 'html.parser'))
     return soup
 
+def convert_expand_macro(soup):
+    expand_macros = soup.find_all('ac:structured-macro', {'ac:name': 'expand'})
+    if expand_macros:
+        for expand_macro in expand_macros:
+            title_param = expand_macro.find('ac:parameter', {'ac:name': 'title'})
+            title_text = title_param.get_text(strip=True) if title_param else "Untitled"
+            rich_text_body = expand_macro.find('ac:rich-text-body')
+            if rich_text_body:
+                body_html = rich_text_body.decode_contents()  # Сохраняем внутренний HTML
+                hugo_shortcode = (
+                    f"{{{{%accordion title=\"{title_text}\"%}}}}\n"
+                    f"{body_html}\n"
+                    f"{{{{%/accordion%}}}}"
+                )
+                expand_macro.replace_with(BeautifulSoup(hugo_shortcode, 'html.parser'))
+    return soup
+
 def fix_ol_tag(soup):
     ol_tags = soup.find_all('ol')
     for tag in ol_tags:
         print("------", tag)
     return soup
-
-def pre_convert(html):
-    html = html.replace("\n", "{{pre}}")
-    return html
 
 def extract_and_replace_table_tags(soup):
     table_contents = []
@@ -319,19 +338,18 @@ def remove_macro_with_tf_popover(soup):
     for section in sections:
         cdata_elements = section.find_all('ac:plain-text-body')
         for cdata in cdata_elements:
-            cdata_content = BeautifulSoup(cdata.string, 'html.parser') if cdata.string else None
-            if cdata_content and cdata_content.find('div', {'data-tf-popover': True}):
+            if cdata.find('div', {'data-tf-popover': True}):
                 section.decompose()
                 break
     return soup
+
 
 def remove_section_with_tf_popover(soup):
     sections = soup.find_all('ac:layout-section')
     for section in sections:
         cdata_elements = section.find_all('ac:plain-text-body')
         for cdata in cdata_elements:
-            cdata_content = BeautifulSoup(cdata.string, 'html.parser') if cdata.string else None
-            if cdata_content and cdata_content.find('div', {'data-tf-popover': True}):
+            if cdata.find('div', {'data-tf-popover': True}):
                 section.decompose()
                 break
     return soup
@@ -405,8 +423,21 @@ def remove_cdata(md_text):
 def merge_pre_tags_with_newlines(html):
     return re.sub(r'(</pre>\s*<pre>)+', '\n', html)
 
+def fix_nested_em_tag(soup):
+    for em_tag in soup.find_all('em'):
+        for nested_em in em_tag.find_all('em'):
+            nested_em.unwrap()
+    return soup
+
+def pre_convert(html):
+    html = re.sub(r"&nbsp;", " ", html)
+    html = re.sub(r"&quot;", '"', html)
+    html = re.sub(r"<em><em>", "<em>", html)
+    html = re.sub(r"</em></em>", "</em>", html)
+    return html
+
 def convert_conf_html_to_md(html):
-#    html = pre_convert(html)
+    html = pre_convert(html)
     html = merge_pre_tags_with_newlines(html)
     html = replace_br_tags(html)
     html = remove_cdata(html)
@@ -414,6 +445,7 @@ def convert_conf_html_to_md(html):
     soup = bs4.BeautifulSoup(html, 'html5lib')
     #soup = fix_ol_tag(soup)
     soup = fix_em_tag(soup)
+ #   soup = fix_nested_em_tag(soup)
     soup = fix_strong_tag(soup)
     soup = remove_hr_tags(soup)
     soup = remove_macro_emoticon(soup)
@@ -423,9 +455,11 @@ def convert_conf_html_to_md(html):
     soup = remove_section_with_tf_popover(soup)
     soup = remove_macro_with_tf_popover(soup)
     soup = remove_macro_anchor(soup)
+    soup = convert_expand_macro(soup)
     soup = convert_macro_ui_steps(soup)
     soup = convert_macro_note(soup)
 #    soup = convert_macro_code(soup)
+    soup = convert_macro_tip(soup)
     soup = convert_macro_info(soup)
     soup = convert_macro_warning(soup)
     soup = convert_atlassian_html(soup)
@@ -466,17 +500,18 @@ def add_prefix_to_directories(path, prefix):
 def generate_hugo_structure(data, url, output_dir, confluence, root_doc_name):
 
     for item in data:
+        has_children = False
         path_with_prefix = add_prefix_to_directories(item['link'][1:], root_doc_name)
         path = os.path.join(output_dir, path_with_prefix)
 
         if 'children' in item:
             path_with_prefix = add_prefix_to_directories(os.path.basename(item['link']), root_doc_name)
             path = os.path.join(path, path_with_prefix)
+            has_children = True
         os.makedirs(path, exist_ok=True)
 
-#        download_attachments_from_page(item['id'], path, confluence)
+ #       download_attachments_from_page(item['id'], path, confluence)
         body = get_page_body(item['id'], confluence)
-#        body = get_page_body(151159230, confluence)
 
         md_content = convert_conf_html_to_md(body)
 
@@ -486,14 +521,14 @@ def generate_hugo_structure(data, url, output_dir, confluence, root_doc_name):
         title = item['title']
         weight = item['weight']
 
-        generate_index_md(path, title, identifier, parent_id, md_content, weight)
+        generate_index_md(path, title, identifier, parent_id, md_content, weight, has_children)
 
         if 'children' in item:
             generate_hugo_structure(item['children'], url, output_dir, confluence, root_doc_name)
 
 
 
-def generate_index_md(path, title, identifier, parent_id, md_content, weight, pdf=None):
+def generate_index_md(path, title, identifier, parent_id, md_content, weight, has_children=False, pdf=None):
     md_filename = os.path.join(path, 'index.md')
     os.makedirs(path, exist_ok=True)
 
@@ -524,8 +559,11 @@ menu:
 # {title}
 
 {md_content}
-
 '''
+
+    if has_children:
+        md_content_header += '\n{{%childrenList%}}\n'
+
 
     with open(md_filename, 'w') as f:
         f.write(md_content_header)
