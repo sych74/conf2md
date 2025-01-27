@@ -144,6 +144,38 @@ def convert_important(soup):
             important.replace_with(BeautifulSoup(hugo_shortcode, 'html.parser'))
     return soup
 
+def convert_warning(soup):
+    importants = soup.find_all('div', class_='warning')
+    if importants:
+        for important in importants:
+            important_html = important.decode_contents()
+            hugo_shortcode = "{{{{%note%}}}}{}{{{{%/note%}}}}".format(important_html)
+            important.replace_with(BeautifulSoup(hugo_shortcode, 'html.parser'))
+    return soup
+
+def convert_mc_variable(soup):
+    for span in soup.find_all('span', class_='mc-variable'):
+        variable_name = next((cls for cls in span['class'] if cls != 'mc-variable' and cls != 'variable'), None)
+        if variable_name:
+            hugo_shortcode = '{{{{< param "{}" >}}}}'.format(variable_name)
+            span.replace_with(BeautifulSoup(hugo_shortcode, 'html.parser'))
+    return soup
+
+def convert_mc_link(soup,root_doc_name):
+    for link in soup.find_all('a', class_='MCXref xref'):
+        if 'href' in link.attrs:
+            old_href = link['href']
+            clean_href = old_href.replace('.html', '')
+            new_href = f"../{root_doc_name}-{clean_href}"
+            link['href'] = new_href
+    return soup
+
+def convert_span_path(soup):
+    for span in soup.find_all('span', class_='path'):
+        span.wrap(soup.new_tag('code'))
+        span.unwrap()
+    return soup
+
 def convert_dropdown(soup):
     dropdowns = soup.find_all('div', class_='MCDropDown')
     for dropdown in dropdowns:
@@ -229,9 +261,6 @@ def download_attachment(url, name, path):
 
 
 
-# ----------- 02.07.2024 --------------------
-
-
 def convert_procedure_heading(soup):
     headings = soup.find_all('p', class_='procedure-heading')
     if headings:
@@ -307,8 +336,6 @@ def convert_images(soup, url, output_dir):
             img.replace_with(new_img)
     return soup
 
-# -------------------------------------------
-
 def extract_and_replace_pre_tags(soup):
     pre_contents = []
     pre_counter = 0
@@ -363,7 +390,29 @@ def remove_div_tags(text):
     return cleaned_text
 
 
-def convert_madcap_html_to_md(url, page, output_dir):
+def post_convert_shortcode(md):
+    md = re.sub(r'\n*{{%note%}}', '\n\n{{%note%}}', md)
+    md = re.sub(r'{{%/note%}}\n*', '{{%/note%}}\n\n', md)
+    md = re.sub(r'{{%note%}}\s*\n', '{{%note%}}\n', md)
+    md = re.sub(r'\n\s*{{%/note%}}', '\n{{%/note%}}', md)
+
+    md = re.sub(r'\n*{{%tip%}}', '\n\n{{%tip%}}', md)
+    md = re.sub(r'{{%/tip%}}\n*', '{{%/tip%}}\n\n', md)
+    md = re.sub(r'{{%tip%}}\s*\n', '{{%tip%}}\n', md)
+    md = re.sub(r'\n\s*{{%/tip%}}', '\n{{%/tip%}}', md)
+
+    md = re.sub(r'\s*!\[\]\([^\)]*\)', lambda m: m.group(0).lstrip(), md)
+
+    md = md.replace("\>", ">")
+    md = md.replace("\<", "<")
+    md = md.replace("\$", "$")
+    md = md.replace("\|", "|")
+    md = md.replace("\[", "[")
+    md = md.replace("\]", "]")
+    md = md.replace("\~", "~")
+    return md
+
+def convert_madcap_html_to_md(url, page, output_dir,root_doc_name):
     page = page.lstrip('/')
     page_url = combine_urls(url, page)
     page_html = get_page_html(page_url)
@@ -372,10 +421,15 @@ def convert_madcap_html_to_md(url, page, output_dir):
     soup = get_page_main_content(soup)
     soup = convert_info(soup)
     soup = convert_important(soup)
+    soup = convert_warning(soup)
+    soup = convert_mc_variable(soup)
+    soup = convert_span_path(soup)
     soup = convert_uicontrol(soup)
+
     soup = convert_dropdown(soup)
     soup = convert_mcpopup_img(soup, url, output_dir)
     soup = convert_mctextpopup(soup)
+    soup = convert_mc_link(soup, root_doc_name)
 
     soup = convert_procedure_heading(soup)
     soup = convert_command_line_interface(soup)
@@ -394,6 +448,7 @@ def convert_madcap_html_to_md(url, page, output_dir):
 
     md_content = restore_table_tags(md_content, table_contents)
     md_content = restore_pre_tags(md_content, pre_contents)
+    md_content = post_convert_shortcode(md_content)
     md_content = remove_div_tags(md_content)
 
     return md_content
@@ -409,7 +464,7 @@ def generate_hugo_structure(data, url, output_dir, root_doc_name):
             path = os.path.join(path, path_with_prefix)
         os.makedirs(path, exist_ok=True)
 
-        md_content = convert_madcap_html_to_md(url, item['page_url'], path)
+        md_content = convert_madcap_html_to_md(url, item['page_url'], path, root_doc_name)
         identifier = root_doc_name if root_doc_name == os.path.basename(item['link']) else f"{root_doc_name}-{os.path.basename(item['link'])}"
         parent = root_doc_name if root_doc_name == os.path.basename(os.path.dirname(item['link'])) else f"{root_doc_name}-{os.path.basename(os.path.dirname(item['link']))}"
         parent_id = parent if item['parentId'] else root_doc_name
